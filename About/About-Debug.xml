@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ModMetaData>
+	<name>RimCities - Dev Build</name>
+	<author>Cabbage</author>
+	<supportedVersions>
+		<li>1.0</li>
+	</supportedVersions>
+	<description>(Development build)</description>
+	<url>https://github.com/rvanasa/rimworld-cities</url>
+</ModMetaData>
