@@ -1,4 +1,4 @@
-# RimCities (Beta)
+# RimCities (work in progress)
 ## A procedural city generator mod for RimWorld.
 
 ### [Download Here](https://github.com/rvanasa/rimworld-cities/releases)
