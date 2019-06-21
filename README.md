@@ -5,6 +5,10 @@
 
 ---
 
+![](About/Preview.png)
+
+---
+
 #### Patch v0.2.2 (June 21, 2019)
 - Improved compatibility with [Combat Extended](https://steamcommunity.com/workshop/filedetails/?id=1631756268).
 
@@ -17,8 +21,6 @@
 - Added partial Japanese language support.
 
 ---
-
-![](About/Preview.png)
 
 RimCities is an attempt to create an interesting and unique end-game challenge for RimWorld players. This mod adds randomly generated cities to the world map, which are similar to other settlements but are far more difficult to attack.
 
