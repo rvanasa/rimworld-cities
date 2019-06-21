@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using RimWorld;
 using Verse;
+using Verse.AI.Group;
 
 namespace Cities {
 
@@ -22,6 +23,7 @@ namespace Cities {
 				(traderKinds.RandomElementWithFallback()
 				?? DefDatabase<TraderKindDef>.AllDefs.Where(t => t.stockGenerators.Count > 0).RandomElement()).stockGenerators;
 
+			var friendly = !s.map.ParentFaction.HostileTo(Faction.OfPlayer);
 			foreach(IntVec3 pos in s.bounds.Cells) {
 				if(s.Chance(density)) {
 					var thing = generators.RandomElement().GenerateThings(s.map.Tile).FirstOrDefault();
@@ -96,6 +98,7 @@ namespace Cities {
 	public class RoomDecorator_Bedroom : RoomDecorator {
 		public float headTableChance = 0.9F;
 		public float dresserChance = 0.9F;
+		public float pawnInBedroomChance = 0.2F;
 
 		public RoomDecorator_Bedroom() {
 			lightChance = 0;
@@ -108,7 +111,7 @@ namespace Cities {
 			var bedX = s.RandX;
 			s.Spawn(bedX, s.MinZ, DefDatabase<ThingDef>.GetNamed("EndTable"), stuff);
 			var bed = (Building_Bed)s.Spawn(bedX, s.MinZ + 1, ThingDefOf.Bed, stuff);
-			var pawn = GenCity.SpawnInhabitant(s.pos, s.map, new LordJob_DefendBase(s.map.ParentFaction, bed.Position));
+			var pawn = GenCity.SpawnInhabitant(s.Chance(pawnInBedroomChance) ? s.pos : s.Coords(s.RandX, s.RandZ), s.map, new LordJob_DefendBase(s.map.ParentFaction, bed.Position), randomWorkSpot: true);
 			bed.TryAssignPawn(pawn);
 		}
 	}

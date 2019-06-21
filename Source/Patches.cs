@@ -15,11 +15,9 @@ namespace Cities {
 		}
 	}
 
-	//public static Map GenerateMap(IntVec3 mapSize, MapParent parent, MapGeneratorDef mapGenerator, IEnumerable<GenStepWithParams> extraGenStepDefs = null, Action<Map> extraInitBeforeContentGen = null) {
-
 	[HarmonyPatch(typeof(MapGenerator))]
 	[HarmonyPatch(nameof(MapGenerator.GenerateMap))]
-	static class Patch_MapGenerator_GenerateMap {
+	static class MapGenerator_GenerateMap {
 		static void Prefix(ref IntVec3 mapSize, MapParent parent, MapGeneratorDef mapGenerator, IEnumerable<GenStepWithParams> extraGenStepDefs, ref System.Action<Map> extraInitBeforeContentGen) {
 			if(mapGenerator.defName.StartsWith("City_")) {
 				if(LoadedModManager.GetMod<Mod_Cities>().GetSettings<ModSettings_Cities>().limitCitySize) {
@@ -40,7 +38,7 @@ namespace Cities {
 
 	[HarmonyPatch(typeof(SettlementDefeatUtility))]
 	[HarmonyPatch(nameof(SettlementDefeatUtility.CheckDefeated))]
-	static class Patch_SettlementDefeatUtility_CheckDefeated {
+	static class SettlementDefeatUtility_CheckDefeated {
 		static bool Prefix(Settlement factionBase) {
 			var playerFaction = Faction.OfPlayer;
 			if(factionBase is City city && !factionBase.Faction.HostileTo(playerFaction)) {
@@ -49,18 +47,6 @@ namespace Cities {
 			return true;
 		}
 	}
-
-	/*[HarmonyPatch(typeof(CaravanArrivalAction_Enter))]
-	[HarmonyPatch(nameof(CaravanArrivalAction_Enter.CanEnter))]
-	static class Patch_CaravanArrivalAction_Enter_CanEnter {
-		static bool Prefix(ref FloatMenuAcceptanceReport __result, Caravan caravan, MapParent mapParent) {
-			if(mapParent is City city) {
-				__result = true;
-				return false;
-			}
-			return true;
-		}
-	}*/
 
 	[HarmonyPatch(typeof(CaravanArrivalAction_OfferGifts))]
 	[HarmonyPatch(nameof(CaravanArrivalAction_OfferGifts.CanOfferGiftsTo))]
@@ -71,6 +57,23 @@ namespace Cities {
 				return false;
 			}
 			return true;
+		}
+	}
+
+	[HarmonyPatch(typeof(ThingOwner<Thing>))]
+	[HarmonyPatch(nameof(ThingOwner<Thing>.TryAdd))]
+	[HarmonyPatch(new[] { typeof(Thing), typeof(bool) })]
+	static class ThingOwner_TryAdd {
+		static void Prefix(ref ThingOwner __instance, Thing item) {
+			var pawn =
+				(__instance.Owner as Pawn_InventoryTracker)?.pawn ??
+				(__instance.Owner as Pawn_EquipmentTracker)?.pawn;
+
+			if(pawn != null && pawn.IsColonistPlayerControlled) {
+				if(pawn.Map.Parent is City city && city.Faction != pawn.Faction && !city.Faction.HostileTo(pawn.Faction)) {
+					city.Faction.TryAffectGoodwillWith(pawn.Faction, -Mathf.RoundToInt(Mathf.Sqrt(item.MarketValue)) - 2);
+				}
+			}
 		}
 	}
 }

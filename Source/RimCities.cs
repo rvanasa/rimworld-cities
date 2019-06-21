@@ -132,7 +132,8 @@ namespace Cities {
 		public override void GenerateFresh(string seed) {
 			var settings = LoadedModManager.GetMod<Mod_Cities>().GetSettings<ModSettings_Cities>();
 			var abandonedChance = settings.abandonedChance;
-			var citiesPer100kTiles = settings.citiesPer100kTiles;
+			//var citiesPer100kTiles = settings.citiesPer100kTiles;
+			var citiesPer100kTiles = new IntRange(200, 200);/////
 			int cityCount = GenMath.RoundRandom(Find.WorldGrid.TilesCount / 100000F * citiesPer100kTiles.RandomInRange);
 			for(int i = 0; i < cityCount; i++) {
 				var abandoned = i == 0 || Rand.Chance(abandonedChance);
@@ -179,7 +180,7 @@ namespace Cities {
 				var things = pos.GetThingList(map);
 				for(var i = things.Count - 1; i >= 0; i--) {
 					var thing = things[i];
-					if(ShouldDestroy(thing, decay)) {
+					if(ShouldDestroy(thing, decay) && !thing.Destroyed) {
 						if(thing is Pawn pawn && Rand.Chance(corpseChance)) {
 							pawn.Kill(null);
 							pawn.Corpse.timeOfDeath -= Rand.RangeInclusive(10, 500) * 1000;
@@ -426,7 +427,7 @@ namespace Cities {
 			s.FillTerrain(GenCity.RandomFloor(s.map));
 			var pawn = (Pawn)null;
 			if(!s.map.ParentFaction.HostileTo(Faction.OfPlayer)) {
-				pawn = GenCity.SpawnInhabitant(s.Coords(s.RandX / 2, s.RandZ / 2), s.map, new LordJob_DefendPoint(s.pos));
+				pawn = GenCity.SpawnInhabitant(s.Coords(s.RandX / 2, s.RandZ / 2), s.map, new LordJob_LiveInCity(s.pos));
 				var traderKind = DefDatabase<TraderKindDef>.AllDefs.RandomElement();
 				pawn.mindState.wantsToTradeWithColony = true;
 				PawnComponentsUtility.AddAndRemoveDynamicComponents(pawn, actAsIfSpawned: true);
@@ -670,6 +671,29 @@ namespace Cities {
 		}
 	}
 
+	public class LordJob_LiveInCity : LordJob {
+		IntVec3 workSpot;
+
+		public override bool AddFleeToil => false;
+
+		public LordJob_LiveInCity() {
+		}
+
+		public LordJob_LiveInCity(IntVec3 workSpot) {
+			this.workSpot = workSpot;
+		}
+
+		public override StateGraph CreateGraph() {
+			StateGraph graph = new StateGraph();
+			graph.StartingToil = new LordToil_Travel(workSpot);
+			return graph;
+		}
+
+		public override void ExposeData() {
+			Scribe_Values.Look(ref workSpot, "workSpot");
+		}
+	}
+
 	public abstract class Decorator {
 		public float weight = 1;
 
@@ -698,8 +722,12 @@ namespace Cities {
 			}
 		}
 
-		public static Pawn SpawnInhabitant(IntVec3 pos, Map map, LordJob job) {
-			return SpawnInhabitant(pos, map, LordMaker.MakeNewLord(map.ParentFaction, job, map));
+		public static Pawn SpawnInhabitant(IntVec3 pos, Map map, LordJob job, bool friendlyJob = false, bool randomWorkSpot = false) {
+			if(!friendlyJob && !map.ParentFaction.HostileTo(Faction.OfPlayer)) {
+				var workPos = randomWorkSpot ? CellRect.WholeMap(map).RandomCell : pos;
+				job = new LordJob_LiveInCity(FindPawnSpot(workPos, map));
+			}
+			return SpawnInhabitant(pos, map, job != null ? LordMaker.MakeNewLord(map.ParentFaction, job, map) : null);
 		}
 
 		public static Pawn SpawnInhabitant(IntVec3 pos, Map map, Lord lord = null) {
@@ -709,6 +737,13 @@ namespace Cities {
 			}
 			GenSpawn.Spawn(pawn, pos, map);
 			return pawn;
+		}
+
+		public static IntVec3 FindPawnSpot(IntVec3 pos, Map map) {
+			while(!pos.Walkable(map)) {
+				pos = pos.RandomAdjacentCell8Way().ClampInsideMap(map);
+			}
+			return pos;
 		}
 	}
 

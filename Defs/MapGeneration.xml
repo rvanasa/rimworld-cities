@@ -501,8 +501,8 @@
     <order>330</order>
     <genStep Class="Cities.GenStep_Sidewalks">
 			<countPer10kCellsRange>
-				<min>100</min>
-				<max>100</max>
+				<min>50</min>
+				<max>50</max>
 			</countPer10kCellsRange>
 			<sidewalkTerrains>
 				<li>TileGranite</li>

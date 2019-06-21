@@ -9,6 +9,11 @@
 
 ---
 
+#### Patch v0.2.3 (June 21, 2019)
+- Fixed several mod incompatibility edge cases.
+- Improved AI in friendly cities.
+- Stealing from friendly cities affects faction relations.
+
 #### Patch v0.2.2 (June 21, 2019)
 - Improved compatibility with [Combat Extended](https://steamcommunity.com/workshop/filedetails/?id=1631756268).
 
