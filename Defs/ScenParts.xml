@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <ScenPartDef>
+    <defName>StartCity</defName>
+    <label>start in a city (RimCities)</label>
+    <category>Misc</category>
+    <scenPartClass>Cities.ScenPart_StartCity</scenPartClass>
+    <maxUses>1</maxUses>
+  </ScenPartDef>
+
+</Defs>

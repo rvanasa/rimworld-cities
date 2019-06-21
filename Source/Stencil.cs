@@ -44,6 +44,10 @@ namespace Cities {
 			return new Stencil(map, pos, rot, bounds);
 		}
 
+		public Stencil ClampInsideMap() {
+			return new Stencil(map, pos.ClampInsideMap(map), rot, bounds);
+		}
+
 		public Stencil MoveRand() {
 			return MoveTo(bounds.RandomCell);
 		}
@@ -233,7 +237,7 @@ namespace Cities {
 		}
 
 		public Thing Spawn(int x, int z, ThingDef thing, ThingDef stuff = null) {
-			return Move(x, z).Spawn(thing, stuff);
+			return Move(x, z).ClampInsideMap().Spawn(thing, stuff);
 		}
 
 		public Thing Spawn(ThingDef thing, ThingDef stuff = null) {

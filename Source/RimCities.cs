@@ -20,7 +20,14 @@ namespace Cities {
 		public override void DoSettingsWindowContents(Rect inRect) {
 			var listing = new Listing_Standard();
 			listing.Begin(inRect);
-			listing.CheckboxLabeled("Limit city map size (disable for larger and probably laggier maps)", ref settings.limitCitySize);
+			listing.Gap();
+			listing.CheckboxLabeled("Limit city map size (reduces lag)", ref settings.limitCitySize);
+			listing.Gap();
+			listing.Label("Abandoned city chance: [" + GenMath.RoundTo(settings.abandonedChance, 0.01F) + "]");
+			settings.abandonedChance = listing.Slider(settings.abandonedChance, 0, 1);
+			listing.Gap();
+			listing.Label("City spawn frequency:");
+			listing.IntRange(ref settings.citiesPer100kTiles, 0, 100);
 			listing.End();
 			base.DoSettingsWindowContents(inRect);
 		}
@@ -31,48 +38,111 @@ namespace Cities {
 	}
 
 	public class ModSettings_Cities : ModSettings {
-		public bool limitCitySize = true;
+		public bool limitCitySize;
+		public float abandonedChance;
+		public IntRange citiesPer100kTiles;
 
 		public override void ExposeData() {
-			Scribe_Values.Look(ref limitCitySize, "limitCitySize");
+			/*if(Scribe.mode == LoadSaveMode.LoadingVars) {
+				Reset();
+			}*/
+			Scribe_Values.Look(ref limitCitySize, "limitCitySize", true);
+			Scribe_Values.Look(ref abandonedChance, "abandonedChance", 0.4F);
+			Scribe_Values.Look(ref citiesPer100kTiles, "citiesPer100kTiles", new IntRange(10, 15));
 			base.ExposeData();
 		}
 	}
 
 	public class City : Settlement {
-		public override MapGeneratorDef MapGeneratorDef => DefDatabase<MapGeneratorDef>.GetNamed("City_Faction");
+		public Faction inhabitantFaction;
+
+		public bool Abandoned => inhabitantFaction == null;
+
+		public override MapGeneratorDef MapGeneratorDef => DefDatabase<MapGeneratorDef>.GetNamed(
+				inhabitantFaction != null ? "City_Faction" : "City_Abandoned");
 
 		public override Texture2D ExpandingIcon => def.ExpandingIconTexture;
 
-		public virtual void PrepareMapSize(ref IntVec3 mapSize) {
-			if(LoadedModManager.GetMod<Mod_Cities>().GetSettings<ModSettings_Cities>().limitCitySize) {
-				mapSize.x = Mathf.Min(mapSize.x, 200);
-				mapSize.z = Mathf.Min(mapSize.z, 200);
+		public override Color ExpandingIconColor => inhabitantFaction != null ? base.ExpandingIconColor : Color.grey;
+
+		public override bool Visitable => base.Visitable || Abandoned;
+
+		public override bool Attackable => base.Attackable && !Abandoned;
+
+		public override void PostMake() {
+			base.PostMake();
+			if(Abandoned) {
+				trader = null;
 			}
+		}
+
+		public override void PostMapGenerate() {
+			base.PostMapGenerate();
+			if(Abandoned) {
+				SetFaction(Faction.OfPlayer);
+			}
+		}
+
+		public override IEnumerable<Gizmo> GetCaravanGizmos(Caravan caravan) {
+			if(Visitable) {
+				yield return new Command_Action {
+					icon = SettleUtility.SettleCommandTex,
+					defaultLabel = "Enter City",
+					defaultDesc = "Enter the selected city.",
+					action = () => {
+						LongEventHandler.QueueLongEvent(() => {
+							var orGenerateMap = GetOrGenerateMapUtility.GetOrGenerateMap(Tile, null);
+							CaravanEnterMapUtility.Enter(caravan, orGenerateMap, CaravanEnterMode.Edge, CaravanDropInventoryMode.DoNotDrop, draftColonists: true);
+						}, "GeneratingMapForNewEncounter", false, null);
+					},
+				};
+			}
+			foreach(var gizmo in base.GetCaravanGizmos(caravan)) {
+				yield return gizmo;
+			}
+		}
+
+		public override void ExposeData() {
+			Scribe_References.Look(ref inhabitantFaction, "inhabitantFaction");
+			base.ExposeData();
+		}
+
+		public Faction FindFaction(System.Predicate<Faction> filter = null) {
+			return (from x in Find.World.factionManager.AllFactionsListForReading
+					where !x.def.isPlayer && !x.def.hidden && !x.def.techLevel.IsNeolithicOrWorse() && (filter == null || filter(x))
+					select x).RandomElementByWeightWithFallback(f => f.def.settlementGenerationWeight);
+		}
+
+		public virtual void PreMapGenerate(Map map) {
+			SetFaction(inhabitantFaction ?? FindFaction(f => f.HostileTo(Faction.OfPlayer)));
 		}
 	}
 
-	public class AbandonedCity : City {
-		public override MapGeneratorDef MapGeneratorDef => DefDatabase<MapGeneratorDef>.GetNamed("City_Abandoned");
-	}
-
 	public class WorldGenStep_Cities : WorldGenStep {
-		public IntRange citiesPer100kTiles = new IntRange(1, 3);
-		//public IntRange citiesPer100kTiles = new IntRange(100, 100);
-
 		public override int SeedPart => GetType().Name.GetHashCode();
 
 		public override void GenerateFresh(string seed) {
+			var settings = LoadedModManager.GetMod<Mod_Cities>().GetSettings<ModSettings_Cities>();
+			var abandonedChance = settings.abandonedChance;
+			var citiesPer100kTiles = settings.citiesPer100kTiles;
 			int cityCount = GenMath.RoundRandom(Find.WorldGrid.TilesCount / 100000F * citiesPer100kTiles.RandomInRange);
 			for(int i = 0; i < cityCount; i++) {
-				Faction faction = (from x in Find.World.factionManager.AllFactionsListForReading
-								   where !x.def.isPlayer && !x.def.hidden && !x.def.techLevel.IsNeolithicOrWorse()
-								   select x).RandomElementByWeight(f => f.def.settlementGenerationWeight);
-				var city = (City)WorldObjectMaker.MakeWorldObject(DefDatabase<WorldObjectDef>.GetNamed("City"));
-				city.SetFaction(faction);
-				city.Tile = TileFinder.RandomSettlementTileFor(faction);
+				var abandoned = i == 0 || Rand.Chance(abandonedChance);
+				var city = (City)WorldObjectMaker.MakeWorldObject(DefDatabase<WorldObjectDef>.GetNamed(abandoned ? "City_Abandoned" : "City_Faction"));
+				city.Tile = TileFinder.RandomSettlementTileFor(city.Faction);
+				city.SetFaction(city.FindFaction());
+				if(!abandoned) {
+					city.inhabitantFaction = city.Faction;
+				}
 				city.Name = SettlementNameGenerator.GenerateSettlementName(city);
 				Find.WorldObjects.Add(city);
+			}
+		}
+
+		public override void GenerateFromScribe(string seed) {
+			if(!Find.WorldObjects.AllWorldObjects.Any(obj => obj is City city)) {
+				Log.Warning("No cities found; regenerating");
+				GenerateFresh(seed);
 			}
 		}
 	}
@@ -89,11 +159,45 @@ namespace Cities {
 
 	public class GenStep_Abandoned_Post : GenStep {
 		public FloatRange decay = new FloatRange(0, 1);
+		public FloatRange corpseChance = new FloatRange(0, 0.1F);
+		public float remnantDensity = 0.1F;
 
 		public override int SeedPart => GetType().Name.GetHashCode();
 
 		public override void Generate(Map map, GenStepParams parms) {
-			// TODO
+			var decay = this.decay.RandomInRange;
+			var corpseChance = this.corpseChance.RandomInRange;
+			foreach(var pos in map.cellsInRandomOrder.GetAll()) {
+				var things = pos.GetThingList(map);
+				for(var i = things.Count - 1; i >= 0; i--) {
+					var thing = things[i];
+					if(ShouldDestroy(thing, decay)) {
+						if(thing is Pawn pawn && Rand.Chance(corpseChance)) {
+							pawn.Kill(null);
+							pawn.Corpse.timeOfDeath -= Rand.RangeInclusive(10, 500) * 1000;
+						}
+						else {
+							thing.Destroy();
+						}
+					}
+				}
+
+				if(Rand.Chance(decay)) {
+					var terrain = pos.RandomAdjacentCell8Way().ClampInsideMap(map).GetTerrain(map);
+					map.terrainGrid.SetTerrain(pos, terrain);
+				}
+			}
+		}
+
+		bool ShouldDestroy(Thing thing, float decay) {
+			float remnantDensity = this.remnantDensity * (1 - decay);
+			return thing.def.destroyable && !Rand.Chance(remnantDensity) && (
+				(thing is Pawn pawn && !pawn.NonHumanlikeOrWildMan())
+				|| (thing is Building_Turret)
+				|| (thing is Plant plant && plant.IsCrop)
+				|| (!thing.def.thingCategories.NullOrEmpty() && !thing.def.IsWithinCategory(ThingCategoryDefOf.Buildings) && !thing.def.IsWithinCategory(ThingCategoryDefOf.Chunks))
+				|| (thing.TryGetComp<CompGlower>() != null)
+				|| (thing is Building && Rand.Chance(thing.def == ThingDefOf.Wall ? remnantDensity * remnantDensity : decay)));
 		}
 	}
 
@@ -307,6 +411,51 @@ namespace Cities {
 		}
 	}
 
+	public class GenStep_Bazaars : GenStep_RectScatterer {
+		public float standChance = 0.4F;
+
+		public override void GenerateRect(Stencil s) {
+			s.FillTerrain(GenCity.RandomFloor(s.map));
+			var pawn = (Pawn)null;
+			if(!s.map.ParentFaction.HostileTo(Faction.OfPlayer)) {
+				pawn = GenCity.SpawnInhabitant(s.Coords(s.RandX / 2, s.RandZ / 2), s.map, new LordJob_DefendPoint(s.pos));
+				var traderKind = DefDatabase<TraderKindDef>.AllDefs.RandomElement();
+				pawn.mindState.wantsToTradeWithColony = true;
+				PawnComponentsUtility.AddAndRemoveDynamicComponents(pawn, actAsIfSpawned: true);
+				pawn.trader.traderKind = traderKind;
+				pawn.inventory.DestroyAll();
+				ThingSetMakerParams parms = new ThingSetMakerParams {
+					traderDef = traderKind,
+					tile = s.map.Tile,
+					traderFaction = s.map.ParentFaction,
+				};
+				foreach(var item in ThingSetMakerDefOf.TraderStock.root.Generate(parms)) {
+					if(!(item is Pawn) && !pawn.inventory.innerContainer.TryAdd(item)) {
+						item.Destroy();
+					}
+				}
+				PawnInventoryGenerator.GiveRandomFood(pawn);
+			}
+			for(var dir = 0; dir < 4; dir++) {
+				if(s.Chance(standChance)) {
+					var sStand = s.Rotate(dir).Move(Mathf.RoundToInt(s.RandX / 2F), s.MaxZ - s.RandInclusive(0, 2)).Bound(-1, 0, 1, 0);
+					sStand.FillTerrain(GenCity.RandomFloor(s.map, true));
+					var wallStuff = GenCity.RandomWallStuff(s.map);
+					sStand.Spawn(sStand.MinX - 1, 0, ThingDefOf.Wall, wallStuff);
+					sStand.Spawn(sStand.MaxX + 1, 0, ThingDefOf.Wall, wallStuff);
+					sStand.Expand(1).FillRoof(RoofDefOf.RoofConstructed);
+					if(pawn != null) {
+						var itemPos = sStand.Coords(sStand.RandX, sStand.RandZ);
+						var item = pawn.inventory.innerContainer.FirstOrDefault();
+						if(item != null) {
+							pawn.inventory.innerContainer.TryDrop(item, itemPos, s.map, ThingPlaceMode.Direct, out Thing result);
+						}
+					}
+				}
+			}
+		}
+	}
+
 	public class GenStep_Fields : GenStep_RectScatterer {
 		public float density = 0.9F;
 		public AltitudeLayer altitudeLayer = AltitudeLayer.LowPlant;
@@ -315,7 +464,6 @@ namespace Cities {
 			ThingDef plant = DefDatabase<ThingDef>.AllDefs
 				.Where(t => t.category == ThingCategory.Plant && t.altitudeLayer == altitudeLayer && !t.plant.cavePlant)
 				.RandomElement();
-			//s.ClearThingsInBounds();
 			foreach(var pos in s.bounds.Cells) {
 				if(s.Chance(density) && pos.GetFirstThing<Thing>(s.map) == null) {
 					GenSpawn.Spawn(plant, pos, s.map);
@@ -521,8 +669,9 @@ namespace Cities {
 	}
 
 	public static class GenCity {
-		public static TerrainDef RandomFloor(Map map) {
-			return BaseGenUtility.RandomBasicFloorDef(map.ParentFaction);
+
+		public static TerrainDef RandomFloor(Map map, bool carpets = false) {
+			return BaseGenUtility.RandomBasicFloorDef(map.ParentFaction, carpets);
 		}
 
 		public static ThingDef RandomWallStuff(Map map, bool onlyCheap = false) {

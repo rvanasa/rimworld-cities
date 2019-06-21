@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Defs>
-
-  <WorldObjectDef>
-    <defName>City</defName>
-    <label>city</label>
-    <description>A large-scale, highly advanced settlement.</description>
+  
+  <WorldObjectDef Name="CityCommon" Abstract="True">
     <worldObjectClass>Cities.City</worldObjectClass>
     <expandingIconTexture>World/WorldObjects/City</expandingIconTexture>
     <expandingIcon>true</expandingIcon>
@@ -14,28 +11,22 @@
       <li Class="WorldObjectCompProperties_Abandon" />
       <li Class="WorldObjectCompProperties_TradeRequest" />
       <li Class="WorldObjectCompProperties_FormCaravan" />
-      <li Class="WorldObjectCompProperties_TimedForcedExit" />
+      <!--<li Class="WorldObjectCompProperties_TimedForcedExit" />-->
       <li Class="WorldObjectCompProperties_EnterCooldown" />
     </comps>
   </WorldObjectDef>
+  
+  <WorldObjectDef ParentName="CityCommon">
+    <defName>City_Faction</defName>
+    <label>city</label>
+    <description>A large-scale, highly advanced settlement.</description>
+  </WorldObjectDef>
 	
-  <!--<WorldObjectDef>
+  <WorldObjectDef ParentName="CityCommon">
     <defName>City_Abandoned</defName>
     <label>abandoned city</label>
     <description>The ruins of a once-great civilization.</description>
-    <worldObjectClass>Cities.AbandonedCity</worldObjectClass>
-    <expandingIcon>true</expandingIcon>
-    <expandingIconPriority>10</expandingIconPriority>
-    <canBePlayerHome>true</canBePlayerHome>
-    <comps>
-      <li Class="WorldObjectCompProperties_Timeout" />
-      <li Class="WorldObjectCompProperties_FormCaravan" />
-      <li Class="WorldObjectCompProperties_TimedForcedExit" />
-      <li Class="WorldObjectCompProperties_EnterCooldown" />
-    </comps>
-		<IncidentTargetTags>
-      <li>Map_Misc</li>
-    </IncidentTargetTags>
-  </WorldObjectDef>-->
+    <expandingIconTexture>World/WorldObjects/City_Abandoned</expandingIconTexture>
+  </WorldObjectDef>
   
 </Defs>

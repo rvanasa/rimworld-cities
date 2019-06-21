@@ -60,6 +60,7 @@
     <Compile Include="RimCities.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="BuildingDecorator.cs" />
+    <Compile Include="Scenario.cs" />
     <Compile Include="RoomDecorator.cs" />
     <Compile Include="Stencil.cs" />
   </ItemGroup>

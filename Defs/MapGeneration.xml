@@ -12,6 +12,7 @@
 			<li>City_Walls</li>
 			<li>City_Streets</li>
 			<li>City_Docks</li>
+			<li>City_Bazaars</li>
 			<li>City_Prison</li>
 			<li>City_Hospital</li>
 			<li>City_ProductionBuildings</li>
@@ -37,6 +38,8 @@
   <MapGeneratorDef Name="_Debug" ParentName="CityCommonBase">
     <defName>City_Abandoned</defName>
     <genSteps>
+			<li>ScatterShrines</li>
+      <li>CaveHives</li>
       <li>City_Abandoned_Pre</li>
       <li>City_Abandoned_Post</li>
     </genSteps>
@@ -95,6 +98,21 @@
 				<min>2</min>
 				<max>4</max>
 			</countPer10kCellsRange>
+    </genStep>
+  </GenStepDef>
+  
+  <GenStepDef>
+    <defName>City_Bazaars</defName>
+    <order>270</order>
+    <genStep Class="Cities.GenStep_Bazaars">
+			<countPer10kCellsRange>
+				<min>2</min>
+				<max>4</max>
+			</countPer10kCellsRange>
+			<areaConstraints>
+				<min>30</min>
+				<max>100</max>
+			</areaConstraints>
     </genStep>
   </GenStepDef>
   
