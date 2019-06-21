@@ -7,7 +7,7 @@
 
 #### *Update v0.2 (June 20, 2019)*
 
-- Cities now generate in previous saves.
+- Cities now generate in previous save files.
 - You can start a new game in a friendly, hostile, or abandoned city using the "Start in a city" scenario option.
 - Both abandoned and conquered cities can now be claimed and converted into player colonies.
 - Friendly cities can now be visited without invoking hostilities.
