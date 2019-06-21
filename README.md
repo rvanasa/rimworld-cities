@@ -30,17 +30,20 @@ RimCities is currently compatible with most RimWorld mods. Let me know if you fi
 
 ## Features:
 
-#### Visit cities on the world map
+#### Visit cities on the world map.
 ![](Docs/World1.png)
 
-#### Explore large, intricate settlement layouts
+#### Explore large, intricate settlement layouts.
 ![](Docs/Map1.png)
 
-#### Scavenge for supplies and avoid defenses
+#### Scavenge for supplies and avoid defenses.
 ![](Docs/Map2.png)
 
-#### Reveal rooms as you progress through the map
+#### Reveal rooms as you progress through the map.
 ![](Docs/Map3.png)
+
+#### Claim conquered and abandoned cities for your faction.
+![](Docs/Map4.png)
 
 ---
 
