@@ -42,14 +42,22 @@ namespace Cities {
 		public float abandonedChance;
 		public IntRange citiesPer100kTiles;
 
+		public ModSettings_Cities() {
+			Reset();
+		}
+
 		public override void ExposeData() {
-			/*if(Scribe.mode == LoadSaveMode.LoadingVars) {
-				Reset();
-			}*/
+			// TODO: DRY defaults
 			Scribe_Values.Look(ref limitCitySize, "limitCitySize", true);
 			Scribe_Values.Look(ref abandonedChance, "abandonedChance", 0.4F);
 			Scribe_Values.Look(ref citiesPer100kTiles, "citiesPer100kTiles", new IntRange(10, 15));
 			base.ExposeData();
+		}
+
+		public void Reset() {
+			limitCitySize = true;
+			abandonedChance = 0.4F;
+			citiesPer100kTiles = new IntRange(10, 15);
 		}
 	}
 
@@ -140,7 +148,7 @@ namespace Cities {
 		}
 
 		public override void GenerateFromScribe(string seed) {
-			if(!Find.WorldObjects.AllWorldObjects.Any(obj => obj is City city)) {
+			if(!Find.WorldObjects.AllWorldObjects.Any(obj => obj is City)) {
 				Log.Warning("No cities found; regenerating");
 				GenerateFresh(seed);
 			}
