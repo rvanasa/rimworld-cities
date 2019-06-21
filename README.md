@@ -5,8 +5,10 @@
 
 ---
 
-#### *Update v0.2 (June 20, 2019)*
+#### Patch v0.2.2 (June 21, 2019)
+- Improved compatibility with [Combat Extended](https://steamcommunity.com/workshop/filedetails/?id=1631756268).
 
+#### Patch v0.2.1 (June 20, 2019)
 - Cities now generate in previous save files.
 - You can start a new game in a friendly, hostile, or abandoned city using the "Start in a city" scenario option.
 - Both abandoned and conquered cities can now be claimed and converted into player colonies.
