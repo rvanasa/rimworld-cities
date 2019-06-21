@@ -18,7 +18,11 @@
 - Both abandoned and conquered cities can now be claimed and converted into player colonies.
 - Friendly cities can now be visited without invoking hostilities.
 - More settings are  available for city generation (check the mod options page).
-- Added partial Japanese language support.
+- Added partial Japanese language support (@Proxyer).
+
+---
+
+### [Announcement/Discusssion Thread](https://www.reddit.com/r/RimWorld/comments/c2odfh/10_rimcities_beta_release_procedural_city_map/)
 
 ---
 
