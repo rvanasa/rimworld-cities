@@ -4,8 +4,9 @@
   <ScenPartDef>
     <defName>StartCity</defName>
     <label>start in a city (RimCities)</label>
-    <category>Misc</category>
+    <category>WorldThing</category>
     <scenPartClass>Cities.ScenPart_StartCity</scenPartClass>
+		<summaryPriority>490</summaryPriority>
     <maxUses>1</maxUses>
   </ScenPartDef>
 

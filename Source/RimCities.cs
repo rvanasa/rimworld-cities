@@ -13,8 +13,6 @@ namespace Cities {
 
 		public Mod_Cities(ModContentPack content) : base(content) {
 			settings = GetSettings<ModSettings_Cities>();
-
-			RimCities_Patches.Setup();
 		}
 
 		public override void DoSettingsWindowContents(Rect inRect) {
@@ -88,6 +86,7 @@ namespace Cities {
 			base.PostMapGenerate();
 			if(Abandoned) {
 				SetFaction(Faction.OfPlayer);
+				GetComponent<TradeRequestComp>().expiration = int.MaxValue;
 			}
 		}
 
@@ -132,8 +131,8 @@ namespace Cities {
 		public override void GenerateFresh(string seed) {
 			var settings = LoadedModManager.GetMod<Mod_Cities>().GetSettings<ModSettings_Cities>();
 			var abandonedChance = settings.abandonedChance;
-			//var citiesPer100kTiles = settings.citiesPer100kTiles;
-			var citiesPer100kTiles = new IntRange(200, 200);/////
+			var citiesPer100kTiles = settings.citiesPer100kTiles;
+			//var citiesPer100kTiles = new IntRange(200, 200);/////
 			int cityCount = GenMath.RoundRandom(Find.WorldGrid.TilesCount / 100000F * citiesPer100kTiles.RandomInRange);
 			for(int i = 0; i < cityCount; i++) {
 				var abandoned = i == 0 || Rand.Chance(abandonedChance);

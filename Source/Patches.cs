@@ -8,8 +8,9 @@ using RimWorld.Planet;
 using Verse;
 
 namespace Cities {
-	public class RimCities_Patches {
-		public static void Setup() {
+	[StaticConstructorOnStartup]
+	public static class RimCities_Patches {
+		static RimCities_Patches() {
 			var harmony = HarmonyInstance.Create("cabbage.rimcities");
 			harmony.PatchAll(Assembly.GetExecutingAssembly());
 		}

@@ -9,6 +9,10 @@
 
 ---
 
+#### Patch v0.2.4 (June 22, 2019)
+- Added "Crashlanded" scenario starting in an abandoned city.
+- Fixed several minor bugs.
+
 #### Patch v0.2.3 (June 21, 2019)
 - Fixed several mod incompatibility edge cases.
 - Improved AI in friendly cities.
