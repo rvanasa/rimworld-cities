@@ -9,6 +9,10 @@
 
 ---
 
+#### Patch v0.2.7 (June 23, 2019)
+- Added compatibility for [Faction Control](https://steamcommunity.com/sharedfiles/filedetails/?id=1509102551) and [Medieval Times](https://steamcommunity.com/sharedfiles/filedetails/?id=732569232).
+- Rebalanced abandoned city wall materials.
+
 #### Patch v0.2.6 (June 23, 2019)
 - Added more wildlife to abandoned cities.
 - Added a "Crashlanded (Friendly City)" scenario.
@@ -24,7 +28,7 @@
 - Fixed several bugs pointed out by the community.
 
 #### Patch v0.2.4 (June 22, 2019)
-- Added "Crashlanded" scenario variant starting in an abandoned city.
+- Added "Crashlanded (Abandoned City)" scenario.
 - Fixed several minor bugs.
 
 #### Patch v0.2.3 (June 21, 2019)
@@ -53,7 +57,7 @@ RimCities is an attempt to create an interesting and unique end-game challenge f
 
 You may occasionally come across abandoned cities, which provide great scavenging opportunities for you and other nearby raiding parties.
 
-RimCities is compatible with existing save files and works with Combat Extended, Real Ruins, and many other mods. If you're encountering issues, try disabling other mods and/or tweaking the load order.
+RimCities is compatible with existing save files and works with Combat Extended, Real Ruins, Zombieland, Faction Control, Medieval Times, and many other mods. If you're encountering issues, try disabling other mods and/or tweaking the load order.
 
 If you'd like to start your colony in a city, click "Scenario Editor" and check the box next to "Edit mode". From there, click "Add part" and add the "Start in city (RimCities)" option. You can then customize the scenario to your liking.
 

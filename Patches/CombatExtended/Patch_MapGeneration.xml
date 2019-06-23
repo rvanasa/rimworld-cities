@@ -11,10 +11,10 @@
         <li Class="PatchOperationReplace">
           <xpath>/Defs/GenStepDef[defName="City_Emplacements"]/genStep/options/li[weaponDef="Turret_MiniTurret"]</xpath>
           <value>
-			<li>
-				<roofed>true</roofed>
-				<weaponDef>Turret_Blaster</weaponDef>
-				<manned>true</manned>
+      			<li>
+      				<roofed>true</roofed>
+      				<weaponDef>Turret_Blaster</weaponDef>
+      				<manned>true</manned>
             </li>
           </value>
         </li>

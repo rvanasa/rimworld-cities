@@ -94,7 +94,7 @@ namespace Cities {
 		protected override void ScatterAt(IntVec3 pos, Map map, int count) {
 			var s = new Stencil(map);
 			s = s.BoundTo(CellRect.FromLimits(pos, s.bounds.RandomCell));
-			var stuff = GenCity.RandomWallStuff(map, true);
+			var stuff = GenCity.RandomWallStuff(map, map.Parent is City city && !city.Abandoned);
 			for(var dir = 0; dir < 4; dir++) {
 				var sDir = s.Rotate(dir);
 				sDir.Fill(sDir.MinX, sDir.MaxZ, sDir.MaxX, sDir.MaxZ, ThingDefOf.Wall, stuff, p => IsValidTile(map, p));

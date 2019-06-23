@@ -168,11 +168,11 @@ namespace Cities {
 			for(int i = 0; i < cityCount; i++) {
 				var abandoned = i == 0 || Rand.Chance(abandonedChance);
 				var city = (City)WorldObjectMaker.MakeWorldObject(DefDatabase<WorldObjectDef>.GetNamed(abandoned ? "City_Abandoned" : "City_Faction"));
-				city.Tile = TileFinder.RandomSettlementTileFor(city.Faction);
 				city.SetFaction(city.FindFaction());
 				if(!abandoned) {
 					city.inhabitantFaction = city.Faction;
 				}
+				city.Tile = TileFinder.RandomSettlementTileFor(city.Faction);
 				city.Name = SettlementNameGenerator.GenerateSettlementName(city);
 				Find.WorldObjects.Add(city);
 			}

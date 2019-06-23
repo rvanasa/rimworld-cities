@@ -9,8 +9,8 @@ using Verse;
 
 namespace Cities {
 	[StaticConstructorOnStartup]
-	public static class RimCities_Patches {
-		static RimCities_Patches() {
+	public static class Patches_RimCities {
+		static Patches_RimCities() {
 			var harmony = HarmonyInstance.Create("cabbage.rimcities");
 			harmony.PatchAll(Assembly.GetExecutingAssembly());
 		}
