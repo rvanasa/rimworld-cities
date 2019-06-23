@@ -38,9 +38,25 @@ namespace Cities {
 							}
 							pawn.guest.SetGuestStatus(s.map.ParentFaction, true);
 						}
+						else {
+							thing.SetOwnedByCity(true);
+						}
 					}
 				}
 			}
+		}
+	}
+
+	public class RoomDecorator_FrozenStorage : RoomDecorator_Storage {
+
+		public override void Decorate(Stencil s) {
+			base.Decorate(s);
+
+			var sVent = s.RotateRand().Move(0, s.MaxZ - 1).Bound(-1, -1, 1, 1);
+			sVent.Border(ThingDefOf.Wall, GenCity.RandomWallStuff(s.map, true));
+			sVent.Bound(0, 0, 0, 0).ClearRoof();
+			var tempControl = sVent.Spawn(0, -1, ThingDefOf.Cooler).TryGetComp<CompTempControl>();
+			tempControl.targetTemperature = -1;
 		}
 	}
 
@@ -51,6 +67,9 @@ namespace Cities {
 		public float chairPawnChance = 0.1F;
 
 		public override void Decorate(Stencil s) {
+			s.Bound(s.RandInclusive(s.MinX, s.MinX / 2) - 1, s.RandInclusive(s.MinZ, s.MinZ / 2) - 1, s.RandInclusive(s.MaxX / 2, s.MaxX) + 1, s.RandInclusive(s.MaxZ / 2, s.MaxZ) + 1)
+				.FillTerrain(GenCity.RandomFloor(s.map, true));
+
 			var def = options.RandomElement();
 			var thing = s.Spawn(def, GenCity.RandomStuff(def, s.map));
 			if(chairDensity > 0) {
@@ -111,7 +130,8 @@ namespace Cities {
 			var bedX = s.RandX;
 			s.Spawn(bedX, s.MinZ, DefDatabase<ThingDef>.GetNamed("EndTable"), stuff);
 			var bed = (Building_Bed)s.Spawn(bedX, s.MinZ + 1, ThingDefOf.Bed, stuff);
-			var pawn = GenCity.SpawnInhabitant(s.Chance(pawnInBedroomChance) ? s.pos : s.Coords(s.RandX, s.RandZ), s.map, new LordJob_DefendBase(s.map.ParentFaction, bed.Position), randomWorkSpot: true);
+			bed.SetFactionDirect(s.map.ParentFaction);
+			var pawn = GenCity.SpawnInhabitant(s.Chance(pawnInBedroomChance) ? s.pos : s.MapBounds.RandomCell, s.map, null, randomWorkSpot: true);
 			bed.TryAssignPawn(pawn);
 		}
 	}

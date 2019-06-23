@@ -15,6 +15,7 @@
 			<li>City_Bazaars</li>
 			<li>City_Prison</li>
 			<li>City_Hospital</li>
+			<li>City_Freezer</li>
 			<li>City_ProductionBuildings</li>
 			<li>City_MainBuildings</li>
 			<li>City_Houses</li>
@@ -106,8 +107,8 @@
     <order>270</order>
     <genStep Class="Cities.GenStep_Bazaars">
 			<countPer10kCellsRange>
-				<min>2</min>
-				<max>4</max>
+				<min>1</min>
+				<max>3</max>
 			</countPer10kCellsRange>
 			<areaConstraints>
 				<min>30</min>
@@ -222,6 +223,38 @@
   </GenStepDef>
   
   <GenStepDef>
+    <defName>City_Freezer</defName>
+    <order>303</order>
+    <genStep Class="Cities.GenStep_Buildings">
+			<count>1</count>
+			<areaConstraints>
+				<min>80</min>
+				<max>100</max>
+			</areaConstraints>
+			<wallChance>0</wallChance>
+			<roomDecorators>
+				<li Class="Cities.RoomDecorator_FrozenStorage">
+					<maxArea>100</maxArea>
+					<density>0.8</density>
+					<stockGenerators>
+						<li Class="StockGenerator_Category">
+			        <categoryDef>FoodMeals</categoryDef>
+			        <thingDefCountRange>
+			          <min>10</min>
+			          <max>50</max>
+			        </thingDefCountRange>
+			        <totalPriceRange>
+			          <min>30</min>
+			          <max>50</max>
+			        </totalPriceRange>
+			      </li>
+					</stockGenerators>
+				</li>
+			</roomDecorators>
+    </genStep>
+  </GenStepDef>
+  
+  <GenStepDef>
     <defName>City_ProductionBuildings</defName>
     <order>310</order>
     <genStep Class="Cities.GenStep_Buildings">
@@ -296,8 +329,9 @@
 			<roomDecorators>
 				<li Class="Cities.RoomDecorator_Storage"></li>
 				<li Class="Cities.RoomDecorator_Centerpiece">
-					<weight>0.5</weight>
+					<weight>0.7</weight>
 					<options>
+						<li>HoopstoneRing</li>
 						<li>BilliardsTable</li>
 						<li>ShipChunk</li>
 						<li>StandingLamp</li>
@@ -318,8 +352,11 @@
 					</chairOptions>
 				</li>
 				<li Class="Cities.RoomDecorator_Centerpiece">
-					<weight>0.25</weight>
+					<weight>0.4</weight>
 					<options>
+						<li>ChessTable</li>
+						<li>GameOfUrBoard</li>
+						<li>PokerTable</li>
 						<li>Table1x2c</li>
 						<li>Table2x2c</li>
 						<li>Table2x4c</li>

@@ -61,19 +61,54 @@ namespace Cities {
 		}
 	}
 
+	[HarmonyPatch(typeof(IncidentWorker_QuestTradeRequest))]
+	[HarmonyPatch(nameof(IncidentWorker_QuestTradeRequest.RandomNearbyTradeableSettlement))]
+	static class IncidentWorker_QuestTradeRequest_RandomNearbyTradeableSettlement {
+		// TODO: improve trade request filtering
+		static void Postfix(ref SettlementBase __result, int originTile) {
+			if(__result is City city && (city.Abandoned || city.Faction.HostileTo(Faction.OfPlayer))) {
+				__result = null;
+			}
+		}
+	}
+
 	[HarmonyPatch(typeof(ThingOwner<Thing>))]
 	[HarmonyPatch(nameof(ThingOwner<Thing>.TryAdd))]
 	[HarmonyPatch(new[] { typeof(Thing), typeof(bool) })]
 	static class ThingOwner_TryAdd {
-		static void Prefix(ref ThingOwner __instance, Thing item) {
+		static void Prefix(ref ThingOwner<Thing> __instance, Thing item) {
 			var pawn =
 				(__instance.Owner as Pawn_InventoryTracker)?.pawn ??
+				(__instance.Owner as Pawn_ApparelTracker)?.pawn ??
 				(__instance.Owner as Pawn_EquipmentTracker)?.pawn;
 
-			if(pawn != null && pawn.IsColonistPlayerControlled) {
-				if(pawn.Map.Parent is City city && city.Faction != pawn.Faction && !city.Faction.HostileTo(pawn.Faction)) {
+			if(pawn != null && pawn.IsColonist && item.IsOwnedByCity(pawn.Map)) {
+				if(pawn.Map.Parent is City city && !city.Abandoned && city.Faction != pawn.Faction) {
 					city.Faction.TryAffectGoodwillWith(pawn.Faction, -Mathf.RoundToInt(Mathf.Sqrt(item.MarketValue)) - 2);
 				}
+			}
+		}
+	}
+
+	[HarmonyPatch(typeof(CompForbiddable))]
+	[HarmonyPatch(nameof(CompForbiddable.CompGetGizmosExtra))]
+	static class CompForbiddable_CompGetGizmosExtra {
+		static bool Prefix(ref CompForbiddable __instance, ref IEnumerable<Gizmo> __result) {
+			if(__instance.Forbidden && __instance.parent.IsOwnedByCity()) {
+				__result = Enumerable.Empty<Gizmo>();
+				return false;
+			}
+			return true;
+		}
+	}
+
+	[HarmonyPatch(typeof(Thing))]
+	[HarmonyPatch(nameof(Thing.SplitOff))]
+	static class Thing_SplitOff {
+
+		static void Postfix(ref Thing __instance, ref Thing __result) {
+			if(__instance.IsOwnedByCity()) {
+				__result?.SetOwnedByCity(true, __instance.Map);
 			}
 		}
 	}

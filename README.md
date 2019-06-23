@@ -9,8 +9,16 @@
 
 ---
 
+#### Patch v0.2.5 (June 23, 2019)
+- While under attack, hostile cities will occasionally call in reinforcements based on your storyteller settings.
+- Significantly improved both friendly and hostile citizen AI (eating, sleeping, responding to attacks). A few more upgrades are coming soon.
+- Spiced up city map generation with town center spaces and more room / building variants.
+- City stockpile ownership works properly now (theft penalties no longer apply to natural resources and player-owned items).
+- Increased the number of items scattered in abandoned cities.
+- Fixed several bugs pointed out by the community.
+
 #### Patch v0.2.4 (June 22, 2019)
-- Added "Crashlanded" scenario starting in an abandoned city.
+- Added "Crashlanded" scenario variant starting in an abandoned city.
 - Fixed several minor bugs.
 
 #### Patch v0.2.3 (June 21, 2019)

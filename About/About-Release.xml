@@ -5,6 +5,6 @@
 	<supportedVersions>
 		<li>1.0</li>
 	</supportedVersions>
-	<description>Procedurally generated city settlements.</description>
+	<description>Procedurally generated city settlements. Compatible with existing save files.</description>
 	<url>https://github.com/rvanasa/rimworld-cities</url>
 </ModMetaData>

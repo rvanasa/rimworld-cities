@@ -101,7 +101,7 @@ namespace Cities {
 		}
 
 		public int RandInclusive(int min, int max) {
-			return Rand.Range(min, max + 1);
+			return Rand.RangeInclusive(min, max);
 		}
 
 		public bool Chance(float chance) {
@@ -174,6 +174,15 @@ namespace Cities {
 
 		public Stencil BorderTerrain(int x1, int z1, int x2, int z2, TerrainDef terrain, Mask mask = null) {
 			return this.Bound(x1, z1, x2, z2).BorderTerrain(terrain, mask);
+		}
+
+		public Stencil ClearRoof(Mask mask = null) {
+			foreach(var pos in bounds.Cells) {
+				if(Check(pos, mask)) {
+					map.roofGrid.SetRoof(pos, null);
+				}
+			}
+			return this;
 		}
 
 		public Stencil FillRoof(RoofDef roof, Mask mask = null) {
