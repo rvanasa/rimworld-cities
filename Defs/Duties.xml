@@ -8,10 +8,10 @@
       <subNodes>
         <li Class="JobGiver_TakeCombatEnhancingDrug" />
         <li Class="JobGiver_AIFightEnemies">
-          <targetAcquireRadius>40</targetAcquireRadius>
+          <targetAcquireRadius>45</targetAcquireRadius>
           <targetKeepRadius>50</targetKeepRadius>
         </li>
-        <li Class="JobGiver_AIGotoNearestHostile" />
+        <!--<li Class="JobGiver_AIGotoNearestHostile" />-->
 				<li Class="ThinkNode_Subtree">
           <treeDef>SatisfyBasicNeeds</treeDef>
         </li>

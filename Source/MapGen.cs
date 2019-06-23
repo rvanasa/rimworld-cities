@@ -35,7 +35,7 @@ namespace Cities {
 				for(var i = things.Count - 1; i >= 0; i--) {
 					var thing = things[i];
 					if(ShouldDestroy(thing, decay) && !thing.Destroyed) {
-						if(thing is Pawn pawn && Rand.Chance(corpseChance)) {
+						if(thing is Pawn pawn && !pawn.Faction.IsPlayer && Rand.Chance(corpseChance)) {
 							pawn.Kill(null);
 							pawn.Corpse.timeOfDeath -= Rand.RangeInclusive(10, 500) * 1000;
 						}
@@ -71,6 +71,9 @@ namespace Cities {
 		public override int SeedPart => GetType().Name.GetHashCode();
 
 		public override void Generate(Map map, GenStepParams parms) {
+			if(map.Parent is City city && city.Abandoned) {
+				return;
+			}
 			foreach(var pos in map.AllCells) {
 				var things = pos.GetThingList(map);
 				for(var i = things.Count - 1; i >= 0; i--) {

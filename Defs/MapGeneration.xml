@@ -552,9 +552,9 @@
   </GenStepDef>
 	
   <GenStepDef>
-    <defName>City_ClearAnimals</defName>
-    <order>1100</order>
-    <genStep Class="Cities.GenStep_ClearAnimals">
+    <defName>City_Abandoned_Post</defName>
+    <order>690</order>
+    <genStep Class="Cities.GenStep_Abandoned_Post">
 			<decay>
 				<min>0.1</min>
 				<max>0.5</max>
@@ -563,9 +563,9 @@
   </GenStepDef>
 	
   <GenStepDef>
-    <defName>City_Abandoned_Post</defName>
-    <order>1101</order>
-    <genStep Class="Cities.GenStep_Abandoned_Post">
+    <defName>City_ClearAnimals</defName>
+    <order>1100</order>
+    <genStep Class="Cities.GenStep_ClearAnimals">
 			<decay>
 				<min>0.1</min>
 				<max>0.5</max>

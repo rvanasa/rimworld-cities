@@ -21,20 +21,20 @@
         <li Class="PatchOperationReplace">
           <xpath>/Defs/GenStepDef[defName="City_Emplacements"]/genStep/options/li[weaponDef="Turret_Autocannon"]</xpath>
           <value>
-			<li>
-				<roofed>true</roofed>
-				<weaponDef>Turret_Heavy</weaponDef>
-				<manned>true</manned>
+      			<li>
+      				<roofed>true</roofed>
+      				<weaponDef>Turret_Heavy</weaponDef>
+      				<manned>true</manned>
             </li>
           </value>
         </li>
         <li Class="PatchOperationReplace">
           <xpath>/Defs/GenStepDef[defName="City_Emplacements"]/genStep/options/li[weaponDef="Turret_Sniper"]</xpath>
           <value>
-				<li>
-				<roofed>true</roofed>
-				<weaponDef>Turret_M240B</weaponDef>
-				<manned>true</manned>
+    				<li>
+      				<roofed>true</roofed>
+      				<weaponDef>Turret_M240B</weaponDef>
+      				<manned>true</manned>
             </li>
           </value>
         </li>

@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Defs>
 
-  <ScenarioDef>
-    <defName>Crashlanded_City</defName>
-    <label>Crashlanded (Abandoned City)</label>
+  <ScenarioDef Name="Crashlanded_City" Abstract="True">
     <description>The three of you awake in your cryptosleep sarcophagi to the sound of sirens and ripping metal. You barely get to the escape pods before the ship is torn apart. Some time later, you land on this unknown rimworld.</description>
     <scenario>
       <summary>The classic RimWorld experience with an urban twist.</summary>
@@ -12,12 +10,6 @@
         <factionDef>PlayerColony</factionDef>
       </playerFaction>
       <parts>
-			
-				<!-- Game start dialog -->
-				<li Class="Cities.ScenPart_StartCity">
-					<def>StartCity</def>
-					<inhabitantKind>Abandoned</inhabitantKind>
-				</li>
 
         <!-- Config pages -->
         <li Class="ScenPart_ConfigPage_ConfigureStartingPawns">
@@ -139,5 +131,31 @@
       </parts>
     </scenario>
   </ScenarioDef>
+	
+	<ScenarioDef ParentName="Crashlanded_City">
+		<defName>Crashlanded_City_Abandoned</defName>
+    <label>Crashlanded (Abandoned City)</label>
+		<scenario>
+			<parts>
+				<li Class="Cities.ScenPart_StartCity">
+					<def>StartCity</def>
+					<inhabitantKind>Abandoned</inhabitantKind>
+				</li>
+			</parts>
+		</scenario>
+	</ScenarioDef>
+	
+	<ScenarioDef ParentName="Crashlanded_City">
+		<defName>Crashlanded_City_Friendly</defName>
+    <label>Crashlanded (Friendly City)</label>
+		<scenario>
+			<parts>
+				<li Class="Cities.ScenPart_StartCity">
+					<def>StartCity</def>
+					<inhabitantKind>Friendly</inhabitantKind>
+				</li>
+			</parts>
+		</scenario>
+	</ScenarioDef>
 
 </Defs>

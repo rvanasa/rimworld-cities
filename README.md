@@ -9,6 +9,12 @@
 
 ---
 
+#### Patch v0.2.6 (June 23, 2019)
+- Added more wildlife to abandoned cities.
+- Added a "Crashlanded (Friendly City)" scenario.
+- Decreased detection range of hostile inhabitants.
+- Using the "Standing" scenario arrival option in an abandoned city will no longer delete your pawns and items.
+
 #### Patch v0.2.5 (June 23, 2019)
 - While under attack, hostile cities will occasionally call in reinforcements based on your storyteller settings.
 - Significantly improved both friendly and hostile citizen AI (eating, sleeping, responding to attacks). A few more upgrades are coming soon.
@@ -43,11 +49,15 @@
 
 ---
 
-RimCities is an attempt to create an interesting and unique end-game challenge for RimWorld players. This mod adds randomly generated cities to the world map, which are similar to other settlements but are far more difficult to attack.
+RimCities is an attempt to create an interesting and unique end-game challenge for RimWorld players. This mod adds randomly generated cities to the world map, which are similar to other settlements but are far more difficult to attack. Pirate-controlled cities provide even more of a challenge by occasionally bombarding you with mortar shells.
 
-You may occasionally come across pirate-controlled cities, which provide even more of a challenge by occasionally bombarding you with mortar shells.
+You may occasionally come across abandoned cities, which provide great scavenging opportunities for you and other nearby raiding parties.
 
-RimCities is currently compatible with most RimWorld mods. Let me know if you find an incompatibility and we can try to find a solution.
+RimCities is compatible with existing save files and works with Combat Extended, Real Ruins, and many other mods. If you're encountering issues, try disabling other mods and/or tweaking the load order.
+
+If you'd like to start your colony in a city, click "Scenario Editor" and check the box next to "Edit mode". From there, click "Add part" and add the "Start in city (RimCities)" option. You can then customize the scenario to your liking.
+
+Work in progress! Let me know if you have any ideas or suggestions for the mod.
 
 ---
 
