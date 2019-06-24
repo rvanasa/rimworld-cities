@@ -9,6 +9,12 @@
 
 ---
 
+#### Patch v0.2.9 (June 23, 2019)
+- Added Japanese translation (@Proxyer).
+
+#### Patch v0.2.8 (June 23, 2019)
+- Abandoned city buildings are now automatically claimed by the player.
+
 #### Patch v0.2.7 (June 23, 2019)
 - Added compatibility for [Faction Control](https://steamcommunity.com/sharedfiles/filedetails/?id=1509102551) and [Medieval Times](https://steamcommunity.com/sharedfiles/filedetails/?id=732569232).
 - Rebalanced abandoned city wall materials.

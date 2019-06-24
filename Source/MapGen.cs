@@ -40,8 +40,11 @@ namespace Cities {
 							pawn.Corpse.timeOfDeath -= Rand.RangeInclusive(10, 500) * 1000;
 						}
 						else {
-							thing.Destroy();
+							thing.Destroy();//
 						}
+					}
+					else if(!(thing is Pawn) && thing.def.CanHaveFaction && thing.Faction == null) {
+						thing.SetFactionDirect(Faction.OfPlayer);
 					}
 				}
 
