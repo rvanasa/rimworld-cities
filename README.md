@@ -9,7 +9,7 @@
 
 ---
 
-#### Patch v0.3.0 (June 25, 2019)
+#### Patch v0.3.0 (June 27, 2019)
 - New quest type: Sabotage (deactivate a city's defenses for an allied invasion force)
 - New quest type: Combined Assault (attack a settlement with your ally)
 - New quest type: Assassination (track down and creatively assassinate a specific target)
