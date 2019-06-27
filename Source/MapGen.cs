@@ -9,6 +9,80 @@ using Verse.AI.Group;
 
 namespace Cities {
 
+	public class MapComponent_QuestTracker : MapComponent {
+		public MapComponent_QuestTracker(Map map) : base(map) {
+		}
+
+		public override void MapGenerated() {
+			bool hasQuest = false;
+			foreach(var quest in Find.World.GetComponent<WorldComponent_QuestTracker>().quests) {
+				quest.MapGenerated(map);
+				hasQuest = true;
+			}
+			if(hasQuest) {
+				Find.TickManager.Notify_GeneratedPotentiallyHostileMap();
+			}
+		}
+
+		public override void MapRemoved() {
+			foreach(var quest in Find.World.GetComponent<WorldComponent_QuestTracker>().quests) {
+				quest.MapRemoved(map);
+			}
+		}
+	}
+
+	public class MapComponent_City : MapComponent {
+		const float DailyFoodGivenPerPerson = 0.5F;
+		const int EventTimeCycle = 40_000;
+		const int RaidPointIncrease = 500;
+
+		public HashSet<Thing> cityOwnedThings = new HashSet<Thing>();
+
+		public City City => (City)map.Parent;
+
+		public MapComponent_City(Map map) : base(map) {
+		}
+
+		public override void ExposeData() {
+			Scribe_Collections.Look(ref cityOwnedThings, "cityOwnedThings", LookMode.Reference);
+			base.ExposeData();
+		}
+
+		public override void MapComponentTick() {
+			if((Find.TickManager.TicksGame + map.Parent.ID) % EventTimeCycle == 0) {
+				if(map.Parent is City city && !city.Abandoned) {
+					if(city.Faction.HostileTo(Faction.OfPlayer)) {
+						var storyComp = Find.Storyteller.storytellerComps.First(x => x is StorytellerComp_OnOffCycle || x is StorytellerComp_RandomMain);
+						var parms = storyComp.GenerateParms(IncidentCategoryDefOf.ThreatBig, map);
+						parms.faction = city.Faction;
+						parms.raidStrategy = RaidStrategyDefOf.ImmediateAttack;
+						parms.raidArrivalMode = DefDatabase<PawnsArrivalModeDef>.GetRandom();
+						parms.raidArrivalModeForQuickMilitaryAid = true;
+						parms.points += RaidPointIncrease;
+						IncidentDefOf.RaidEnemy.Worker.TryExecute(parms);
+					}
+					else {
+						var pos = QuestUtility.FindDropSpot(map);
+						var things = new List<Thing>();
+						var foodCount = (int)(map.mapPawns.SpawnedPawnsInFaction(map.ParentFaction).Count * EventTimeCycle / 60000F * DailyFoodGivenPerPerson);
+						for(var i = 0; i < foodCount; i++) {
+							var thing = ThingMaker.MakeThing(ThingDefOf.MealSurvivalPack);
+							map.GetComponent<MapComponent_City>().cityOwnedThings.Add(thing);
+							things.Add(thing);
+						}
+						DropPodUtility.DropThingsNear(pos, map, things, canRoofPunch: false);
+					}
+				}
+			}
+		}
+	}
+
+	public abstract class Decorator {
+		public float weight = 1;
+
+		public abstract void Decorate(Stencil s);
+	}
+
 	public class GenStep_Abandoned_Pre : GenStep {
 		public FloatRange decay = new FloatRange(0, 1);
 
@@ -28,8 +102,11 @@ namespace Cities {
 		public override int SeedPart => GetType().Name.GetHashCode();
 
 		public override void Generate(Map map, GenStepParams parms) {
+			var playerFaction = Faction.OfPlayer;
 			var decay = this.decay.RandomInRange;
 			var corpseChance = this.corpseChance.RandomInRange;
+			//var autoClaim = Find.Maps.Count == 1;
+			var autoClaim = false;
 			foreach(var pos in map.cellsInRandomOrder.GetAll()) {
 				var things = pos.GetThingList(map);
 				for(var i = things.Count - 1; i >= 0; i--) {
@@ -40,11 +117,11 @@ namespace Cities {
 							pawn.Corpse.timeOfDeath -= Rand.RangeInclusive(10, 500) * 1000;
 						}
 						else {
-							thing.Destroy();//
+							thing.Destroy();
 						}
 					}
-					else if(!(thing is Pawn) && thing.def.CanHaveFaction && thing.Faction == null) {
-						thing.SetFactionDirect(Faction.OfPlayer);
+					else if(autoClaim && !(thing is Pawn) && thing.def.CanHaveFaction && thing.Faction == null) {
+						thing.SetFactionDirect(playerFaction);
 					}
 				}
 
@@ -64,7 +141,7 @@ namespace Cities {
 				|| (thing is Plant plant && plant.IsCrop)
 				|| (!thing.def.thingCategories.NullOrEmpty() && !thing.def.IsWithinCategory(ThingCategoryDefOf.Buildings) && !thing.def.IsWithinCategory(ThingCategoryDefOf.Chunks))
 				|| (thing.TryGetComp<CompGlower>() != null)
-				|| (thing is Building && Rand.Chance(thing.def == ThingDefOf.Wall ? remnantDensity * remnantDensity : decay)));
+				|| (thing is Building && thing.def.CanHaveFaction && Rand.Chance(thing.def == ThingDefOf.Wall ? remnantDensity * remnantDensity : decay)));
 		}
 	}
 
@@ -97,7 +174,7 @@ namespace Cities {
 		protected override void ScatterAt(IntVec3 pos, Map map, int count) {
 			var s = new Stencil(map);
 			s = s.BoundTo(CellRect.FromLimits(pos, s.bounds.RandomCell));
-			var stuff = GenCity.RandomWallStuff(map, map.Parent is City city && !city.Abandoned);
+			var stuff = GenCity.RandomWallStuff(map);
 			for(var dir = 0; dir < 4; dir++) {
 				var sDir = s.Rotate(dir);
 				sDir.Fill(sDir.MinX, sDir.MaxZ, sDir.MaxX, sDir.MaxZ, ThingDefOf.Wall, stuff, p => IsValidTile(map, p));
@@ -479,7 +556,7 @@ namespace Cities {
 			s.Expand(1).BorderTerrain(GenCity.RandomFloor(s.map), p => IsValidTile(s.map, p));
 		}
 
-		private void GenRooms(Stencil s, bool parentWall) {
+		void GenRooms(Stencil s, bool parentWall) {
 			s = s.Center();
 			var room = roomDecorators.RandomElementByWeight(r => r.weight / r.maxArea);
 			if(s.Area > room.maxArea) {
@@ -491,7 +568,7 @@ namespace Cities {
 				var hasWall = s.Chance(wallChance);
 
 				if(hasWall) {
-					s.Fill(wallX, s.MinZ + 1, wallX, s.MaxZ - 1, ThingDefOf.Wall, RandomWallStuff(s.map, true));
+					s.Fill(wallX, s.MinZ + 1, wallX, s.MaxZ - 1, ThingDefOf.Wall, RandomWallStuff(s.map));
 				}
 
 				var left = s.Bound(s.MinX, s.MinZ, wallX, s.MaxZ);
@@ -501,7 +578,7 @@ namespace Cities {
 
 				if(hasWall && parentWall) {
 					var offset = s.RandInclusive(0, 2) + 1;
-					s.Spawn(wallX, s.Chance(.5F) ? s.MinZ + offset : s.MaxZ - offset, ThingDefOf.Door, RandomWallStuff(s.map, true));
+					s.Spawn(wallX, s.Chance(.5F) ? s.MinZ + offset : s.MaxZ - offset, ThingDefOf.Door, RandomWallStuff(s.map/*, true*/));
 				}
 			}
 			else {
@@ -526,12 +603,12 @@ namespace Cities {
 			}
 		}
 
-		private TerrainDef RandomFloor(Map map) {
+		TerrainDef RandomFloor(Map map) {
 			return floorOptions.RandomElementWithFallback() ?? GenCity.RandomFloor(map);
 		}
 
-		private ThingDef RandomWallStuff(Map map, bool interior = false) {
-			return wallStuffOptions.RandomElementWithFallback() ?? GenCity.RandomWallStuff(map, interior);
+		ThingDef RandomWallStuff(Map map) {
+			return wallStuffOptions.RandomElementWithFallback() ?? GenCity.RandomWallStuff(map);
 		}
 	}
 }

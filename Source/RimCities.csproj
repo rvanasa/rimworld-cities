@@ -56,13 +56,18 @@
     <None Include="..\Patches\**" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Quests_RimCities.cs" />
+    <Compile Include="Quests.cs" />
+    <Compile Include="Keanu.cs" />
+    <Compile Include="WorldGen.cs" />
     <Compile Include="Patches.cs" />
     <Compile Include="MapGen.cs" />
-    <Compile Include="CityJobs.cs" />
+    <Compile Include="Jobs.cs" />
     <Compile Include="RimCities.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="BuildingDecorator.cs" />
-    <Compile Include="Scenario.cs" />
+    <Compile Include="Incidents.cs" />
+    <Compile Include="Scenarios.cs" />
     <Compile Include="RoomDecorator.cs" />
     <Compile Include="Stencil.cs" />
   </ItemGroup>

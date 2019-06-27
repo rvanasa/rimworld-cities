@@ -9,8 +9,29 @@
 
 ---
 
+#### Patch v0.3.0 (June 25, 2019)
+- New quest type: Sabotage (deactivate a city's defenses for an allied invasion force)
+- New quest type: Combined Assault (attack a settlement with your ally)
+- New quest type: Assassination (track down and creatively assassinate a specific target)
+- New quest type: Heavy Siege (defend a city from waves of enemies)
+- New quest type: Prison Break (help prisoners escape a city)
+- New very rare secret incident type :)
+- Abandoned city resources are no longer automatically claimed for more control over player wealth.
+- Building materials have been rebalanced for all city types.
+- When using Faction Control, city world generation works better on existing saves.
+- When using Medieval Times, fewer rooms will contain production-related stations.
+- The "Area revealed" message no longer shows up repeatedly when exploring city maps.
+- A greater number of cities will generate per world (by default).
+- Abandoned cities are no longer affected by the "Limit city map size" mod setting.
+- Hostile cities no longer claim ownership of items (i.e. items can now be un-forbidden).
+- Friendly cities now receive occasional food deliveries via drop pod.
+- Map generation now works better with other terrain generation mods.
+
+#### Patch v0.2.10 (June 24, 2019)
+- Fixed Medieval Times compatibility.
+
 #### Patch v0.2.9 (June 23, 2019)
-- Added Japanese translation (@Proxyer).
+- Updated Japanese translation (@Proxyer).
 
 #### Patch v0.2.8 (June 23, 2019)
 - Abandoned city buildings are now automatically claimed by the player.

@@ -20,20 +20,18 @@ namespace Cities {
 	[HarmonyPatch(nameof(MapGenerator.GenerateMap))]
 	static class MapGenerator_GenerateMap {
 		static void Prefix(ref IntVec3 mapSize, MapParent parent, MapGeneratorDef mapGenerator, IEnumerable<GenStepWithParams> extraGenStepDefs, ref System.Action<Map> extraInitBeforeContentGen) {
-			if(mapGenerator.defName.StartsWith("City_")) {
+			if(parent is City city) {
+				var shouldLimitMapSize = !city.Abandoned;
 				if(LoadedModManager.GetMod<Mod_Cities>().GetSettings<ModSettings_Cities>().limitCitySize) {
 					mapSize.x = Mathf.Min(mapSize.x, 200);
 					mapSize.z = Mathf.Min(mapSize.z, 200);
 				}
-			}
-
-			var prevInitAction = extraInitBeforeContentGen;
-			extraInitBeforeContentGen = map => {
-				if(map.Parent is City city) {
+				var prevInitAction = extraInitBeforeContentGen;
+				extraInitBeforeContentGen = map => {
 					city.PreMapGenerate(map);
-				}
-				prevInitAction?.Invoke(map);
-			};
+					prevInitAction?.Invoke(map);
+				};
+			}
 		}
 	}
 
@@ -41,8 +39,7 @@ namespace Cities {
 	[HarmonyPatch(nameof(SettlementDefeatUtility.CheckDefeated))]
 	static class SettlementDefeatUtility_CheckDefeated {
 		static bool Prefix(Settlement factionBase) {
-			var playerFaction = Faction.OfPlayer;
-			if(factionBase is City city && !factionBase.Faction.HostileTo(playerFaction)) {
+			if(factionBase is City city && !factionBase.Faction.HostileTo(Faction.OfPlayer)) {
 				return false;
 			}
 			return true;
@@ -64,7 +61,6 @@ namespace Cities {
 	[HarmonyPatch(typeof(IncidentWorker_QuestTradeRequest))]
 	[HarmonyPatch(nameof(IncidentWorker_QuestTradeRequest.RandomNearbyTradeableSettlement))]
 	static class IncidentWorker_QuestTradeRequest_RandomNearbyTradeableSettlement {
-		// TODO: improve trade request filtering
 		static void Postfix(ref SettlementBase __result, int originTile) {
 			if(__result is City city && (city.Abandoned || city.Faction.HostileTo(Faction.OfPlayer))) {
 				__result = null;
@@ -105,10 +101,95 @@ namespace Cities {
 	[HarmonyPatch(typeof(Thing))]
 	[HarmonyPatch(nameof(Thing.SplitOff))]
 	static class Thing_SplitOff {
-
 		static void Postfix(ref Thing __instance, ref Thing __result) {
 			if(__instance.IsOwnedByCity()) {
 				__result?.SetOwnedByCity(true, __instance.Map);
+			}
+		}
+	}
+
+	[HarmonyPatch(typeof(FogGrid))]
+	[HarmonyPatch("FloodUnfogAdjacent")]
+	static class FogGrid_FloodUnfogAdjacent {
+		static bool Prefix(ref FogGrid __instance, ref Map ___map, IntVec3 c) {
+			if(!(___map.Parent is City)) {
+				return true;
+			}
+			__instance.Unfog(c);
+			FloodUnfogResult floodUnfogResult = default(FloodUnfogResult);
+			for(int i = 0; i < 4; i++) {
+				IntVec3 intVec = c + GenAdj.CardinalDirections[i];
+				if(intVec.InBounds(___map) && intVec.Fogged(___map)) {
+					Building edifice = intVec.GetEdifice(___map);
+					if(edifice == null || !edifice.def.MakeFog) {
+						floodUnfogResult = FloodFillerFog.FloodUnfog(intVec, ___map);
+					}
+					else {
+						__instance.Unfog(intVec);
+					}
+				}
+			}
+			for(int j = 0; j < 8; j++) {
+				IntVec3 c2 = c + GenAdj.AdjacentCells[j];
+				if(c2.InBounds(___map)) {
+					Building edifice2 = c2.GetEdifice(___map);
+					if(edifice2 != null && edifice2.def.MakeFog) {
+						__instance.Unfog(c2);
+					}
+				}
+			}
+			return false;
+		}
+	}
+
+	/*[HarmonyPatch(typeof(CaravanFormingUtility))]
+	[HarmonyPatch(nameof(CaravanFormingUtility.AllReachableColonyItems))]
+	static class CaravanFormingUtility_AllReachableColonyItems {
+		static void Postfix(ref List<Thing> __result, Map map) {
+			var ownedThings = map.GetComponent<MapComponent_City>()?.cityOwnedThings;
+			if(ownedThings != null) {
+				__result.RemoveAll(ownedThings.Contains);
+			}
+		}
+	}*/
+
+	[HarmonyPatch(typeof(WorldObject))]
+	[HarmonyPatch(nameof(WorldObject.GetGizmos))]
+	static class WorldObject_GetGizmos {
+		static void Postfix(ref WorldObject __instance, ref IEnumerable<Gizmo> __result) {
+			foreach(var quest in Find.World.GetComponent<WorldComponent_QuestTracker>().quests) {
+				__result = __result.Concat(quest.GetGizmos(__instance));
+				if(quest.Targets.targets.Contains(__instance)) {
+					if(quest.def.Worker is IncidentWorker_Quest worker) {
+						var gizmo = new Command_Action {
+							icon = QuestIcons.InfoIcon,
+							defaultLabel = quest.Name,
+							defaultDesc = worker.LetterText,
+							action = () => worker.MakeLetter().OpenLetter(),
+						};
+						__result = __result.Add(gizmo);
+					}
+				}
+			}
+		}
+	}
+
+	[HarmonyPatch(typeof(Thing))]
+	[HarmonyPatch(nameof(Thing.GetGizmos))]
+	static class Thing_GetGizmos {
+		static void Postfix(ref Thing __instance, ref IEnumerable<Gizmo> __result) {
+			foreach(var quest in Find.World.GetComponent<WorldComponent_QuestTracker>().quests) {
+				__result = __result.Concat(quest.GetGizmos(__instance));
+			}
+		}
+	}
+
+	[HarmonyPatch(typeof(Thing))]
+	[HarmonyPatch(nameof(Thing.GetFloatMenuOptions))]
+	static class Thing_GetFloatMenuOptions {
+		static void Postfix(ref Thing __instance, ref IEnumerable<FloatMenuOption> __result, Pawn selPawn) {
+			foreach(var quest in Find.World.GetComponent<WorldComponent_QuestTracker>().quests) {
+				__result = __result.Concat(quest.GetFloatMenuOptions(__instance, selPawn));
 			}
 		}
 	}

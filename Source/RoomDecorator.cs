@@ -53,7 +53,7 @@ namespace Cities {
 			base.Decorate(s);
 
 			var sVent = s.RotateRand().Move(0, s.MaxZ - 1).Bound(-1, -1, 1, 1);
-			sVent.Border(ThingDefOf.Wall, GenCity.RandomWallStuff(s.map, true));
+			sVent.Border(ThingDefOf.Wall, GenCity.RandomWallStuff(s.map));
 			sVent.Bound(0, 0, 0, 0).ClearRoof();
 			var tempControl = sVent.Spawn(0, -1, ThingDefOf.Cooler).TryGetComp<CompTempControl>();
 			tempControl.targetTemperature = -1;
@@ -64,7 +64,8 @@ namespace Cities {
 		public List<ThingDef> options = new List<ThingDef>();
 		public List<ThingDef> chairOptions = new List<ThingDef>();
 		public float chairDensity;
-		public float chairPawnChance = 0.1F;
+		//public float chairPawnChance = 0.1F;
+		public float chairPawnChance = 0;
 
 		public override void Decorate(Stencil s) {
 			s.Bound(s.RandInclusive(s.MinX, s.MinX / 2) - 1, s.RandInclusive(s.MinZ, s.MinZ / 2) - 1, s.RandInclusive(s.MaxX / 2, s.MaxX) + 1, s.RandInclusive(s.MaxZ / 2, s.MaxZ) + 1)
@@ -149,6 +150,7 @@ namespace Cities {
 			var thing = bedOptions.RandomElement();
 			var stuff = GenCity.RandomStuff(thing, s.map);
 			var bed = (Building_Bed)sBed.Spawn(sBed.RandX, sBed.RandZ, thing, stuff);
+			bed.SetFactionDirect(s.map.ParentFaction);
 			bed.ForPrisoners = true;
 			if(s.Chance(prisonerChance)) {
 				var pawn = GenCity.SpawnInhabitant(s.pos, s.map);
@@ -170,6 +172,7 @@ namespace Cities {
 			var monitorDef = DefDatabase<ThingDef>.GetNamed("VitalsMonitor");
 			var monitor = sBed.Spawn(sBed.RandX, sBed.MaxZ, monitorDef);
 			var bed = (Building_Bed)sBed.Spawn(sBed.RandX, sBed.RandZ, thing, stuff);
+			bed.SetFactionDirect(s.map.ParentFaction);
 			bed.Medical = true;
 		}
 	}

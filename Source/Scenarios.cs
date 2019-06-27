@@ -30,7 +30,7 @@ namespace Cities {
 
 			var city = (City)WorldObjectMaker.MakeWorldObject(DefDatabase<WorldObjectDef>.GetNamed(GetObjectDefName()));
 			city.SetFaction(Find.GameInitData.playerFaction);
-			city.inhabitantFaction = city.FindFaction(IsValidFaction);
+			city.inhabitantFaction = GenCity.RandomCityFaction(IsValidFaction);
 			city.Tile = Find.GameInitData.startingTile;
 			city.Name = SettlementNameGenerator.GenerateSettlementName(city, city.inhabitantFaction?.def.factionNameMaker);
 			Find.WorldObjects.Add(city);

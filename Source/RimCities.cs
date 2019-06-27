@@ -21,6 +21,8 @@ namespace Cities {
 			listing.Gap();
 			listing.CheckboxLabeled("Limit city map size (reduces lag)", ref settings.limitCitySize);
 			listing.Gap();
+			listing.CheckboxLabeled("Enable city quest system", ref settings.enableQuestSystem);
+			listing.Gap();
 			listing.Label("Abandoned city chance: [" + GenMath.RoundTo(settings.abandonedChance, 0.01F) + "]");
 			settings.abandonedChance = listing.Slider(settings.abandonedChance, 0, 1);
 			listing.Gap();
@@ -37,8 +39,10 @@ namespace Cities {
 
 	public class ModSettings_Cities : ModSettings {
 		public bool limitCitySize;
+		public bool enableQuestSystem;
 		public float abandonedChance;
 		public IntRange citiesPer100kTiles;
+		public IntRange abandonedPer100kTiles;
 
 		public ModSettings_Cities() {
 			Reset();
@@ -46,171 +50,47 @@ namespace Cities {
 
 		public override void ExposeData() {
 			// TODO: DRY defaults
-			Scribe_Values.Look(ref limitCitySize, "limitCitySize", true);
-			Scribe_Values.Look(ref abandonedChance, "abandonedChance", 0.4F);
-			Scribe_Values.Look(ref citiesPer100kTiles, "citiesPer100kTiles", new IntRange(10, 15));
 			base.ExposeData();
+			Scribe_Values.Look(ref limitCitySize, "limitCitySize", true);
+			Scribe_Values.Look(ref enableQuestSystem, "enableQuestSystem", true);
+			Scribe_Values.Look(ref citiesPer100kTiles, "citiesPer100kTiles", new IntRange(10, 15));
+			Scribe_Values.Look(ref abandonedPer100kTiles, "abandonedPer100kTiles", new IntRange(5, 10));
 		}
 
 		public void Reset() {
 			limitCitySize = true;
-			abandonedChance = 0.4F;
+			enableQuestSystem = true;
+			abandonedChance = 0.3F;
 			citiesPer100kTiles = new IntRange(10, 15);
+			abandonedPer100kTiles = new IntRange(5, 10);
 		}
 	}
 
-	public class City : Settlement {
-		public Faction inhabitantFaction;
+	public static class GenCity {
 
-		public bool Abandoned => inhabitantFaction == null;
-
-		public override MapGeneratorDef MapGeneratorDef => DefDatabase<MapGeneratorDef>.GetNamed(
-				inhabitantFaction != null ? "City_Faction" : "City_Abandoned");
-
-		public override Texture2D ExpandingIcon => def.ExpandingIconTexture;
-
-		public override Color ExpandingIconColor => inhabitantFaction != null ? base.ExpandingIconColor : Color.grey;
-
-		public override bool Visitable => base.Visitable || Abandoned;
-
-		public override bool Attackable => base.Attackable && !Abandoned;
-
-		public override void PostMake() {
-			base.PostMake();
-			if(Abandoned) {
-				trader = null;
-			}
-		}
-
-		public override void PostMapGenerate() {
-			base.PostMapGenerate();
-			if(Abandoned) {
-				SetFaction(Faction.OfPlayer);
-			}
-		}
-
-		public override IEnumerable<Gizmo> GetCaravanGizmos(Caravan caravan) {
-			if(Visitable) {
-				yield return new Command_Action {
-					icon = SettleUtility.SettleCommandTex,
-					defaultLabel = "Enter City",
-					defaultDesc = "Enter the selected city.",
-					action = () => {
-						LongEventHandler.QueueLongEvent(() => {
-							var orGenerateMap = GetOrGenerateMapUtility.GetOrGenerateMap(Tile, null);
-							CaravanEnterMapUtility.Enter(caravan, orGenerateMap, CaravanEnterMode.Edge, CaravanDropInventoryMode.DoNotDrop, draftColonists: true);
-						}, "GeneratingMapForNewEncounter", false, null);
-					},
-				};
-			}
-			foreach(var gizmo in base.GetCaravanGizmos(caravan)) {
-				yield return gizmo;
-			}
-		}
-
-		public override void ExposeData() {
-			Scribe_References.Look(ref inhabitantFaction, "inhabitantFaction");
-			base.ExposeData();
-		}
-
-		public Faction FindFaction(System.Predicate<Faction> filter = null) {
+		public static Faction RandomCityFaction(System.Predicate<Faction> filter = null) {
 			return (from x in Find.World.factionManager.AllFactionsListForReading
 					where !x.def.isPlayer && !x.def.hidden && !x.def.techLevel.IsNeolithicOrWorse() && (filter == null || filter(x))
 					select x).RandomElementByWeightWithFallback(f => f.def.settlementGenerationWeight);
 		}
 
-		public virtual void PreMapGenerate(Map map) {
-			SetFaction(inhabitantFaction ?? FindFaction(f => f.HostileTo(Faction.OfPlayer)));
-		}
-	}
-
-	public class MapComponent_City : MapComponent {
-		const int RaidTimeCycle = 50_000;
-		const int RaidPointIncrease = 500;
-
-		public HashSet<Thing> cityOwnedThings = new HashSet<Thing>();
-
-		public City City => (City)map.Parent;
-
-		public MapComponent_City(Map map) : base(map) {
-		}
-
-		public override void ExposeData() {
-			Scribe_Collections.Look(ref cityOwnedThings, "cityOwnedThings", LookMode.Reference);
-			base.ExposeData();
-		}
-
-		public override void MapComponentTick() {
-			if((Find.TickManager.TicksGame + map.Parent.ID) % RaidTimeCycle == 0) {
-				if(map.Parent is City city && !city.Abandoned && city.Faction.HostileTo(Faction.OfPlayer)) {
-					var storyComp = Find.Storyteller.storytellerComps.First(x => x is StorytellerComp_OnOffCycle || x is StorytellerComp_RandomMain);
-					var parms = storyComp.GenerateParms(IncidentCategoryDefOf.ThreatBig, map);
-					parms.faction = city.Faction;
-					parms.raidStrategy = RaidStrategyDefOf.ImmediateAttack;
-					parms.raidArrivalMode = DefDatabase<PawnsArrivalModeDef>.GetRandom();
-					parms.raidArrivalModeForQuickMilitaryAid = true;
-					parms.points += RaidPointIncrease;
-					IncidentDefOf.RaidEnemy.Worker.TryExecute(parms);
-				}
-			}
-		}
-	}
-
-	public class WorldGenStep_Cities : WorldGenStep {
-		public override int SeedPart => GetType().Name.GetHashCode();
-
-		public override void GenerateFresh(string seed) {
-			var settings = LoadedModManager.GetMod<Mod_Cities>().GetSettings<ModSettings_Cities>();
-			var abandonedChance = settings.abandonedChance;
-			var citiesPer100kTiles = settings.citiesPer100kTiles;
-			//var citiesPer100kTiles = new IntRange(400, 400);/////
-			int cityCount = GenMath.RoundRandom(Find.WorldGrid.TilesCount / 100000F * citiesPer100kTiles.RandomInRange);
-			for(int i = 0; i < cityCount; i++) {
-				var abandoned = i == 0 || Rand.Chance(abandonedChance);
-				var city = (City)WorldObjectMaker.MakeWorldObject(DefDatabase<WorldObjectDef>.GetNamed(abandoned ? "City_Abandoned" : "City_Faction"));
-				city.SetFaction(city.FindFaction());
-				if(!abandoned) {
-					city.inhabitantFaction = city.Faction;
-				}
-				city.Tile = TileFinder.RandomSettlementTileFor(city.Faction);
-				city.Name = SettlementNameGenerator.GenerateSettlementName(city);
-				Find.WorldObjects.Add(city);
-			}
-		}
-
-		public override void GenerateFromScribe(string seed) {
-			if(!Find.WorldObjects.AllWorldObjects.Any(obj => obj is City)) {
-				Log.Warning("No cities found; regenerating");
-				GenerateFresh(seed);
-			}
-		}
-	}
-
-	public abstract class Decorator {
-		public float weight = 1;
-
-		public abstract void Decorate(Stencil s);
-	}
-
-	public static class GenCity {
-
 		public static TerrainDef RandomFloor(Map map, bool carpets = false) {
 			return BaseGenUtility.RandomBasicFloorDef(map.ParentFaction, carpets);
 		}
 
-		public static ThingDef RandomWallStuff(Map map, bool onlyCheap = false) {
-			return RandomStuff(ThingDefOf.Wall, map, onlyCheap);
+		public static ThingDef RandomWallStuff(Map map, bool expensive = false) {
+			return RandomStuff(ThingDefOf.Wall, map, expensive);
 		}
 
-		public static ThingDef RandomStuff(ThingDef thing, Map map, bool onlyCheap = false) {
+		public static ThingDef RandomStuff(ThingDef thing, Map map, bool expensive = false) {
 			if(!thing.MadeFromStuff) {
 				return null;
 			}
-			else if(onlyCheap) {
-				return GenStuff.RandomStuffInexpensiveFor(thing, map.ParentFaction);
+			else if(expensive) {
+				return GenStuff.RandomStuffByCommonalityFor(thing, map.ParentFaction.def.techLevel);
 			}
 			else {
-				return GenStuff.RandomStuffByCommonalityFor(thing, map.ParentFaction.def.techLevel);
+				return GenStuff.RandomStuffInexpensiveFor(thing, map.ParentFaction);
 			}
 		}
 
@@ -249,8 +129,8 @@ namespace Cities {
 				}
 
 				map = map ?? thing.Map;
-				if(map?.Parent is City city && !city.Abandoned) {
-					var cityOwnedThings = thing.Map.GetComponent<MapComponent_City>().cityOwnedThings;
+				if(map?.Parent is City city && !city.Abandoned && !city.Faction.HostileTo(Faction.OfPlayer)) {
+					var cityOwnedThings = map.GetComponent<MapComponent_City>().cityOwnedThings;
 					if(owned) {
 						cityOwnedThings.Add(thing);
 					}

@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <IncidentDef Class="Cities.QuestDef">
+		<defName>Quest_City_Sabotage</defName>
+		<label>city sabotage quest</label>
+		<questClass>Cities.Quest_Sabotage</questClass>
+		<category>WorldQuest</category>
+    <targetTags>
+      <li>World</li>
+    </targetTags>
+		<letterLabel>Sabotage opportunity</letterLabel>
+		<letterText>A guerrila force intends to attack {1}, a city of {0}. You can choose to help by deconstructing all turret defenses in {1}. \n\nThe attacker's identity will remain a secret until the assault begins. \n\nExpect both factions' opinions toward your colony to change dramatically upon completing this task.</letterText>
+		<letterDef>NeutralEvent</letterDef>
+		<questParts>
+			<li Class="Cities.QuestListener_GiveThings">
+				<events>
+					<li>Complete</li>
+				</events>
+				<value>
+					<min>3000</min>
+					<max>4000</max>
+				</value>
+			</li>
+		</questParts>
+		<baseChance>0.5</baseChance>
+	</IncidentDef>
+	
+  <IncidentDef Class="Cities.QuestDef">
+		<defName>Quest_City_Assault</defName>
+		<label>combined assault quest</label>
+		<questClass>Cities.Quest_Assault</questClass>
+		<category>WorldQuest</category>
+    <targetTags>
+      <li>World</li>
+    </targetTags>
+		<letterLabel>Combined assault</letterLabel>
+		<letterText>{0} is preparing to attack {2}, a settlement of {1}. \n\nIf you choose to join, {0} will allow you to claim the conquered city.</letterText>
+		<letterDef>NeutralEvent</letterDef>
+		<questParts>
+			<li Class="Cities.QuestListener_GiveThings">
+				<events>
+					<li>Complete</li>
+				</events>
+				<value>
+					<min>2000</min>
+					<max>3000</max>
+				</value>
+			</li>
+		</questParts>
+		<baseChance>0.5</baseChance>
+	</IncidentDef>
+	
+  <IncidentDef Class="Cities.QuestDef">
+		<defName>Quest_City_Assassinate</defName>
+		<label>assassination quest</label>
+		<questClass>Cities.Quest_Assassinate</questClass>
+		<category>WorldQuest</category>
+    <targetTags>
+      <li>World</li>
+    </targetTags>
+		<letterLabel>Assassination request</letterLabel>
+		<letterText>A mysterious figure has contacted your colony, requesting the assassination of {0}. {1} is a highly influential {2} citizen, and currently lives at the city of {3}. \n\nA creative, indirect assasination will prevent diplomatic repercussions.</letterText>
+		<letterDef>NeutralEvent</letterDef>
+		<questParts>
+			<li Class="Cities.QuestListener_GiveThings">
+				<events>
+					<li>Complete</li>
+				</events>
+				<value>
+					<min>2000</min>
+					<max>3000</max>
+				</value>
+			</li>
+			<li Class="Cities.QuestListener_Message">
+				<events>
+					<li>Complete</li>
+				</events>
+				<letter>Target assassinated</letter>
+				<message>{0} has been successfully assassinated.</message>
+				<messageType>PositiveEvent</messageType>
+			</li>
+			<li Class="Cities.QuestListener_Message">
+				<events>
+					<li>Cancel</li>
+				</events>
+				<letter>Target escaped</letter>
+				<message>{0} has left the area.</message>
+				<messageType>NegativeEvent</messageType>
+			</li>
+		</questParts>
+		<baseChance>0.5</baseChance>
+	</IncidentDef>
+	
+  <IncidentDef Class="Cities.QuestDef">
+		<defName>Quest_City_Defend</defName>
+		<label>city defense quest</label>
+		<questClass>Cities.Quest_Defend</questClass>
+		<category>WorldQuest</category>
+    <targetTags>
+      <li>World</li>
+    </targetTags>
+		<letterLabel>City under attack</letterLabel>
+		<letterText>{2} is under heavy siege by {0} and desperately needs reinforcements. \n\nIf you successfully defend {2}, surviving citizens from {1} will join your faction as a token of their gratitude.</letterText>
+		<letterDef>NegativeEvent</letterDef>
+		<questParts>
+			<li Class="Cities.QuestListener_GiveThings">
+				<events>
+					<li>Complete</li>
+				</events>
+				<value>
+					<min>5000</min>
+					<max>7000</max>
+				</value>
+			</li>
+			<li Class="Cities.QuestListener_Message">
+				<events>
+					<li>Complete</li>
+				</events>
+				<letter>Attackers leaving</letter>
+				<message>{0} are packing up and leaving. {2} has been successfully defended.</message>
+				<messageType>PositiveEvent</messageType>
+			</li>
+			<li Class="Cities.QuestListener_Message">
+				<events>
+					<li>Cancel</li>
+					<li>Expire</li>
+				</events>
+				<letter>City captured</letter>
+				<message>{2} has been captured by {0}.</message>
+				<messageType>NegativeEvent</messageType>
+			</li>
+		</questParts>
+		<baseChance>0.25</baseChance>
+	</IncidentDef>
+	
+  <IncidentDef Class="Cities.QuestDef">
+		<defName>Quest_City_PrisonBreak</defName>
+		<label>prison break quest</label>
+		<questClass>Cities.Quest_PrisonBreak</questClass>
+		<category>WorldQuest</category>
+    <targetTags>
+      <li>World</li>
+    </targetTags>
+		<letterLabel>Prison plot</letterLabel>
+		<letterText>Prisoners at {1} are devising an escape plan. If you choose to help, they will join your faction upon being released. \n\nUnfortunately, their captors have been tipped off and are preparing for your arrival. If you enter {1} before the prisoners escape, expect a hostile reaction from {0}.</letterText>
+		<letterDef>PositiveEvent</letterDef>
+		<questParts>
+			<li Class="Cities.QuestListener_Message">
+				<events>
+					<li>Cancel</li>
+				</events>
+				<letter>Prisoners escaped</letter>
+				<message>The prisoners seem to have already escaped.</message>
+				<messageType>NegativeEvent</messageType>
+			</li>
+		</questParts>
+		<baseChance>0.5</baseChance>
+	</IncidentDef>
+
+</Defs>

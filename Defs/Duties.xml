@@ -6,7 +6,6 @@
     <alwaysShowWeapon>false</alwaysShowWeapon>
     <thinkNode Class="ThinkNode_Priority">
       <subNodes>
-        <li Class="JobGiver_TakeCombatEnhancingDrug" />
         <li Class="JobGiver_AIFightEnemies">
           <targetAcquireRadius>45</targetAcquireRadius>
           <targetKeepRadius>50</targetKeepRadius>
@@ -20,7 +19,7 @@
           <maxDistToDutyTarget>12</maxDistToDutyTarget>
           <subNodes>
             <li Class="JobGiver_WanderAnywhere">
-              <wanderRadius>30</wanderRadius>
+              <wanderRadius>12</wanderRadius>
             </li>
           </subNodes>
         </li>
