@@ -10,7 +10,7 @@
 ---
 
 #### Patch v0.3.1 (June 27, 2019)
-- Added potential compatibility with Quest Tab (collaboration with Merthykins).
+- Added compatibility with Quest Tab (collaboration with Merthykins).
 - Improved city quest expiration time logic.
 
 #### Patch v0.3.0 (June 27, 2019)
