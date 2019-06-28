@@ -10,8 +10,9 @@
 ---
 
 #### Patch v0.3.1 (June 27, 2019)
-- Added compatibility with Quest Tab (collaboration with Merthykins).
+- Added compatibility with Quest Tab (collaboration with @Merthykins).
 - Improved city quest expiration time logic.
+- Updated Japanese translation (@Proxyer is awesome).
 
 #### Patch v0.3.0 (June 27, 2019)
 - New quest type: Sabotage (deactivate a city's defenses for an allied invasion force)

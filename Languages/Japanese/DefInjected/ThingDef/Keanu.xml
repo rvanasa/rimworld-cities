@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <Keanu_Dog.label>ビーグル犬</Keanu_Dog.label>
+  <Keanu_Dog.description>幸せな小さいビーグル犬です。</Keanu_Dog.description>
+  <Keanu_Dog.tools.left_claw.label>左爪</Keanu_Dog.tools.left_claw.label>
+  <Keanu_Dog.tools.right_claw.label>右爪</Keanu_Dog.tools.right_claw.label>
+  <Keanu_Dog.tools.cute_little_teeth.label>可愛らしい牙</Keanu_Dog.tools.cute_little_teeth.label>
+  <Keanu_Dog.tools.head.label>頭</Keanu_Dog.tools.head.label>
+  <!-- <Leather_Keanu_Dog.label>ビーグル犬の皮</Leather_Keanu_Dog.label>
+  <Leather_Keanu_Dog.description>ビーグル犬の皮</Leather_Keanu_Dog.description>
+  <Leather_Keanu_Dog.stuffProps.stuffAdjective>ビーグル犬の皮</Leather_Keanu_Dog.stuffProps.stuffAdjective>
+  <Meat_Keanu_Dog.label>ビーグル犬の肉</Meat_Keanu_Dog.label>
+  <Meat_Keanu_Dog.description>ビーグル犬の肉</Meat_Keanu_Dog.description> -->
+  <Corpse_Keanu_Dog.label>ビーグル犬の死骸</Corpse_Keanu_Dog.label>
+  <Corpse_Keanu_Dog.description>ビーグル犬の死骸</Corpse_Keanu_Dog.description>
+
+</LanguageData>

@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <Keanu_WickDog.label>犬が迷い込んだ</Keanu_WickDog.label>
+  <Keanu_WickDog.letterText>愛らしい犬があなたのコロニーに迷い込んだ。</Keanu_WickDog.letterText>
+  <Keanu_WickDog.letterLabel>迷い込んだ犬</Keanu_WickDog.letterLabel>
+
+  <Keanu_WickRevenge.label>狂犬</Keanu_WickRevenge.label>
+  <Keanu_WickRevenge.letterText>人間を憎む狂犬が現れました。生命を守るために逃げましょう！</Keanu_WickRevenge.letterText>
+  <Keanu_WickRevenge.letterLabel>狂犬</Keanu_WickRevenge.letterLabel>
+
+</LanguageData>

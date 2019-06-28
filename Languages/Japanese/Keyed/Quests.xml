@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <QuestResultComplete>完了すると：{0}</QuestResultComplete>
+  <QuestResultCancel>失敗すると：{0}</QuestResultCancel>
+  <QuestResultExpire>期限切れ：{0}</QuestResultExpire>
+  <QuestExpireTime>残り時間：{0}</QuestExpireTime>
+
+  <QuestAppendWorth>財宝：{0}</QuestAppendWorth>
+
+  <QuestComplete>クエスト完了（{0}）</QuestComplete>
+  <QuestCancelled>クエスト中止（{0}）</QuestCancelled>
+  <QuestExpired>クエスト期限切れ（{0}）</QuestExpired>
+
+  <QuestReceived>これらの報酬を受け取りました：{0}</QuestReceived>
+
+  <QuestDefendWave>攻撃の波（{0}回目／最大{1}回）</QuestDefendWave>
+
+</LanguageData>
