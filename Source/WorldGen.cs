@@ -25,6 +25,15 @@ namespace Cities {
 
 		public override bool Attackable => base.Attackable && !Abandoned;
 
+		public IEnumerable<Quest> QuestsHere => Find.World.GetComponent<WorldComponent_QuestTracker>().quests
+				.Where(q => q.Targets.targets.Contains(this));
+
+		bool QuestTab_IsQuest => QuestsHere.Any();
+		//string QuestTab_Label => QuestsHere.Select(q => q.Name).ToArray().ToCommaList();
+		string QuestTab_Label => Name;
+		int QuestTab_TicksLeft => QuestsHere.Where(q => q.TicksLeft > 0).TryMinBy(q => q.TicksLeft, out var min) ? min.TicksLeft : -1;
+		int QuestTab_Hostility => Faction.IsPlayer ? -1000 : -Faction.PlayerGoodwill;
+
 		public override void SetFaction(Faction newFaction) {
 			base.SetFaction(newFaction);
 			if(inhabitantFaction != null) {
@@ -77,6 +86,22 @@ namespace Cities {
 
 		public virtual void PreMapGenerate(Map map) {
 			SetFaction(inhabitantFaction ?? GenCity.RandomCityFaction(f => f.HostileTo(Faction.OfPlayer)));
+		}
+
+		public override string GetInspectString() {
+			var s = base.GetInspectString();
+			bool hasQuests = false;
+			foreach(var quest in QuestsHere) {
+				if(!hasQuests) {
+					hasQuests = true;
+					s += "\n--";
+				}
+				var ticksLeft = quest.TicksLeft;
+				if(ticksLeft > 0) {
+					s += "\n" + quest.Name + " (" + ticksLeft.ToStringTicksToPeriod() + ")";
+				}
+			}
+			return s;
 		}
 	}
 

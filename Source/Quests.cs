@@ -204,6 +204,8 @@ namespace Cities {
 	}
 
 	public abstract class Quest : IExposable {
+		static readonly IntRange ExpirationDaysRange = new IntRange(10, 30);
+
 		public QuestDef def;
 		public int expireTime;
 
@@ -217,6 +219,8 @@ namespace Cities {
 		public bool Started => state != QuestState.BeforeStart;
 		public bool Ended => state != QuestState.BeforeStart && state != QuestState.Started;
 		public bool Expired => state == QuestState.Expired;
+
+		public int TicksLeft => Started ? expireTime - Find.TickManager.TicksGame : -1;
 
 		public virtual int MinCapableColonists => 2;
 
@@ -245,7 +249,7 @@ namespace Cities {
 				if(expire != null) {
 					text += "\n\n" + expire;
 				}
-				text += "\n\n" + "QuestExpireTime".Translate().Formatted((expireTime - Find.TickManager.TicksGame).ToStringTicksToPeriod());
+				text += "\n\n" + "QuestExpireTime".Translate().Formatted(TicksLeft.ToStringTicksToPeriod());
 				return text;
 			}
 		}
@@ -287,15 +291,11 @@ namespace Cities {
 			var info = Targets.TryGetPrimaryTarget();
 			var tileIdTo = info.IsValid ? info.Tile : tileIdFrom;
 
-			var randomInRange = SiteTuning.QuestSiteTimeoutDaysRange.RandomInRange;
 			var arriveTicks = CaravanArrivalTimeEstimator.EstimatedTicksToArrive(tileIdFrom, tileIdTo, null);
 			var arriveDays = arriveTicks / 60000F;
-			var timeoutDays = Mathf.CeilToInt(Mathf.Max(arriveDays + 6, arriveDays * 1.35F));
-			var timeoutRange = SiteTuning.QuestSiteTimeoutDaysRange;
-			if(timeoutDays > timeoutRange.max) {
-				return -1;
-			}
-			var days = Mathf.Max(randomInRange, timeoutDays);
+			var minDays = Mathf.CeilToInt(Mathf.Max(arriveDays + 6, arriveDays * 1.35F));
+			
+			var days = Mathf.Max(ExpirationDaysRange.RandomInRange, Mathf.Min(ExpirationDaysRange.max, minDays));
 			return 60000 * days;
 		}
 
@@ -358,8 +358,8 @@ namespace Cities {
 				return;
 			}
 			state = QuestState.Started;
-			Find.World.GetComponent<WorldComponent_QuestTracker>().quests.Add(this);
 			expireTime = Find.TickManager.TicksGame + RandomExpiryTicks();
+			Find.World.GetComponent<WorldComponent_QuestTracker>().quests.Add(this);
 			foreach(var part in def.questParts) {
 				part.OnStart(this);
 			}

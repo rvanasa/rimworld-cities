@@ -105,7 +105,7 @@ namespace Cities {
 
 	public class Quest_Assault : Quest {
 		Faction alliedFaction;
-		Settlement target;
+		City target;
 
 		public override int MinCapableColonists => 5;
 
@@ -125,10 +125,10 @@ namespace Cities {
 			alliedFaction = Find.FactionManager.RandomAlliedFaction(minTechLevel: TechLevel.Industrial);
 			//alliedFaction = Find.FactionManager.RandomNonHostileFaction(minTechLevel: TechLevel.Industrial);
 			target = Find.WorldObjects.Settlements
-				.Where(s => s.Faction.HostileTo(Faction.OfPlayer)
+				.Where(s => s is City && s.Faction.HostileTo(Faction.OfPlayer)
 				&& QuestUtility.Reachable(HomeMap?.Parent, s, 50)
 				&& !s.HasMap)
-				.RandomElementWithFallback();
+				.RandomElementWithFallback()as City;
 		}
 
 		public override bool AllPartsValid() {
