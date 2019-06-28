@@ -9,6 +9,10 @@
 
 ---
 
+#### Patch v0.3.1 (June 27, 2019)
+- Added potential compatibility with Quest Tab (collaboration with Merthykins)
+- Improved city quest expiration time logic
+
 #### Patch v0.3.0 (June 27, 2019)
 - New quest type: Sabotage (deactivate a city's defenses for an allied invasion force)
 - New quest type: Combined Assault (attack a settlement with your ally)
