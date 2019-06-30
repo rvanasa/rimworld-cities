@@ -9,6 +9,9 @@
 
 ---
 
+#### Patch v0.3.4 (June 30, 2019)
+- Updated Medieval Times compatibility.
+
 #### Patch v0.3.3 (June 30, 2019)
 - Significantly increased rarity of secret incident.
 - Added Combat Enhanced compatibility to secret incident.

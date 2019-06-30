@@ -9,16 +9,16 @@
       <!--<success>Always</success>-->
       <operations>
         <li Class="PatchOperationRemove">
-          <xpath>/Defs/MapGeneratorDef[@Name="CityCommonBase"]/genSteps/li[text()="City_Hospital"]</xpath>
+          <xpath>/Defs/MapGeneratorDef[@Name="Cities_Base"]/genSteps/li[text()="City_Hospital"]</xpath>
         </li>
         <li Class="PatchOperationRemove">
-          <xpath>/Defs/MapGeneratorDef[@Name="CityCommonBase"]/genSteps/li[text()="City_Freezer"]</xpath>
+          <xpath>/Defs/MapGeneratorDef[@Name="Cities_Base"]/genSteps/li[text()="City_Freezer"]</xpath>
         </li>
         <li Class="PatchOperationRemove">
-          <xpath>/Defs/MapGeneratorDef[@Name="CityCommonBase"]/genSteps/li[text()="City_Emplacements"]</xpath>
+          <xpath>/Defs/MapGeneratorDef[@Name="Cities_Base"]/genSteps/li[text()="City_Emplacements"]</xpath>
         </li>
         <li Class="PatchOperationRemove">
-          <xpath>/Defs/MapGeneratorDef[@Name="CityCommonBase"]/genSteps/li[text()="SettlementPower"]</xpath>
+          <xpath>/Defs/MapGeneratorDef[@Name="Cities_Base"]/genSteps/li[text()="SettlementPower"]</xpath>
         </li>
         <li Class="PatchOperationRemove">
           <xpath>/Defs/GenStepDef[defName="City_ProductionBuildings"]/genStep/roomDecorators/li[@Class="Cities.RoomDecorator_Batteries"]</xpath>

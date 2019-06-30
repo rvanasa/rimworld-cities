@@ -354,7 +354,7 @@ namespace Cities {
 		public override void OnCancel() {
 			OnExpire();
 		}
-
+		
 		public override void OnExpire() {
 			city.SetFaction(enemyFaction);
 		}
