@@ -9,6 +9,11 @@
 
 ---
 
+#### Patch v0.3.2 (June 29, 2019)
+- Increased friendly raid strength in "Combined Assault" quest type.
+- Rebalanced "Heavy Siege" quest type (citizens no longer join your faction).
+- Fixed a persistence-related bug in "Assassination" quest type.
+
 #### Patch v0.3.1 (June 27, 2019)
 - Added compatibility with Quest Tab (collaboration with @Merthykins).
 - Improved city quest expiration time logic.

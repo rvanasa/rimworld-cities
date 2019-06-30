@@ -128,7 +128,7 @@ namespace Cities {
 				.Where(s => s is City && s.Faction.HostileTo(Faction.OfPlayer)
 				&& QuestUtility.Reachable(HomeMap?.Parent, s, 50)
 				&& !s.HasMap)
-				.RandomElementWithFallback()as City;
+				.RandomElementWithFallback() as City;
 		}
 
 		public override bool AllPartsValid() {
@@ -141,9 +141,9 @@ namespace Cities {
 				var parms = storyComp.GenerateParms(IncidentCategoryDefOf.ThreatBig, map);
 				parms.faction = alliedFaction;
 				parms.raidStrategy = DefDatabase<RaidStrategyDef>.GetRandom();
-				parms.raidArrivalMode = DefDatabase<PawnsArrivalModeDef>.GetRandom();
+				parms.raidArrivalMode = PawnsArrivalModeDefOf.EdgeWalkIn;
 				parms.raidArrivalModeForQuickMilitaryAid = true;
-				parms.points = 4000;
+				parms.points = 5000;
 				IncidentDefOf.RaidFriendly.Worker.TryExecute(parms);
 			}
 		}
@@ -225,10 +225,10 @@ namespace Cities {
 
 		public override void OnTick() {
 			if(AtInterval(100)) {
-				if(pawn.Dead) {
+				if(pawn != null && pawn.Dead) {
 					Complete();
 				}
-				else if(city.HasMap && !pawn.SpawnedOrAnyParentSpawned) {
+				else if(city.HasMap && (pawn == null || !pawn.SpawnedOrAnyParentSpawned)) {
 					Cancel();
 				}
 			}
@@ -327,7 +327,7 @@ namespace Cities {
 							//	}
 							//}
 							//if(!hasEnemy) {
-								Complete();
+							Complete();
 							//}
 						}
 					}
@@ -344,11 +344,11 @@ namespace Cities {
 			var playerFaction = Faction.OfPlayer;
 			map.Parent.SetFaction(playerFaction);
 			faction.TryAffectGoodwillWith(playerFaction, 200);
-			foreach(var pawn in map.mapPawns.AllPawns) {
+			/*foreach(var pawn in map.mapPawns.AllPawns) {
 				if(pawn.Faction == faction) {
 					pawn.SetFactionDirect(playerFaction);
 				}
-			}
+			}*/
 		}
 
 		public override void OnCancel() {

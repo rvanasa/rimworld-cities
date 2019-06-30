@@ -101,7 +101,7 @@
       <li>World</li>
     </targetTags>
 		<letterLabel>City under attack</letterLabel>
-		<letterText>{2} is under heavy siege by {0} and desperately needs reinforcements. \n\nIf you successfully defend {2}, surviving citizens from {1} will join your faction as a token of their gratitude.</letterText>
+		<letterText>{2} is under heavy siege by {0} and desperately needs reinforcements. \n\nIf you successfully defend {2}, the city will be given to your faction as a token of their gratitude.</letterText>
 		<letterDef>NegativeEvent</letterDef>
 		<questParts>
 			<li Class="Cities.QuestListener_GiveThings">
