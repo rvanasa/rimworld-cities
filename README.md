@@ -9,13 +9,17 @@
 
 ---
 
+#### Patch v0.3.3 (June 30, 2019)
+- Significantly increased rarity of secret incident.
+- Added Combat Enhanced compatibility to secret incident.
+
 #### Patch v0.3.2 (June 29, 2019)
 - Increased friendly raid strength in "Combined Assault" quest type.
 - Rebalanced "Heavy Siege" quest type (citizens no longer join your faction).
 - Fixed a persistence-related bug in "Assassination" quest type.
 
 #### Patch v0.3.1 (June 27, 2019)
-- Added compatibility with Quest Tab (collaboration with @Merthykins).
+- Added compatibility for Quest Tab (collaboration with @Merthykins).
 - Improved city quest expiration time logic.
 - Updated Japanese translation (@Proxyer is awesome).
 
@@ -92,9 +96,11 @@
 
 RimCities is an attempt to create an interesting and unique end-game challenge for RimWorld players. This mod adds randomly generated cities to the world map, which are similar to other settlements but are far more difficult to attack. Pirate-controlled cities provide even more of a challenge by occasionally bombarding you with mortar shells.
 
-You may occasionally come across abandoned cities, which provide great scavenging opportunities for you and other nearby raiding parties.
+It is possible to visit and explore friendly cities with in-person trading and custom quest objectives. Rival factions will attack one another's cities from time to time, giving you opportunities to choose sides and establish military alliances.
 
-RimCities is compatible with existing save files and works with Combat Extended, Real Ruins, Zombieland, Faction Control, Medieval Times, and many other mods. If you're encountering issues, try disabling other mods and/or tweaking the load order.
+You may also come across abandoned cities, which provide great scavenging opportunities for you and other nearby raiding parties.
+
+RimCities is compatible with existing save files and works with Combat Extended, Real Ruins, Zombieland, Faction Control, RimQuest, Quest Tab, Medieval Times, and many other mods. If you're encountering issues, try disabling other mods and/or tweaking the load order.
 
 If you'd like to start your colony in a city, click "Scenario Editor" and check the box next to "Edit mode". From there, click "Add part" and add the "Start in city (RimCities)" option. You can then customize the scenario to your liking.
 

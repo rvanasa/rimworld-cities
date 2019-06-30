@@ -252,7 +252,7 @@
 		<workerClass>Keanu.IncidentWorker_WickDog</workerClass>
 		<letterLabel>Dog arrives</letterLabel>
 		<letterText>An adorable dog has wandered into your colony.</letterText>
-		<baseChance>0.01</baseChance>
+		<baseChance>0.002</baseChance>
 		<minRefireDays>1000</minRefireDays>
 		<pawnKind>Keanu_Dog</pawnKind>
 		<pawnFixedGender>Female</pawnFixedGender>
@@ -267,7 +267,7 @@
     </targetTags>
 		<workerClass>Keanu.IncidentWorker_WickRevenge</workerClass>
 		<letterLabel>Dog revenge</letterLabel>
-		<letterText>A very angry man has appeared. Flee for your lives!</letterText>
+		<letterText>Upon Daisy's death, a man has appeared seeking revenge and bloodshed. Flee for your lives!</letterText>
 		<baseChance>0</baseChance>
 		<pawnKind>Keanu_Pawn</pawnKind>
 	</IncidentDef>

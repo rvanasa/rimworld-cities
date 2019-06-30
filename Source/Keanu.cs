@@ -67,10 +67,15 @@ namespace Keanu {
 				fixedGender: Gender.Male);
 			var pawn = PawnGenerator.GeneratePawn(request);
 			pawn.Name = new NameTriple("Keenes", "Wick", "Reavu");
-			var weapon = ThingMaker.MakeThing(DefDatabase<ThingDef>.GetNamed("Gun_Minigun"));
-			weapon.TryGetComp<CompQuality>()?.SetQuality(QualityCategory.Legendary, ArtGenerationContext.Outsider);
-			pawn.equipment.DestroyAllEquipment();
-			pawn.equipment.AddEquipment((ThingWithComps)weapon);
+			try {
+				var weapon = ThingMaker.MakeThing(DefDatabase<ThingDef>.GetNamed("Gun_Minigun"));
+				weapon.TryGetComp<CompQuality>()?.SetQuality(QualityCategory.Legendary, ArtGenerationContext.Outsider);
+				pawn.equipment.DestroyAllEquipment();
+				pawn.equipment.AddEquipment((ThingWithComps)weapon);
+			}
+			catch(System.Exception e) {
+				Log.Warning("Failed to provide custom weapon for revenge event: " + e);
+			}
 			pawn.skills.GetSkill(SkillDefOf.Shooting).Level = 20;
 			pawn.skills.GetSkill(SkillDefOf.Melee).Level = 20;
 			pawn.story.melanin = 0.4F;
