@@ -52,13 +52,22 @@
     </Reference>
     <None Include="..\About\**" />
     <None Include="..\Defs\**" />
-    <None Include="..\Languages\**" />
+    <None Include="..\Languages\English\Keyed\Cities.xml" />
+    <None Include="..\Languages\English\Keyed\Quests.xml" />
+    <None Include="..\Languages\Japanese\DefInjected\IncidentDef\Incidents.xml" />
+    <None Include="..\Languages\Japanese\DefInjected\IncidentDef\Keanu.xml" />
+    <None Include="..\Languages\Japanese\DefInjected\PawnKindDef\Keanu.xml" />
+    <None Include="..\Languages\Japanese\DefInjected\ScenarioDef\Scenarios.xml" />
+    <None Include="..\Languages\Japanese\DefInjected\ScenPartDef\ScenParts.xml" />
+    <None Include="..\Languages\Japanese\DefInjected\ThingDef\Keanu.xml" />
+    <None Include="..\Languages\Japanese\DefInjected\WorldObjectDef\WorldObjects.xml" />
+    <None Include="..\Languages\Japanese\Keyed\Cities.xml" />
+    <None Include="..\Languages\Japanese\Keyed\Quests.xml" />
     <None Include="..\Patches\**" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Quests_RimCities.cs" />
     <Compile Include="Quests.cs" />
-    <Compile Include="Keanu.cs" />
     <Compile Include="WorldGen.cs" />
     <Compile Include="Patches.cs" />
     <Compile Include="MapGen.cs" />
