@@ -66,6 +66,7 @@
     <None Include="..\Patches\**" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Keanu.cs" />
     <Compile Include="Quests_RimCities.cs" />
     <Compile Include="Quests.cs" />
     <Compile Include="WorldGen.cs" />

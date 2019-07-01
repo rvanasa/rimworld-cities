@@ -9,6 +9,12 @@
 
 ---
 
+#### Patch v0.3.6 (July 1, 2019)
+- Fixed save corruption due to secret incident removal.
+
+#### Patch v0.3.5 (June 30, 2019)
+- Removed secret incident.
+
 #### Patch v0.3.4 (June 30, 2019)
 - Updated Medieval Times compatibility.
 
