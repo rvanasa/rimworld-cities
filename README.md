@@ -9,6 +9,9 @@
 
 ---
 
+#### Patch v0.3.7 (July 1, 2019)
+- Improved "Combined Assault" quest completion logic.
+
 #### Patch v0.3.6 (July 1, 2019)
 - Fixed save corruption due to secret incident removal.
 
