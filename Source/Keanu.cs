@@ -28,6 +28,7 @@ namespace Keanu {
 				fixedGender: def.pawnFixedGender);
 			var pawn = PawnGenerator.GeneratePawn(request);
 			pawn.Name = new NameSingle("Daisy");
+			pawn.GetComp<ThingComp_WickDog>().enabled = true;
 			GenSpawn.Spawn(pawn, cell, map);
 			var text = def.letterText.Formatted(pawn.Named("PAWN")).AdjustedFor(pawn);
 			var title = def.letterLabel.Formatted(pawn.Named("PAWN")).AdjustedFor(pawn);
@@ -99,9 +100,14 @@ namespace Keanu {
 	}
 
 	public class ThingComp_WickDog : ThingComp {
+		public bool enabled;
+
+		/*public override void PostExposeData() {
+			Scribe_Values.Look(ref enabled, "enabled");
+		}*/
 
 		public override void PostDestroy(DestroyMode mode, Map map) {
-			if(mode == DestroyMode.KillFinalize) {
+			if(enabled && mode == DestroyMode.KillFinalize) {
 				for(var i = 0; i < 100; i++) {
 					if(DefDatabase<IncidentDef>.GetNamed("Keanu_WickRevenge").Worker.TryExecute(new IncidentParms {
 						target = map ?? Find.Maps.Where(m => m.mapPawns.AnyFreeColonistSpawned).RandomElement() ?? Find.CurrentMap,

@@ -31,7 +31,7 @@
   <PawnKindDef ParentName="OutlanderBase">
     <defName>Keanu_Pawn</defName>
     <label>legend</label>
-    <combatPower>1000</combatPower>
+    <combatPower>5</combatPower>
     <minGenerationAge>40</minGenerationAge>
     <maxGenerationAge>50</maxGenerationAge>
     <isFighter>true</isFighter>
@@ -184,7 +184,8 @@
     <label>beagle</label>
     <race>Keanu_Dog</race>
     <combatPower>30</combatPower>
-    <ecoSystemWeight>0.30</ecoSystemWeight>
+    <ecoSystemWeight>0</ecoSystemWeight>
+    <wildGroupSize>0</wildGroupSize>
 		<canArriveManhunter>false</canArriveManhunter>
     <lifeStages>
       <li>
@@ -252,7 +253,7 @@
 		<workerClass>Keanu.IncidentWorker_WickDog</workerClass>
 		<letterLabel>Dog arrives</letterLabel>
 		<letterText>An adorable dog has wandered into your colony.</letterText>
-		<baseChance>0</baseChance>
+		<baseChance>0.02</baseChance>
 		<minRefireDays>1000</minRefireDays>
 		<pawnKind>Keanu_Dog</pawnKind>
 		<pawnFixedGender>Female</pawnFixedGender>
@@ -267,7 +268,7 @@
     </targetTags>
 		<workerClass>Keanu.IncidentWorker_WickRevenge</workerClass>
 		<letterLabel>Dog revenge</letterLabel>
-		<letterText>Upon Daisy's death, a man has appeared seeking revenge and bloodshed. Flee for your lives!</letterText>
+		<letterText>Upon the beagle's death, a man has appeared seeking revenge and bloodshed. Flee for your lives!</letterText>
 		<baseChance>0</baseChance>
 		<pawnKind>Keanu_Pawn</pawnKind>
 	</IncidentDef>
