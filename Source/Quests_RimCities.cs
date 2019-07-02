@@ -137,6 +137,7 @@ namespace Cities {
 
 		public override void OnMapGenerated(Map map) {
 			if(map.Parent == target) {
+				Complete();
 				var storyComp = Find.Storyteller.storytellerComps.First(x => x is StorytellerComp_OnOffCycle || x is StorytellerComp_RandomMain);
 				var parms = storyComp.GenerateParms(IncidentCategoryDefOf.ThreatBig, map);
 				parms.faction = alliedFaction;
@@ -154,16 +155,7 @@ namespace Cities {
 			}
 		}
 
-		public override void OnTick() {
-			if(AtInterval(100)) {
-				if(Find.WorldObjects.AnyDestroyedSettlementAt(target.Tile)) {
-					Complete();
-				}
-			}
-		}
-
 		public override void OnComplete() {
-			target.SetFaction(Faction.OfPlayer);
 		}
 
 		public override void OnExpire() {
