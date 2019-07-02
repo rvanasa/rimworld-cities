@@ -270,7 +270,7 @@ namespace Cities {
 		}
 
 		protected virtual bool IsValidHome(Map map) {
-			return !map.ParentFaction.HostileTo(Faction.OfPlayer) && HasSufficientColonists(map);
+			return map.Parent != null && !map.ParentFaction.HostileTo(Faction.OfPlayer) && HasSufficientColonists(map);
 		}
 
 		protected virtual bool HasSufficientColonists(Map map) {
@@ -294,7 +294,7 @@ namespace Cities {
 			var arriveTicks = CaravanArrivalTimeEstimator.EstimatedTicksToArrive(tileIdFrom, tileIdTo, null);
 			var arriveDays = arriveTicks / 60000F;
 			var minDays = Mathf.CeilToInt(Mathf.Max(arriveDays + 6, arriveDays * 1.35F));
-			
+
 			var days = Mathf.Max(ExpirationDaysRange.RandomInRange, Mathf.Min(ExpirationDaysRange.max, minDays));
 			return 60000 * days;
 		}
@@ -406,6 +406,7 @@ namespace Cities {
 				return false;
 			}
 			this.state = state;
+			UpdateHome();///
 			OnEnd();
 			Messages.Message(formatter.Translate().Formatted(Name), Targets, messageType);
 			return true;

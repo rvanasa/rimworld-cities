@@ -9,6 +9,9 @@
 
 ---
 
+#### Patch v0.3.8 (July 1, 2019)
+- Fixed a minor quest system persistence bug. 
+
 #### Patch v0.3.7 (July 1, 2019)
 - Improved "Combined Assault" quest completion logic.
 
