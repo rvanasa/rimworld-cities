@@ -23,6 +23,8 @@ namespace Cities {
 			listing.Gap();
 			listing.CheckboxLabeled("Enable city quest system", ref settings.enableQuestSystem);
 			listing.Gap();
+			listing.CheckboxLabeled("Enable city events (food drops, reinforcements)", ref settings.enableEvents);
+			listing.Gap();
 			listing.Label("Abandoned city chance: [" + GenMath.RoundTo(settings.abandonedChance, 0.01F) + "]");
 			settings.abandonedChance = listing.Slider(settings.abandonedChance, 0, 1);
 			listing.Gap();
@@ -40,6 +42,7 @@ namespace Cities {
 	public class ModSettings_Cities : ModSettings {
 		public bool limitCitySize;
 		public bool enableQuestSystem;
+		public bool enableEvents;
 		public float abandonedChance;
 		public IntRange citiesPer100kTiles;
 		public IntRange abandonedPer100kTiles;
@@ -53,6 +56,7 @@ namespace Cities {
 			base.ExposeData();
 			Scribe_Values.Look(ref limitCitySize, "limitCitySize", true);
 			Scribe_Values.Look(ref enableQuestSystem, "enableQuestSystem", true);
+			Scribe_Values.Look(ref enableEvents, "enableEvents", true);
 			Scribe_Values.Look(ref citiesPer100kTiles, "citiesPer100kTiles", new IntRange(10, 15));
 			Scribe_Values.Look(ref abandonedPer100kTiles, "abandonedPer100kTiles", new IntRange(5, 10));
 		}
@@ -60,6 +64,7 @@ namespace Cities {
 		public void Reset() {
 			limitCitySize = true;
 			enableQuestSystem = true;
+			enableEvents = true;
 			abandonedChance = 0.3F;
 			citiesPer100kTiles = new IntRange(10, 15);
 			abandonedPer100kTiles = new IntRange(5, 10);

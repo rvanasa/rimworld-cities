@@ -270,7 +270,7 @@ namespace Cities {
 		}
 
 		protected virtual bool IsValidHome(Map map) {
-			return map.Parent != null && !map.ParentFaction.HostileTo(Faction.OfPlayer) && HasSufficientColonists(map);
+			return map?.Parent?.Faction != null && !map.ParentFaction.HostileTo(Faction.OfPlayer) && HasSufficientColonists(map);
 		}
 
 		protected virtual bool HasSufficientColonists(Map map) {
@@ -303,7 +303,8 @@ namespace Cities {
 			if(home == null || !IsValidHome(home)) {
 				home = Find.Maps.Where(IsValidHome).MaxByWithFallback(m => m.mapPawns.FreeColonistsSpawnedCount)
 					?? Find.CurrentMap
-					?? Find.Maps.MaxByWithFallback(m => m.mapPawns.FreeColonistsSpawnedCount);
+					?? Find.Maps.MaxByWithFallback(m => m.mapPawns.FreeColonistsSpawnedCount)
+					?? home;
 			}
 		}
 

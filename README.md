@@ -9,8 +9,13 @@
 
 ---
 
+#### Patch v0.3.9 (July 2, 2019)
+- Added a setting to enable/disable city events such as hostile reinforcement raids and food airdrops.
+- Fixed a bug related to quest starting point assignment.
+- Improved compatibility with Wick Time (standalone John Wick event mod). 
+
 #### Patch v0.3.8 (July 1, 2019)
-- Fixed a minor quest system persistence bug. 
+- Fixed a minor quest system persistence bug.
 
 #### Patch v0.3.7 (July 1, 2019)
 - Improved "Combined Assault" quest completion logic.

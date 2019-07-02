@@ -50,6 +50,10 @@ namespace Cities {
 
 		public override void MapComponentTick() {
 			if((Find.TickManager.TicksGame + map.Parent.ID) % EventTimeCycle == 0) {
+				if(!LoadedModManager.GetMod<Mod_Cities>().GetSettings<ModSettings_Cities>().enableEvents) {
+					return;
+				}
+
 				if(map.Parent is City city && !city.Abandoned) {
 					if(city.Faction.HostileTo(Faction.OfPlayer)) {
 						var storyComp = Find.Storyteller.storytellerComps.First(x => x is StorytellerComp_OnOffCycle || x is StorytellerComp_RandomMain);
