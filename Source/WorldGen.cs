@@ -14,8 +14,7 @@ namespace Cities {
 
 		public bool Abandoned => inhabitantFaction == null;
 
-		public override MapGeneratorDef MapGeneratorDef => DefDatabase<MapGeneratorDef>.GetNamed(
-				inhabitantFaction != null ? "City_Faction" : "City_Abandoned");
+		public override MapGeneratorDef MapGeneratorDef => def.mapGenerator;
 
 		public override Texture2D ExpandingIcon => def.ExpandingIconTexture;
 

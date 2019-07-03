@@ -21,13 +21,22 @@
     <defName>City_Faction</defName>
     <label>city</label>
     <description>A large-scale, highly advanced settlement.</description>
+    <mapGenerator>City_Faction</mapGenerator>
   </WorldObjectDef>
 	
   <WorldObjectDef ParentName="CityCommon">
     <defName>City_Abandoned</defName>
     <label>abandoned city</label>
     <description>The ruins of a once-great civilization.</description>
+    <mapGenerator>City_Abandoned</mapGenerator>
     <expandingIconTexture>World/WorldObjects/City_Abandoned</expandingIconTexture>
+  </WorldObjectDef>
+	
+  <WorldObjectDef ParentName="CityCommon">
+    <defName>City_Ghost</defName>
+    <label>ghost city</label>
+    <description>A mysteriously empty settlement.</description>
+    <mapGenerator>City_Ghost</mapGenerator>
   </WorldObjectDef>
   
 </Defs>

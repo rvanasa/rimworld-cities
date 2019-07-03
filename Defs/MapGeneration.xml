@@ -61,6 +61,16 @@
     </genSteps>
   </MapGeneratorDef>
 	
+  <MapGeneratorDef ParentName="Cities_Base">
+    <defName>City_Ghost</defName>
+    <genSteps>
+			<li>ScatterShrines</li>
+      <li>CaveHives</li>
+      <li>City_Ghost_Post</li>
+      <li>City_ClearAnimals</li>
+    </genSteps>
+  </MapGeneratorDef>
+	
   <GenStepDef>
     <defName>City_Abandoned_Pre</defName>
     <order>240</order>
@@ -574,6 +584,13 @@
 				<min>0.1</min>
 				<max>0.5</max>
 			</decay>
+    </genStep>
+  </GenStepDef>
+	
+  <GenStepDef>
+    <defName>City_Ghost_Post</defName>
+    <order>690</order>
+    <genStep Class="Cities.GenStep_Ghost_Post">
     </genStep>
   </GenStepDef>
 	

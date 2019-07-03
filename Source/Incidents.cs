@@ -26,10 +26,7 @@ namespace Cities {
 
 		public abstract bool StartIncident(IncidentParms parms);
 
-		protected override bool CanFireNowSub(IncidentParms parms) {
-			if(!base.CanFireNowSub(parms)) {
-				return false;
-			}
+		public virtual void UpdateCache(IncidentParms parms) {
 			var currentWorld = Find.World;
 			var currentTick = Find.TickManager.TicksGame;
 			if(lastTick != currentTick || lastWorld != currentWorld) {
@@ -37,17 +34,23 @@ namespace Cities {
 				lastTick = currentTick;
 				lastSuccess = CheckIncident(parms);
 			}
+		}
+
+		protected override bool CanFireNowSub(IncidentParms parms) {
+			if(!base.CanFireNowSub(parms)) {
+				return false;
+			}
+			UpdateCache(parms);
 			return lastSuccess;
 		}
 
 		protected override bool TryExecuteWorker(IncidentParms parms) {
-			if(CanFireNowSub(parms) && StartIncident(parms)) {
-				if(def.letterText != null) {
-					Find.LetterStack.ReceiveLetter(MakeLetter());
-				}
-				return true;
+			UpdateCache(parms);
+			var started = StartIncident(parms);
+			if(started && def.letterText != null) {
+				Find.LetterStack.ReceiveLetter(MakeLetter());
 			}
-			return false;
+			return started;
 		}
 
 		public virtual Letter MakeLetter() {
@@ -91,8 +94,11 @@ namespace Cities {
 		}
 
 		public override bool StartIncident(IncidentParms parms) {
-			quest.Start();
-			return true;
+			if(quest.AllPartsValid()) {
+				quest.Start();
+				return true;
+			}
+			return false;
 		}
 	}
 }

@@ -41,25 +41,31 @@ namespace Cities {
 		}
 
 		string GetObjectDefName() {
-			return inhabitantKind == InhabitantKind.Abandoned ? "City_Abandoned" : "City_Faction";
+			switch(inhabitantKind) {
+				case InhabitantKind.Abandoned:
+					return "City_Abandoned";
+				case InhabitantKind.Ghost:
+					return "City_Ghost";
+				default:
+					return "City_Faction";
+			}
 		}
 
 		bool IsValidFaction(Faction faction) {
 			var playerFaction = Faction.OfPlayer;
 			switch(inhabitantKind) {
-				case InhabitantKind.Abandoned:
-					return false;
 				case InhabitantKind.Hostile:
 					return faction.HostileTo(playerFaction);
 				case InhabitantKind.Friendly:
 					return !faction.HostileTo(playerFaction);
 				default:
-					return true;
+					return false;
 			}
 		}
 
 		enum InhabitantKind {
 			Abandoned,
+			Ghost,
 			Friendly,
 			Hostile,
 		}
