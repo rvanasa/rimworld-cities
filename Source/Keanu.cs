@@ -102,9 +102,9 @@ namespace Keanu {
 	public class ThingComp_WickDog : ThingComp {
 		public bool enabled;
 
-		/*public override void PostExposeData() {
+		public override void PostExposeData() {
 			Scribe_Values.Look(ref enabled, "enabled");
-		}*/
+		}
 
 		public override void PostDestroy(DestroyMode mode, Map map) {
 			if(enabled && mode == DestroyMode.KillFinalize) {

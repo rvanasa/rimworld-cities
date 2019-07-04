@@ -9,6 +9,15 @@
 
 ---
 
+#### Patch v0.3.12 (July 4, 2019)
+- Fixed a potential edge case with city quest home selection logic. 
+- Updated Japanese translation (@Proxyer).
+
+#### Patch v0.3.11 (July 3, 2019)
+- Beds can now be claimed in abandoned cities.
+- Mod and scenario settings are now translatable.
+- Turrets no longer generate in ghost cities.
+
 #### Patch v0.3.10 (July 2, 2019)
 - Added "Ghost" cities designed for zombie survival scenarios, which are essentially friendly/hostile cities without any citizens. This is accessible via the "Start in city" scenario option.
 

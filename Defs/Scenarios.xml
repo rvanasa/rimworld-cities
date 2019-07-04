@@ -135,6 +135,7 @@
 	<ScenarioDef ParentName="Crashlanded_City">
 		<defName>Crashlanded_City_Abandoned</defName>
     <label>Crashlanded (Abandoned City)</label>
+    <description>Instead of spawning in the wilderness, you will start inside a city.</description>
 		<scenario>
 			<parts>
 				<li Class="Cities.ScenPart_StartCity">

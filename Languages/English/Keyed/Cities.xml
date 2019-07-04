@@ -4,4 +4,15 @@
   <EnterCity>Enter City</EnterCity>
   <EnterCityDesc>Enter the selected city.</EnterCityDesc>
   
+  <LimitCitySize>Limit city map size (reduces lag)</LimitCitySize>
+  <EnableCityQuests>Enable city quest system</EnableCityQuests>
+  <EnableCityEvents>Enable city events (food drops, reinforcements)</EnableCityEvents>
+  <AbandonedCityChance>Abandoned city chance: [{0}]</AbandonedCityChance>
+  <CitiesPer100kTiles>City spawn frequency:</CitiesPer100kTiles>
+  
+  <FriendlyCityKind>Friendly</FriendlyCityKind>
+  <HostileCityKind>Hostile</HostileCityKind>
+  <AbandonedCityKind>Abandoned</AbandonedCityKind>
+  <GhostCityKind>Ghost</GhostCityKind>
+  
 </LanguageData>

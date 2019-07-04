@@ -18,7 +18,7 @@ namespace Cities {
 		public override void DoEditInterface(Listing_ScenEdit listing) {
 			var scenPartRect = listing.GetScenPartRect(this, RowHeight * 3 + 31);
 			if(Widgets.ButtonText(scenPartRect.TopPartPixels(RowHeight), inhabitantKind.ToString())) {
-				FloatMenuUtility.MakeMenu(System.Enum.GetNames(typeof(InhabitantKind)), s => s, s => {
+				FloatMenuUtility.MakeMenu(System.Enum.GetNames(typeof(InhabitantKind)), s => (s + "CityKind").Translate(), s => {
 					return () => inhabitantKind = (InhabitantKind)System.Enum.Parse(typeof(InhabitantKind), s);
 				});
 			}
@@ -34,10 +34,6 @@ namespace Cities {
 			city.Tile = Find.GameInitData.startingTile;
 			city.Name = SettlementNameGenerator.GenerateSettlementName(city, city.inhabitantFaction?.def.factionNameMaker);
 			Find.WorldObjects.Add(city);
-		}
-
-		public override string Summary(Scenario scen) {
-			return "Instead of spawning in the wilderness, you will start inside a city.";
 		}
 
 		string GetObjectDefName() {

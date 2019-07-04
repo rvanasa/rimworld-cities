@@ -300,7 +300,7 @@ namespace Cities {
 		}
 
 		public virtual void UpdateHome() {
-			if(home == null || !IsValidHome(home)) {
+			if(home == null || !Find.Maps.Contains(home)) {
 				home = Find.Maps.Where(IsValidHome).MaxByWithFallback(m => m.mapPawns.FreeColonistsSpawnedCount)
 					?? Find.CurrentMap
 					?? Find.Maps.MaxByWithFallback(m => m.mapPawns.FreeColonistsSpawnedCount)

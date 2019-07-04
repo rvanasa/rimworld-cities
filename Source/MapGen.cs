@@ -127,6 +127,9 @@ namespace Cities {
 					else if(autoClaim && !(thing is Pawn) && thing.def.CanHaveFaction && thing.Faction == null) {
 						thing.SetFactionDirect(playerFaction);
 					}
+					else if(!autoClaim && thing is Building_Bed bed) {
+						bed.SetFactionDirect(null);
+					}
 				}
 
 				if(Rand.Chance(decay)) {
@@ -157,7 +160,7 @@ namespace Cities {
 				var things = pos.GetThingList(map);
 				for(var i = things.Count - 1; i >= 0; i--) {
 					var thing = things[i];
-					if(thing is Pawn pawn && pawn.Faction != null && !pawn.Faction.IsPlayer) {
+					if((thing is Pawn || thing is Building_Turret) && thing.Faction != null && !thing.Faction.IsPlayer) {
 						thing.Destroy();
 					}
 				}

@@ -142,17 +142,6 @@ namespace Cities {
 		}
 	}
 
-	/*[HarmonyPatch(typeof(CaravanFormingUtility))]
-	[HarmonyPatch(nameof(CaravanFormingUtility.AllReachableColonyItems))]
-	static class CaravanFormingUtility_AllReachableColonyItems {
-		static void Postfix(ref List<Thing> __result, Map map) {
-			var ownedThings = map.GetComponent<MapComponent_City>()?.cityOwnedThings;
-			if(ownedThings != null) {
-				__result.RemoveAll(ownedThings.Contains);
-			}
-		}
-	}*/
-
 	[HarmonyPatch(typeof(WorldObject))]
 	[HarmonyPatch(nameof(WorldObject.GetGizmos))]
 	static class WorldObject_GetGizmos {
