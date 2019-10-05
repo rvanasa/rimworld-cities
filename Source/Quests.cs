@@ -224,7 +224,12 @@ namespace Cities {
 
 		public virtual int MinCapableColonists => 2;
 
-		public Map HomeMap => home;
+		public Map HomeMap {
+			get {
+				UpdateHome();
+				return home;
+			}
+		}
 
 		public virtual string Name => def.letterLabel;
 
@@ -287,7 +292,7 @@ namespace Cities {
 		}
 
 		protected virtual int RandomExpiryTicks() {
-			var tileIdFrom = HomeMap.Tile;
+			var tileIdFrom = home.Tile;
 			var info = Targets.TryGetPrimaryTarget();
 			var tileIdTo = info.IsValid ? info.Tile : tileIdFrom;
 

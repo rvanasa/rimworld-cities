@@ -7,7 +7,7 @@
     <pawnSingular>legend</pawnSingular>
 		<pawnsPlural>legends</pawnsPlural>
     <permanentEnemy>true</permanentEnemy>
-		<requiredCountAtGameStart>1</requiredCountAtGameStart>
+		<requiredCountAtGameStart>0</requiredCountAtGameStart>
 		<fixedName>Legends</fixedName>
 		<techLevel>Industrial</techLevel>
 		<backstoryCategories>
@@ -15,6 +15,10 @@
 		</backstoryCategories>
 		<hidden>true</hidden>
 		<autoFlee>false</autoFlee>
+		<canMakeRandomly>false</canMakeRandomly>
+		<canSiege>false</canSiege>
+		<canStageAttacks>false</canStageAttacks>
+		<earliestRaidDays>10000</earliestRaidDays>
 		<geneticVariance>0</geneticVariance>
 		<hairTags>
 			<li>Urban</li>
