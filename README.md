@@ -9,6 +9,9 @@
 
 ---
 
+#### Patch v0.3.13 (October 4, 2019)
+- Continued deprecation of Keanu/Legends easter egg. 
+
 #### Patch v0.3.12 (July 4, 2019)
 - Fixed a potential edge case with city quest home selection logic. 
 - Updated Japanese translation (@Proxyer).
