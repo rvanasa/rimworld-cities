@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <Keanu_Pawn.label>легендарный</Keanu_Pawn.label>
+  <Keanu_Pawn.labelPlural>Легендарные</Keanu_Pawn.labelPlural>
+
+  <Keanu_Dog.label>гончая собака</Keanu_Dog.label>
+  <Keanu_Dog.labelPlural>гончие собаки</Keanu_Dog.labelPlural>
+  <Keanu_Dog.lifeStages.beagle_puppy.label>щенок гончей</Keanu_Dog.lifeStages.beagle_puppy.label>
+  <Keanu_Dog.lifeStages.beagle_puppy.labelPlural>щенки гончей</Keanu_Dog.lifeStages.beagle_puppy.labelPlural>
+  <Keanu_Dog.lifeStages.beagle_puppy.labelMale>щенок гончей (самец)</Keanu_Dog.lifeStages.beagle_puppy.labelMale>
+  <Keanu_Dog.lifeStages.beagle_puppy.labelMalePlural>щенки гончей (самцы)</Keanu_Dog.lifeStages.beagle_puppy.labelMalePlural>
+  <Keanu_Dog.lifeStages.beagle_puppy.labelFemale>щенок гончей (самка)</Keanu_Dog.lifeStages.beagle_puppy.labelFemale>
+  <Keanu_Dog.lifeStages.beagle_puppy.labelFemalePlural>щенки гончей (самки)</Keanu_Dog.lifeStages.beagle_puppy.labelFemalePlural>
+  <Keanu_Dog.lifeStages.1.label>Гончая собака</Keanu_Dog.lifeStages.1.label>
+  <Keanu_Dog.lifeStages.1.labelPlural>Гончие собаки</Keanu_Dog.lifeStages.1.labelPlural>
+  <Keanu_Dog.lifeStages.1.labelMale>Гончая собака(самец)</Keanu_Dog.lifeStages.1.labelMale>
+  <Keanu_Dog.lifeStages.1.labelMalePlural>Гончие собаки(самцы)</Keanu_Dog.lifeStages.1.labelMalePlural>
+  <Keanu_Dog.lifeStages.1.labelFemale>Гончая собака(самка)</Keanu_Dog.lifeStages.1.labelFemale>
+  <Keanu_Dog.lifeStages.1.labelFemalePlural>Гончие собаки(самки)</Keanu_Dog.lifeStages.1.labelFemalePlural>
+  <Keanu_Dog.lifeStages.2.label>Гончая собака</Keanu_Dog.lifeStages.2.label>
+  <Keanu_Dog.lifeStages.2.labelPlural>Гончие собаки</Keanu_Dog.lifeStages.2.labelPlural>
+  <Keanu_Dog.lifeStages.2.labelMale>Гончая собака(самец)</Keanu_Dog.lifeStages.2.labelMale>
+  <Keanu_Dog.lifeStages.2.labelMalePlural>Гончие собаки(самцы)</Keanu_Dog.lifeStages.2.labelMalePlural>
+  <Keanu_Dog.lifeStages.2.labelFemale>Гончая собака(самка)</Keanu_Dog.lifeStages.2.labelFemale>
+  <Keanu_Dog.lifeStages.2.labelFemalePlural>Гончие собаки(самки)</Keanu_Dog.lifeStages.2.labelFemalePlural>
+  <Keanu_Dog.labelMale>Гончая собака(самец)</Keanu_Dog.labelMale>
+  <Keanu_Dog.labelMalePlural>Гончие собаки(самцы)</Keanu_Dog.labelMalePlural>
+  <Keanu_Dog.labelFemale>Гончая собака(самка)</Keanu_Dog.labelFemale>
+  <Keanu_Dog.labelFemalePlural>Гончие собаки(самки</Keanu_Dog.labelFemalePlural>
+
+</LanguageData>
