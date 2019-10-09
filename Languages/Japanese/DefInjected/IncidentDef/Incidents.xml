@@ -18,7 +18,7 @@
   <Quest_City_Assassinate.questParts.2.message>{0}がこのエリアから逃れました。</Quest_City_Assassinate.questParts.2.message>
 
   <Quest_City_Defend.label>大都市クエスト：重包囲防衛</Quest_City_Defend.label>
-  <Quest_City_Defend.letterText>現在{2}は、{0}による激しい包囲攻撃を受けており、必死に防衛していますが、増援部隊が必要です。\n\nもし、あなたが{2}を首尾よく防御できれば、この大都市は彼らの感謝の印としてあなたの派閥に所属するでしょう。。</Quest_City_Defend.letterText>
+  <Quest_City_Defend.letterText>現在{2}は、{0}による激しい包囲攻撃を受けており、必死に防衛していますが、増援部隊が必要です。\n\nもし、あなたが{2}を首尾よく防御できれば、この大都市は彼らの感謝の印としてあなたに見返りを提供するでしょう。。</Quest_City_Defend.letterText>
   <Quest_City_Defend.letterLabel>大都市を防衛せよ</Quest_City_Defend.letterLabel>
   <Quest_City_Defend.questParts.1.letter>襲撃者が撤退した</Quest_City_Defend.questParts.1.letter>
   <Quest_City_Defend.questParts.2.letter>大都市が占領された</Quest_City_Defend.questParts.2.letter>
