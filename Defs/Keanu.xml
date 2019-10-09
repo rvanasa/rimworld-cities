@@ -35,7 +35,7 @@
   <PawnKindDef ParentName="OutlanderBase">
     <defName>Keanu_Pawn</defName>
     <label>legend</label>
-    <combatPower>5</combatPower>
+    <combatPower>500</combatPower>
     <minGenerationAge>40</minGenerationAge>
     <maxGenerationAge>50</maxGenerationAge>
     <isFighter>true</isFighter>
@@ -187,7 +187,7 @@
     <defName>Keanu_Dog</defName>
     <label>beagle</label>
     <race>Keanu_Dog</race>
-    <combatPower>30</combatPower>
+    <combatPower>500</combatPower>
     <ecoSystemWeight>0</ecoSystemWeight>
     <wildGroupSize>0</wildGroupSize>
 		<canArriveManhunter>false</canArriveManhunter>
