@@ -9,6 +9,11 @@
 
 ---
 
+#### Patch v0.3.14 (October 8, 2019)
+- Added "Crashlanded (Ghost City)" scenario. 
+- Increased time between "Defend City" quest attack waves.
+- Fixed localization for "Disable city events" menu option. 
+
 #### Patch v0.3.13 (October 4, 2019)
 - Continued deprecation of Keanu/Legends easter egg. 
 

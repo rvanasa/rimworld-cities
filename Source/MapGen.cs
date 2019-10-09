@@ -165,6 +165,7 @@ namespace Cities {
 					}
 				}
 			}
+			map.weatherManager.curWeather = DefDatabase<WeatherDef>.GetNamed("Fog");
 		}
 	}
 

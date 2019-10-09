@@ -234,8 +234,7 @@ namespace Cities {
 	public class Quest_Defend : Quest {
 		const int MaxStageCount = 8;
 		const int CheckInterval = 1000;
-		//static readonly IntRange StageInterval = new IntRange(5_000, 10_000);
-		static readonly IntRange StageInterval = new IntRange(1_000, 3_000);
+		static readonly IntRange StageInterval = new IntRange(5_000, 10_000);
 
 		Faction enemyFaction;
 		City city;
