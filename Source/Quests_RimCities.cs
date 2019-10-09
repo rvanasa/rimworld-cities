@@ -333,7 +333,7 @@ namespace Cities {
 			}
 			var faction = map.ParentFaction;
 			var playerFaction = Faction.OfPlayer;
-			map.Parent.SetFaction(playerFaction);
+			//map.Parent.SetFaction(playerFaction);
 			faction.TryAffectGoodwillWith(playerFaction, 200);
 			/*foreach(var pawn in map.mapPawns.AllPawns) {
 				if(pawn.Faction == faction) {
