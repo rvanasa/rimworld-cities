@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <EnterCity>Войти в город</EnterCity>
+  <EnterCityDesc>Войти в выбранный город</EnterCityDesc>
+
+  <LimitCitySize>Ограничить размер городской карты (меньше лагов)</LimitCitySize>
+  <EnableCityQuests>Включить систему квестов в городе</EnableCityQuests>
+  <EnableCityEvents>Включить события в городе (появление еды, подкрепление)</EnableCityEvents>
+  <AbandonedCityChance>Шанс города стать покинутым：[{0}]</AbandonedCityChance>
+  <CitiesPer100kTiles>Частота спавна города：</CitiesPer100kTiles>
+
+  <FriendlyCityKind>Дружественный</FriendlyCityKind>
+  <HostileCityKind>Враждебный</HostileCityKind>
+  <AbandonedCityKind>Покинутый</AbandonedCityKind>
+  <GhostCityKind>Призрак</GhostCityKind>
+
+</LanguageData>

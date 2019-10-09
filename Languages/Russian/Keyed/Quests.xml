@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <QuestResultComplete>На выполнении：{0}</QuestResultComplete>
+  <QuestResultCancel>Провалено：{0}</QuestResultCancel>
+  <QuestResultExpire>Истекает：{0}</QuestResultExpire>
+  <QuestExpireTime>Осталось времени：{0}</QuestExpireTime>
+
+  <QuestAppendWorth>стоимость：{0}</QuestAppendWorth>
+
+  <QuestComplete>Квест выполнен（{0}）</QuestComplete>
+  <QuestCancelled>Квест отменен（{0}）</QuestCancelled>
+  <QuestExpired>Квест истек（{0}）</QuestExpired>
+
+  <QuestReceived>Получен{0}</QuestReceived>
+
+  <QuestDefendWave>Атакующая волна ({0} / {1})</QuestDefendWave>
+
+</LanguageData>
