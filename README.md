@@ -16,8 +16,8 @@
 
 #### Patch v0.3.14 (October 8, 2019)
 - Added "Crashlanded (Ghost City)" scenario.
-- Increased time between "Heavy Siege" quest attack waves.
-- Rebalanced the "Heavy Siege" quest rewards.
+- Increased time between "Heavy Siege" attack waves.
+- Rebalanced the "Heavy Siege" rewards.
 - Fixed localization for "Disable city events" menu option.
 
 #### Patch v0.3.13 (October 4, 2019)
