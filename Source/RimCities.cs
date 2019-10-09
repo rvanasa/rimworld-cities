@@ -23,7 +23,7 @@ namespace Cities {
 			listing.Gap();
 			listing.CheckboxLabeled("EnableCityQuests".Translate(), ref settings.enableQuestSystem);
 			listing.Gap();
-			listing.CheckboxLabeled("EnableCityEvents", ref settings.enableEvents);
+			listing.CheckboxLabeled("EnableCityEvents".Translate(), ref settings.enableEvents);
 			listing.Gap();
 			listing.Label("AbandonedCityChance".Translate().Formatted(GenMath.RoundTo(settings.abandonedChance, 0.01F)));
 			settings.abandonedChance = listing.Slider(settings.abandonedChance, 0, 1);

@@ -134,8 +134,8 @@
 	
 	<ScenarioDef ParentName="Crashlanded_City">
 		<defName>Crashlanded_City_Abandoned</defName>
-    <label>Crashlanded (Abandoned City)</label>
-    <description>Instead of spawning in the wilderness, you will start inside a city.</description>
+		<label>Crashlanded (Abandoned City)</label>
+		<description>Instead of spawning in the wilderness, you will start inside an abandoned city. You will find plenty of resources, but keep a close eye out for scavengers and raiding parties.</description>
 		<scenario>
 			<parts>
 				<li Class="Cities.ScenPart_StartCity">
@@ -148,12 +148,27 @@
 	
 	<ScenarioDef ParentName="Crashlanded_City">
 		<defName>Crashlanded_City_Friendly</defName>
-    <label>Crashlanded (Friendly City)</label>
+		<description>Instead of spawning in the wilderness, you will start inside a friendly city.</description>
+		<label>Crashlanded (Friendly City)</label>
 		<scenario>
 			<parts>
 				<li Class="Cities.ScenPart_StartCity">
 					<def>StartCity</def>
 					<inhabitantKind>Friendly</inhabitantKind>
+				</li>
+			</parts>
+		</scenario>
+	</ScenarioDef>
+	
+	<ScenarioDef ParentName="Crashlanded_City">
+		<defName>Crashlanded_City_Ghost</defName>
+		<description>Instead of spawning in the wilderness, you will start inside an eerily silent city.</description>
+		<label>Crashlanded (Ghost City)</label>
+		<scenario>
+			<parts>
+				<li Class="Cities.ScenPart_StartCity">
+					<def>StartCity</def>
+					<inhabitantKind>Ghost</inhabitantKind>
 				</li>
 			</parts>
 		</scenario>
