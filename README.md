@@ -1,15 +1,11 @@
 # RimCities
 ## A procedural city generator mod for RimWorld.
 
-### [Steam Workshop](https://steamcommunity.com/sharedfiles/filedetails/?id=1775170117) | [Previous Versions](https://github.com/rvanasa/rimworld-cities/releases)
+### [Steam Workshop](https://steamcommunity.com/sharedfiles/filedetails/?id=1775170117) | [Announcement Thread](https://www.reddit.com/r/RimWorld/comments/c2odfh/10_rimcities_beta_release_procedural_city_map/) | [Previous Versions](https://github.com/rvanasa/rimworld-cities/releases)
 
 ---
 
 ![](About/Preview.png)
-
----
-
-### [Announcement/Discusssion Thread](https://www.reddit.com/r/RimWorld/comments/c2odfh/10_rimcities_beta_release_procedural_city_map/)
 
 ---
 
