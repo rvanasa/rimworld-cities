@@ -25,23 +25,23 @@ Work in progress! Let me know if you have any ideas or suggestions for the mod.
 
 ## Features:
 
-#### Visit cities on the world map.
+### Visit cities on the world map.
 ![](Docs/World1.png)
 
-#### Explore large, intricate settlement layouts.
+### Explore large, intricate settlement layouts.
 ![](Docs/Map1.png)
 
-#### Scavenge for supplies and avoid defenses.
+### Scavenge for supplies and avoid defenses.
 ![](Docs/Map2.png)
 
-#### Reveal rooms as you progress through the map.
+### Reveal rooms as you progress through the map.
 ![](Docs/Map3.png)
 
-#### Claim conquered and abandoned cities for your faction.
+### Claim conquered and abandoned cities for your faction.
 ![](Docs/Map4.png)
 
 ---
 
-### [Steam Workshop](https://steamcommunity.com/sharedfiles/filedetails/?id=1775170117) | [Previous Versions](https://github.com/rvanasa/rimworld-cities/releases)
+### [Steam Workshop](https://steamcommunity.com/sharedfiles/filedetails/?id=1775170117) | [Announcement Thread](https://www.reddit.com/r/RimWorld/comments/c2odfh/10_rimcities_beta_release_procedural_city_map/) | [Previous Versions](https://github.com/rvanasa/rimworld-cities/releases)
 
 If you have any ideas or suggestions, please feel free to add an issue or submit a pull request.
