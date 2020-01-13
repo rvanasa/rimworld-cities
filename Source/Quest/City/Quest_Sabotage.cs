@@ -22,10 +22,9 @@ namespace Cities
 		public override void ChooseParts() {
 			base.ChooseParts();
 			target = Find.WorldObjects.Settlements
-				.Where(s => s is City city && city.Visitable && !city.Abandoned
-				            && QuestUtility.Reachable(HomeMap?.Parent, s, 50)
-				            && !s.HasMap)
-				.RandomElementWithFallback() as City;
+				.OfType<City>()
+				.Where(s =>  s.Visitable && !s.Abandoned && !s.HasMap)
+				.RandomByDistance(HomeMap?.Parent, 50);
 		}
 
 		public override bool AllPartsValid() {

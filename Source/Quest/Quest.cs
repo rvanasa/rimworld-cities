@@ -5,277 +5,294 @@ using RimWorld.Planet;
 using UnityEngine;
 using Verse;
 
-namespace Cities
-{
-	public abstract class Quest : IExposable {
-		static readonly IntRange ExpirationDaysRange = new IntRange(10, 30);
+namespace Cities {
+    public abstract class Quest : IExposable {
+        static readonly IntRange ExpirationDaysRange = new IntRange(10, 30);
 
-		public QuestDef def;
-		public int expireTime;
+        public QuestDef def;
+        public int expireTime;
 
-		QuestState state = QuestState.BeforeStart;
-		Map home;
-		List<Result> completeResults = new List<Result>();
-		List<Result> cancelResults = new List<Result>();
-		List<Result> expireResults = new List<Result>();
+        QuestState state = QuestState.BeforeStart;
+        Map home;
+        List<Result> completeResults = new List<Result>();
+        List<Result> cancelResults = new List<Result>();
+        List<Result> expireResults = new List<Result>();
 
-		// public QuestState State => state;
-		public bool Started => state != QuestState.BeforeStart;
-		public bool Ended => state != QuestState.BeforeStart && state != QuestState.Started;
-		public bool Expired => state == QuestState.Expired;
+        public bool Started => state != QuestState.BeforeStart;
+        public bool Ended => state != QuestState.BeforeStart && state != QuestState.Started;
+        public bool Expired => state == QuestState.Expired;
 
-		public int TicksLeft => Started ? expireTime - Find.TickManager.TicksGame : -1;
+        public int TicksLeft => Started ? expireTime - Find.TickManager.TicksGame : -1;
 
-		public virtual int MinCapableColonists => 2;
+        public virtual int MinCapableColonists => 2;
 
-		public Map HomeMap {
-			get {
-				UpdateHome();
-				return home;
-			}
-		}
+        public Map HomeMap {
+            get {
+                UpdateHome();
+                return home;
+            }
+        }
 
-		public virtual string Name => def.letterLabel;
+        public virtual string Name => def.letterLabel;
 
-		public abstract LookTargets Targets { get; }
+        public abstract LookTargets Targets { get; }
 
-		public virtual Faction Issuer => null;
+        public virtual Faction Issuer => null;
 
-		public virtual NamedArgument[] FormatArgs => new NamedArgument[0];
+        public virtual NamedArgument[] FormatArgs => new NamedArgument[0];
 
-		public virtual string DetailText {
-			get {
-				var text = def.letterText.Formatted(FormatArgs);
-				var complete = ResultLabel("QuestResultComplete", completeResults);
-				var cancel = ResultLabel("QuestResultCancel", cancelResults);
-				var expire = ResultLabel("QuestResultExpire", expireResults);
-				if(complete != null) {
-					text += "\n\n" + complete;
-				}
-				if(cancel != null) {
-					text += "\n\n" + cancel;
-				}
-				if(expire != null) {
-					text += "\n\n" + expire;
-				}
-				text += "\n\n" + "QuestExpireTime".Translate().Formatted(TicksLeft.ToStringTicksToPeriod());
-				return text;
-			}
-		}
+        public virtual string DetailText {
+            get {
+                var text = def.letterText.Formatted(FormatArgs);
+                var complete = ResultLabel("QuestResultComplete", completeResults);
+                var cancel = ResultLabel("QuestResultCancel", cancelResults);
+                var expire = ResultLabel("QuestResultExpire", expireResults);
+                if (complete != null) {
+                    text += "\n\n" + complete;
+                }
 
-		string ResultLabel(string format, IEnumerable<Result> results) {
-			var labels = results.Select(r => r.Label).Where(s => s != null).ToArray();
-			return labels.Length > 0 ? format.Translate().Formatted(labels.ToCommaList()) : null;
-		}
+                if (cancel != null) {
+                    text += "\n\n" + cancel;
+                }
 
-		public virtual void ExposeData() {
-			Scribe_Defs.Look(ref def, "def");
-			Scribe_Values.Look(ref expireTime, "expireTime");
-			Scribe_Values.Look(ref state, "state");
-			Scribe_References.Look(ref home, "home");
-			Scribe_Collections.Look(ref completeResults, "completeResults");
-			Scribe_Collections.Look(ref cancelResults, "cancelResults");
-			Scribe_Collections.Look(ref expireResults, "expireResults");
-		}
+                if (expire != null) {
+                    text += "\n\n" + expire;
+                }
 
-		protected virtual bool IsValidHome(Map map) {
-			return map?.Parent?.Faction != null && !map.ParentFaction.HostileTo(Faction.OfPlayer) && HasSufficientColonists(map);
-		}
+                text += "\n\n" + "QuestExpireTime".Translate().Formatted(TicksLeft.ToStringTicksToPeriod());
+                return text;
+            }
+        }
 
-		protected virtual bool HasSufficientColonists(Map map) {
-			var list = map.mapPawns.SpawnedPawnsInFaction(Faction.OfPlayer);
-			int num = 0;
-			for(int i = 0; i < list.Count; i++) {
-				if(list[i].IsFreeColonist && !HealthAIUtility.ShouldSeekMedicalRest(list[i])) {
-					if(++num >= MinCapableColonists) {
-						return true;
-					}
-				}
-			}
-			return false;
-		}
+        string ResultLabel(string format, IEnumerable<Result> results) {
+            var labels = results.Select(r => r.Label).Where(s => s != null).ToArray();
+            return labels.Length > 0 ? format.Translate().Formatted(labels.ToCommaList()) : null;
+        }
 
-		protected virtual int RandomExpiryTicks() {
-			var tileIdFrom = home.Tile;
-			var info = Targets.TryGetPrimaryTarget();
-			var tileIdTo = info.IsValid ? info.Tile : tileIdFrom;
+        public virtual void ExposeData() {
+            Scribe_Defs.Look(ref def, "def");
+            Scribe_Values.Look(ref expireTime, "expireTime");
+            Scribe_Values.Look(ref state, "state");
+            Scribe_References.Look(ref home, "home");
+            Scribe_Collections.Look(ref completeResults, "completeResults");
+            Scribe_Collections.Look(ref cancelResults, "cancelResults");
+            Scribe_Collections.Look(ref expireResults, "expireResults");
+        }
 
-			var arriveTicks = CaravanArrivalTimeEstimator.EstimatedTicksToArrive(tileIdFrom, tileIdTo, null);
-			var arriveDays = arriveTicks / 60000F;
-			var minDays = Mathf.CeilToInt(Mathf.Max(arriveDays + 6, arriveDays * 1.35F));
+        protected virtual bool IsValidHome(Map map) {
+            return map?.Parent?.Faction != null && !map.ParentFaction.HostileTo(Faction.OfPlayer) &&
+                   HasSufficientColonists(map);
+        }
 
-			var days = Mathf.Max(ExpirationDaysRange.RandomInRange, Mathf.Min(ExpirationDaysRange.max, minDays));
-			return 60000 * days;
-		}
+        protected virtual bool HasSufficientColonists(Map map) {
+            var list = map.mapPawns.SpawnedPawnsInFaction(Faction.OfPlayer);
+            var num = 0;
+            foreach (var pawn in list) {
+                if (pawn.IsFreeColonist && !HealthAIUtility.ShouldSeekMedicalRest(pawn)) {
+                    if (++num >= MinCapableColonists) {
+                        return true;
+                    }
+                }
+            }
 
-		public virtual void UpdateHome() {
-			if(home == null || !Find.Maps.Contains(home)) {
-				home = Find.Maps.Where(IsValidHome).MaxByWithFallback(m => m.mapPawns.FreeColonistsSpawnedCount)
-				       ?? Find.CurrentMap
-				       ?? Find.Maps.MaxByWithFallback(m => m.mapPawns.FreeColonistsSpawnedCount)
-				       ?? home;
-			}
-		}
+            return false;
+        }
 
-		public virtual void ChooseParts() {
-			UpdateHome();
-			/*if(home == null) {
-				return;
-			}*/
-			foreach(var part in def.questParts) {
-				part.OnChoose(this);
-				/*if(!part.IsValid(this)) {
-					return;
-				}*/
-			}
-		}
+        protected virtual int RandomExpiryTicks() {
+            var tileIdFrom = home.Tile;
+            var info = Targets.TryGetPrimaryTarget();
+            var tileIdTo = info.IsValid ? info.Tile : tileIdFrom;
 
-		public virtual bool AllPartsValid() {
-			if(home == null) {
-				return false;
-			}
-			foreach(var part in def.questParts) {
-				if(!part.IsValid(this)) {
-					return false;
-				}
-			}
-			return true;
-		}
+            var arriveTicks = CaravanArrivalTimeEstimator.EstimatedTicksToArrive(tileIdFrom, tileIdTo, null);
+            var arriveDays = arriveTicks / 60000F;
+            var minDays = Mathf.CeilToInt(Mathf.Max(arriveDays + 6, arriveDays * 1.35F));
 
-		public virtual bool CanReceiveRandomly() {
-			return AllPartsValid() && IsValidHome(home);
-		}
+            var days = Mathf.Max(ExpirationDaysRange.RandomInRange, Mathf.Min(ExpirationDaysRange.max, minDays));
+            return 60000 * days;
+        }
 
-		public virtual void Listen(string key, Result result) {
-			// TODO: convert to multimap data structure
-			if(key == "Complete") {
-				completeResults.Add(result);
-			}
-			else if(key == "Cancel") {
-				cancelResults.Add(result);
-			}
-			else if(key == "Expire") {
-				expireResults.Add(result);
-			}
-			else {
-				Log.Error("Unknown quest event: " + key);
-			}
-		}
+        public virtual void UpdateHome() {
+            if (home == null || !Find.Maps.Contains(home)) {
+                home = Find.Maps.Where(IsValidHome).MaxByWithFallback(m => m.mapPawns.FreeColonistsSpawnedCount)
+                       ?? Find.CurrentMap
+                       ?? Find.Maps.MaxByWithFallback(m => m.mapPawns.FreeColonistsSpawnedCount)
+                       ?? home;
+            }
+        }
 
-		public void Start() {
-			if(Started) {
-				Log.Error("Quest already started: " + Name);
-				return;
-			}
-			state = QuestState.Started;
-			expireTime = Find.TickManager.TicksGame + RandomExpiryTicks();
-			Find.World.GetComponent<WorldComponent_QuestTracker>().quests.Add(this);
-			foreach(var part in def.questParts) {
-				part.OnStart(this);
-			}
-			OnStart();
-		}
+        public virtual void ChooseParts() {
+            UpdateHome();
+            /*if(home == null) {
+                return;
+            }*/
+            foreach (var part in def.questParts) {
+                part.OnChoose(this);
+                /*if(!part.IsValid(this)) {
+                    return;
+                }*/
+            }
+        }
 
-		public void Complete() {
-			if(!TryEnd(QuestState.Completed, "QuestComplete", MessageTypeDefOf.PositiveEvent)) {
-				return;
-			}
-			foreach(var part in def.questParts) {
-				part.OnComplete(this);
-			}
-			OnComplete();
-		}
+        public virtual bool AllPartsValid() {
+            if (home == null) {
+                return false;
+            }
 
-		public void Cancel() {
-			if(!TryEnd(QuestState.Cancelled, "QuestCancelled", MessageTypeDefOf.NegativeEvent)) {
-				return;
-			}
-			foreach(var part in def.questParts) {
-				part.OnCancel(this);
-			}
-			OnCancel();
-		}
+            foreach (var part in def.questParts) {
+                if (!part.IsValid(this)) {
+                    return false;
+                }
+            }
 
-		public void Expire() {
-			if(!TryEnd(QuestState.Expired, "QuestExpired", MessageTypeDefOf.NeutralEvent)) {
-				return;
-			}
-			foreach(var part in def.questParts) {
-				part.OnExpire(this);
-			}
-			OnExpire();
-		}
+            return true;
+        }
 
-		bool TryEnd(QuestState state, string formatter, MessageTypeDef messageType) {
-			if(!Started) {
-				Log.Error("Could not set quest to " + state + " (not started): " + Name);
-				return false;
-			}
-			if(Ended) {
-				Log.Error("Could not set quest to " + state + " (already ended): " + Name);
-				return false;
-			}
-			this.state = state;
-			UpdateHome();///
-			OnEnd();
-			Messages.Message(formatter.Translate().Formatted(Name), Targets, messageType);
-			return true;
-		}
+        public virtual bool CanReceiveRandomly() {
+            return AllPartsValid() && IsValidHome(home);
+        }
 
-		public void MapGenerated(Map map) {
-			UpdateHome();
-			foreach(var part in def.questParts) {
-				part.OnMapGenerated(this);
-			}
-			OnMapGenerated(map);
-		}
+        public virtual void Listen(string key, Result result) {
+            // TODO: convert to multimap data structure
+            if (key == "Complete") {
+                completeResults.Add(result);
+            }
+            else if (key == "Cancel") {
+                cancelResults.Add(result);
+            }
+            else if (key == "Expire") {
+                expireResults.Add(result);
+            }
+            else {
+                Log.Error("Unknown quest event: " + key);
+            }
+        }
 
-		public void MapRemoved(Map map) {
-			UpdateHome();
-			foreach(var part in def.questParts) {
-				part.OnMapRemoved(this);
-			}
-			OnMapRemoved(map);
-		}
+        public void Start() {
+            if (Started) {
+                Log.Error("Quest already started: " + Name);
+                return;
+            }
 
-		protected bool AtInterval(int interval) {
-			return (Find.TickManager.TicksGame + def.shortHash) % interval == 0;
-		}
+            state = QuestState.Started;
+            expireTime = Find.TickManager.TicksGame + RandomExpiryTicks();
+            Find.World.GetComponent<WorldComponent_QuestTracker>().quests.Add(this);
+            foreach (var part in def.questParts) {
+                part.OnStart(this);
+            }
 
-		public virtual void OnStart() {
-		}
+            OnStart();
+        }
 
-		public virtual void OnEnd() {
-		}
+        public void Complete() {
+            if (!TryEnd(QuestState.Completed, "QuestComplete", MessageTypeDefOf.PositiveEvent)) {
+                return;
+            }
 
-		public virtual void OnComplete() {
-		}
+            foreach (var part in def.questParts) {
+                part.OnComplete(this);
+            }
 
-		public virtual void OnCancel() {
-		}
+            OnComplete();
+        }
 
-		public virtual void OnExpire() {
-		}
+        public void Cancel() {
+            if (!TryEnd(QuestState.Cancelled, "QuestCancelled", MessageTypeDefOf.NegativeEvent)) {
+                return;
+            }
 
-		public virtual void OnTick() {
-		}
+            foreach (var part in def.questParts) {
+                part.OnCancel(this);
+            }
 
-		public virtual void OnMapGenerated(Map map) {
-		}
+            OnCancel();
+        }
 
-		public virtual void OnMapRemoved(Map map) {
-		}
+        public void Expire() {
+            if (!TryEnd(QuestState.Expired, "QuestExpired", MessageTypeDefOf.NeutralEvent)) {
+                return;
+            }
 
-		public virtual IEnumerable<Gizmo> GetGizmos(WorldObject obj) {
-			yield break;
-		}
+            foreach (var part in def.questParts) {
+                part.OnExpire(this);
+            }
 
-		public virtual IEnumerable<Gizmo> GetGizmos(Thing thing) {
-			yield break;
-		}
+            OnExpire();
+        }
 
-		public virtual IEnumerable<FloatMenuOption> GetFloatMenuOptions(Thing thing, Pawn pawn) {
-			yield break;
-		}
-	}
+        bool TryEnd(QuestState state, string formatter, MessageTypeDef messageType) {
+            if (!Started) {
+                Log.Error("Could not set quest to " + state + " (not started): " + Name);
+                return false;
+            }
+
+            if (Ended) {
+                Log.Error("Could not set quest to " + state + " (already ended): " + Name);
+                return false;
+            }
+
+            this.state = state;
+            UpdateHome(); ///
+            OnEnd();
+            Messages.Message(formatter.Translate().Formatted(Name), Targets, messageType);
+            return true;
+        }
+
+        public void MapGenerated(Map map) {
+            UpdateHome();
+            foreach (var part in def.questParts) {
+                part.OnMapGenerated(this);
+            }
+
+            OnMapGenerated(map);
+        }
+
+        public void MapRemoved(Map map) {
+            UpdateHome();
+            foreach (var part in def.questParts) {
+                part.OnMapRemoved(this);
+            }
+
+            OnMapRemoved(map);
+        }
+
+        protected bool AtInterval(int interval) {
+            return (Find.TickManager.TicksGame + def.shortHash) % interval == 0;
+        }
+
+        public virtual void OnStart() {
+        }
+
+        public virtual void OnEnd() {
+        }
+
+        public virtual void OnComplete() {
+        }
+
+        public virtual void OnCancel() {
+        }
+
+        public virtual void OnExpire() {
+        }
+
+        public virtual void OnTick() {
+        }
+
+        public virtual void OnMapGenerated(Map map) {
+        }
+
+        public virtual void OnMapRemoved(Map map) {
+        }
+
+        public virtual IEnumerable<Gizmo> GetGizmos(WorldObject obj) {
+            yield break;
+        }
+
+        public virtual IEnumerable<Gizmo> GetGizmos(Thing thing) {
+            yield break;
+        }
+
+        public virtual IEnumerable<FloatMenuOption> GetFloatMenuOptions(Thing thing, Pawn pawn) {
+            yield break;
+        }
+    }
 }

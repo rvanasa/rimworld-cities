@@ -24,12 +24,10 @@ namespace Cities
 		public override void ChooseParts() {
 			base.ChooseParts();
 			alliedFaction = Find.FactionManager.RandomAlliedFaction(minTechLevel: TechLevel.Industrial);
-			//alliedFaction = Find.FactionManager.RandomNonHostileFaction(minTechLevel: TechLevel.Industrial);
 			target = Find.WorldObjects.Settlements
-				.Where(s => s is City && FactionUtility.HostileTo(s.Faction, Faction.OfPlayer)
-				                      && QuestUtility.Reachable(HomeMap?.Parent, s, 50)
-				                      && !s.HasMap)
-				.RandomElementWithFallback() as City;
+				.OfType<City>()
+				.Where(s => s.Faction.HostileTo(Faction.OfPlayer) && !s.HasMap)
+				.RandomByDistance(HomeMap?.Parent, 50);
 		}
 
 		public override bool AllPartsValid() {
