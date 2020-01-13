@@ -22,7 +22,9 @@ namespace Cities {
 
         protected override void ScatterAt(IntVec3 pos, Map map, int count) {
             var s = GetStencil(map, pos);
-            GenerateRect(s.Value.Center().RotateRand());
+            if (s.HasValue) {
+                GenerateRect(s.Value.Center().RotateRand());
+            }
         }
 
         protected override bool TryFindScatterCell(Map map, out IntVec3 result) {

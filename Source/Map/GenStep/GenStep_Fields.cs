@@ -14,7 +14,7 @@ namespace Cities {
 		public AltitudeLayer altitudeLayer = AltitudeLayer.LowPlant;
 
 		public override void GenerateRect(Stencil s) {
-			ThingDef plant = DefDatabase<ThingDef>.AllDefs
+			var plant = DefDatabase<ThingDef>.AllDefs
 				.Where(t => t.category == ThingCategory.Plant && t.altitudeLayer == altitudeLayer && !t.plant.cavePlant)
 				.RandomElement();
 			foreach(var pos in s.bounds.Cells) {
