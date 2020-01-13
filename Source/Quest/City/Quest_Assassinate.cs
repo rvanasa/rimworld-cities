@@ -33,17 +33,21 @@ namespace Cities {
             var faction = city.Faction;
             pawn = PawnGenerator.GeneratePawn(new PawnGenerationRequest(faction.RandomPawnKind(), faction,
                 PawnGenerationContext.NonPlayer, city.Tile));
-            Find.World.worldPawns.PassToWorld(pawn, PawnDiscardDecideMode.KeepForever);
         }
-
+        
         public override bool AllPartsValid() {
             return base.AllPartsValid() && city != null && pawn != null;
         }
 
         public override void OnMapGenerated(Map map) {
             if (map.Parent == city) {
-                var lord = LordMaker.MakeNewLord(pawn.Faction, new LordJob_LiveInCity(), map, new[] {pawn});
-                GenSpawn.Spawn(pawn, CellRect.WholeMap(map).ExpandedBy(-20).RandomCell, map);
+                if (!pawn.Spawned) {
+                    GenSpawn.Spawn(pawn, CellRect.WholeMap(map).ExpandedBy(-20).RandomCell, map);
+                }
+                if (pawn.GetLord() == null) {
+                    var lord = LordMaker.MakeNewLord(pawn.Faction, new LordJob_LiveInCity(), map);
+                    lord.AddPawn(pawn);
+                }
                 var bed = map.listerThings.AllThings.OfType<Building_Bed>().Where(b => !b.ForPrisoners && !b.Medical)
                     .RandomElementWithFallback();
                 if (bed != null) {
@@ -57,6 +61,12 @@ namespace Cities {
             if (map.Parent == city) {
                 Cancel();
             }
+        }
+
+        public override void OnStart() {
+            base.OnStart();
+            
+            Find.World.worldPawns.PassToWorld(pawn, PawnDiscardDecideMode.KeepForever);
         }
 
         public override void OnTick() {
