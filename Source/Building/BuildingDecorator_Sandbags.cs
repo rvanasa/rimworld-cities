@@ -1,18 +1,8 @@
-using System.Collections.Generic;
-using System.Linq;
 using RimWorld;
 using Verse;
 
-namespace Cities {
-
-	public abstract class BuildingDecorator : Decorator {
-	}
-
-	public class BuildingDecorator_None : BuildingDecorator {
-		public override void Decorate(Stencil s) {
-		}
-	}
-
+namespace Cities
+{
 	public class BuildingDecorator_Sandbags : BuildingDecorator {
 		public int distance = 2;
 

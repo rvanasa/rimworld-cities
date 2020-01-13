@@ -1,12 +1,9 @@
-using System.Collections.Generic;
-using System.Linq;
-using UnityEngine;
 using RimWorld;
 using RimWorld.Planet;
 using Verse;
 
-namespace Cities {
-
+namespace Cities
+{
 	public abstract class IncidentWorker_Cached : IncidentWorker {
 		World lastWorld;
 		int lastTick;
@@ -64,41 +61,6 @@ namespace Cities {
 		}
 
 		public virtual void PostQuestMapGenerate(WorldObject obj) {
-		}
-	}
-
-	public class IncidentWorker_Quest : IncidentWorker_Cached {
-		Quest quest;
-
-		public QuestDef Def => (QuestDef)def;
-
-		public override string LetterText => quest.DetailText;
-
-		public override Faction LetterIssuer => quest.Issuer;
-
-		public override LookTargets LetterTargets => quest.Targets;
-
-		public override NamedArgument[] LetterParams => quest.FormatArgs;
-
-		public override bool CheckIncident(IncidentParms parms) {
-			if(!LoadedModManager.GetMod<Mod_Cities>().GetSettings<ModSettings_Cities>().enableQuestSystem) {
-				return false;
-			}
-			if(quest == null || quest.Started) {
-				var def = Def;
-				quest = (Quest)System.Activator.CreateInstance(def.questClass);
-				quest.def = def;
-			}
-			quest.ChooseParts();
-			return quest.CanReceiveRandomly();
-		}
-
-		public override bool StartIncident(IncidentParms parms) {
-			if(quest.AllPartsValid()) {
-				quest.Start();
-				return true;
-			}
-			return false;
 		}
 	}
 }

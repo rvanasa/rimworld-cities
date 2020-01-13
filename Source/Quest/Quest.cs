@@ -1,208 +1,12 @@
 using System.Collections.Generic;
 using System.Linq;
-using UnityEngine;
 using RimWorld;
 using RimWorld.Planet;
+using UnityEngine;
 using Verse;
-using Verse.AI.Group;
 
-namespace Cities {
-
-	[StaticConstructorOnStartup]
-	public static class QuestIcons {
-		public static readonly Texture2D InfoIcon = ContentFinder<Texture2D>.Get("UI/Commands/LaunchReport");
-		//public static readonly Texture2D AttackIcon = ContentFinder<Texture2D>.Get("UI/Commands/SquadAttack");
-	}
-
-	public static class QuestUtility {
-		public static bool Reachable(WorldObject from, WorldObject to, int minDist = int.MaxValue) {
-			if(from == null || to == null) {
-				return false;
-			}
-			return Reachable(from.Tile, to.Tile, minDist);
-		}
-
-		public static bool Reachable(int from, int to, int minDist = int.MaxValue) {
-			return Find.WorldGrid.ApproxDistanceInTiles(from, to) < minDist && Find.WorldReachability.CanReach(from, to);
-		}
-
-		public static IntVec3 FindDropSpot(Map map, int dropArea = 10) {
-			var attempts = 20;
-			Stencil s;
-			do {
-				s = new Stencil(map).MoveRand()
-					.ExpandRegion(p => p.GetFirstThing<Thing>(map) == null, dropArea)
-					.Center();
-				if(s.Area >= dropArea) {
-					break;
-				}
-			}
-			while(--attempts >= 0);
-			return s.pos;
-		}
-	}
-
-	public class QuestDef : IncidentDef {
-		public System.Type questClass;
-		public List<QuestPart> questParts = new List<QuestPart>();
-
-		public QuestDef() {
-			workerClass = typeof(IncidentWorker_Quest);
-			questClass = typeof(Quest);
-			//category = IncidentCategoryDefOf.WorldQuest;
-			//targetTags = new List<IncidentTargetTagDef>(new[] { IncidentTargetTagDefOf.World });
-		}
-	}
-
-	public abstract class QuestPart {
-		public virtual void OnChoose(Quest quest) {
-		}
-		public virtual bool IsValid(Quest quest) {
-			return true;
-		}
-		public virtual void OnStart(Quest quest) {
-		}
-		public virtual void OnComplete(Quest quest) {
-		}
-		public virtual void OnCancel(Quest quest) {
-		}
-		public virtual void OnExpire(Quest quest) {
-		}
-		public virtual void OnMapGenerated(Quest quest) {
-		}
-		public virtual void OnMapRemoved(Quest quest) {
-		}
-	}
-
-	public abstract class QuestListener : QuestPart {
-		public List<string> events = new List<string>();
-
-		public override void OnStart(Quest quest) {
-			foreach(var result in GetResults(quest)) {
-				foreach(var key in events) {
-					quest.Listen(key, result);
-				}
-			}
-		}
-
-		public abstract IEnumerable<Result> GetResults(Quest quest);
-	}
-
-	public class QuestListener_GiveThings : QuestListener {
-		public FloatRange value = new FloatRange(1000, 2000);
-
-		public List<ThingSetMakerDef> thingSetMakerOptions = new List<ThingSetMakerDef>();
-
-		public override IEnumerable<Result> GetResults(Quest quest) {
-			var maker = thingSetMakerOptions.RandomElementWithFallback()
-				?? ThingSetMakerDefOf.Reward_StandardByDropPod;
-			var things = maker.root.Generate(new ThingSetMakerParams {
-				totalMarketValueRange = value,
-			});
-			yield return new DropPodResult(things);
-		}
-	}
-
-	public class QuestListener_Message : QuestListener {
-		public string letter;
-		public string message;
-		public MessageTypeDef messageType;
-
-		public List<ThingSetMakerDef> thingSetMakerOptions = new List<ThingSetMakerDef>();
-
-		public override IEnumerable<Result> GetResults(Quest quest) {
-			yield return new MessageResult(message, messageType ?? MessageTypeDefOf.NeutralEvent);
-			if(letter != null) {
-				yield return new LetterResult(letter, message, DefDatabase<LetterDef>.GetNamed(messageType.defName) ?? LetterDefOf.NeutralEvent);
-			}
-		}
-	}
-
-	public abstract class Result : IExposable {
-		public virtual string Label => null;
-
-		public virtual void ExposeData() {
-		}
-
-		public virtual void OnResult(Quest quest) {
-		}
-	}
-
-	public class DropPodResult : Result {
-		public List<Thing> things;
-
-		public override string Label => GenThing.ThingsToCommaList(things) + " (" + "QuestAppendWorth".Translate().Formatted(GenThing.GetMarketValue(things).ToStringMoney()) + ")";
-
-		public DropPodResult() {
-		}
-
-		public DropPodResult(List<Thing> things) {
-			this.things = things;
-		}
-
-		public override void ExposeData() {
-			Scribe_Collections.Look(ref things, "things", LookMode.Deep);
-		}
-
-		public override void OnResult(Quest quest) {
-			var map = quest.HomeMap;
-			var pos = QuestUtility.FindDropSpot(map);
-			DropPodUtility.DropThingsNear(pos, map, things, canRoofPunch: false);
-			Messages.Message("QuestReceived".Translate().Formatted(Label), new LookTargets(pos, map), MessageTypeDefOf.PositiveEvent);
-		}
-	}
-
-	public class MessageResult : Result {
-		public string message;
-		public MessageTypeDef type;
-
-		public MessageResult() {
-		}
-
-		public MessageResult(string message, MessageTypeDef type) {
-			this.message = message;
-			this.type = type;
-		}
-
-		public override void ExposeData() {
-			Scribe_Values.Look(ref message, "message");
-			Scribe_Defs.Look(ref type, "type");
-		}
-
-		public override void OnResult(Quest quest) {
-			var text = message.Formatted(quest.FormatArgs);
-			Messages.Message(text, type);
-		}
-	}
-
-	public class LetterResult : Result {
-		public string label;
-		public string text;
-		public LetterDef type;
-
-		public LetterResult() {
-		}
-
-		public LetterResult(string label, string text, LetterDef type) {
-			this.label = label;
-			this.text = text;
-			this.type = type;
-		}
-
-		public override void ExposeData() {
-			Scribe_Values.Look(ref label, "label");
-			Scribe_Values.Look(ref text, "text");
-			Scribe_Defs.Look(ref type, "type");
-		}
-
-		public override void OnResult(Quest quest) {
-			var text = this.text.Formatted(quest.FormatArgs);
-			if(label != null) {
-				Find.LetterStack.ReceiveLetter(label, text, type);
-			}
-		}
-	}
-
+namespace Cities
+{
 	public abstract class Quest : IExposable {
 		static readonly IntRange ExpirationDaysRange = new IntRange(10, 30);
 
@@ -307,9 +111,9 @@ namespace Cities {
 		public virtual void UpdateHome() {
 			if(home == null || !Find.Maps.Contains(home)) {
 				home = Find.Maps.Where(IsValidHome).MaxByWithFallback(m => m.mapPawns.FreeColonistsSpawnedCount)
-					?? Find.CurrentMap
-					?? Find.Maps.MaxByWithFallback(m => m.mapPawns.FreeColonistsSpawnedCount)
-					?? home;
+				       ?? Find.CurrentMap
+				       ?? Find.Maps.MaxByWithFallback(m => m.mapPawns.FreeColonistsSpawnedCount)
+				       ?? home;
 			}
 		}
 
@@ -473,13 +277,5 @@ namespace Cities {
 		public virtual IEnumerable<FloatMenuOption> GetFloatMenuOptions(Thing thing, Pawn pawn) {
 			yield break;
 		}
-	}
-
-	public enum QuestState {
-		BeforeStart,
-		Started,
-		Completed,
-		Cancelled,
-		Expired,
 	}
 }

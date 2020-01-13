@@ -22,7 +22,7 @@ namespace Cities {
 		static void Prefix(ref IntVec3 mapSize, MapParent parent, MapGeneratorDef mapGenerator, IEnumerable<GenStepWithParams> extraGenStepDefs, ref System.Action<Map> extraInitBeforeContentGen) {
 			if(parent is City city) {
 				var shouldLimitMapSize = !city.Abandoned;
-				if(LoadedModManager.GetMod<Mod_Cities>().GetSettings<ModSettings_Cities>().limitCitySize) {
+				if(Config_Cities.Instance.limitCitySize) {
 					mapSize.x = Mathf.Min(mapSize.x, 200);
 					mapSize.z = Mathf.Min(mapSize.z, 200);
 				}

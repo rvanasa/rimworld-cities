@@ -1,14 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using UnityEngine;
 using RimWorld;
 using RimWorld.Planet;
-using RimWorld.BaseGen;
+using UnityEngine;
 using Verse;
-using Verse.AI.Group;
 
-namespace Cities {
-
+namespace Cities
+{
 	public class City : Settlement {
 		public Faction inhabitantFaction;
 
@@ -25,7 +23,7 @@ namespace Cities {
 		public override bool Attackable => base.Attackable && !Abandoned;
 
 		public IEnumerable<Quest> QuestsHere => Find.World.GetComponent<WorldComponent_QuestTracker>().quests
-				.Where(q => q.Targets.targets.Contains(this));
+			.Where(q => q.Targets.targets.Contains(this));
 
 		bool QuestTab_IsQuest => QuestsHere.Any();
 		//string QuestTab_Label => QuestsHere.Select(q => q.Name).ToArray().ToCommaList();
@@ -103,76 +101,4 @@ namespace Cities {
 			return s;
 		}
 	}
-
-	public class WorldGenStep_Cities : WorldGenStep {
-		public override int SeedPart => GetType().Name.GetHashCode();
-
-		public override void GenerateFresh(string seed) {
-			var settings = LoadedModManager.GetMod<Mod_Cities>().GetSettings<ModSettings_Cities>();
-			GenerateCities(settings.citiesPer100kTiles.RandomInRange, false);
-			GenerateCities(settings.abandonedPer100kTiles.RandomInRange, true);
-		}
-
-		public override void GenerateFromScribe(string seed) {
-			if(!Find.WorldObjects.AllWorldObjects.Any(obj => obj is City)) {
-				Log.Warning("No cities found; regenerating");
-				GenerateFresh(seed);
-			}
-		}
-
-		void GenerateCities(int per100kTiles, bool abandoned) {
-			int cityCount = GenMath.RoundRandom(Find.WorldGrid.TilesCount / 100000F * per100kTiles);
-			for(int i = 0; i < cityCount; i++) {
-				var city = (City)WorldObjectMaker.MakeWorldObject(DefDatabase<WorldObjectDef>.GetNamed(abandoned ? "City_Abandoned" : "City_Faction"));
-				city.SetFaction(GenCity.RandomCityFaction());
-				if(!abandoned) {
-					city.inhabitantFaction = city.Faction;
-				}
-				city.Tile = TileFinder.RandomSettlementTileFor(city.Faction);
-				city.Name = SettlementNameGenerator.GenerateSettlementName(city);
-				if(!TileFinder.IsValidTileForNewSettlement(city.Tile)) {
-					// (Faction Control) ensure valid tile for existing saves
-					city.Tile = TileFinder.RandomStartingTile();
-				}
-				Find.WorldObjects.Add(city);
-			}
-		}
-	}
-
-	public class WorldComponent_QuestTracker : WorldComponent {
-		public List<Quest> quests = new List<Quest>();
-
-		public WorldComponent_QuestTracker(World world) : base(world) {
-		}
-
-		public override void ExposeData() {
-			Scribe_Collections.Look(ref quests, "quests");
-		}
-
-		public override void WorldComponentTick() {
-			var tick = Find.TickManager.TicksGame;
-			for(int i = quests.Count - 1; i >= 0; i--) {
-				var quest = quests[i];
-				if(tick >= quest.expireTime && !quest.Ended) {
-					quest.Expire();
-				}
-
-				if(quest.Ended) {
-					quests.RemoveAt(i);
-				}
-				else {
-					quest.OnTick();
-				}
-			}
-		}
-	}
-
-	/*public class WorldObjectCompProperties_Quests : WorldObjectCompProperties {
-		public WorldObjectCompProperties_Quests() {
-			compClass = typeof(WorldObjectComp_Quests);
-		}
-	}
-
-	public class WorldObjectComp_Quests : WorldObjectComp {
-	}*/
 }
