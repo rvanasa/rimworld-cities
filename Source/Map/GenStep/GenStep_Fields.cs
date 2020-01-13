@@ -23,5 +23,9 @@ namespace Cities {
 				}
 			}
 		}
+
+		protected override bool IsValidTerrain(TerrainDef terrain) {
+			return base.IsValidTerrain(terrain) && terrain != TerrainDefOf.Ice;
+		}
 	}
 }
