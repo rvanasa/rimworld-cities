@@ -93,7 +93,9 @@ namespace Cities {
 
                 yield return action;
 
-                yield return CaravanVisitUtility.TradeCommand(caravan);
+                if (!Abandoned) {
+                    yield return CaravanVisitUtility.TradeCommand(caravan);
+                } 
             }
 
             foreach (var gizmo in base.GetCaravanGizmos(caravan)) {
