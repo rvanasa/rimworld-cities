@@ -5,7 +5,7 @@ namespace Cities
 {
 	public class GenStep_Abandoned_Post : GenStep {
 		public FloatRange decay = new FloatRange(0, 1);
-		public FloatRange corpseChance = new FloatRange(0, 0.1F);
+		public FloatRange corpseChance = new FloatRange(0, 0.3F);
 		public float remnantDensity = 0.15F;
 		public float scavengerDensity = 0.5F;
 
@@ -15,7 +15,6 @@ namespace Cities
 			var playerFaction = Faction.OfPlayer;
 			var decay = this.decay.RandomInRange;
 			var corpseChance = this.corpseChance.RandomInRange;
-			//var autoClaim = Find.Maps.Count == 1;
 			var autoClaim = false;
 			foreach(var pos in map.cellsInRandomOrder.GetAll()) {
 				var things = pos.GetThingList(map);

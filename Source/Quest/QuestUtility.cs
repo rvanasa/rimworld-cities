@@ -25,7 +25,7 @@ namespace Cities {
             Stencil s;
             do {
                 s = new Stencil(map).MoveRand()
-                    .ExpandRegion(p => p.GetFirstThing<Thing>(map) == null, dropArea)
+                    .ExpandRegion((m, p) => p.GetFirstThing<Thing>(m) == null, dropArea)
                     .Center();
                 if (s.Area >= dropArea) {
                     break;

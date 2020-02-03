@@ -22,13 +22,13 @@ namespace Cities {
             }
 
             var s1 = s.Move(0, 1);
-            while (s1.Check(s1.pos, p => IsValidTile(map, p))) {
+            while (s1.Check(s1.pos, IsValidTile)) {
                 s1.SetTerrain(terrain);
                 s1 = s1.Move(0, 1);
             }
 
             var s2 = s.Move(0, -1);
-            while (s2.Check(s2.pos, p => IsValidTile(map, p))) {
+            while (s2.Check(s2.pos, IsValidTile)) {
                 s2.SetTerrain(terrain);
                 s2 = s2.Move(0, -1);
             }

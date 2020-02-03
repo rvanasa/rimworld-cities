@@ -4,7 +4,7 @@ using RimWorld;
 using Verse;
 
 namespace Cities {
-    
+
     public class GenStep_Emplacements : GenStep_RectScatterer {
         public List<EmplacementOption> options = new List<EmplacementOption>();
 
@@ -53,7 +53,7 @@ namespace Cities {
                 }
 
                 if (manned) {
-                    var pawn = GenCity.SpawnInhabitant(s.pos, s.map, new LordJob_ManTurrets());
+                    GenCity.SpawnInhabitant(s.pos, s.map, new LordJob_ManTurrets());
                 }
             }
         }

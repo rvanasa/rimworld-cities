@@ -31,12 +31,20 @@
     <mapGenerator>City_Abandoned</mapGenerator>
     <expandingIconTexture>World/WorldObjects/City_Abandoned</expandingIconTexture>
   </WorldObjectDef>
-	
+
   <WorldObjectDef ParentName="CityCommon">
     <defName>City_Ghost</defName>
     <label>ghost city</label>
     <description>A mysteriously empty settlement.</description>
     <mapGenerator>City_Ghost</mapGenerator>
+  </WorldObjectDef>
+
+  <WorldObjectDef ParentName="CityCommon">
+    <defName>City_Citadel</defName>
+    <worldObjectClass>Cities.Citadel</worldObjectClass>
+    <label>citadel</label>
+    <description>The shining capital city of this planet.</description>
+    <mapGenerator>City_Citadel</mapGenerator>
   </WorldObjectDef>
   
 </Defs>

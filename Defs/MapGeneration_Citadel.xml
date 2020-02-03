@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <MapGeneratorDef ParentName="Cities_Base">
+    <defName>City_Citadel</defName>
+    <genSteps>
+      <li>Narrow_Checkpoints</li>
+      <li>Narrow_Trenches</li>
+    </genSteps>
+  </MapGeneratorDef>
+
+  <GenStepDef>
+    <defName>Narrow_Checkpoints</defName>
+    <order>245</order>
+    <genStep Class="Cities.GenStep_NarrowCheckpoints">
+      <countPer10kCellsRange>
+        <min>2</min>
+        <max>3</max>
+      </countPer10kCellsRange>
+    </genStep>
+  </GenStepDef>
+
+  <GenStepDef>
+    <defName>Narrow_Trenches</defName>
+    <order>246</order>
+    <genStep Class="Cities.GenStep_NarrowTrenches">
+      <countPer10kCellsRange>
+        <min>4</min>
+        <max>5</max>
+      </countPer10kCellsRange>
+    </genStep>
+  </GenStepDef>
+
+</Defs>

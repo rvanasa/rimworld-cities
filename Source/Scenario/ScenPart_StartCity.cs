@@ -42,6 +42,8 @@ namespace Cities {
 					return "City_Abandoned";
 				case InhabitantKind.Ghost:
 					return "City_Ghost";
+				case InhabitantKind.Citadel:
+					return "City_Citadel";
 				default:
 					return "City_Faction";
 			}
@@ -64,6 +66,7 @@ namespace Cities {
 			Ghost,
 			Friendly,
 			Hostile,
+			Citadel,
 		}
 	}
 }

@@ -41,13 +41,13 @@ namespace Cities {
 
         void GenMainRoad(Stencil s, TerrainDef roadTerrain, TerrainDef divTerrain, TerrainDef sidewalkTerrain) {
             s.Bound(-3, 0, 3, s.MaxZ)
-                .BorderTerrain(sidewalkTerrain, p => IsValidSidewalkTerrain(p.GetTerrain(s.map)));
+                .BorderTerrain(sidewalkTerrain, (m, p) => IsValidSidewalkTerrain(p.GetTerrain(m)));
             s.Bound(-2, 0, 2, s.MaxZ)
                 .ClearThingsInBounds()
                 .FillTerrain(roadTerrain);
             var s1 = s;
             s.Bound(-4, 0, 4, s.MaxZ)
-                .BorderTerrain(TerrainUtility.Bridge, p => p.GetTerrain(s1.map).IsWater);
+                .BorderTerrain(TerrainUtility.Bridge, (m, p) => p.GetTerrain(m).IsWater);
             s.FillTerrain(0, 0, 0, s.MaxZ, divTerrain);
             s = s.Move(0, roadSpacing.RandomInRange);
             while (s.Expand(-2).IsInBounds()) {
@@ -65,12 +65,12 @@ namespace Cities {
 
         void GenSideRoad(Stencil s, TerrainDef roadTerrain, TerrainDef sidewalkTerrain) {
             s.Bound(-2, 0, 2, s.MaxZ)
-                .BorderTerrain(sidewalkTerrain, p => IsValidSidewalkTerrain(p.GetTerrain(s.map)));
+                .BorderTerrain(sidewalkTerrain, (m, p) => IsValidSidewalkTerrain(p.GetTerrain(m)));
             s.Bound(-1, 0, 1, s.MaxZ)
                 .ClearThingsInBounds()
                 .FillTerrain(roadTerrain);
             s.Bound(-3, 0, 3, s.MaxZ)
-                .BorderTerrain(TerrainUtility.Bridge, p => p.GetTerrain(s.map).IsWater);
+                .BorderTerrain(TerrainUtility.Bridge, (m, p) => p.GetTerrain(m).IsWater);
         }
 
         bool IsValidSidewalkTerrain(TerrainDef terrain) {

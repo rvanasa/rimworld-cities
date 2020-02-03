@@ -15,7 +15,7 @@ namespace Cities {
             var stuff = GenCity.RandomWallStuff(map);
             for (var dir = 0; dir < 4; dir++) {
                 var sDir = s.Rotate(dir);
-                sDir.Fill(sDir.MinX, sDir.MaxZ, sDir.MaxX, sDir.MaxZ, ThingDefOf.Wall, stuff, p => IsValidTile(map, p));
+                sDir.Fill(sDir.MinX, sDir.MaxZ, sDir.MaxX, sDir.MaxZ, ThingDefOf.Wall, stuff, IsValidTile);
             }
         }
 

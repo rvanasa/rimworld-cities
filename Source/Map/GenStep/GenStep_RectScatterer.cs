@@ -48,7 +48,7 @@ namespace Cities {
             cachedPos = pos;
             var s = new Stencil(map)
                 .MoveTo(pos)
-                .ExpandRegion(p => IsValidTile(map, p), areaConstraints.max);
+                .ExpandRegion(IsValidTile, areaConstraints.max);
 
             var ratio = (float) s.Width / s.Height;
             if (s.Area < areaConstraints.min || ratio > maxRatio || 1 / ratio > maxRatio) {

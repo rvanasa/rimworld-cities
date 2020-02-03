@@ -95,10 +95,14 @@ namespace Cities {
 
                 if (!Abandoned) {
                     yield return CaravanVisitUtility.TradeCommand(caravan);
-                } 
+                }
             }
 
             foreach (var gizmo in base.GetCaravanGizmos(caravan)) {
+                if (gizmo is Command command && command.defaultLabel == "CommandTrade".Translate()) {
+                    continue;
+                }
+
                 yield return gizmo;
             }
         }
@@ -128,6 +132,14 @@ namespace Cities {
             }
 
             return s;
+        }
+
+        public virtual IntVec3 ChooseMapSize(IntVec3 mapSize) {
+            if (Config_Cities.Instance.limitCitySize) {
+                mapSize.x = Mathf.Min(mapSize.x, 200);
+                mapSize.z = Mathf.Min(mapSize.z, 200);
+            }
+            return mapSize;
         }
     }
 }

@@ -1,79 +1,89 @@
 ﻿using System.Collections.Generic;
+using System.Reflection;
+using Harmony;
 using UnityEngine;
 using Verse;
 
 namespace Cities {
-	
-	public class Config_Cities
-	{
-		public static Config_Cities Instance => LoadedModManager.GetMod<Mod_Cities>().GetSettings<ModSettings_Cities>().config;
-		
-		static readonly Config_Cities Defaults = new Config_Cities();
 
-		public bool limitCitySize = true;
-		public bool enableQuestSystem = true;
-		public bool enableEvents = true;
-		public float abandonedChance = 0.3F;
-		public IntRange citiesPer100kTiles = new IntRange(10, 15);
-		public IntRange abandonedPer100kTiles = new IntRange(5, 10);
+    [StaticConstructorOnStartup]
+    public static class Patches_RimCities {
+        static Patches_RimCities() {
+            var harmony = HarmonyInstance.Create("cabbage.rimcities");
+            harmony.PatchAll(Assembly.GetExecutingAssembly());
+        }
+    }
 
-		public void ExposeData() {
-			Scribe_Values.Look(ref limitCitySize, "limitCitySize", Defaults.limitCitySize);
-			Scribe_Values.Look(ref enableQuestSystem, "enableQuestSystem", Defaults.enableQuestSystem);
-			Scribe_Values.Look(ref enableEvents, "enableEvents", Defaults.enableEvents);
-			Scribe_Values.Look(ref citiesPer100kTiles, "citiesPer100kTiles", Defaults.citiesPer100kTiles);
-			Scribe_Values.Look(ref abandonedPer100kTiles, "abandonedPer100kTiles", Defaults.abandonedPer100kTiles);
-		}
-	}
+    public class Config_Cities {
+        public static Config_Cities Instance =>
+            LoadedModManager.GetMod<Mod_Cities>().GetSettings<ModSettings_Cities>().config;
 
-	public class Mod_Cities : Mod {
-		readonly ModSettings_Cities settings;
+        static readonly Config_Cities Defaults = new Config_Cities();
 
-		Config_Cities Config => settings.config;
+        public bool limitCitySize = true;
+        public bool enableQuestSystem = true;
+        public bool enableEvents = true;
+        public float abandonedChance = 0.3F;
+        public IntRange citiesPer100kTiles = new IntRange(10, 15);
+        public IntRange abandonedPer100kTiles = new IntRange(5, 10);
 
-		public Mod_Cities(ModContentPack content) : base(content) {
-			settings = GetSettings<ModSettings_Cities>();
-		}
+        public void ExposeData() {
+            Scribe_Values.Look(ref limitCitySize, "limitCitySize", Defaults.limitCitySize);
+            Scribe_Values.Look(ref enableQuestSystem, "enableQuestSystem", Defaults.enableQuestSystem);
+            Scribe_Values.Look(ref enableEvents, "enableEvents", Defaults.enableEvents);
+            Scribe_Values.Look(ref citiesPer100kTiles, "citiesPer100kTiles", Defaults.citiesPer100kTiles);
+            Scribe_Values.Look(ref abandonedPer100kTiles, "abandonedPer100kTiles", Defaults.abandonedPer100kTiles);
+        }
+    }
 
-		public override void DoSettingsWindowContents(Rect inRect) {
-			var listing = new Listing_Standard();
-			listing.Begin(inRect);
-			listing.Gap();
-			listing.CheckboxLabeled("LimitCitySize".Translate(), ref Config.limitCitySize);
-			listing.Gap();
-			listing.CheckboxLabeled("EnableCityQuests".Translate(), ref Config.enableQuestSystem);
-			listing.Gap();
-			listing.CheckboxLabeled("EnableCityEvents".Translate(), ref Config.enableEvents);
-			listing.Gap();
-			listing.Label("AbandonedCityChance".Translate().Formatted(GenMath.RoundTo(Config.abandonedChance, 0.01F)));
-			Config.abandonedChance = listing.Slider(Config.abandonedChance, 0, 1);
-			listing.Gap();
-			listing.Label("CitiesPer100kTiles".Translate());
-			listing.IntRange(ref Config.citiesPer100kTiles, 0, 100);
-			listing.End();
-			base.DoSettingsWindowContents(inRect);
-		}
+    public class Mod_Cities : Mod {
+        readonly ModSettings_Cities settings;
 
-		public override string SettingsCategory() {
-			return "RimCities";
-		}
-	}
+        Config_Cities Config => settings.config;
 
-	public class ModSettings_Cities : ModSettings {
+        public Mod_Cities(ModContentPack content) : base(content) {
+            settings = GetSettings<ModSettings_Cities>();
+        }
 
-		public Config_Cities config;
+        public override void DoSettingsWindowContents(Rect inRect) {
+            var listing = new Listing_Standard();
+            listing.Begin(inRect);
+            listing.Gap();
+            listing.CheckboxLabeled("LimitCitySize".Translate(), ref Config.limitCitySize);
+            listing.Gap();
+            listing.CheckboxLabeled("EnableCityQuests".Translate(), ref Config.enableQuestSystem);
+            listing.Gap();
+            listing.CheckboxLabeled("EnableCityEvents".Translate(), ref Config.enableEvents);
+            listing.Gap();
+            listing.Label("AbandonedCityChance".Translate().Formatted(GenMath.RoundTo(Config.abandonedChance, 0.01F)));
+            Config.abandonedChance = listing.Slider(Config.abandonedChance, 0, 1);
+            listing.Gap();
+            listing.Label("CitiesPer100kTiles".Translate());
+            listing.IntRange(ref Config.citiesPer100kTiles, 0, 100);
+            listing.End();
+            base.DoSettingsWindowContents(inRect);
+        }
 
-		public ModSettings_Cities() {
-			Reset();
-		}
+        public override string SettingsCategory() {
+            return "RimCities";
+        }
+    }
 
-		public override void ExposeData() {
-			base.ExposeData();
-			config.ExposeData();
-		}
+    public class ModSettings_Cities : ModSettings {
 
-		public void Reset() {
-			config = new Config_Cities();
-		}
-	}
+        public Config_Cities config;
+
+        public ModSettings_Cities() {
+            Reset();
+        }
+
+        public override void ExposeData() {
+            base.ExposeData();
+            config.ExposeData();
+        }
+
+        public void Reset() {
+            config = new Config_Cities();
+        }
+    }
 }
