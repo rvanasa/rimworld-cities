@@ -9,9 +9,9 @@ using Verse.AI.Group;
 namespace Cities {
 
 	public class GenStep_Docks : GenStep_Scatterer {
-		public IntRange size = new IntRange(5, 10);
-
 		public override int SeedPart => GetType().Name.GetHashCode();
+		
+		public IntRange size = new IntRange(5, 10);
 
 		protected override void ScatterAt(IntVec3 pos, Map map, int count) {
 			var width = size.RandomInRange;

@@ -153,7 +153,7 @@
       </areaConstraints>
       <wallChance>0.75</wallChance>
       <buildingDecorators>
-        <li Class="Cities.BuildingDecorator_Sandbags"></li>
+        <li Class="Cities.BuildingDecorator_Sandbags"/>
       </buildingDecorators>
       <roomDecorators>
         <li Class="Cities.RoomDecorator_PrisonCell">
@@ -352,7 +352,7 @@
         <max>2000</max>
       </areaConstraints>
       <roomDecorators>
-        <li Class="Cities.RoomDecorator_Storage"></li>
+        <li Class="Cities.RoomDecorator_Storage"/>
         <li Class="Cities.RoomDecorator_Centerpiece">
           <weight>0.7</weight>
           <options>

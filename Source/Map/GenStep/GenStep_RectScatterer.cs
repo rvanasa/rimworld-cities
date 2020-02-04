@@ -9,6 +9,8 @@ using Verse.AI.Group;
 
 namespace Cities {
     public abstract class GenStep_RectScatterer : GenStep_Scatterer {
+        public override int SeedPart => GetType().Name.GetHashCode();
+
         public IntRange areaConstraints = new IntRange(100, 1000);
         public float maxRatio = 3;
 
@@ -17,8 +19,6 @@ namespace Cities {
         [Unsaved] Stencil? cachedStencil;
 
         public int MaxAttempts => 100;
-
-        public override int SeedPart => GetType().Name.GetHashCode();
 
         protected override void ScatterAt(IntVec3 pos, Map map, int count) {
             var s = GetStencil(map, pos);

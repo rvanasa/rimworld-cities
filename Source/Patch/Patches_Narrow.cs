@@ -8,13 +8,13 @@ namespace Cities {
     [HarmonyPatch(typeof(GenStep_FindPlayerStartSpot))]
     [HarmonyPatch(nameof(GenStep_FindPlayerStartSpot.Generate))]
     internal static class GenStep_FindPlayerStartSpot_Generate {
-        static void Postfix(ref Map map) {
+        static void Postfix(Map map) {
             if (map.Parent is Citadel) {
                 const int border = 10;
-                MapGenerator.PlayerStartSpot = new IntVec3(
+                MapGenerator.PlayerStartSpot = GenCity.FindPawnSpot(new IntVec3(
                     Rand.RangeInclusive(border, map.Size.x - border),
                     0,
-                    Rand.RangeInclusive(border, map.Size.x - border));
+                    Rand.RangeInclusive(border, map.Size.x - border)), map);
             }
         }
     }
@@ -22,10 +22,11 @@ namespace Cities {
     [HarmonyPatch(typeof(CaravanEnterMapUtility))]
     [HarmonyPatch("GetEnterCell")]
     internal static class CaravanEnterMapUtility_GetEnterCell {
-        static void Postfix(ref Map map, ref IntVec3 __result) {
+        static void Postfix(Map map, ref IntVec3 __result) {
             if (map.Parent is Citadel) {
                 __result.z = 0;
             }
+            __result = GenCity.FindPawnSpot(__result, map);
         }
     }
 }

@@ -6,6 +6,7 @@
     <genSteps>
       <li>Narrow_Checkpoints</li>
       <li>Narrow_Trenches</li>
+      <li>Narrow_Minefields</li>
     </genSteps>
   </MapGeneratorDef>
 
@@ -27,6 +28,17 @@
       <countPer10kCellsRange>
         <min>4</min>
         <max>5</max>
+      </countPer10kCellsRange>
+    </genStep>
+  </GenStepDef>
+
+  <GenStepDef>
+    <defName>Narrow_Minefields</defName>
+    <order>247</order>
+    <genStep Class="Cities.GenStep_NarrowMinefields">
+      <countPer10kCellsRange>
+        <min>1</min>
+        <max>2</max>
       </countPer10kCellsRange>
     </genStep>
   </GenStepDef>

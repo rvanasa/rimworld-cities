@@ -12,6 +12,7 @@
   
   <FriendlyCityKind>Friendly</FriendlyCityKind>
   <HostileCityKind>Hostile</HostileCityKind>
+  <PirateCityKind>Pirate</PirateCityKind>
   <AbandonedCityKind>Abandoned</AbandonedCityKind>
   <GhostCityKind>Ghost</GhostCityKind>
   

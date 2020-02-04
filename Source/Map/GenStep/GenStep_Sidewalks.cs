@@ -9,9 +9,9 @@ using Verse.AI.Group;
 
 namespace Cities {
     public class GenStep_Sidewalks : GenStep_Scatterer {
-        public List<TerrainDef> sidewalkTerrains = new List<TerrainDef>();
-
         public override int SeedPart => GetType().Name.GetHashCode();
+
+        public List<TerrainDef> sidewalkTerrains = new List<TerrainDef>();
 
         protected override void ScatterAt(IntVec3 pos, Map map, int count) {
             var terrain = sidewalkTerrains.RandomElement();

@@ -45,6 +45,7 @@
     <label>citadel</label>
     <description>The shining capital city of this planet.</description>
     <mapGenerator>City_Citadel</mapGenerator>
+    <expandingIconTexture>World/WorldObjects/City_Citadel</expandingIconTexture>
   </WorldObjectDef>
   
 </Defs>

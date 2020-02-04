@@ -4,12 +4,12 @@ using Verse;
 namespace Cities
 {
 	public class GenStep_Abandoned_Post : GenStep {
+		public override int SeedPart => GetType().Name.GetHashCode();
+		
 		public FloatRange decay = new FloatRange(0, 1);
 		public FloatRange corpseChance = new FloatRange(0, 0.3F);
 		public float remnantDensity = 0.15F;
 		public float scavengerDensity = 0.5F;
-
-		public override int SeedPart => GetType().Name.GetHashCode();
 
 		public override void Generate(Map map, GenStepParams parms) {
 			var playerFaction = Faction.OfPlayer;

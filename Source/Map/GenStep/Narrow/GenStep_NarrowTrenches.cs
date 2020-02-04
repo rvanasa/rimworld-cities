@@ -22,13 +22,13 @@ namespace Cities {
 
             var sentries = sentryRange.RandomInRange;
             for (var i = 0; i < sentries; i++) {
-                var point = s.MoveRand().pos;
+                var point = s.MoveRand().pos + IntVec3.North * 3;
                 GenCity.SpawnInhabitant(point, map, new LordJob_DefendBase(map.ParentFaction, point));
             }
         }
 
         bool IsValidTile(Map map, IntVec3 pos) {
-            return TerrainUtility.IsNaturalExcludingRock(pos.GetTerrain(map));
+            return TerrainUtility.IsNatural(pos.GetTerrain(map)) && pos.GetThingList(map).Count == 0;
         }
     }
 }

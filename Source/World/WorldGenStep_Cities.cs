@@ -1,6 +1,7 @@
 ﻿using JetBrains.Annotations;
 using RimWorld;
 using RimWorld.Planet;
+using UnityEngine;
 using Verse;
 
 namespace Cities {
@@ -26,7 +27,7 @@ namespace Cities {
         }
 
         void GenerateCities(int per100kTiles, bool abandoned) {
-            var cityCount = GenMath.RoundRandom(Find.WorldGrid.TilesCount / 100_000F * per100kTiles);
+            var cityCount = Mathf.Max(1, GenMath.RoundRandom(Find.WorldGrid.TilesCount / 100_000F * per100kTiles));
             for (var i = 0; i < cityCount; i++) {
                 var def = DefDatabase<WorldObjectDef>.GetNamed(abandoned ? "City_Abandoned" : "City_Faction");
                 GenerateCity(def, abandoned);

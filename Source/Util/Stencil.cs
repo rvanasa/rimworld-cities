@@ -40,6 +40,11 @@ namespace Cities {
             return MoveTo(Coords(x, z));
         }
 
+        public Stencil MoveWithBounds(int x, int z) {
+            int minX = MinX, minZ = MinZ, maxX = MaxX, maxZ = MaxZ;
+            return Move(x, z).Bound(minX, minZ, maxX, maxZ);
+        }
+
         public Stencil MoveTo(IntVec3 pos) {
             return new Stencil(map, pos, rot, bounds);
         }
@@ -65,24 +70,28 @@ namespace Cities {
         }
 
         public Stencil Expand(int amount) {
-            return new Stencil(map, pos, rot, bounds.ExpandedBy(amount));
+            return new Stencil(map, pos, rot, bounds.ExpandedBy(amount).ClipInsideMap(map));
+        }
+
+        public Stencil Expand(int minX, int minZ, int maxX, int maxZ) {
+            return Bound(MinX + minX, MinZ + minZ, MaxX + maxX, MaxZ + maxZ);
         }
 
         private int RelativeDir(int dir) {
             return (rot.AsInt + dir) & 0b11;
         }
 
+        public Stencil RotateTo(int dir) {
+            return new Stencil(map, pos, new Rot4(dir), bounds);
+        }
+
         public Stencil Rotate(int dir) {
-            return new Stencil(map, pos, new Rot4(RelativeDir(dir)), bounds);
+            return RotateTo(RelativeDir(dir));
         }
 
         public Stencil Rotate(RotationDirection dir) {
             return new Stencil(map, pos, rot.Rotated(dir), bounds);
         }
-
-        /*public Stencil Forward(int amount) {
-            return Move(0, 1);
-        }*/
 
         public Stencil Left() {
             return Rotate(-1);
@@ -94,6 +103,22 @@ namespace Cities {
 
         public Stencil Back() {
             return Rotate(2);
+        }
+
+        public Stencil North() {
+            return RotateTo(0);
+        }
+
+        public Stencil East() {
+            return RotateTo(1);
+        }
+
+        public Stencil South() {
+            return RotateTo(2);
+        }
+
+        public Stencil West() {
+            return RotateTo(3);
         }
 
         public Stencil RotateRand() {

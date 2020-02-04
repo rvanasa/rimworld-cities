@@ -9,14 +9,14 @@ using Verse.AI.Group;
 
 namespace Cities {
     public class GenStep_Streets : GenStep {
+        public override int SeedPart => GetType().Name.GetHashCode();
+
         public IntRange centerRadius = new IntRange(5, 15);
         public IntRange roadSpacing = new IntRange(30, 50);
         public float roadChance = 0.5F;
         public List<TerrainDef> roadTerrains = new List<TerrainDef>();
         public List<TerrainDef> divTerrains = new List<TerrainDef>();
         public List<TerrainDef> sidewalkTerrains = new List<TerrainDef>();
-
-        public override int SeedPart => GetType().Name.GetHashCode();
 
         public override void Generate(Map map, GenStepParams parms) {
             var roadTerrain = roadTerrains.RandomElement();
