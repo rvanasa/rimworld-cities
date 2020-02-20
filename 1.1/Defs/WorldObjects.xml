@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  
+  <WorldObjectDef Name="CityCommon" Abstract="True">
+    <worldObjectClass>Cities.City</worldObjectClass>
+    <expandingIconTexture>World/WorldObjects/City</expandingIconTexture>
+    <expandingIcon>true</expandingIcon>
+    <expandingIconPriority>10</expandingIconPriority>
+    <canBePlayerHome>true</canBePlayerHome>
+    <comps>
+      <!--<li Class="City.WorldObjectCompProperties_QuestTracker" />-->
+      <li Class="WorldObjectCompProperties_Abandon" />
+      <li Class="WorldObjectCompProperties_TradeRequest" />
+      <li Class="WorldObjectCompProperties_FormCaravan" />
+      <!--<li Class="WorldObjectCompProperties_TimedForcedExit" />-->
+      <li Class="WorldObjectCompProperties_EnterCooldown" />
+    </comps>
+  </WorldObjectDef>
+  
+  <WorldObjectDef ParentName="CityCommon">
+    <defName>City_Faction</defName>
+    <label>city</label>
+    <description>A large-scale, highly advanced settlement.</description>
+    <mapGenerator>City_Faction</mapGenerator>
+  </WorldObjectDef>
+	
+  <WorldObjectDef ParentName="CityCommon">
+    <defName>City_Abandoned</defName>
+    <label>abandoned city</label>
+    <description>The ruins of a once-great civilization.</description>
+    <mapGenerator>City_Abandoned</mapGenerator>
+    <expandingIconTexture>World/WorldObjects/City_Abandoned</expandingIconTexture>
+  </WorldObjectDef>
+
+  <WorldObjectDef ParentName="CityCommon">
+    <defName>City_Ghost</defName>
+    <label>ghost city</label>
+    <description>A mysteriously empty settlement.</description>
+    <mapGenerator>City_Ghost</mapGenerator>
+  </WorldObjectDef>
+
+  <WorldObjectDef ParentName="CityCommon">
+    <defName>City_Citadel</defName>
+    <worldObjectClass>Cities.Citadel</worldObjectClass>
+    <label>citadel</label>
+    <description>The shining capital city of this planet.</description>
+    <mapGenerator>City_Citadel</mapGenerator>
+    <expandingIconTexture>World/WorldObjects/City_Citadel</expandingIconTexture>
+  </WorldObjectDef>
+  
+</Defs>

@@ -18,7 +18,7 @@ namespace Cities {
                 .ClearThingsInBounds()
                 .FillTerrain(GenCity.RandomFloor(map), IsValidTile)
                 .Expand(1)
-                .Border(ThingDefOf.Sandbags, mask: IsValidTile);
+                .Border(ThingDefOf.Sandbags, GenCity.RandomStuff(ThingDefOf.Sandbags, map), mask: IsValidTile);
 
             var sentries = sentryRange.RandomInRange;
             for (var i = 0; i < sentries; i++) {

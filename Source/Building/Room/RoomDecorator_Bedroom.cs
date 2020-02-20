@@ -21,7 +21,7 @@ namespace Cities
             var bed = (Building_Bed)s.Spawn(bedX, s.MinZ + 1, ThingDefOf.Bed, stuff);
             bed.SetFactionDirect(s.map.ParentFaction);
             var pawn = GenCity.SpawnInhabitant(s.Chance(pawnInBedroomChance) ? s.pos : s.MapBounds.RandomCell, s.map, null, randomWorkSpot: true);
-            bed.TryAssignPawn(pawn);
+            bed.CompAssignableToPawn.TryAssignPawn(pawn);
         }
     }
 }

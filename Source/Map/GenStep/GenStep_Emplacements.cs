@@ -9,11 +9,12 @@ namespace Cities {
         public List<EmplacementOption> options = new List<EmplacementOption>();
 
         public override void GenerateRect(Stencil s) {
+            var stuff = GenCity.RandomStuff(ThingDefOf.Sandbags, s.map);
             for (var dir = 0; dir < 4; dir++) {
                 var sDir = s.Rotate(dir);
                 for (var x = sDir.MinX; x <= sDir.MaxX; x++) {
                     if (x <= sDir.MinX / 2 || x >= sDir.MaxX / 2) {
-                        sDir.Spawn(x, sDir.MaxZ, ThingDefOf.Sandbags);
+                        sDir.Spawn(x, sDir.MaxZ, ThingDefOf.Sandbags, stuff);
                     }
                 }
             }

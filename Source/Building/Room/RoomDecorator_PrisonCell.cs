@@ -2,8 +2,7 @@
 using RimWorld;
 using Verse;
 
-namespace Cities
-{
+namespace Cities {
     public class RoomDecorator_PrisonCell : RoomDecorator {
         public List<ThingDef> bedOptions = new List<ThingDef>();
         public float prisonerChance = 0.25F;
@@ -16,13 +15,13 @@ namespace Cities
             var sBed = s.Expand(-1);
             var thing = bedOptions.RandomElement();
             var stuff = GenCity.RandomStuff(thing, s.map);
-            var bed = (Building_Bed)sBed.Spawn(sBed.RandX, sBed.RandZ, thing, stuff);
+            var bed = (Building_Bed) sBed.Spawn(sBed.RandX, sBed.RandZ, thing, stuff);
             bed.SetFactionDirect(s.map.ParentFaction);
             bed.ForPrisoners = true;
-            if(s.Chance(prisonerChance)) {
-                var pawn = GenCity.SpawnInhabitant(s.pos, s.map);
+            if (s.Chance(prisonerChance)) {
+                var pawn = GenCity.SpawnInhabitant(s.pos, s.map, kind: PawnKindDefOf.Slave);
                 pawn.guest.SetGuestStatus(s.map.ParentFaction, true);
-                bed.TryAssignPawn(pawn);
+                bed.CompAssignableToPawn.TryAssignPawn(pawn);
             }
         }
     }

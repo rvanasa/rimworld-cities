@@ -1,12 +1,15 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
 using Verse;
 
-namespace Cities
-{
+namespace Cities {
     public class RoomDecorator_Centerpiece : RoomDecorator {
         public List<ThingDef> options = new List<ThingDef>();
         public List<ThingDef> chairOptions = new List<ThingDef>();
+
         public float chairDensity;
+
         //public float chairPawnChance = 0.1F;
         public float chairPawnChance = 0;
 
@@ -15,30 +18,33 @@ namespace Cities
                 .FillTerrain(GenCity.RandomFloor(s.map, true));
 
             var def = options.RandomElement();
+            if (def == null) {
+                Debug.LogWarning("Unknown centerpiece from options: " + options);
+            }
             var thing = s.Spawn(def, GenCity.RandomStuff(def, s.map));
-            if(chairDensity > 0) {
+            if (chairDensity > 0) {
                 var chairDef = chairOptions.RandomElement();
                 var chairStuff = GenCity.RandomStuff(chairDef, s.map);
                 var sThing = s.BoundTo(thing.OccupiedRect());
-                for(var dir = 0; dir < 4; dir++) {
+                for (var dir = 0; dir < 4; dir++) {
                     var sDir = sThing.Rotate(dir);
-                    for(var x = sDir.MinX; x <= sDir.MaxX; x++) {
-                        if(s.Chance(chairDensity)) {
+                    for (var x = sDir.MinX; x <= sDir.MaxX; x++) {
+                        if (s.Chance(chairDensity)) {
                             SpawnChair(sDir.Move(x, sDir.MinZ - 1), chairDef, chairStuff);
                         }
                     }
                 }
             }
-            else if(thing.def.hasInteractionCell && chairOptions.Count > 0) {
+            else if (thing.def.hasInteractionCell && chairOptions.Count > 0) {
                 var chairDef = chairOptions.RandomElement();
                 var chairStuff = GenCity.RandomStuff(chairDef, s.map);
                 SpawnChair(s.MoveTo(thing.InteractionCell), chairDef, chairStuff);
             }
         }
 
-        private void SpawnChair(Stencil s, ThingDef thing, ThingDef stuff) {
+        void SpawnChair(Stencil s, ThingDef thing, ThingDef stuff) {
             s.Spawn(thing, stuff);
-            if(s.Chance(chairPawnChance)) {
+            if (s.Chance(chairPawnChance)) {
                 GenCity.SpawnInhabitant(s.pos, s.map);
             }
         }

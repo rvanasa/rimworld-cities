@@ -11,7 +11,7 @@ namespace Cities
 
 		public override IEnumerable<Result> GetResults(Quest quest) {
 			var maker = thingSetMakerOptions.RandomElementWithFallback()
-			            ?? ThingSetMakerDefOf.Reward_StandardByDropPod;
+			            ?? ThingSetMakerDefOf.Reward_ItemsStandard;
 			var things = maker.root.Generate(new ThingSetMakerParams {
 				totalMarketValueRange = value,
 			});

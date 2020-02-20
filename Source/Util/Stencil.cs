@@ -74,7 +74,7 @@ namespace Cities {
         }
 
         public Stencil Expand(int minX, int minZ, int maxX, int maxZ) {
-            return Bound(MinX + minX, MinZ + minZ, MaxX + maxX, MaxZ + maxZ);
+            return Bound(MinX - minX, MinZ - minZ, MaxX + maxX, MaxZ + maxZ);
         }
 
         private int RelativeDir(int dir) {

@@ -10,7 +10,6 @@ namespace Cities
 		public QuestDef() {
 			workerClass = typeof(IncidentWorker_Quest);
 			questClass = typeof(Quest);
-			//category = IncidentCategoryDefOf.WorldQuest;
 			//targetTags = new List<IncidentTargetTagDef>(new[] { IncidentTargetTagDefOf.World });
 		}
 	}

@@ -23,10 +23,10 @@ namespace Cities {
                 PawnComponentsUtility.AddAndRemoveDynamicComponents(pawn, true);
                 pawn.trader.traderKind = traderKind;
                 pawn.inventory.DestroyAll();
-                ThingSetMakerParams parms = new ThingSetMakerParams {
+                var parms = new ThingSetMakerParams {
                     traderDef = traderKind,
                     tile = s.map.Tile,
-                    traderFaction = s.map.ParentFaction,
+                    makingFaction = s.map.ParentFaction,
                 };
                 foreach (var item in ThingSetMakerDefOf.TraderStock.root.Generate(parms)) {
                     if (!(item is Pawn) && !pawn.inventory.innerContainer.TryAdd(item)) {

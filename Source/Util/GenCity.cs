@@ -33,19 +33,24 @@ namespace Cities {
             }
         }
 
-        public static Pawn SpawnInhabitant(IntVec3 pos, Map map, LordJob job = null, bool friendlyJob = false, bool randomWorkSpot = false) {
+        public static Pawn SpawnInhabitant(IntVec3 pos, Map map, LordJob job = null, bool friendlyJob = false, bool randomWorkSpot = false, PawnKindDef kind = null) {
             if (job == null || (!friendlyJob && !map.ParentFaction.HostileTo(Faction.OfPlayer))) {
                 var workPos = randomWorkSpot ? CellRect.WholeMap(map).RandomCell : pos;
                 job = new LordJob_LiveInCity(FindPawnSpot(workPos, map));
             }
-
             return SpawnInhabitant(pos, map, LordMaker.MakeNewLord(map.ParentFaction, job, map));
         }
 
-        public static Pawn SpawnInhabitant(IntVec3 pos, Map map, Lord lord) {
+        public static Pawn SpawnInhabitant(IntVec3 pos, Map map, Lord lord, PawnKindDef kind = null) {
             pos = FindPawnSpot(pos, map);
 
-            var pawn = PawnGenerator.GeneratePawn(new PawnGenerationRequest(map.ParentFaction.RandomPawnKind(), map.ParentFaction, PawnGenerationContext.NonPlayer, map.Tile, inhabitant: true));
+            var pawn = PawnGenerator.GeneratePawn(new PawnGenerationRequest(
+                kind ?? map.ParentFaction.RandomPawnKind(),
+                map.ParentFaction,
+                PawnGenerationContext.NonPlayer,
+                map.Tile,
+                inhabitant: true));
+            
             lord?.AddPawn(pawn);
             GenSpawn.Spawn(pawn, pos, map);
             return pawn;

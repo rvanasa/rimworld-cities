@@ -10,7 +10,7 @@ namespace Cities {
 
         public IntRange tierRange = new IntRange(1, 3);
         public IntRange sentryRange = new IntRange(2, 5);
-        public IntRange ammoRange = new IntRange(2, 10);
+        public IntRange ammoRange = new IntRange(4, 10);
 
         protected override void ScatterAt(IntVec3 pos, Map map, GenStepParams parms, int count) {
             var tier = tierRange.RandomInRange;
@@ -19,14 +19,16 @@ namespace Cities {
 
             var s = new Stencil(map).MoveTo(pos);
             s.Bound(0, 0, 0, tier - 1).Fill(ThingDefOf.Door, stuff, IsValidTile);
-
             s = s.Bound(s.MinX, 0, s.MaxX, 0);
 
             s.Expand(0, 0, 0, tier - 1)
-                .Fill(ThingDefOf.Wall, stuff, IsValidTile);
+                .Fill(ThingDefOf.Wall, stuff, IsValidWallTile);
+
+            s.Expand(0, -1, 0, -3)
+                .ClearThingsInBounds();
 
             s.MoveWithBounds(0, -3)
-                .Fill(ThingDefOf.Sandbags, mask: IsValidTile);
+                .Fill(ThingDefOf.Barricade, GenCity.RandomStuff(ThingDefOf.Barricade, map), mask: IsValidTile);
 
             var sentries = sentryRange.RandomInRange;
             for (var i = 0; i < sentries; i++) {
@@ -50,7 +52,7 @@ namespace Cities {
                         var ammo = s.MoveTo(ammoPoint).Spawn(0, 0, ThingDefOf.Shell_HighExplosive);
                         ammo.stackCount = ammoRange.RandomInRange;
                         GenCity.SpawnInhabitant(ammoPoint, map, new LordJob_ManTurrets());
-                        
+
                         break;
                     }
                 } while (attempts-- > 0);
@@ -65,6 +67,10 @@ namespace Cities {
 
         bool IsValidTile(Map map, IntVec3 pos) {
             return TerrainUtility.IsNatural(pos.GetTerrain(map));
+        }
+
+        bool IsValidWallTile(Map map, IntVec3 pos) {
+            return pos.GetThingList(map).Count == 0;
         }
 
         bool IsValidEmplacementTile(Map map, IntVec3 pos) {

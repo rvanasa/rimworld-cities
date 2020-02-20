@@ -20,9 +20,11 @@ namespace Cities {
         public override bool Visitable => base.Visitable || Abandoned;
 
         public override bool Attackable => base.Attackable && !Abandoned;
-
+        
         public IEnumerable<Quest> QuestsHere => Find.World.GetComponent<WorldComponent_QuestTracker>().quests
             .Where(q => q.Targets.targets.Contains(this));
+
+        public virtual int RaidPointIncrease => 500;
 
         int abandonCt;
 

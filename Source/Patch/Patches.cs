@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Text;
 using UnityEngine;
 using HarmonyLib;
 using RimWorld;
@@ -44,12 +45,11 @@ namespace Cities {
     [HarmonyPatch(typeof(CaravanArrivalAction_OfferGifts))]
     [HarmonyPatch(nameof(CaravanArrivalAction_OfferGifts.CanOfferGiftsTo))]
     internal static class CaravanArrivalAction_OfferGifts_CanOfferGiftsTo {
-        static bool Prefix(ref FloatMenuAcceptanceReport __result, Caravan caravan, MapParent parent) {
-            if (parent is City city && city.Abandoned) {
+        static bool Prefix(ref FloatMenuAcceptanceReport __result, Caravan caravan, Settlement settlement) {
+            if (settlement is City city && city.Abandoned) {
                 __result = false;
                 return false;
             }
-
             return true;
         }
     }
