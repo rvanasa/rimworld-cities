@@ -12,7 +12,7 @@ namespace Cities {
         public IntRange sentryRange = new IntRange(2, 5);
         public IntRange ammoRange = new IntRange(2, 10);
 
-        protected override void ScatterAt(IntVec3 pos, Map map, int count) {
+        protected override void ScatterAt(IntVec3 pos, Map map, GenStepParams parms, int count) {
             var tier = tierRange.RandomInRange;
 
             var stuff = GenCity.RandomWallStuff(map);

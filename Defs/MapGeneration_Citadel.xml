@@ -4,11 +4,19 @@
   <MapGeneratorDef ParentName="Cities_Base">
     <defName>City_Citadel</defName>
     <genSteps>
+      <li>Narrow_Keep</li>
       <li>Narrow_Checkpoints</li>
       <li>Narrow_Trenches</li>
       <li>Narrow_Minefields</li>
     </genSteps>
   </MapGeneratorDef>
+
+  <GenStepDef>
+    <defName>Narrow_Keep</defName>
+    <order>241</order>
+    <genStep Class="Cities.GenStep_NarrowKeep">
+    </genStep>
+  </GenStepDef>
 
   <GenStepDef>
     <defName>Narrow_Checkpoints</defName>

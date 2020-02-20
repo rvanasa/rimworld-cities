@@ -9,7 +9,7 @@ namespace Cities {
     public class GenStep_Walls : GenStep_Scatterer {
         public override int SeedPart => GetType().Name.GetHashCode();
 
-        protected override void ScatterAt(IntVec3 pos, Map map, int count) {
+        protected override void ScatterAt(IntVec3 pos, Map map, GenStepParams parms, int count) {
             var s = new Stencil(map);
             s = s.BoundTo(CellRect.FromLimits(pos, s.bounds.RandomCell));
             var stuff = GenCity.RandomWallStuff(map);

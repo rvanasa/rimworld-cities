@@ -13,7 +13,7 @@ namespace Cities {
 		
 		public IntRange size = new IntRange(5, 10);
 
-		protected override void ScatterAt(IntVec3 pos, Map map, int count) {
+		protected override void ScatterAt(IntVec3 pos, Map map, GenStepParams parms, int count) {
 			var width = size.RandomInRange;
 			var height = size.RandomInRange;
 			var s = new Stencil(map);

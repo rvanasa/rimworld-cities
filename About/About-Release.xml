@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ModMetaData>
-	<name>RimCities</name>
-	<author>CeilingYoda</author>
+	<packageId>rimcities</packageId>
+	<name>RimCities - Citadel Update</name>
+	<author>Cabbage</author>
 	<supportedVersions>
 		<li>1.0</li>
+		<li>1.1</li>
 	</supportedVersions>
 	<description>Procedurally generated city settlements. Compatible with existing save files.</description>
 	<url>https://github.com/rvanasa/rimworld-cities</url>

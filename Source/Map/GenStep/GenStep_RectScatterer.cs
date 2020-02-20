@@ -20,7 +20,7 @@ namespace Cities {
 
         public int MaxAttempts => 100;
 
-        protected override void ScatterAt(IntVec3 pos, Map map, int count) {
+        protected override void ScatterAt(IntVec3 pos, Map map, GenStepParams parms, int count) {
             var s = GetStencil(map, pos);
             if (s.HasValue) {
                 GenerateRect(s.Value.Center().RotateRand());

@@ -13,7 +13,7 @@ namespace Cities {
         public IntRange spacingRange = new IntRange(3, 6);
         public IntRange jitterRange = new IntRange(0, 2);
 
-        protected override void ScatterAt(IntVec3 pos, Map map, int count) {
+        protected override void ScatterAt(IntVec3 pos, Map map, GenStepParams parms, int count) {
             var s = new Stencil(map).MoveTo(pos);
 
             s = s.Bound(s.MinX, 0, s.MaxX, 0);

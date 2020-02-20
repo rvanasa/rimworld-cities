@@ -26,14 +26,15 @@ namespace Cities {
 
         int abandonCt;
 
-        // Quest Tab metadata
-        bool QuestTab_IsQuest => QuestsHere.Any();
-        string QuestTab_Label => Name;
-        int QuestTab_Hostility => Faction.IsPlayer ? -1000 : -Faction.PlayerGoodwill;
-
-        int QuestTab_TicksLeft => QuestsHere.Where(q => q.TicksLeft > 0).TryMinBy(q => q.TicksLeft, out var min)
-            ? min.TicksLeft
-            : -1;
+        // Quest Tab mod metadata
+        // bool QuestTab_IsQuest => QuestsHere.Any();
+        // string QuestTab_Label => Name;
+        // int QuestTab_Hostility => Faction.IsPlayer ? -1000 : -Faction.PlayerGoodwill;
+        // int QuestTab_TicksLeft => QuestsHere
+        //     .Where(q => q.TicksLeft > 0)
+        //     .TryMinBy(q => q.TicksLeft, out var min)
+        //     ? min.TicksLeft
+        //     : -1;
 
         public City() {
             trader = new Settlement_TraderTracker(this);

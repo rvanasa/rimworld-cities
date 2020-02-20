@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Reflection;
-using Harmony;
+using HarmonyLib;
 using UnityEngine;
 using Verse;
 
@@ -9,7 +9,7 @@ namespace Cities {
     [StaticConstructorOnStartup]
     public static class Patches_RimCities {
         static Patches_RimCities() {
-            var harmony = HarmonyInstance.Create("cabbage.rimcities");
+            var harmony = new Harmony("cabbage.rimcities");
             harmony.PatchAll(Assembly.GetExecutingAssembly());
         }
     }

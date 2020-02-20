@@ -2,9 +2,10 @@
 using System.Linq;
 using System.Reflection;
 using UnityEngine;
-using Harmony;
+using HarmonyLib;
 using RimWorld;
 using RimWorld.Planet;
+using RimWorld.QuestGen;
 using Verse;
 
 namespace Cities {
@@ -43,8 +44,8 @@ namespace Cities {
     [HarmonyPatch(typeof(CaravanArrivalAction_OfferGifts))]
     [HarmonyPatch(nameof(CaravanArrivalAction_OfferGifts.CanOfferGiftsTo))]
     internal static class CaravanArrivalAction_OfferGifts_CanOfferGiftsTo {
-        static bool Prefix(ref FloatMenuAcceptanceReport __result, Caravan caravan, SettlementBase settlement) {
-            if (settlement is City city && city.Abandoned) {
+        static bool Prefix(ref FloatMenuAcceptanceReport __result, Caravan caravan, MapParent parent) {
+            if (parent is City city && city.Abandoned) {
                 __result = false;
                 return false;
             }
@@ -53,10 +54,10 @@ namespace Cities {
         }
     }
 
-    [HarmonyPatch(typeof(IncidentWorker_QuestTradeRequest))]
-    [HarmonyPatch(nameof(IncidentWorker_QuestTradeRequest.RandomNearbyTradeableSettlement))]
-    internal static class IncidentWorker_QuestTradeRequest_RandomNearbyTradeableSettlement {
-        static void Postfix(ref SettlementBase __result, int originTile) {
+    [HarmonyPatch(typeof(QuestNode_GetNearbySettlement))]
+    [HarmonyPatch("RandomNearbyTradeableSettlement")]
+    internal static class QuestNode_GetNearbySettlement_RandomNearbyTradeableSettlement {
+        static void Postfix(ref MapParent __result, int originTile, Slate slate) {
             if (__result is City city && (city.Abandoned || city.Faction.HostileTo(Faction.OfPlayer))) {
                 __result = null;
             }
@@ -155,7 +156,7 @@ namespace Cities {
                             defaultDesc = worker.LetterText,
                             action = () => worker.MakeLetter().OpenLetter(),
                         };
-                        __result = __result.Add(gizmo);
+                        __result = __result.AddItem(gizmo);
                     }
                 }
             }

@@ -11,7 +11,7 @@ namespace Cities {
 
         public IntRange sentryRange = new IntRange(2, 4);
 
-        protected override void ScatterAt(IntVec3 pos, Map map, int count) {
+        protected override void ScatterAt(IntVec3 pos, Map map, GenStepParams parms, int count) {
             var s = new Stencil(map).MoveTo(pos);
 
             s = s.Bound(s.MinX, 0, s.MaxX, 0)

@@ -52,7 +52,7 @@ namespace Cities {
                     .RandomElementWithFallback();
                 if (bed != null) {
                     bed.SetFactionDirect(pawn.Faction);
-                    bed.TryAssignPawn(pawn);
+                    bed.CompAssignableToPawn.TryAssignPawn(pawn);
                 }
             }
         }

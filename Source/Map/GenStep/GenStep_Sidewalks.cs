@@ -13,7 +13,7 @@ namespace Cities {
 
         public List<TerrainDef> sidewalkTerrains = new List<TerrainDef>();
 
-        protected override void ScatterAt(IntVec3 pos, Map map, int count) {
+        protected override void ScatterAt(IntVec3 pos, Map map, GenStepParams parms, int count) {
             var terrain = sidewalkTerrains.RandomElement();
 
             var s = new Stencil(map).MoveTo(pos).RotateRand();
