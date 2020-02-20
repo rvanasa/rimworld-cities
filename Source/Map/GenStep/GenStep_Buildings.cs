@@ -8,6 +8,7 @@ using Verse.AI.Group;
 
 namespace Cities {
     public class GenStep_Buildings : GenStep_RectScatterer {
+        public bool expensive = false;
         public float wallChance = 0.9F;
         public float doorChance = 0.75F;
         public List<TerrainDef> floorOptions = new List<TerrainDef>();
@@ -83,19 +84,21 @@ namespace Cities {
                 try {
                     room.Decorate(sInterior);
                 }
-                catch (System.Exception e) {
+                catch {
                     Log.Error("Error occurred in room decorator type: " + room.GetType().Name);
-                    throw e;
+                    throw;
                 }
             }
         }
 
         TerrainDef RandomFloor(Map map) {
-            return floorOptions.RandomElementWithFallback() ?? GenCity.RandomFloor(map);
+            return floorOptions.RandomElementWithFallback()
+                   ?? (expensive ? BaseGenUtility.RandomHightechFloorDef() : GenCity.RandomFloor(map));
         }
 
         ThingDef RandomWallStuff(Map map) {
-            return wallStuffOptions.RandomElementWithFallback() ?? GenCity.RandomWallStuff(map);
+            return wallStuffOptions.RandomElementWithFallback()
+                   ?? (expensive ? GenStuff.RandomStuffFor(ThingDefOf.Wall) : GenCity.RandomWallStuff(map));
         }
     }
 }

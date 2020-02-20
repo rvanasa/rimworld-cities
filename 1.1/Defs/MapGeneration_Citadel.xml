@@ -4,6 +4,7 @@
   <MapGeneratorDef ParentName="Cities_Base">
     <defName>City_Citadel</defName>
     <genSteps>
+      <li>City_AdvancedBuildings</li>
       <li>Narrow_Keep</li>
       <li>Narrow_Checkpoints</li>
       <li>Narrow_Trenches</li>
@@ -24,6 +25,7 @@
     <defName>Narrow_Keep</defName>
     <order>255</order>
     <genStep Class="Cities.GenStep_NarrowKeep">
+      <buildingGenStepDef>City_AdvancedBuildings</buildingGenStepDef>
     </genStep>
   </GenStepDef>
 
@@ -32,7 +34,7 @@
     <order>245</order>
     <genStep Class="Cities.GenStep_NarrowCheckpoints">
       <countPer10kCellsRange>
-        <min>2</min>
+        <min>3</min>
         <max>3</max>
       </countPer10kCellsRange>
     </genStep>
@@ -43,7 +45,7 @@
     <order>246</order>
     <genStep Class="Cities.GenStep_NarrowTrenches">
       <countPer10kCellsRange>
-        <min>4</min>
+        <min>5</min>
         <max>5</max>
       </countPer10kCellsRange>
     </genStep>
@@ -54,9 +56,69 @@
     <order>247</order>
     <genStep Class="Cities.GenStep_NarrowMinefields">
       <countPer10kCellsRange>
-        <min>1</min>
+        <min>2</min>
         <max>2</max>
       </countPer10kCellsRange>
+    </genStep>
+  </GenStepDef>
+
+  <GenStepDef>
+    <defName>City_AdvancedBuildings</defName>
+    <order>311</order>
+    <genStep Class="Cities.GenStep_Buildings">
+      <countPer10kCellsRange>
+        <min>3</min>
+        <max>6</max>
+      </countPer10kCellsRange>
+      <areaConstraints>
+        <min>200</min>
+        <max>1000</max>
+      </areaConstraints>
+      <expensive>true</expensive>
+      <roomDecorators>
+        <li Class="Cities.RoomDecorator_Storage">
+          <weight>0.75</weight>
+          <maxArea>150</maxArea>
+        </li>
+        <li Class="Cities.RoomDecorator_Centerpiece">
+          <weight>1.2</weight>
+          <maxArea>120</maxArea>
+          <options>
+            <li>HoopstoneRing</li>
+            <li>BilliardsTable</li>
+            <li>StandingLamp</li>
+            <li>CryptosleepCasket</li>
+            <li>CommsConsole</li>
+            <li>OrbitalTradeBeacon</li>
+            <li>AnimalSleepingBox</li>
+            <li>ElectricCrematorium</li>
+            <li>InfiniteChemreactor</li>
+            <li>SteleLarge</li>
+            <li>SteleGrand</li>
+          </options>
+          <chairOptions>
+            <li>Stool</li>
+            <li>DiningChair</li>
+          </chairOptions>
+        </li>
+        <li Class="Cities.RoomDecorator_Centerpiece">
+          <maxArea>100</maxArea>
+          <options>
+            <li>ChessTable</li>
+            <li>GameOfUrBoard</li>
+            <li>PokerTable</li>
+            <li>Table1x2c</li>
+            <li>Table2x2c</li>
+            <li>Table2x4c</li>
+            <li>Table3x3c</li>
+          </options>
+          <chairOptions>
+            <li>Stool</li>
+            <li>DiningChair</li>
+          </chairOptions>
+          <chairDensity>0.6</chairDensity>
+        </li>
+      </roomDecorators>
     </genStep>
   </GenStepDef>
 

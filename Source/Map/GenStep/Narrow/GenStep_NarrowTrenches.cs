@@ -9,7 +9,7 @@ namespace Cities {
     public class GenStep_NarrowTrenches : GenStep_Scatterer {
         public override int SeedPart => GetType().Name.GetHashCode();
 
-        public IntRange sentryRange = new IntRange(2, 4);
+        public IntRange sentryRange = new IntRange(4, 8);
 
         protected override void ScatterAt(IntVec3 pos, Map map, GenStepParams parms, int count) {
             var s = new Stencil(map).MoveTo(pos);

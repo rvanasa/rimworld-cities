@@ -1,9 +1,7 @@
-using Cities;
 using RimWorld;
 using RimWorld.BaseGen;
 using UnityEngine;
 using Verse;
-using Verse.AI.Group;
 
 namespace Cities {
 
@@ -13,6 +11,8 @@ namespace Cities {
         public float heightRatio = 1;
 
         public IntRange marginRange = new IntRange(4, 6);
+
+        public GenStepDef buildingGenStepDef;
 
         public override void Generate(Map map, GenStepParams parms) {
             var s = new Stencil(map);
@@ -24,7 +24,7 @@ namespace Cities {
             s.FillTerrain(BaseGenUtility.RandomHightechFloorDef());
 
             // Outer barricade
-            s.Fill(s.MinX, s.MinZ - 6, s.MaxX, s.MinZ - 6, ThingDefOf.Barricade, GenCity.RandomStuff(ThingDefOf.Barricade, map));
+            s.Fill(s.MinX, s.MinZ - 6, s.MaxX, s.MinZ - 6, ThingDefOf.Barricade, GenCity.RandomStuff(ThingDefOf.Barricade, map), IsValidBarricadeTile);
 
             // Outer wall
             var wallStuff = BaseGenUtility.RandomHightechWallStuff();
@@ -37,32 +37,32 @@ namespace Cities {
 
             // Inner keep
             s = s.Expand(-marginRange.RandomInRange, -marginRange.RandomInRange, -marginRange.RandomInRange, -marginRange.RandomInRange);
-            s.FillTerrain(BaseGenUtility.RandomHightechFloorDef());
-            s.Border(ThingDefOf.Wall, GenCity.RandomWallStuff(map, true));
+            // s.FillTerrain(BaseGenUtility.RandomHightechFloorDef());
+            // s.Border(ThingDefOf.Wall, GenCity.RandomWallStuff(map, true));
 
-            // var mechanoidCt = 20;
-            // for (var i = 0; i < mechanoidCt; i++) {
-            //     var pos = GenCity.FindPawnSpot(s.MoveRand().pos, map);
-            //     var pawn = PawnGenerator.GeneratePawn(new PawnGenerationRequest(PawnKindDefOf.AncientSoldier, Faction.OfMechanoids, PawnGenerationContext.NonPlayer, map.Tile));
-            //     pawn.SetFactionDirect(map.ParentFaction);
-            // }
+            var genStep = (GenStep_Buildings) buildingGenStepDef.genStep;
+            genStep.GenerateRect(s);
 
-            // Mechanoids
-            var mechs = PawnGroupMakerUtility.GeneratePawns(new PawnGroupMakerParms {
-                groupKind = PawnGroupKindDefOf.Combat,
-                tile = map.Tile,
-                faction = Faction.OfMechanoids,
-                points = 10000,
-            });
-            foreach (var mech in mechs) {
-                mech.SetFactionDirect(map.ParentFaction);
+            if (map.ParentFaction?.GoodwillWith(Faction.OfPlayer) < 0) {
+                
+                // Mechanoids
+                var mechs = PawnGroupMakerUtility.GeneratePawns(new PawnGroupMakerParms {
+                    groupKind = PawnGroupKindDefOf.Combat,
+                    tile = map.Tile,
+                    faction = Faction.OfMechanoids,
+                    points = 10000,
+                });
+                foreach (var mech in mechs) {
+                    GenSpawn.Spawn(mech, GenCity.FindPawnSpot(s.MoveRand().pos, map), map);
+                    mech.SetFactionDirect(map.ParentFaction);
+                }
             }
 
             //TODO throne room   
         }
 
-        // bool IsValidTile(Map map, IntVec3 pos) {
-        //     return TerrainUtility.IsNatural(pos.GetTerrain(map));
-        // }
+        bool IsValidBarricadeTile(Map map, IntVec3 pos) {
+            return TerrainUtility.IsNaturalExcludingRock(pos.GetTerrain(map));
+        }
     }
 }

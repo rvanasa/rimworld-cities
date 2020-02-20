@@ -9,7 +9,7 @@ namespace Cities {
         public override int SeedPart => GetType().Name.GetHashCode();
 
         public IntRange tierRange = new IntRange(1, 3);
-        public IntRange sentryRange = new IntRange(2, 5);
+        public IntRange sentryRange = new IntRange(5, 10);
         public IntRange ammoRange = new IntRange(4, 10);
 
         protected override void ScatterAt(IntVec3 pos, Map map, GenStepParams parms, int count) {
@@ -36,7 +36,7 @@ namespace Cities {
                 GenCity.SpawnInhabitant(point, map, new LordJob_DefendBase(map.ParentFaction, point));
             }
 
-            var mortars = tierRange.RandomInRange;
+            var mortars = tierRange.RandomInRange * 2;
             for (var i = 0; i < mortars; i++) {
                 var attempts = 10;
                 do {

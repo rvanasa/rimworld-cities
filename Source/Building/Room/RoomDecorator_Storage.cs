@@ -16,15 +16,15 @@ namespace Cities
                 (traderKinds.RandomElementWithFallback()
                  ?? DefDatabase<TraderKindDef>.AllDefs.Where(t => t.stockGenerators.Count > 0).RandomElement()).stockGenerators;
 
-            var friendly = !s.map.ParentFaction.HostileTo(Faction.OfPlayer);
-            foreach(IntVec3 pos in s.bounds.Cells) {
+            // var friendly = !s.map.ParentFaction.HostileTo(Faction.OfPlayer);
+            foreach(var pos in s.bounds.Cells) {
                 if(s.Chance(density)) {
                     var thing = generators.RandomElement().GenerateThings(s.map.Tile).FirstOrDefault();
                     if(thing != null) {
                         if(thing.stackCount > thing.def.stackLimit) {
                             thing.stackCount = s.RandInclusive(1, thing.def.stackLimit);
                         }
-                        GenSpawn.Spawn(thing, pos, s.map);
+                        GenSpawn.Spawn(thing.TryMakeMinified(), pos, s.map);
                         if(thing is Pawn pawn) {
                             if(pawn.guest == null) {
                                 pawn.guest = new Pawn_GuestTracker(pawn);

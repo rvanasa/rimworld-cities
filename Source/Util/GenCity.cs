@@ -50,17 +50,18 @@ namespace Cities {
                 PawnGenerationContext.NonPlayer,
                 map.Tile,
                 inhabitant: true));
-            
+
             lord?.AddPawn(pawn);
             GenSpawn.Spawn(pawn, pos, map);
             return pawn;
         }
 
         public static IntVec3 FindPawnSpot(IntVec3 pos, Map map) {
-            while (!pos.Walkable(map)) {
+            var maxAttempts = 50;
+            while (maxAttempts > 0 && !pos.Walkable(map)) {
+                maxAttempts--;
                 pos = pos.RandomAdjacentCell8Way().ClampInsideMap(map);
             }
-
             return pos;
         }
 

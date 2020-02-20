@@ -5,7 +5,7 @@ using Verse;
 namespace Cities {
     public class BuildingDecorator_Patio : BuildingDecorator {
         public IntRange distanceRange = new IntRange(2, 3);
-        public IntRange columnSpacingRange = new IntRange(3, 8);
+        public IntRange columnSpacingRange = new IntRange(3, 18);
 
         public override void Decorate(Stencil s) {
             var floorStuff = GenCity.RandomFloor(s.map);
