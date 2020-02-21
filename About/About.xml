@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ModMetaData>
-	<packageId>Cabbage.RimCities</packageId>
-	<name>RimCities - Dev Build</name>
+	<packageId>Cabbage.RimCitiesDevBuild</packageId>
+	<name>RimCities (Dev Build)</name>
 	<author>Cabbage</author>
 	<supportedVersions>
-		<li>1.0</li>
 		<li>1.1</li>
 	</supportedVersions>
 	<description>(Development build)</description>

@@ -98,7 +98,7 @@ namespace Cities {
 
         ThingDef RandomWallStuff(Map map) {
             return wallStuffOptions.RandomElementWithFallback()
-                   ?? (expensive ? GenStuff.RandomStuffFor(ThingDefOf.Wall) : GenCity.RandomWallStuff(map));
+                   ?? GenCity.RandomWallStuff(map,expensive);
         }
     }
 }

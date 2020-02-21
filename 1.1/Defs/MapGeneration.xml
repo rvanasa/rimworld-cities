@@ -380,6 +380,12 @@
             <li>HiTechResearchBench</li>
             <li>BiofuelRefinery</li>
             <li>InfiniteChemreactor</li>
+            <li>Urn</li>
+            <li>MarriageSpot</li>
+            <li>PartySpot</li>
+            <!--<li>Piano</li>-->
+            <!--<li>Harp</li>-->
+            <!--<li>Harpsichord</li>-->
           </options>
           <chairOptions>
             <li>Stool</li>
@@ -391,17 +397,11 @@
           <options>
             <li>ChessTable</li>
             <li>GameOfUrBoard</li>
-<!--            <li>Piano</li>-->
-<!--            <li>Harp</li>-->
-<!--            <li>Harpsichord</li>-->
             <li>PokerTable</li>
             <li>Table1x2c</li>
             <li>Table2x2c</li>
             <li>Table2x4c</li>
             <li>Table3x3c</li>
-            <li>Urn</li>
-            <li>MarriageSpot</li>
-            <li>PartySpot</li>
           </options>
           <chairOptions>
             <li>Stool</li>

@@ -119,6 +119,16 @@
           <chairDensity>0.6</chairDensity>
         </li>
       </roomDecorators>
+      <floorOptions>
+        <li>MetalTile</li>
+        <li>SilverTile</li>
+        <li>SterileTile</li>
+        <li>GoldTile</li>
+        <li>CarpetRed</li>
+        <li>CarpetBlue</li>
+        <li>CarpetCream</li>
+        <li>CarpetDark</li>
+      </floorOptions>
     </genStep>
   </GenStepDef>
 
