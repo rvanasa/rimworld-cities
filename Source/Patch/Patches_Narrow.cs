@@ -25,8 +25,10 @@ namespace Cities {
         static void Postfix(Map map, ref IntVec3 __result) {
             if (map.Parent is Citadel) {
                 __result.z = 0;
+                __result = GenCity.FindPawnSpot(__result, map);
+                
+                FloodFillerFog.FloodUnfog(__result, map);//////
             }
-            __result = GenCity.FindPawnSpot(__result, map);
         }
     }
 }

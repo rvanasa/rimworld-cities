@@ -18,7 +18,7 @@ namespace Cities {
 
 		public override void WorldComponentTick() {
 			var tick = Find.TickManager.TicksGame;
-			for(int i = quests.Count - 1; i >= 0; i--) {
+			for(var i = quests.Count - 1; i >= 0; i--) {
 				var quest = quests[i];
 				if(tick >= quest.expireTime && !quest.Ended) {
 					quest.Expire();

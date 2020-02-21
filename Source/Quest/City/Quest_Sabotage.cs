@@ -1,5 +1,6 @@
 using System.Linq;
 using RimWorld;
+using RimWorld.Planet;
 using Verse;
 
 namespace Cities {
@@ -28,6 +29,12 @@ namespace Cities {
 
         public override bool AllPartsValid() {
             return base.AllPartsValid() && target != null;
+        }
+
+        protected override void OnSetupHandle(RimWorld.Quest handle) {
+            handle.AddPart(new QuestPart_CityQuest {
+                targets = new GlobalTargetInfo[] {target},
+            });
         }
 
         public override void OnMapGenerated(Map map) {

@@ -8,7 +8,7 @@ namespace Cities
 
         public override void Decorate(Stencil s) {
             var charge = this.charge.RandomInRange;
-            for(int x = s.MinX + 1; x <= s.MaxX - 1; x++) {
+            for(var x = s.MinX + 1; x <= s.MaxX - 1; x++) {
                 var batteryComp = s.Spawn(x, 0, ThingDefOf.Battery).TryGetComp<CompPowerBattery>();
                 if(batteryComp != null) {
                     batteryComp.SetStoredEnergyPct(charge);

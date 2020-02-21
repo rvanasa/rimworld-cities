@@ -2,12 +2,15 @@ using System.Collections.Generic;
 using System.Linq;
 using RimWorld;
 using RimWorld.Planet;
+using RimWorld.QuestGen;
 using UnityEngine;
 using Verse;
 
 namespace Cities {
     public abstract class Quest : IExposable {
         static readonly IntRange ExpirationDaysRange = new IntRange(10, 30);
+
+        RimWorld.Quest handle;
 
         public QuestDef def;
         public int expireTime;
@@ -25,6 +28,7 @@ namespace Cities {
         public int TicksLeft => Started ? expireTime - Find.TickManager.TicksGame : -1;
 
         public virtual int MinCapableColonists => 2;
+        public virtual int ChallengeRating => 2;
 
         public Map HomeMap {
             get {
@@ -152,18 +156,20 @@ namespace Cities {
         }
 
         public virtual void Listen(string key, Result result) {
-            // TODO: convert to multimap data structure
-            if (key == "Complete") {
-                completeResults.Add(result);
-            }
-            else if (key == "Cancel") {
-                cancelResults.Add(result);
-            }
-            else if (key == "Expire") {
-                expireResults.Add(result);
-            }
-            else {
-                Log.Error("Unknown quest event: " + key);
+            switch (key) {
+                // TODO: convert to multimap data structure
+                case "Complete":
+                    completeResults.Add(result);
+                    break;
+                case "Cancel":
+                    cancelResults.Add(result);
+                    break;
+                case "Expire":
+                    expireResults.Add(result);
+                    break;
+                default:
+                    Log.Error("Unknown quest event: " + key);
+                    break;
             }
         }
 
@@ -180,6 +186,14 @@ namespace Cities {
                 part.OnStart(this);
             }
 
+            var slate = new Slate();
+            handle = RimWorld.QuestUtility.GenerateQuestAndMakeAvailable(DefDatabase<QuestScriptDef>.GetNamed("CityQuest"), slate);
+            handle.name = Name;
+            handle.description = DetailText;
+            handle.challengeRating = ChallengeRating;
+            OnSetupHandle(handle);
+            handle.Initiate();
+
             OnStart();
         }
 
@@ -193,6 +207,8 @@ namespace Cities {
             }
 
             OnComplete();
+
+            handle.End(QuestEndOutcome.Success);
         }
 
         public void Cancel() {
@@ -205,6 +221,8 @@ namespace Cities {
             }
 
             OnCancel();
+
+            handle.End(QuestEndOutcome.Fail);
         }
 
         public void Expire() {
@@ -217,6 +235,8 @@ namespace Cities {
             }
 
             OnExpire();
+
+            handle.End(QuestEndOutcome.Fail);
         }
 
         bool TryEnd(QuestState state, string formatter, MessageTypeDef messageType) {
@@ -259,6 +279,9 @@ namespace Cities {
             return (Find.TickManager.TicksGame + def.shortHash) % interval == 0;
         }
 
+        protected virtual void OnSetupHandle(RimWorld.Quest handle) {
+        }
+
         public virtual void OnStart() {
         }
 
@@ -283,16 +306,16 @@ namespace Cities {
         public virtual void OnMapRemoved(Map map) {
         }
 
-        public virtual IEnumerable<Gizmo> GetGizmos(WorldObject obj) {
-            yield break;
-        }
-
-        public virtual IEnumerable<Gizmo> GetGizmos(Thing thing) {
-            yield break;
-        }
-
-        public virtual IEnumerable<FloatMenuOption> GetFloatMenuOptions(Thing thing, Pawn pawn) {
-            yield break;
-        }
+        // public virtual IEnumerable<Gizmo> GetGizmos(WorldObject obj) {
+        //     yield break;
+        // }
+        //
+        // public virtual IEnumerable<Gizmo> GetGizmos(Thing thing) {
+        //     yield break;
+        // }
+        //
+        // public virtual IEnumerable<FloatMenuOption> GetFloatMenuOptions(Thing thing, Pawn pawn) {
+        //     yield break;
+        // }
     }
 }

@@ -23,7 +23,7 @@
 				</value>
 			</li>
 		</questParts>
-		<baseChance>0.3</baseChance>
+		<baseChance>0.2</baseChance>
 	</IncidentDef>
 	
   <IncidentDef Class="Cities.QuestDef">
@@ -48,7 +48,7 @@
 				</value>
 			</li>
 		</questParts>
-		<baseChance>0.3</baseChance>
+		<baseChance>0.2</baseChance>
 	</IncidentDef>
 	
   <IncidentDef Class="Cities.QuestDef">
@@ -89,7 +89,7 @@
 				<messageType>NegativeEvent</messageType>
 			</li>
 		</questParts>
-		<baseChance>0.3</baseChance>
+		<baseChance>0.2</baseChance>
 	</IncidentDef>
 	
   <IncidentDef Class="Cities.QuestDef">
@@ -131,7 +131,7 @@
 				<messageType>NegativeEvent</messageType>
 			</li>
 		</questParts>
-		<baseChance>0.15</baseChance>
+		<baseChance>0.12</baseChance>
 	</IncidentDef>
 	
   <IncidentDef Class="Cities.QuestDef">
@@ -155,7 +155,7 @@
 				<messageType>NegativeEvent</messageType>
 			</li>
 		</questParts>
-		<baseChance>0.3</baseChance>
+		<baseChance>0.2</baseChance>
 	</IncidentDef>
 
 </Defs>

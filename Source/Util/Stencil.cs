@@ -284,7 +284,7 @@ namespace Cities {
         }
 
         void DoClear(IntVec3 pos) {
-            List<Thing> things = pos.GetThingList(map);
+            var things = pos.GetThingList(map);
             for (var num = things.Count - 1; num >= 0; num--) {
                 var thing = things[num];
                 if (thing.def.destroyable) {

@@ -91,7 +91,6 @@ namespace Cities {
                 __result = Enumerable.Empty<Gizmo>();
                 return false;
             }
-
             return true;
         }
     }
@@ -115,10 +114,10 @@ namespace Cities {
             }
 
             __instance.Unfog(c);
-            for (int i = 0; i < 4; i++) {
-                IntVec3 intVec = c + GenAdj.CardinalDirections[i];
+            for (var i = 0; i < 4; i++) {
+                var intVec = c + GenAdj.CardinalDirections[i];
                 if (intVec.InBounds(___map) && intVec.Fogged(___map)) {
-                    Building edifice = intVec.GetEdifice(___map);
+                    var edifice = intVec.GetEdifice(___map);
                     if (edifice == null || !edifice.def.MakeFog) {
                         FloodFillerFog.FloodUnfog(intVec, ___map);
                     }
@@ -128,10 +127,10 @@ namespace Cities {
                 }
             }
 
-            for (int j = 0; j < 8; j++) {
-                IntVec3 c2 = c + GenAdj.AdjacentCells[j];
+            for (var j = 0; j < 8; j++) {
+                var c2 = c + GenAdj.AdjacentCells[j];
                 if (c2.InBounds(___map)) {
-                    Building edifice2 = c2.GetEdifice(___map);
+                    var edifice2 = c2.GetEdifice(___map);
                     if (edifice2 != null && edifice2.def.MakeFog) {
                         __instance.Unfog(c2);
                     }
@@ -142,44 +141,15 @@ namespace Cities {
         }
     }
 
-    [HarmonyPatch(typeof(WorldObject))]
-    [HarmonyPatch(nameof(WorldObject.GetGizmos))]
-    internal static class WorldObject_GetGizmos {
-        static void Postfix(ref WorldObject __instance, ref IEnumerable<Gizmo> __result) {
-            foreach (var quest in Find.World.GetComponent<WorldComponent_QuestTracker>().quests) {
-                __result = __result.Concat(quest.GetGizmos(__instance));
-                if (quest.Targets.targets.Contains(__instance)) {
-                    if (quest.def.Worker is IncidentWorker_Quest worker) {
-                        var gizmo = new Command_Action {
-                            icon = QuestIcons.InfoIcon,
-                            defaultLabel = quest.Name,
-                            defaultDesc = worker.LetterText,
-                            action = () => worker.MakeLetter().OpenLetter(),
-                        };
-                        __result = __result.AddItem(gizmo);
-                    }
-                }
+    [HarmonyPatch(typeof(Settlement_TraderTracker))]
+    [HarmonyPatch(nameof(Settlement_TraderTracker.TraderKind), MethodType.Getter)]
+    internal static class Settlement_TraderTracker_TraderKind {
+        static bool Prefix(ref Settlement_TraderTracker __instance, ref TraderKindDef __result) {
+            if (__instance.ParentHolder is City city) {
+                __result = city.SpecialTraderKind;
+                return false;
             }
-        }
-    }
-
-    [HarmonyPatch(typeof(Thing))]
-    [HarmonyPatch(nameof(Thing.GetGizmos))]
-    internal static class Thing_GetGizmos {
-        static void Postfix(ref Thing __instance, ref IEnumerable<Gizmo> __result) {
-            foreach (var quest in Find.World.GetComponent<WorldComponent_QuestTracker>().quests) {
-                __result = __result.Concat(quest.GetGizmos(__instance));
-            }
-        }
-    }
-
-    [HarmonyPatch(typeof(Thing))]
-    [HarmonyPatch(nameof(Thing.GetFloatMenuOptions))]
-    internal static class Thing_GetFloatMenuOptions {
-        static void Postfix(ref Thing __instance, ref IEnumerable<FloatMenuOption> __result, Pawn selPawn) {
-            foreach (var quest in Find.World.GetComponent<WorldComponent_QuestTracker>().quests) {
-                __result = __result.Concat(quest.GetFloatMenuOptions(__instance, selPawn));
-            }
+            return true;
         }
     }
 }

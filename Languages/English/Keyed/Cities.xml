@@ -16,4 +16,6 @@
   <AbandonedCityKind>Abandoned</AbandonedCityKind>
   <GhostCityKind>Ghost</GhostCityKind>
   
+  <CitadelName>{0} Citadel</CitadelName>
+  
 </LanguageData>

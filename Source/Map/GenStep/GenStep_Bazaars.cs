@@ -49,7 +49,7 @@ namespace Cities {
                         var itemPos = sStand.Coords(sStand.RandX, sStand.RandZ);
                         var item = pawn.inventory.innerContainer.FirstOrDefault();
                         if (item != null) {
-                            pawn.inventory.innerContainer.TryDrop(item, itemPos, s.map, ThingPlaceMode.Direct, out Thing result);
+                            pawn.inventory.innerContainer.TryDrop(item, itemPos, s.map, ThingPlaceMode.Direct, out var result);
                             item.SetOwnedByCity(true);
                         }
                     }

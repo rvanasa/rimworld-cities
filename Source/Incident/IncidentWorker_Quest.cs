@@ -11,11 +11,8 @@ namespace Cities {
         public QuestDef Def => (QuestDef) def;
 
         public override string LetterText => quest.DetailText;
-
         public override Faction LetterIssuer => quest.Issuer;
-
         public override LookTargets LetterTargets => quest.Targets;
-
         public override NamedArgument[] LetterParams => quest.FormatArgs;
 
         public override bool CheckIncident(IncidentParms parms) {
@@ -38,7 +35,6 @@ namespace Cities {
                 quest.Start();
                 return true;
             }
-
             return false;
         }
     }

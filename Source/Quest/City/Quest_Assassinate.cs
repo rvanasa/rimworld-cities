@@ -34,9 +34,15 @@ namespace Cities {
             pawn = PawnGenerator.GeneratePawn(new PawnGenerationRequest(faction.RandomPawnKind(), faction,
                 PawnGenerationContext.NonPlayer, city.Tile));
         }
-        
+
         public override bool AllPartsValid() {
             return base.AllPartsValid() && city != null && pawn != null;
+        }
+
+        protected override void OnSetupHandle(RimWorld.Quest handle) {
+            handle.AddPart(new QuestPart_CityQuest {
+                targets = new GlobalTargetInfo[] {city, pawn},
+            });
         }
 
         public override void OnMapGenerated(Map map) {
@@ -65,7 +71,7 @@ namespace Cities {
 
         public override void OnStart() {
             base.OnStart();
-            
+
             Find.World.worldPawns.PassToWorld(pawn, PawnDiscardDecideMode.KeepForever);
         }
 

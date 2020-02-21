@@ -20,11 +20,13 @@ namespace Cities {
         public override bool Visitable => base.Visitable || Abandoned;
 
         public override bool Attackable => base.Attackable && !Abandoned;
-        
+
         public IEnumerable<Quest> QuestsHere => Find.World.GetComponent<WorldComponent_QuestTracker>().quests
             .Where(q => q.Targets.targets.Contains(this));
 
         public virtual int RaidPointIncrease => 500;
+
+        public virtual TraderKindDef SpecialTraderKind => DefDatabase<TraderKindDef>.GetNamed("Base_City");
 
         int abandonCt;
 
@@ -110,6 +112,16 @@ namespace Cities {
             }
         }
 
+        public override IEnumerable<FloatMenuOption> GetFloatMenuOptions(Caravan caravan) {
+            foreach (var option in base.GetFloatMenuOptions(caravan)) {
+                if (option.Label.Contains("CommandTrade".Translate())) {
+                    continue;
+                }
+
+                yield return option;
+            }
+        }
+
         public override void ExposeData() {
             Scribe_References.Look(ref inhabitantFaction, "inhabitantFaction");
             base.ExposeData();
@@ -121,7 +133,7 @@ namespace Cities {
 
         public override string GetInspectString() {
             var s = base.GetInspectString();
-            bool hasQuests = false;
+            var hasQuests = false;
             foreach (var quest in QuestsHere) {
                 if (!hasQuests) {
                     hasQuests = true;
@@ -135,6 +147,10 @@ namespace Cities {
             }
 
             return s;
+        }
+
+        public virtual string ChooseName() {
+            return SettlementNameGenerator.GenerateSettlementName(this);
         }
 
         public virtual IntVec3 ChooseMapSize(IntVec3 mapSize) {

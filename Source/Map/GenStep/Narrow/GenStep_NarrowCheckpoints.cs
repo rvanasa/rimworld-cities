@@ -61,8 +61,8 @@ namespace Cities {
             s.Bound(s.MinX, 0, s.MaxX, 0)
                 .Expand(3).FillTerrain(TerrainDefOf.Concrete, IsValidTile);
 
-            s.Bound(s.MinX, 0, s.MaxX, -3)
-                .FillRoof(RoofDefOf.RoofConstructed);
+            // s.Bound(s.MinX, 0, s.MaxX, -3)
+            //     .FillRoof(RoofDefOf.RoofConstructed, IsValidTile);
         }
 
         bool IsValidTile(Map map, IntVec3 pos) {

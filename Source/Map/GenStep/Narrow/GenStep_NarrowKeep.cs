@@ -19,7 +19,7 @@ namespace Cities {
             s = s.Bound(s.MinX, s.MaxZ - Mathf.RoundToInt(map.Size.x * heightRatio), s.MaxX, s.MaxZ)
                 .ClearThingsInBounds()
                 .Center();
-
+            
             // Courtyard floor
             s.FillTerrain(BaseGenUtility.RandomHightechFloorDef());
 
@@ -29,7 +29,7 @@ namespace Cities {
             // Outer wall
             var wallStuff = BaseGenUtility.RandomHightechWallStuff();
             s.Fill(s.MinX, s.MinZ - 3, s.MaxX, s.MinZ, ThingDefOf.Wall, wallStuff);
-
+            
             // Outer door
             var doorX = s.RandX;
             s.Bound(doorX, s.MinZ - 3, doorX, s.MinZ)
@@ -37,12 +37,10 @@ namespace Cities {
 
             // Inner keep
             s = s.Expand(-marginRange.RandomInRange, -marginRange.RandomInRange, -marginRange.RandomInRange, -marginRange.RandomInRange);
-            // s.FillTerrain(BaseGenUtility.RandomHightechFloorDef());
-            // s.Border(ThingDefOf.Wall, GenCity.RandomWallStuff(map, true));
 
             var genStep = (GenStep_Buildings) buildingGenStepDef.genStep;
             genStep.GenerateRect(s);
-
+            
             if (map.ParentFaction?.GoodwillWith(Faction.OfPlayer) < 0) {
                 
                 // Mechanoids

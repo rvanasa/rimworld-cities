@@ -42,7 +42,7 @@ namespace Cities {
             }
 
             city.Tile = TileFinder.RandomSettlementTileFor(city.Faction);
-            city.Name = SettlementNameGenerator.GenerateSettlementName(city);
+            city.Name = city.ChooseName();
             if (!TileFinder.IsValidTileForNewSettlement(city.Tile)) {
                 // (Faction Control) ensure valid tile for existing saves
                 city.Tile = TileFinder.RandomStartingTile();

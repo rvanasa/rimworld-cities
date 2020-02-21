@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using RimWorld;
+using RimWorld.Planet;
 using Verse;
 
 namespace Cities {
@@ -16,6 +17,7 @@ namespace Cities {
         int ticksTillNextStage = Rand.RangeInclusive(3_000, 5_000);
 
         public override int MinCapableColonists => 5;
+        public override int ChallengeRating => 4;
 
         public override LookTargets Targets => city;
 
@@ -36,11 +38,18 @@ namespace Cities {
             city = Find.WorldObjects.Settlements
                 .OfType<City>()
                 .Where(s => s.Visitable && !s.Abandoned && !s.HasMap)
-                .RandomByDistance(HomeMap?.Parent,50) ;
+                .RandomByDistance(HomeMap?.Parent, 50);
         }
 
         public override bool AllPartsValid() {
             return base.AllPartsValid() && enemyFaction != null && city != null;
+        }
+
+        protected override void OnSetupHandle(RimWorld.Quest handle) {
+            handle.AddPart(new QuestPart_CityQuest {
+                factions = new[] {enemyFaction},
+                targets = new GlobalTargetInfo[] {city},
+            });
         }
 
         public override void OnMapGenerated(Map map) {

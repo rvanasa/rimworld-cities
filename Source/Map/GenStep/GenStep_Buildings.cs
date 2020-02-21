@@ -22,7 +22,7 @@ namespace Cities {
             var stuff = RandomWallStuff(s.map);
             s.Border(ThingDefOf.Wall, stuff);
 
-            bool hasDoor = false;
+            var hasDoor = false;
             for (var dir = 0; dir < 4; dir++) {
                 if (!hasDoor || s.Chance(doorChance)) {
                     hasDoor = true;
