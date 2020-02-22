@@ -17,19 +17,28 @@ namespace Cities {
         public override void GenerateRect(Stencil s) {
             GenRooms(s, true);
 
-            var stuff = RandomWallStuff(s.map);
-            s.Border(ThingDefOf.Wall, stuff);
-
+            var wallStuff = RandomWallStuff(s.map);
+            var doorStuff = RandomWallStuff(s.map);
             var hasDoor = false;
             for (var dir = 0; dir < 4; dir++) {
-                if (!hasDoor || s.Chance(doorChance)) {
+                var sDir = s.Rotate(dir);
+
+                var doorHere = !hasDoor || s.Chance(doorChance);
+                if (doorHere) {
                     hasDoor = true;
-                    var sDoor = s.Rotate(dir);
-                    var offset = sDoor.RandInclusive(1, 2);
-                    var doorZ = sDoor.Chance(.5F) ? sDoor.MinZ + offset : sDoor.MaxZ - offset;
-                    // TODO fix doors in final pass
-                    sDoor//.ClearThingsAtPos()
-                        .Spawn(sDoor.MaxX, doorZ, ThingDefOf.Door, stuff);
+                    var offset = sDir.RandInclusive(0, 2) + 2;
+                    var doorZ = sDir.Chance(.5F) ? sDir.MinZ + offset : sDir.MaxZ - offset;
+                    for (var z = sDir.MinZ; z < sDir.MaxZ; z++) {
+                        if (z != doorZ) {
+                            sDir.Spawn(sDir.MaxX, z, ThingDefOf.Wall, doorStuff);
+                        }
+                        else {
+                            sDir.Spawn(sDir.MaxX, z, ThingDefOf.Door, wallStuff);
+                        }
+                    }
+                }
+                else {
+                    sDir.Fill(sDir.MaxX, sDir.MinZ, sDir.MaxX, sDir.MaxZ - 1, ThingDefOf.Wall, wallStuff);
                 }
             }
 
