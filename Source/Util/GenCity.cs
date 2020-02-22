@@ -36,7 +36,9 @@ namespace Cities {
         public static Pawn SpawnInhabitant(IntVec3 pos, Map map, LordJob job = null, bool friendlyJob = false, bool randomWorkSpot = false, PawnKindDef kind = null) {
             if (job == null || (!friendlyJob && !map.ParentFaction.HostileTo(Faction.OfPlayer))) {
                 var workPos = randomWorkSpot ? CellRect.WholeMap(map).RandomCell : pos;
-                job = new LordJob_LiveInCity(FindPawnSpot(workPos, map));
+                job = map.Parent is Citadel
+                    ? (LordJob) new LordJob_LiveInCitadel(FindPawnSpot(workPos, map))
+                    : new LordJob_LiveInCity(FindPawnSpot(workPos, map));
             }
             return SpawnInhabitant(pos, map, LordMaker.MakeNewLord(map.ParentFaction, job, map));
         }

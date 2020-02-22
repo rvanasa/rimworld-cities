@@ -24,10 +24,12 @@ namespace Cities {
     internal static class CaravanEnterMapUtility_GetEnterCell {
         static void Postfix(Map map, ref IntVec3 __result) {
             if (map.Parent is Citadel) {
-                __result.z = 0;
-                __result = GenCity.FindPawnSpot(__result, map);
+                __result.z = 2;
+                while (__result.GetFirstThing<Building>(map) != null) {
+                    __result.z++;
+                }
                 
-                FloodFillerFog.FloodUnfog(__result, map);//////
+                FloodFillerFog.FloodUnfog(__result, map);
             }
         }
     }

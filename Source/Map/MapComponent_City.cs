@@ -26,15 +26,15 @@ namespace Cities {
                     return;
                 }
 
-                if (map.Parent is City city && !city.Abandoned) {
-                    if (city.Faction.HostileTo(Faction.OfPlayer)) {
+                if (!City.Abandoned) {
+                    if (City.Faction.HostileTo(Faction.OfPlayer)) {
                         var storyComp = Find.Storyteller.storytellerComps.First(x => x is StorytellerComp_OnOffCycle || x is StorytellerComp_RandomMain);
                         var parms = storyComp.GenerateParms(IncidentCategoryDefOf.ThreatBig, map);
-                        parms.faction = city.Faction;
+                        parms.faction = City.Faction;
                         parms.raidStrategy = RaidStrategyDefOf.ImmediateAttack;
                         parms.raidArrivalMode = DefDatabase<PawnsArrivalModeDef>.GetRandom();
                         parms.raidArrivalModeForQuickMilitaryAid = true;
-                        parms.points += city.RaidPointIncrease;
+                        parms.points += City.RaidPointIncrease;
                         IncidentDefOf.RaidEnemy.Worker.TryExecute(parms);
                     }
                     // else {

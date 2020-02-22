@@ -21,16 +21,17 @@ namespace Cities {
             var spacing = spacingRange.RandomInRange;
             for (var i = s.MinX + spacingRange.RandomInRange; i <= s.MaxX; i += spacing) {
                 var point = s.MoveRand().pos + IntVec3.North * 3;
-
-                var trap = s.MoveTo(point)
-                    .Spawn(jitterRange.RandomInRange * Rand.Sign, jitterRange.RandomInRange * Rand.Sign,
-                        DefDatabase<ThingDef>.GetNamed("TrapIED_HighExplosive"));
-                trap.SetFactionDirect(map.ParentFaction);
+                if (IsValidTile(map, point)) {
+                    var trap = s.MoveTo(point)
+                        .Spawn(jitterRange.RandomInRange * Rand.Sign, jitterRange.RandomInRange * Rand.Sign,
+                            DefDatabase<ThingDef>.GetNamed("TrapIED_HighExplosive"));
+                    trap.SetFactionDirect(map.ParentFaction);
+                }
             }
         }
 
         bool IsValidTile(Map map, IntVec3 pos) {
-            return TerrainUtility.IsNatural(pos.GetTerrain(map));
+            return TerrainUtility.IsNaturalExcludingRock(pos.GetTerrain(map));
         }
     }
 }

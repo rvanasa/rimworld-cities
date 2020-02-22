@@ -34,8 +34,8 @@
     <order>245</order>
     <genStep Class="Cities.GenStep_NarrowCheckpoints">
       <countPer10kCellsRange>
-        <min>3</min>
-        <max>3</max>
+        <min>5</min>
+        <max>5</max>
       </countPer10kCellsRange>
     </genStep>
   </GenStepDef>
@@ -45,8 +45,8 @@
     <order>246</order>
     <genStep Class="Cities.GenStep_NarrowTrenches">
       <countPer10kCellsRange>
-        <min>5</min>
-        <max>5</max>
+        <min>7</min>
+        <max>7</max>
       </countPer10kCellsRange>
     </genStep>
   </GenStepDef>
@@ -56,8 +56,8 @@
     <order>247</order>
     <genStep Class="Cities.GenStep_NarrowMinefields">
       <countPer10kCellsRange>
-        <min>2</min>
-        <max>2</max>
+        <min>6</min>
+        <max>6</max>
       </countPer10kCellsRange>
     </genStep>
   </GenStepDef>

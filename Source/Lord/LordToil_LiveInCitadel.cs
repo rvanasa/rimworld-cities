@@ -9,16 +9,17 @@ using Verse.AI.Group;
 using Verse.AI;
 
 namespace Cities {
-    public class LordToil_LiveInCity : LordToil {
+    public class LordToil_LiveInCitadel : LordToil {
         public IntVec3 workSpot;
 
-        public LordToil_LiveInCity(IntVec3 workSpot) {
+        public LordToil_LiveInCitadel(IntVec3 workSpot) {
             this.workSpot = workSpot;
         }
 
         public override void UpdateAllDuties() {
+            Debug.LogError("123");
             foreach (var pawn in lord.ownedPawns) {
-                pawn.mindState.duty = new PawnDuty(DefDatabase<DutyDef>.GetNamed("LiveInCity"), workSpot);
+                pawn.mindState.duty = new PawnDuty(DefDatabase<DutyDef>.GetNamed("LiveInCitadel"), workSpot);
             }
         }
     }
