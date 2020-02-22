@@ -29,7 +29,6 @@ namespace Cities {
         public virtual TraderKindDef WorldTraderKind => DefDatabase<TraderKindDef>.GetNamed("Base_City");
 
         int abandonCt;
-        bool isInhabitantFactionDefined;
 
         // Quest Tab mod metadata
         // bool QuestTab_IsQuest => QuestsHere.Any();
@@ -50,7 +49,6 @@ namespace Cities {
             if (inhabitantFaction != null) {
                 inhabitantFaction = newFaction;
             }
-            isInhabitantFactionDefined = true;
         }
 
         // public override void PostMake() {
@@ -71,22 +69,22 @@ namespace Cities {
             }
         }
 
-        public override void PostMake() {
-            base.PostMake();
-            if (Faction == null) {
-                base.SetFaction(Find.FactionManager?.AllFactions
-                    .Where(f => f.def.humanlikeFaction && !f.def.techLevel.IsNeolithicOrWorse())
-                    .RandomElementWithFallback());
-            }
-            isInhabitantFactionDefined = false;
-        }
-
-        public override void PostAdd() {
-            base.PostAdd();
-            if (!isInhabitantFactionDefined || inhabitantFaction == null) {
-                inhabitantFaction = Faction;
-            }
-        }
+        // public override void PostMake() {
+        //     base.PostMake();
+        //     if (Faction == null) {
+        //         base.SetFaction(Find.FactionManager?.AllFactions
+        //             .Where(f => f.def.humanlikeFaction && !f.def.techLevel.IsNeolithicOrWorse())
+        //             .RandomElementWithFallback());
+        //     }
+        //     isInhabitantFactionDefined = false;
+        // }
+        //
+        // public override void PostAdd() {
+        //     base.PostAdd();
+        //     if (!isInhabitantFactionDefined || inhabitantFaction == null) {
+        //         inhabitantFaction = Faction;
+        //     }
+        // }
 
         public override void PostMapGenerate() {
             base.PostMapGenerate();
