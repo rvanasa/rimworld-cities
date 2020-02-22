@@ -51,8 +51,25 @@ namespace Cities {
                 var wallX = Mathf.RoundToInt(s.RandX * .3F);
                 var hasWall = s.Chance(wallChance);
 
+                var doorZ = 0; // default unused
                 if (hasWall) {
-                    s.Fill(wallX, s.MinZ + 1, wallX, s.MaxZ - 1, ThingDefOf.Wall, RandomWallStuff(s.map));
+                    var wallStuff = RandomWallStuff(s.map);
+                    if (parentWall) {
+                        var offset = s.RandInclusive(0, 2) + 1;
+                        doorZ = s.Chance(.5F) ? s.MinZ + offset : s.MaxZ - offset;
+
+                        var minZ = s.MinZ + 1;
+                        var maxZ = s.MaxZ - 1;
+                        for (var z = minZ; z <= maxZ; z++) {
+                            if (z != doorZ) {
+                                s.Spawn(wallX, z, ThingDefOf.Wall, wallStuff);
+                            }
+                        }
+                        // TODO dry
+                    }
+                    else {
+                        s.Fill(wallX, s.MinZ + 1, wallX, s.MaxZ - 1, ThingDefOf.Wall, RandomWallStuff(s.map));
+                    }
                 }
 
                 var left = s.Bound(s.MinX, s.MinZ, wallX, s.MaxZ);
@@ -61,10 +78,7 @@ namespace Cities {
                 GenRooms(right, hasWall);
 
                 if (hasWall && parentWall) {
-                    var offset = s.RandInclusive(0, 2) + 1;
-                    s//.ClearThingsAtPos()
-                        .Spawn(wallX, s.Chance(.5F) ? s.MinZ + offset : s.MaxZ - offset, ThingDefOf.Door,
-                            RandomWallStuff(s.map /*, true*/));
+                    s.Spawn(wallX, doorZ, ThingDefOf.Door, RandomWallStuff(s.map));
                 }
             }
             else {
