@@ -267,7 +267,6 @@ namespace Cities {
             foreach (var pos in bounds.Cells) {
                 DoClear(pos);
             }
-
             return this;
         }
 

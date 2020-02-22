@@ -27,7 +27,8 @@ namespace Cities {
                     var sDoor = s.Rotate(dir);
                     var offset = sDoor.RandInclusive(1, 2);
                     var doorZ = sDoor.Chance(.5F) ? sDoor.MinZ + offset : sDoor.MaxZ - offset;
-                    sDoor.ClearThingsAtPos()
+                    // TODO fix doors in final pass
+                    sDoor//.ClearThingsAtPos()
                         .Spawn(sDoor.MaxX, doorZ, ThingDefOf.Door, stuff);
                 }
             }
@@ -61,7 +62,7 @@ namespace Cities {
 
                 if (hasWall && parentWall) {
                     var offset = s.RandInclusive(0, 2) + 1;
-                    s.ClearThingsAtPos()
+                    s//.ClearThingsAtPos()
                         .Spawn(wallX, s.Chance(.5F) ? s.MinZ + offset : s.MaxZ - offset, ThingDefOf.Door,
                             RandomWallStuff(s.map /*, true*/));
                 }
