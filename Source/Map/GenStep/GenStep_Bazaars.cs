@@ -33,7 +33,7 @@ namespace Cities {
                         item.Destroy();
                     }
                 }
-
+                
                 PawnInventoryGenerator.GiveRandomFood(pawn);
             }
 

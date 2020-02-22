@@ -152,4 +152,41 @@ namespace Cities {
             return true;
         }
     }
+
+    [HarmonyPatch(typeof(Pawn))]
+    [HarmonyPatch(nameof(Pawn.DropAndForbidEverything))]
+    internal static class Pawn_DropAndForbidEverything {
+        static bool Prefix(ref Pawn __instance) {
+            if (__instance.Map.Parent is City && __instance.TraderKind != null) {
+                __instance.inventory.DestroyAll();
+            }
+            return true;
+        }
+    }
+
+    // bug hotfix for 1.1
+    [HarmonyPatch(typeof(Room))]
+    [HarmonyPatch(nameof(Room.Notify_ContainedThingSpawnedOrDespawned))]
+    internal static class Room_Notify_ContainedThingSpawnedOrDespawned {
+        static bool Prefix(Room __instance, ref Thing th) {
+            try {
+                if (th.def.category == ThingCategory.Mote || th.def.category == ThingCategory.Projectile || (th.def.category == ThingCategory.Ethereal || th.def.category == ThingCategory.Pawn))
+                    return false;
+                if (__instance.IsDoorway) {
+                    foreach (var t in __instance.Regions[0].links) {
+                        Region otherRegion = t.GetOtherRegion(__instance.Regions[0]);
+                        if (!otherRegion.IsDoorway)
+                            otherRegion.Room.Notify_ContainedThingSpawnedOrDespawned(th);
+                    }
+                }
+                typeof(Room).GetField("statsAndRoleDirty", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.GetField)
+                    .SetValue(__instance, true);
+            }
+            catch (System.Exception e) {
+                Debug.LogWarning(e);
+            }
+
+            return false;
+        }
+    }
 }
