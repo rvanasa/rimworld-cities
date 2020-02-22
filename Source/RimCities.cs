@@ -25,6 +25,7 @@ namespace Cities {
         public float abandonedChance = 0.3F;
         public IntRange citiesPer100kTiles = new IntRange(10, 15);
         public IntRange abandonedPer100kTiles = new IntRange(5, 10);
+        public int minCitadelsPerWorld = 1;
 
         public void ExposeData() {
             Scribe_Values.Look(ref limitCitySize, "limitCitySize", Defaults.limitCitySize);
@@ -32,6 +33,7 @@ namespace Cities {
             Scribe_Values.Look(ref enableEvents, "enableEvents", Defaults.enableEvents);
             Scribe_Values.Look(ref citiesPer100kTiles, "citiesPer100kTiles", Defaults.citiesPer100kTiles);
             Scribe_Values.Look(ref abandonedPer100kTiles, "abandonedPer100kTiles", Defaults.abandonedPer100kTiles);
+            Scribe_Values.Look(ref minCitadelsPerWorld, "minCitadelsPerWorld", Defaults.minCitadelsPerWorld);
         }
     }
 
@@ -59,6 +61,9 @@ namespace Cities {
             listing.Gap();
             listing.Label("CitiesPer100kTiles".Translate());
             listing.IntRange(ref Config.citiesPer100kTiles, 0, 100);
+            listing.Gap();
+            listing.Label("MinCitadelsPerWorld".Translate().Formatted(Config.minCitadelsPerWorld));
+            listing.IntAdjuster(ref Config.minCitadelsPerWorld, 1, 1);
             listing.End();
             base.DoSettingsWindowContents(inRect);
         }

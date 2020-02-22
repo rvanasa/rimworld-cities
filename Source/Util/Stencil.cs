@@ -271,6 +271,11 @@ namespace Cities {
             return this;
         }
 
+        public Stencil ClearThingsAtPos() {
+            DoClear(pos);
+            return this;
+        }
+
         public Thing Spawn(int x, int z, ThingDef thing, ThingDef stuff = null) {
             return Move(x, z).ClampInsideMap().Spawn(thing, stuff);
         }

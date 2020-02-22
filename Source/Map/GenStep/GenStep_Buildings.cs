@@ -1,10 +1,8 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using RimWorld;
-using RimWorld.Planet;
 using RimWorld.BaseGen;
 using Verse;
-using Verse.AI.Group;
 
 namespace Cities {
     public class GenStep_Buildings : GenStep_RectScatterer {
@@ -27,10 +25,10 @@ namespace Cities {
                 if (!hasDoor || s.Chance(doorChance)) {
                     hasDoor = true;
                     var sDoor = s.Rotate(dir);
-                    // var offset = sDoor.RandInclusive(0, 2) + 2;
                     var offset = sDoor.RandInclusive(1, 2);
                     var doorZ = sDoor.Chance(.5F) ? sDoor.MinZ + offset : sDoor.MaxZ - offset;
-                    sDoor.Spawn(sDoor.MaxX, doorZ, ThingDefOf.Door, stuff);
+                    sDoor.ClearThingsAtPos()
+                        .Spawn(sDoor.MaxX, doorZ, ThingDefOf.Door, stuff);
                 }
             }
 
@@ -63,8 +61,9 @@ namespace Cities {
 
                 if (hasWall && parentWall) {
                     var offset = s.RandInclusive(0, 2) + 1;
-                    s.Spawn(wallX, s.Chance(.5F) ? s.MinZ + offset : s.MaxZ - offset, ThingDefOf.Door,
-                        RandomWallStuff(s.map /*, true*/));
+                    s.ClearThingsAtPos()
+                        .Spawn(wallX, s.Chance(.5F) ? s.MinZ + offset : s.MaxZ - offset, ThingDefOf.Door,
+                            RandomWallStuff(s.map /*, true*/));
                 }
             }
             else {
@@ -98,7 +97,7 @@ namespace Cities {
 
         ThingDef RandomWallStuff(Map map) {
             return wallStuffOptions.RandomElementWithFallback()
-                   ?? GenCity.RandomWallStuff(map,expensive);
+                   ?? GenCity.RandomWallStuff(map, expensive);
         }
     }
 }

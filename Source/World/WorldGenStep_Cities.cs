@@ -1,4 +1,5 @@
-﻿using JetBrains.Annotations;
+﻿using System.Linq;
+using JetBrains.Annotations;
 using RimWorld;
 using RimWorld.Planet;
 using UnityEngine;
@@ -16,7 +17,9 @@ namespace Cities {
                 GenerateCities(config.abandonedPer100kTiles.RandomInRange, true);
             }
 
-            if (!Find.WorldObjects.AllWorldObjects.Any(obj => obj is Citadel)) {
+            var missingCitadels = Config_Cities.Instance.minCitadelsPerWorld
+                                  - Find.WorldObjects.AllWorldObjects.Count(obj => obj is Citadel);
+            while (missingCitadels-- > 0) {
                 GenerateCity(DefDatabase<WorldObjectDef>.GetNamed("City_Citadel"), false,
                     f => f.def.CanEverBeNonHostile);
             }

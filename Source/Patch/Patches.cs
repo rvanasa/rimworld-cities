@@ -146,7 +146,7 @@ namespace Cities {
     internal static class Settlement_TraderTracker_TraderKind {
         static bool Prefix(ref Settlement_TraderTracker __instance, ref TraderKindDef __result) {
             if (__instance.ParentHolder is City city) {
-                __result = city.SpecialTraderKind;
+                __result = city.WorldTraderKind;
                 return false;
             }
             return true;

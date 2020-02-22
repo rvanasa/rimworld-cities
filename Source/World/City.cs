@@ -26,9 +26,10 @@ namespace Cities {
 
         public virtual int RaidPointIncrease => 500;
 
-        public virtual TraderKindDef SpecialTraderKind => DefDatabase<TraderKindDef>.GetNamed("Base_City");
+        public virtual TraderKindDef WorldTraderKind => DefDatabase<TraderKindDef>.GetNamed("Base_City");
 
         int abandonCt;
+        bool isInhabitantFactionDefined;
 
         // Quest Tab mod metadata
         // bool QuestTab_IsQuest => QuestsHere.Any();
@@ -49,6 +50,7 @@ namespace Cities {
             if (inhabitantFaction != null) {
                 inhabitantFaction = newFaction;
             }
+            isInhabitantFactionDefined = true;
         }
 
         // public override void PostMake() {
@@ -66,6 +68,23 @@ namespace Cities {
                 if (Abandoned) {
                     trader = null;
                 }
+            }
+        }
+
+        public override void PostMake() {
+            base.PostMake();
+            if (Faction == null) {
+                base.SetFaction(Find.FactionManager?.AllFactions
+                    .Where(f => f.def.humanlikeFaction && !f.def.techLevel.IsNeolithicOrWorse())
+                    .RandomElementWithFallback());
+            }
+            isInhabitantFactionDefined = false;
+        }
+
+        public override void PostAdd() {
+            base.PostAdd();
+            if (!isInhabitantFactionDefined || inhabitantFaction == null) {
+                inhabitantFaction = Faction;
             }
         }
 
@@ -117,7 +136,6 @@ namespace Cities {
                 if (option.Label.Contains("CommandTrade".Translate())) {
                     continue;
                 }
-
                 yield return option;
             }
         }

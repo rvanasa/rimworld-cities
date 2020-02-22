@@ -9,6 +9,7 @@
   <EnableCityEvents>Enable city events (food drops, reinforcements)</EnableCityEvents>
   <AbandonedCityChance>Abandoned city chance: [{0}]</AbandonedCityChance>
   <CitiesPer100kTiles>City spawn frequency:</CitiesPer100kTiles>
+  <MinCitadelsPerWorld>Minimum citadels per world: [{0}]</MinCitadelsPerWorld>
   
   <FriendlyCityKind>Friendly</FriendlyCityKind>
   <HostileCityKind>Hostile</HostileCityKind>
