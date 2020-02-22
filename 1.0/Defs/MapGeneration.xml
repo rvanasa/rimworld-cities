@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Defs>
-
-  <MapGeneratorDef Name="Cities_MapCommonBase" Abstract="True">
+	
+	<MapGeneratorDef Name="Cities_MapCommonBase" Abstract="True">
     <genSteps>
       <li>ElevationFertility</li>
       <li>Caves</li>
@@ -19,590 +19,590 @@
       <li>Fog</li>
     </genSteps>
   </MapGeneratorDef>
-
+	
   <MapGeneratorDef Name="Cities_Base" ParentName="Cities_MapCommonBase" Abstract="True">
     <genSteps>
       <li>RocksFromGrid</li>
       <li>ScatterDeepResourceLumps</li>
-      <li>City_Walls</li>
-      <li>City_Streets</li>
-      <li>City_Docks</li>
-      <li>City_Bazaars</li>
-      <li>City_Prison</li>
-      <li>City_Hospital</li>
-      <li>City_Freezer</li>
-      <li>City_ProductionBuildings</li>
-      <li>City_MainBuildings</li>
-      <li>City_Houses</li>
-      <li>City_ThingGroups</li>
-      <li>City_Emplacements</li>
-      <li>City_Fields</li>
-      <li>City_Orchards</li>
-      <li>City_Sidewalks</li>
-      <li>City_ClearAnimals</li>
-      <li>SettlementPower</li>
+			<li>City_Walls</li>
+			<li>City_Streets</li>
+			<li>City_Docks</li>
+			<li>City_Bazaars</li>
+			<li>City_Prison</li>
+			<li>City_Hospital</li>
+			<li>City_Freezer</li>
+			<li>City_ProductionBuildings</li>
+			<li>City_MainBuildings</li>
+			<li>City_Houses</li>
+			<li>City_ThingGroups</li>
+			<li>City_Emplacements</li>
+			<li>City_Fields</li>
+			<li>City_Orchards</li>
+			<li>City_Sidewalks</li>
+			<li>City_ClearAnimals</li>
+			<li>SettlementPower</li>
     </genSteps>
   </MapGeneratorDef>
-
+	
   <MapGeneratorDef ParentName="Cities_Base">
     <defName>City_Faction</defName>
     <genSteps>
       <li>City_ClearAnimals</li>
     </genSteps>
   </MapGeneratorDef>
-
+	
   <MapGeneratorDef ParentName="Cities_Base">
     <defName>City_Abandoned</defName>
     <genSteps>
-      <li>ScatterShrines</li>
+			<li>ScatterShrines</li>
       <li>CaveHives</li>
       <li>City_Abandoned_Pre</li>
       <li>City_Abandoned_Post</li>
     </genSteps>
   </MapGeneratorDef>
-
+	
   <MapGeneratorDef ParentName="Cities_Base">
     <defName>City_Ghost</defName>
     <genSteps>
-      <li>ScatterShrines</li>
+			<li>ScatterShrines</li>
       <li>CaveHives</li>
       <li>City_Ghost_Post</li>
       <li>City_ClearAnimals</li>
     </genSteps>
   </MapGeneratorDef>
-
+	
   <GenStepDef>
     <defName>City_Abandoned_Pre</defName>
     <order>240</order>
     <genStep Class="Cities.GenStep_Abandoned_Pre">
-      <decay>
-        <min>0.1</min>
-        <max>0.5</max>
-      </decay>
+			<decay>
+				<min>0.1</min>
+				<max>0.5</max>
+			</decay>
     </genStep>
   </GenStepDef>
-
+  
   <GenStepDef>
     <defName>City_Walls</defName>
     <order>250</order>
     <genStep Class="Cities.GenStep_Walls">
-      <countPer10kCellsRange>
-        <min>0</min>
-        <max>2</max>
-      </countPer10kCellsRange>
+			<countPer10kCellsRange>
+				<min>0</min>
+				<max>2</max>
+			</countPer10kCellsRange>
     </genStep>
   </GenStepDef>
-
+  
   <GenStepDef>
     <defName>City_Streets</defName>
     <order>251</order>
     <genStep Class="Cities.GenStep_Streets">
-      <roadTerrains>
-        <li>FlagstoneGranite</li>
-        <li>FlagstoneSlate</li>
-        <li>BrokenAsphalt</li>
-      </roadTerrains>
-      <divTerrains>
-        <li>Concrete</li>
-        <li>PavedTile</li>
-      </divTerrains>
-      <sidewalkTerrains>
-        <li>TileGranite</li>
-        <li>TileSlate</li>
-        <li>TileLimestone</li>
-        <li>TileMarble</li>
-        <li>TileSandstone</li>
-      </sidewalkTerrains>
+			<roadTerrains>
+				<li>FlagstoneGranite</li>
+				<li>FlagstoneSlate</li>
+				<li>BrokenAsphalt</li>
+			</roadTerrains>
+			<divTerrains>
+				<li>Concrete</li>
+				<li>PavedTile</li>
+			</divTerrains>
+			<sidewalkTerrains>
+				<li>TileGranite</li>
+				<li>TileSlate</li>
+				<li>TileLimestone</li>
+				<li>TileMarble</li>
+				<li>TileSandstone</li>
+			</sidewalkTerrains>
     </genStep>
   </GenStepDef>
-
+  
   <GenStepDef>
     <defName>City_Docks</defName>
     <order>260</order>
     <genStep Class="Cities.GenStep_Docks">
-      <countPer10kCellsRange>
-        <min>2</min>
-        <max>4</max>
-      </countPer10kCellsRange>
+			<countPer10kCellsRange>
+				<min>2</min>
+				<max>4</max>
+			</countPer10kCellsRange>
     </genStep>
   </GenStepDef>
-
+  
   <GenStepDef>
     <defName>City_Bazaars</defName>
     <order>270</order>
     <genStep Class="Cities.GenStep_Bazaars">
-      <countPer10kCellsRange>
-        <min>1</min>
-        <max>3</max>
-      </countPer10kCellsRange>
-      <areaConstraints>
-        <min>30</min>
-        <max>100</max>
-      </areaConstraints>
+			<countPer10kCellsRange>
+				<min>1</min>
+				<max>3</max>
+			</countPer10kCellsRange>
+			<areaConstraints>
+				<min>30</min>
+				<max>100</max>
+			</areaConstraints>
     </genStep>
   </GenStepDef>
-
+  
   <GenStepDef>
     <defName>City_Prison</defName>
     <order>301</order>
     <genStep Class="Cities.GenStep_Buildings">
-      <count>1</count>
-      <areaConstraints>
-        <min>100</min>
-        <max>200</max>
-      </areaConstraints>
-      <wallChance>0.75</wallChance>
-      <buildingDecorators>
-        <li Class="Cities.BuildingDecorator_Sandbags"/>
-      </buildingDecorators>
-      <roomDecorators>
-        <li Class="Cities.RoomDecorator_PrisonCell">
-          <maxArea>50</maxArea>
-          <bedOptions>
-            <li>Bed</li>
-            <li>Bedroll</li>
-            <li>SleepingSpot</li>
-          </bedOptions>
-        </li>
-      </roomDecorators>
+			<count>1</count>
+			<areaConstraints>
+				<min>100</min>
+				<max>200</max>
+			</areaConstraints>
+			<wallChance>0.75</wallChance>
+			<buildingDecorators>
+				<li Class="Cities.BuildingDecorator_Sandbags"></li>
+			</buildingDecorators>
+			<roomDecorators>
+				<li Class="Cities.RoomDecorator_PrisonCell">
+					<maxArea>50</maxArea>
+					<bedOptions>
+						<li>Bed</li>
+						<li>Bedroll</li>
+						<li>SleepingSpot</li>
+					</bedOptions>
+				</li>
+			</roomDecorators>
     </genStep>
   </GenStepDef>
-
+  
   <GenStepDef>
     <defName>City_Hospital</defName>
     <order>302</order>
     <genStep Class="Cities.GenStep_Buildings">
-      <count>1</count>
-      <areaConstraints>
-        <min>200</min>
-        <max>300</max>
-      </areaConstraints>
-      <wallChance>0.75</wallChance>
-      <floorOptions>
-        <li>PavedTile</li>
-        <li>MetalTile</li>
-        <li>SilverTile</li>
-        <li>SterileTile</li>
-      </floorOptions>
-      <roomDecorators>
-        <li Class="Cities.RoomDecorator_Storage">
-          <maxArea>40</maxArea>
-          <stockGenerators>
-            <li Class="StockGenerator_SingleDef">
-              <thingDef>Neutroamine</thingDef>
-              <countRange>
-                <min>50</min>
-                <max>200</max>
-              </countRange>
-            </li>
-            <li Class="StockGenerator_SingleDef">
-              <thingDef>Penoxycyline</thingDef>
-              <countRange>
-                <min>50</min>
-                <max>200</max>
-              </countRange>
-            </li>
-            <li Class="StockGenerator_SingleDef">
-              <thingDef>MedicineIndustrial</thingDef>
-              <countRange>
-                <min>25</min>
-                <max>50</max>
-              </countRange>
-            </li>
-            <li Class="StockGenerator_SingleDef">
-              <thingDef>MedicineUltratech</thingDef>
-              <countRange>
-                <min>5</min>
-                <max>15</max>
-              </countRange>
-            </li>
-            <li Class="StockGenerator_Category">
-              <categoryDef>Medicine</categoryDef>
-              <thingDefCountRange>
-                <min>2</min>
-                <max>3</max>
-              </thingDefCountRange>
-              <totalPriceRange>
-                <min>500</min>
-                <max>1000</max>
-              </totalPriceRange>
-            </li>
-            <li Class="StockGenerator_Category">
-              <categoryDef>BodyPartsArtificial</categoryDef>
-              <thingDefCountRange>
-                <min>2</min>
-                <max>4</max>
-              </thingDefCountRange>
-              <totalPriceRange>
-                <min>400</min>
-                <max>800</max>
-              </totalPriceRange>
-            </li>
-          </stockGenerators>
-        </li>
-        <li Class="Cities.RoomDecorator_HospitalBed">
-          <maxArea>80</maxArea>
-        </li>
-      </roomDecorators>
+			<count>1</count>
+			<areaConstraints>
+				<min>200</min>
+				<max>300</max>
+			</areaConstraints>
+			<wallChance>0.75</wallChance>
+			<floorOptions>
+				<li>PavedTile</li>
+				<li>MetalTile</li>
+				<li>SilverTile</li>
+				<li>SterileTile</li>
+			</floorOptions>
+			<roomDecorators>
+				<li Class="Cities.RoomDecorator_Storage">
+					<maxArea>40</maxArea>
+					<stockGenerators>
+						<li Class="StockGenerator_SingleDef">
+							<thingDef>Neutroamine</thingDef>
+							<countRange>
+								<min>50</min>
+								<max>200</max>
+							</countRange>
+						</li>
+						<li Class="StockGenerator_SingleDef">
+							<thingDef>Penoxycyline</thingDef>
+							<countRange>
+								<min>50</min>
+								<max>200</max>
+							</countRange>
+						</li>
+						<li Class="StockGenerator_SingleDef">
+							<thingDef>MedicineIndustrial</thingDef>
+							<countRange>
+								<min>25</min>
+								<max>50</max>
+							</countRange>
+						</li>
+						<li Class="StockGenerator_SingleDef">
+							<thingDef>MedicineUltratech</thingDef>
+							<countRange>
+								<min>5</min>
+								<max>15</max>
+							</countRange>
+						</li>
+						<li Class="StockGenerator_Category">
+			        <categoryDef>Medicine</categoryDef>
+			        <thingDefCountRange>
+			          <min>2</min>
+			          <max>3</max>
+			        </thingDefCountRange>
+			        <totalPriceRange>
+			          <min>500</min>
+			          <max>1000</max>
+			        </totalPriceRange>
+			      </li>
+						<li Class="StockGenerator_Category">
+			        <categoryDef>BodyPartsArtificial</categoryDef>
+			        <thingDefCountRange>
+			          <min>2</min>
+			          <max>4</max>
+			        </thingDefCountRange>
+			        <totalPriceRange>
+			          <min>400</min>
+			          <max>800</max>
+			        </totalPriceRange>
+			      </li>
+			    </stockGenerators>
+				</li>
+				<li Class="Cities.RoomDecorator_HospitalBed">
+					<maxArea>80</maxArea>
+				</li>
+			</roomDecorators>
     </genStep>
   </GenStepDef>
-
+  
   <GenStepDef>
     <defName>City_Freezer</defName>
     <order>303</order>
     <genStep Class="Cities.GenStep_Buildings">
-      <count>1</count>
-      <areaConstraints>
-        <min>80</min>
-        <max>100</max>
-      </areaConstraints>
-      <wallChance>0</wallChance>
-      <roomDecorators>
-        <li Class="Cities.RoomDecorator_FrozenStorage">
-          <maxArea>100</maxArea>
-          <density>0.8</density>
-          <stockGenerators>
-            <li Class="StockGenerator_Category">
-              <categoryDef>FoodMeals</categoryDef>
-              <thingDefCountRange>
-                <min>10</min>
-                <max>50</max>
-              </thingDefCountRange>
-              <totalPriceRange>
-                <min>30</min>
-                <max>50</max>
-              </totalPriceRange>
-            </li>
-          </stockGenerators>
-        </li>
-      </roomDecorators>
+			<count>1</count>
+			<areaConstraints>
+				<min>80</min>
+				<max>100</max>
+			</areaConstraints>
+			<wallChance>0</wallChance>
+			<roomDecorators>
+				<li Class="Cities.RoomDecorator_FrozenStorage">
+					<maxArea>100</maxArea>
+					<density>0.8</density>
+					<stockGenerators>
+						<li Class="StockGenerator_Category">
+			        <categoryDef>FoodMeals</categoryDef>
+			        <thingDefCountRange>
+			          <min>10</min>
+			          <max>50</max>
+			        </thingDefCountRange>
+			        <totalPriceRange>
+			          <min>30</min>
+			          <max>50</max>
+			        </totalPriceRange>
+			      </li>
+					</stockGenerators>
+				</li>
+			</roomDecorators>
     </genStep>
   </GenStepDef>
-
+  
   <GenStepDef>
     <defName>City_ProductionBuildings</defName>
     <order>310</order>
     <genStep Class="Cities.GenStep_Buildings">
-      <countPer10kCellsRange>
-        <min>1</min>
-        <max>1</max>
-      </countPer10kCellsRange>
-      <areaConstraints>
-        <min>250</min>
-        <max>400</max>
-      </areaConstraints>
-      <wallChance>0.5</wallChance>
-      <roomDecorators>
-        <li Class="Cities.RoomDecorator_Storage">
-          <weight>0.5</weight>
-          <maxArea>80</maxArea>
-          <stockGenerators>
-            <li Class="StockGenerator_Category">
-              <categoryDef>FoodMeals</categoryDef>
-              <thingDefCountRange>
-                <min>5</min>
-                <max>10</max>
-              </thingDefCountRange>
-              <totalPriceRange>
-                <min>10</min>
-                <max>50</max>
-              </totalPriceRange>
-            </li>
-          </stockGenerators>
-        </li>
-        <li Class="Cities.RoomDecorator_Batteries">
-          <weight>0.5</weight>
-        </li>
-        <li Class="Cities.RoomDecorator_Centerpiece">
-          <weight>3</weight>
-          <maxArea>80</maxArea>
-          <options>
-            <li>TableSculpting</li>
-            <li>TableButcher</li>
-            <li>ElectricTailoringBench</li>
-            <li>ElectricSmithy</li>
-            <li>TableMachining</li>
-            <li>ElectricStove</li>
-            <li>TableStonecutter</li>
-            <li>Brewery</li>
-            <li>DrugLab</li>
-            <li>ElectricSmelter</li>
-            <li>BiofuelRefinery</li>
-            <li>FabricationBench</li>
-          </options>
-          <chairOptions>
-            <li>Stool</li>
-            <li>DiningChair</li>
-          </chairOptions>
-        </li>
-      </roomDecorators>
+			<countPer10kCellsRange>
+				<min>1</min>
+				<max>1</max>
+			</countPer10kCellsRange>
+			<areaConstraints>
+				<min>250</min>
+				<max>400</max>
+			</areaConstraints>
+			<wallChance>0.5</wallChance>
+			<roomDecorators>
+				<li Class="Cities.RoomDecorator_Storage">
+					<weight>0.5</weight>
+					<maxArea>80</maxArea>
+					<stockGenerators>
+						<li Class="StockGenerator_Category">
+			        <categoryDef>FoodMeals</categoryDef>
+			        <thingDefCountRange>
+			          <min>5</min>
+			          <max>10</max>
+			        </thingDefCountRange>
+			        <totalPriceRange>
+			          <min>10</min>
+			          <max>50</max>
+			        </totalPriceRange>
+			      </li>
+					</stockGenerators>
+				</li>
+				<li Class="Cities.RoomDecorator_Batteries">
+					<weight>0.5</weight>
+				</li>
+				<li Class="Cities.RoomDecorator_Centerpiece">
+					<weight>3</weight>
+					<maxArea>80</maxArea>
+					<options>
+						<li>TableSculpting</li>
+						<li>TableButcher</li>
+						<li>ElectricTailoringBench</li>
+						<li>ElectricSmithy</li>
+						<li>TableMachining</li>
+						<li>ElectricStove</li>
+						<li>TableStonecutter</li>
+						<li>Brewery</li>
+						<li>DrugLab</li>
+						<li>ElectricSmelter</li>
+						<li>BiofuelRefinery</li>
+						<li>FabricationBench</li>
+					</options>
+					<chairOptions>
+						<li>Stool</li>
+						<li>DiningChair</li>
+					</chairOptions>
+				</li>
+			</roomDecorators>
     </genStep>
   </GenStepDef>
-
+  
   <GenStepDef>
     <defName>City_MainBuildings</defName>
     <order>311</order>
     <genStep Class="Cities.GenStep_Buildings">
-      <countPer10kCellsRange>
-        <min>4</min>
-        <max>8</max>
-      </countPer10kCellsRange>
-      <areaConstraints>
-        <min>100</min>
-        <max>2000</max>
-      </areaConstraints>
-      <roomDecorators>
-        <li Class="Cities.RoomDecorator_Storage"/>
-        <li Class="Cities.RoomDecorator_Centerpiece">
-          <weight>0.7</weight>
-          <options>
-            <li>HoopstoneRing</li>
-            <li>BilliardsTable</li>
-            <li>ShipChunk</li>
-            <li>StandingLamp</li>
-            <li>WoodFiredGenerator</li>
-            <li>CryptosleepCasket</li>
-            <li>CommsConsole</li>
-            <li>OrbitalTradeBeacon</li>
-            <!--<li>AnimalSleepingBox</li>-->
-            <li>ElectricCrematorium</li>
-            <li>FabricationBench</li>
-            <li>HiTechResearchBench</li>
-            <li>BiofuelRefinery</li>
-            <li>GroundPenetratingScanner</li>
-          </options>
-          <chairOptions>
-            <li>Stool</li>
-            <li>DiningChair</li>
-          </chairOptions>
-        </li>
-        <li Class="Cities.RoomDecorator_Centerpiece">
-          <weight>0.4</weight>
-          <options>
-            <li>ChessTable</li>
-            <li>GameOfUrBoard</li>
-            <li>PokerTable</li>
-            <li>Table1x2c</li>
-            <li>Table2x2c</li>
-            <li>Table2x4c</li>
-            <li>Table3x3c</li>
-          </options>
-          <chairOptions>
-            <li>Stool</li>
-            <li>DiningChair</li>
-          </chairOptions>
-          <chairDensity>0.8</chairDensity>
-        </li>
-        <!--<li Class="Cities.RoomDecorator_Centerpiece">
-          <weight>0.5</weight>
-          <roofed>false</roofed>
-          <options>
-            <li>LongRangeMineralScanner</li>
-          </options>
-          <chairOptions>
-            <li>Stool</li>
-          </chairOptions>
-        </li>-->
-      </roomDecorators>
+			<countPer10kCellsRange>
+				<min>4</min>
+				<max>8</max>
+			</countPer10kCellsRange>
+			<areaConstraints>
+				<min>100</min>
+				<max>2000</max>
+			</areaConstraints>
+			<roomDecorators>
+				<li Class="Cities.RoomDecorator_Storage"></li>
+				<li Class="Cities.RoomDecorator_Centerpiece">
+					<weight>0.7</weight>
+					<options>
+						<li>HoopstoneRing</li>
+						<li>BilliardsTable</li>
+						<li>ShipChunk</li>
+						<li>StandingLamp</li>
+						<li>WoodFiredGenerator</li>
+						<li>CryptosleepCasket</li>
+						<li>CommsConsole</li>
+						<li>OrbitalTradeBeacon</li>
+						<!--<li>AnimalSleepingBox</li>-->
+						<li>ElectricCrematorium</li>
+						<li>FabricationBench</li>
+						<li>HiTechResearchBench</li>
+						<li>BiofuelRefinery</li>
+						<li>GroundPenetratingScanner</li>
+					</options>
+					<chairOptions>
+						<li>Stool</li>
+						<li>DiningChair</li>
+					</chairOptions>
+				</li>
+				<li Class="Cities.RoomDecorator_Centerpiece">
+					<weight>0.4</weight>
+					<options>
+						<li>ChessTable</li>
+						<li>GameOfUrBoard</li>
+						<li>PokerTable</li>
+						<li>Table1x2c</li>
+						<li>Table2x2c</li>
+						<li>Table2x4c</li>
+						<li>Table3x3c</li>
+					</options>
+					<chairOptions>
+						<li>Stool</li>
+						<li>DiningChair</li>
+					</chairOptions>
+					<chairDensity>0.8</chairDensity>
+				</li>
+				<!--<li Class="Cities.RoomDecorator_Centerpiece">
+					<weight>0.5</weight>
+					<roofed>false</roofed>
+					<options>
+						<li>LongRangeMineralScanner</li>
+					</options>
+					<chairOptions>
+						<li>Stool</li>
+					</chairOptions>
+				</li>-->
+			</roomDecorators>
     </genStep>
   </GenStepDef>
-
+  
   <GenStepDef>
     <defName>City_Houses</defName>
     <order>311</order>
     <genStep Class="Cities.GenStep_Buildings">
-      <countPer10kCellsRange>
-        <min>10</min>
-        <max>15</max>
-      </countPer10kCellsRange>
-      <areaConstraints>
-        <min>50</min>
-        <max>100</max>
-      </areaConstraints>
-      <roomDecorators>
-        <li Class="Cities.RoomDecorator_Storage">
-          <maxArea>50</maxArea>
-        </li>
-        <li Class="Cities.RoomDecorator_Bedroom">
-          <weight>2</weight>
-          <maxArea>80</maxArea>
-        </li>
-      </roomDecorators>
+			<countPer10kCellsRange>
+				<min>10</min>
+				<max>15</max>
+			</countPer10kCellsRange>
+			<areaConstraints>
+				<min>50</min>
+				<max>100</max>
+			</areaConstraints>
+			<roomDecorators>
+				<li Class="Cities.RoomDecorator_Storage">
+					<maxArea>50</maxArea>
+				</li>
+				<li Class="Cities.RoomDecorator_Bedroom">
+					<weight>2</weight>
+					<maxArea>80</maxArea>
+				</li>
+			</roomDecorators>
     </genStep>
   </GenStepDef>
-
+  
   <GenStepDef>
     <defName>City_ThingGroups</defName>
     <order>312</order>
     <genStep Class="Cities.GenStep_ThingGroups">
-      <countPer10kCellsRange>
-        <min>4</min>
-        <max>8</max>
-      </countPer10kCellsRange>
-      <areaConstraints>
-        <min>40</min>
-        <max>150</max>
-      </areaConstraints>
-      <options>
-        <li>
-          <thingDef>SolarGenerator</thingDef>
-          <spacingX>5</spacingX>
-          <spacingZ>6</spacingZ>
-        </li>
-        <li>
-          <naturalFloor>true</naturalFloor>
-          <thingDef>Grave</thingDef>
-          <spacingX>2</spacingX>
-          <spacingZ>3</spacingZ>
-        </li>
-        <li>
-          <weight>0.25</weight>
-          <roofed>true</roofed>
-          <thingDef>Sarcophagus</thingDef>
-          <spacingX>3</spacingX>
-          <spacingZ>4</spacingZ>
-        </li>
-        <li>
-          <weight>0.25</weight>
-          <thingDef>PodLauncher</thingDef>
-          <spacingX>3</spacingX>
-          <spacingZ>6</spacingZ>
-        </li>
-      </options>
+			<countPer10kCellsRange>
+				<min>4</min>
+				<max>8</max>
+			</countPer10kCellsRange>
+			<areaConstraints>
+				<min>40</min>
+				<max>150</max>
+			</areaConstraints>
+			<options>
+				<li>
+					<thingDef>SolarGenerator</thingDef>
+					<spacingX>5</spacingX>
+					<spacingZ>6</spacingZ>
+				</li>
+				<li>
+					<naturalFloor>true</naturalFloor>
+					<thingDef>Grave</thingDef>
+					<spacingX>2</spacingX>
+					<spacingZ>3</spacingZ>
+				</li>
+				<li>
+					<weight>0.25</weight>
+					<roofed>true</roofed>
+					<thingDef>Sarcophagus</thingDef>
+					<spacingX>3</spacingX>
+					<spacingZ>4</spacingZ>
+				</li>
+				<li>
+					<weight>0.25</weight>
+					<thingDef>PodLauncher</thingDef>
+					<spacingX>3</spacingX>
+					<spacingZ>6</spacingZ>
+				</li>
+			</options>
     </genStep>
   </GenStepDef>
-
+  
   <GenStepDef>
     <defName>City_Emplacements</defName>
     <order>313</order>
     <genStep Class="Cities.GenStep_Emplacements">
-      <countPer10kCellsRange>
-        <min>3</min>
-        <max>6</max>
-      </countPer10kCellsRange>
-      <areaConstraints>
-        <min>10</min>
-        <max>30</max>
-      </areaConstraints>
-      <options>
-        <li>
-          <weaponDef>Turret_Mortar</weaponDef>
-          <ammoDef>Shell_HighExplosive</ammoDef>
-          <manned>true</manned>
-          <selfDestructive>true</selfDestructive>
-        </li>
-        <li>
-          <weight>0.5</weight>
-          <weaponDef>Turret_Mortar</weaponDef>
-          <ammoDef>Shell_AntigrainWarhead</ammoDef>
-          <ammoCount>
-            <min>1</min>
-            <max>3</max>
-          </ammoCount>
-          <manned>true</manned>
-          <selfDestructive>true</selfDestructive>
-        </li>
-        <li>
-          <weaponDef>Turret_MiniTurret</weaponDef>
-          <ammoDef>Steel</ammoDef>
-          <ammoCount>
-            <min>1</min>
-            <max>10</max>
-          </ammoCount>
-        </li>
-        <li>
-          <roofed>true</roofed>
-          <weaponDef>Turret_Autocannon</weaponDef>
-          <ammoDef>Steel</ammoDef>
-        </li>
-        <li>
-          <roofed>true</roofed>
-          <weaponDef>Turret_Sniper</weaponDef>
-          <ammoDef>Uranium</ammoDef>
-        </li>
-      </options>
+			<countPer10kCellsRange>
+				<min>3</min>
+				<max>6</max>
+			</countPer10kCellsRange>
+			<areaConstraints>
+				<min>10</min>
+				<max>30</max>
+			</areaConstraints>
+			<options>
+				<li>
+					<weaponDef>Turret_Mortar</weaponDef>
+					<ammoDef>Shell_HighExplosive</ammoDef>
+					<manned>true</manned>
+					<selfDestructive>true</selfDestructive>
+				</li>
+				<li>
+					<weight>0.5</weight>
+					<weaponDef>Turret_Mortar</weaponDef>
+					<ammoDef>Shell_AntigrainWarhead</ammoDef>
+					<ammoCount>
+						<min>1</min>
+						<max>3</max>
+					</ammoCount>
+					<manned>true</manned>
+					<selfDestructive>true</selfDestructive>
+				</li>
+				<li>
+					<weaponDef>Turret_MiniTurret</weaponDef>
+					<ammoDef>Steel</ammoDef>
+					<ammoCount>
+						<min>1</min>
+						<max>10</max>
+					</ammoCount>
+				</li>
+				<li>
+					<roofed>true</roofed>
+					<weaponDef>Turret_Autocannon</weaponDef>
+					<ammoDef>Steel</ammoDef>
+				</li>
+				<li>
+					<roofed>true</roofed>
+					<weaponDef>Turret_Sniper</weaponDef>
+					<ammoDef>Uranium</ammoDef>
+				</li>
+			</options>
     </genStep>
   </GenStepDef>
-
+  
   <GenStepDef>
     <defName>City_Fields</defName>
     <order>320</order>
     <genStep Class="Cities.GenStep_Fields">
-      <countPer10kCellsRange>
-        <min>10</min>
-        <max>20</max>
-      </countPer10kCellsRange>
-      <areaConstraints>
-        <min>50</min>
-        <max>1000</max>
-      </areaConstraints>
-      <maxRatio>5</maxRatio>
+			<countPer10kCellsRange>
+				<min>10</min>
+				<max>20</max>
+			</countPer10kCellsRange>
+			<areaConstraints>
+				<min>50</min>
+				<max>1000</max>
+			</areaConstraints>
+			<maxRatio>5</maxRatio>
     </genStep>
   </GenStepDef>
-
+  
   <GenStepDef>
     <defName>City_Orchards</defName>
     <order>321</order>
     <genStep Class="Cities.GenStep_Fields">
-      <countPer10kCellsRange>
-        <min>5</min>
-        <max>10</max>
-      </countPer10kCellsRange>
-      <areaConstraints>
-        <min>20</min>
-        <max>100</max>
-      </areaConstraints>
-      <maxRatio>10</maxRatio>
-      <density>0.2</density>
-      <altitudeLayer>Building</altitudeLayer>
+			<countPer10kCellsRange>
+				<min>5</min>
+				<max>10</max>
+			</countPer10kCellsRange>
+			<areaConstraints>
+				<min>20</min>
+				<max>100</max>
+			</areaConstraints>
+			<maxRatio>10</maxRatio>
+			<density>0.2</density>
+			<altitudeLayer>Building</altitudeLayer>
     </genStep>
   </GenStepDef>
-
+  
   <GenStepDef>
     <defName>City_Sidewalks</defName>
     <order>330</order>
     <genStep Class="Cities.GenStep_Sidewalks">
-      <countPer10kCellsRange>
-        <min>50</min>
-        <max>50</max>
-      </countPer10kCellsRange>
-      <sidewalkTerrains>
-        <li>TileGranite</li>
-        <li>TileSlate</li>
-        <li>TileLimestone</li>
-        <li>TileMarble</li>
-        <li>TileSandstone</li>
-      </sidewalkTerrains>
+			<countPer10kCellsRange>
+				<min>50</min>
+				<max>50</max>
+			</countPer10kCellsRange>
+			<sidewalkTerrains>
+				<li>TileGranite</li>
+				<li>TileSlate</li>
+				<li>TileLimestone</li>
+				<li>TileMarble</li>
+				<li>TileSandstone</li>
+			</sidewalkTerrains>
     </genStep>
   </GenStepDef>
-
+	
   <GenStepDef>
     <defName>City_Abandoned_Post</defName>
     <order>690</order>
     <genStep Class="Cities.GenStep_Abandoned_Post">
-      <decay>
-        <min>0.1</min>
-        <max>0.5</max>
-      </decay>
+			<decay>
+				<min>0.1</min>
+				<max>0.5</max>
+			</decay>
     </genStep>
   </GenStepDef>
-
+	
   <GenStepDef>
     <defName>City_Ghost_Post</defName>
     <order>690</order>
     <genStep Class="Cities.GenStep_Ghost_Post">
     </genStep>
   </GenStepDef>
-
+	
   <GenStepDef>
     <defName>City_ClearAnimals</defName>
     <order>1100</order>
     <genStep Class="Cities.GenStep_ClearAnimals">
-      <decay>
-        <min>0.1</min>
-        <max>0.5</max>
-      </decay>
+			<decay>
+				<min>0.1</min>
+				<max>0.5</max>
+			</decay>
     </genStep>
   </GenStepDef>
-
+	
 </Defs>

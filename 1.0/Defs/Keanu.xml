@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  
+  <FactionDef>
+    <defName>Keanu_Faction</defName>
+		<label>legends</label>
+    <pawnSingular>legend</pawnSingular>
+		<pawnsPlural>legends</pawnsPlural>
+    <permanentEnemy>true</permanentEnemy>
+		<requiredCountAtGameStart>0</requiredCountAtGameStart>
+		<fixedName>Legends</fixedName>
+		<techLevel>Industrial</techLevel>
+		<backstoryCategories>
+			<li>Civil</li>
+		</backstoryCategories>
+		<hidden>true</hidden>
+		<autoFlee>false</autoFlee>
+		<canMakeRandomly>false</canMakeRandomly>
+		<canSiege>false</canSiege>
+		<canStageAttacks>false</canStageAttacks>
+		<earliestRaidDays>10000</earliestRaidDays>
+		<geneticVariance>0</geneticVariance>
+		<hairTags>
+			<li>Urban</li>
+		</hairTags>
+		<apparelStuffFilter>
+			<thingDefs>
+				<li>Synthread</li>
+				<li>Hyperweave</li>
+				<li>Plasteel</li>
+			</thingDefs>
+		</apparelStuffFilter>
+	</FactionDef>
+  
+  <PawnKindDef ParentName="OutlanderBase">
+    <defName>Keanu_Pawn</defName>
+    <label>legend</label>
+    <combatPower>500</combatPower>
+    <minGenerationAge>40</minGenerationAge>
+    <maxGenerationAge>50</maxGenerationAge>
+    <isFighter>true</isFighter>
+    <race>Human</race>
+    <chemicalAddictionChance>0</chemicalAddictionChance>
+    <backstoryCryptosleepCommonality>0</backstoryCryptosleepCommonality>
+    <backstoryCategories>
+      <li>Civil</li>
+    </backstoryCategories>
+    <invNutrition>10</invNutrition>
+    <inventoryOptions>
+      <subOptionsChooseOne>
+        <li>
+          <choiceChance>6</choiceChance>
+          <thingDef>MedicineIndustrial</thingDef>
+          <countRange>5</countRange>
+        </li>
+      </subOptionsChooseOne>
+    </inventoryOptions>
+    <gearHealthRange>
+      <min>1</min>
+      <max>1</max>
+    </gearHealthRange>
+    <itemQuality>Legendary</itemQuality>
+    <weaponMoney>
+      <min>2000</min>
+      <max>10000</max>
+    </weaponMoney>
+    <weaponTags>
+      <li>GunHeavy</li>
+    </weaponTags>
+    <apparelAllowHeadgearChance>0</apparelAllowHeadgearChance>
+    <apparelRequired>
+      <li>Apparel_CollarShirt</li>
+      <li>Apparel_Pants</li>
+      <li>Apparel_Duster</li>
+      <li>Apparel_FlakVest</li>
+    </apparelRequired>
+    <apparelColor>(50,50,50)</apparelColor>
+  </PawnKindDef>
+  
+  <ThingDef ParentName="AnimalThingBase">
+    <defName>Keanu_Dog</defName>
+    <label>beagle</label>
+    <description>A happy little beagle.</description>
+    <statBases>
+      <MoveSpeed>3.1</MoveSpeed>
+      <MarketValue>100</MarketValue>
+      <ComfyTemperatureMin>-15</ComfyTemperatureMin>
+    </statBases>
+    <comps>
+      <li>
+        <compClass>Keanu.ThingComp_WickDog</compClass>
+      </li>
+    </comps>
+    <tools>
+      <li>
+        <label>left claw</label>
+        <capacities>
+          <li>Scratch</li>
+        </capacities>
+        <power>3.6</power>
+        <cooldownTime>2</cooldownTime>
+        <linkedBodyPartsGroup>FrontLeftPaw</linkedBodyPartsGroup>
+      </li>
+      <li>
+        <label>right claw</label>
+        <capacities>
+          <li>Scratch</li>
+        </capacities>
+        <power>3.6</power>
+        <cooldownTime>2</cooldownTime>
+        <linkedBodyPartsGroup>FrontRightPaw</linkedBodyPartsGroup>
+      </li>
+      <li>
+        <label>cute little teeth</label>
+        <capacities>
+          <li>Bite</li>
+        </capacities>
+        <power>4.8</power>
+        <cooldownTime>2</cooldownTime>
+        <linkedBodyPartsGroup>Teeth</linkedBodyPartsGroup>
+        <chanceFactor>0.7</chanceFactor>
+      </li>
+      <li>
+        <label>head</label>
+        <capacities>
+          <li>Blunt</li>
+        </capacities>
+        <power>2</power>
+        <cooldownTime>2</cooldownTime>
+        <linkedBodyPartsGroup>HeadAttackTool</linkedBodyPartsGroup>
+        <ensureLinkedBodyPartsGroupAlwaysUsable>true</ensureLinkedBodyPartsGroupAlwaysUsable>
+        <chanceFactor>0.2</chanceFactor>
+      </li>
+    </tools>
+    <race>
+      <body>QuadrupedAnimalWithPawsAndTail</body>
+      <petness>1</petness>
+      <baseBodySize>0.3</baseBodySize>
+      <baseHungerRate>0.30</baseHungerRate>
+      <baseHealthScale>0.4</baseHealthScale>
+      <foodType>OmnivoreAnimal, OvivoreAnimal</foodType>
+      <leatherDef>Leather_Dog</leatherDef>
+      <nameOnTameChance>1</nameOnTameChance>
+      <trainability>Intermediate</trainability>
+      <wildness>0</wildness>
+      <nuzzleMtbHours>24</nuzzleMtbHours>
+      <gestationPeriodDays>24</gestationPeriodDays>
+      <litterSizeCurve>
+        <points>
+          <li>(0.5, 0)</li>
+          <li>(1, 1)</li>
+          <li>(2, 1.7)</li>
+          <li>(3, 0.7)</li>
+          <li>(3.5, 0)</li>
+        </points>
+      </litterSizeCurve>
+      <lifeExpectancy>15</lifeExpectancy>
+      <lifeStageAges>
+        <li>
+          <def>AnimalBaby</def>
+          <minAge>0</minAge>
+        </li>
+        <li>
+          <def>AnimalJuvenile</def>
+          <minAge>0.1</minAge>
+        </li>
+        <li>
+          <def>AnimalAdult</def>
+          <minAge>0.3</minAge>
+          <soundWounded>Pawn_DogSmall_Injured</soundWounded>
+          <soundDeath>Pawn_DogSmall_Dead</soundDeath>
+          <soundCall>Pawn_DogSmall_Call</soundCall>
+          <soundAngry>Pawn_DogSmall_Angry</soundAngry>
+        </li>
+      </lifeStageAges>
+      <soundMeleeHitPawn>Pawn_Melee_SmallScratch_HitPawn</soundMeleeHitPawn>
+      <soundMeleeHitBuilding>Pawn_Melee_SmallScratch_HitBuilding</soundMeleeHitBuilding>
+      <soundMeleeMiss>Pawn_Melee_SmallScratch_Miss</soundMeleeMiss>
+    </race>
+    <tradeTags>
+      <li>AnimalCommon</li>
+      <li>AnimalPet</li>
+    </tradeTags>
+  </ThingDef>
+	
+  <PawnKindDef ParentName="AnimalKindBase">
+    <defName>Keanu_Dog</defName>
+    <label>beagle</label>
+    <race>Keanu_Dog</race>
+    <combatPower>500</combatPower>
+    <ecoSystemWeight>0</ecoSystemWeight>
+    <wildGroupSize>0</wildGroupSize>
+		<canArriveManhunter>false</canArriveManhunter>
+    <lifeStages>
+      <li>
+        <label>beagle puppy</label>
+        <labelPlural>beagle puppies</labelPlural>
+        <bodyGraphicData>
+          <texPath>Things/Pawn/Animal/YorkshireTerrier/YorkshireTerrier</texPath>
+          <drawSize>0.48</drawSize>
+        </bodyGraphicData>
+        <dessicatedBodyGraphicData>
+          <texPath>Things/Pawn/Animal/YorkshireTerrier/Dessicated_YorkshireTerrier</texPath>
+          <drawSize>0.48</drawSize>
+        </dessicatedBodyGraphicData>
+      </li>
+      <li>
+        <bodyGraphicData>
+          <texPath>Things/Pawn/Animal/YorkshireTerrier/YorkshireTerrier</texPath>
+          <drawSize>0.75</drawSize>
+        </bodyGraphicData>
+        <femaleGraphicData>
+          <texPath>Things/Pawn/Animal/YorkshireTerrier/YorkshireTerrier</texPath>
+          <drawSize>0.73</drawSize>
+        </femaleGraphicData>
+        <dessicatedBodyGraphicData>
+          <texPath>Things/Pawn/Animal/YorkshireTerrier/Dessicated_YorkshireTerrier</texPath>
+          <drawSize>0.75</drawSize>
+        </dessicatedBodyGraphicData>
+        <femaleDessicatedBodyGraphicData>
+          <texPath>Things/Pawn/Animal/YorkshireTerrier/Dessicated_YorkshireTerrier</texPath>
+          <drawSize>0.73</drawSize>
+        </femaleDessicatedBodyGraphicData>
+      </li>
+      <li>
+        <bodyGraphicData>
+          <texPath>Things/Pawn/Animal/YorkshireTerrier/YorkshireTerrier</texPath>
+          <drawSize>0.9</drawSize>
+          <shadowData>
+            <volume>(0.20, 0.3, 0.20)</volume>
+            <offset>(0,0,-0.08)</offset>
+          </shadowData>
+        </bodyGraphicData>
+        <femaleGraphicData>
+          <texPath>Things/Pawn/Animal/YorkshireTerrier/YorkshireTerrier</texPath>
+          <drawSize>0.89</drawSize>
+        </femaleGraphicData>
+        <dessicatedBodyGraphicData>
+          <texPath>Things/Pawn/Animal/YorkshireTerrier/Dessicated_YorkshireTerrier</texPath>
+          <drawSize>0.9</drawSize>
+        </dessicatedBodyGraphicData>
+        <femaleDessicatedBodyGraphicData>
+          <texPath>Things/Pawn/Animal/YorkshireTerrier/Dessicated_YorkshireTerrier</texPath>
+          <drawSize>0.89</drawSize>
+        </femaleDessicatedBodyGraphicData>
+      </li>
+    </lifeStages>
+  </PawnKindDef>
+  
+  <IncidentDef>
+		<defName>Keanu_WickDog</defName>
+		<label>dog arrival</label>
+		<category>Special</category>
+    <targetTags>
+      <li>Map_PlayerHome</li>
+    </targetTags>
+		<workerClass>Keanu.IncidentWorker_WickDog</workerClass>
+		<letterLabel>Dog arrives</letterLabel>
+		<letterText>An adorable dog has wandered into your colony.</letterText>
+		<baseChance>0.02</baseChance>
+		<minRefireDays>1000</minRefireDays>
+		<pawnKind>Keanu_Dog</pawnKind>
+		<pawnFixedGender>Female</pawnFixedGender>
+	</IncidentDef>
+  
+  <IncidentDef>
+		<defName>Keanu_WickRevenge</defName>
+		<label>dog revenge</label>
+		<category>Special</category>
+    <targetTags>
+      <li>Map_PlayerHome</li>
+    </targetTags>
+		<workerClass>Keanu.IncidentWorker_WickRevenge</workerClass>
+		<letterLabel>Dog revenge</letterLabel>
+		<letterText>Upon the beagle's death, a man has appeared seeking revenge and bloodshed. Flee for your lives!</letterText>
+		<baseChance>0</baseChance>
+		<pawnKind>Keanu_Pawn</pawnKind>
+	</IncidentDef>
+  
+</Defs>
