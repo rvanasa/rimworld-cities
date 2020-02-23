@@ -10,8 +10,6 @@ namespace Cities {
 
         public HashSet<Thing> cityOwnedThings = new HashSet<Thing>();
 
-        public City City => (City) map.Parent;
-
         public MapComponent_City(Map map) : base(map) {
         }
 
@@ -26,33 +24,36 @@ namespace Cities {
                     return;
                 }
 
-                if (!City.Abandoned) {
-                    if (City.Faction.HostileTo(Faction.OfPlayer)) {
-                        var storyComp = Find.Storyteller.storytellerComps.First(x => x is StorytellerComp_OnOffCycle || x is StorytellerComp_RandomMain);
-                        var parms = storyComp.GenerateParms(IncidentCategoryDefOf.ThreatBig, map);
-                        parms.faction = City.Faction;
-                        parms.raidStrategy = RaidStrategyDefOf.ImmediateAttack;
-                        parms.raidArrivalMode = DefDatabase<PawnsArrivalModeDef>.GetRandom();
-                        parms.raidArrivalModeForQuickMilitaryAid = true;
-                        parms.points += City.RaidPointIncrease;
-                        IncidentDefOf.RaidEnemy.Worker.TryExecute(parms);
-                    }
-                    // else {
-                    // var pos = QuestUtility.FindDropSpot(map);
-                    // var things = new List<Thing>();
-                    // var foodCount = (int) (.Count * EventTimeCycle / 60000F / );
-                    // for (var i = 0; i < foodCount; i++) {
-                    //     map.GetComponent<MapComponent_City>().cityOwnedThings.Add(thing);
-                    //     things.Add(thing);
-                    // }
-                    // DropPodUtility.DropThingsNear(pos, map, things, canRoofPunch: false);
-                    // }
+                if (map.Parent is City city) {
+                    if (!city.Abandoned) {
+                        if (city.Faction.HostileTo(Faction.OfPlayer)) {
+                            var storyComp = Find.Storyteller.storytellerComps
+                                .First(x => x is StorytellerComp_OnOffCycle || x is StorytellerComp_RandomMain);
+                            var parms = storyComp.GenerateParms(IncidentCategoryDefOf.ThreatBig, map);
+                            parms.faction = city.Faction;
+                            parms.raidStrategy = RaidStrategyDefOf.ImmediateAttack;
+                            parms.raidArrivalMode = DefDatabase<PawnsArrivalModeDef>.GetRandom();
+                            parms.raidArrivalModeForQuickMilitaryAid = true;
+                            parms.points += city.RaidPointIncrease;
+                            IncidentDefOf.RaidEnemy.Worker.TryExecute(parms);
+                        }
+                        // else {
+                        // var pos = QuestUtility.FindDropSpot(map);
+                        // var things = new List<Thing>();
+                        // var foodCount = (int) (.Count * EventTimeCycle / 60000F / );
+                        // for (var i = 0; i < foodCount; i++) {
+                        //     map.GetComponent<MapComponent_City>().cityOwnedThings.Add(thing);
+                        //     things.Add(thing);
+                        // }
+                        // DropPodUtility.DropThingsNear(pos, map, things, canRoofPunch: false);
+                        // }
 
-                    foreach (var pawn in map.mapPawns.SpawnedPawnsInFaction(map.ParentFaction)) {
-                        if (!pawn.inventory.innerContainer.Any(thing => pawn.WillEat(thing))) {
-                            for (var i = 0; i < 2; i++) {
-                                var meal = ThingMaker.MakeThing(ThingDefOf.MealSurvivalPack);
-                                pawn.inventory.innerContainer.TryAdd(meal);
+                        foreach (var pawn in map.mapPawns.SpawnedPawnsInFaction(map.ParentFaction)) {
+                            if (!pawn.inventory.innerContainer.Any(thing => pawn.WillEat(thing))) {
+                                for (var i = 0; i < 2; i++) {
+                                    var meal = ThingMaker.MakeThing(ThingDefOf.MealSurvivalPack);
+                                    pawn.inventory.innerContainer.TryAdd(meal);
+                                }
                             }
                         }
                     }

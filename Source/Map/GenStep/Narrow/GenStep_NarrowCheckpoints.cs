@@ -43,10 +43,11 @@ namespace Cities {
                     var point = s.MoveRand().pos + IntVec3.North * (tier + 2);
                     var sMortar = s.MoveTo(point).ExpandRegion(IsValidEmplacementTile, 25).Center();
                     if (s.Area >= 9) {
-                        sMortar.ClearThingsInBounds()
+                        var mortar = sMortar.ClearThingsInBounds()
                             .FillTerrain(TerrainDefOf.Concrete)
                             .Back()
                             .Spawn(ThingDefOf.Turret_Mortar, GenCity.RandomStuff(ThingDefOf.Turret_Mortar, map));
+                        mortar.SetFactionDirect(map.ParentFaction);
 
                         var ammoPoint = point + IntVec3.North * 2;
                         var ammo = s.MoveTo(ammoPoint).Spawn(0, 0, ThingDefOf.Shell_HighExplosive);

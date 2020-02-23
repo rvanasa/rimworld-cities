@@ -49,6 +49,9 @@
         <li Class="ThinkNode_Subtree">
           <treeDef>SatisfyBasicNeeds</treeDef>
         </li>
+        <li Class="JobGiver_ManTurretsNearSelf">
+          <maxDistFromPoint>30</maxDistFromPoint>
+        </li>
         <li Class="JobGiver_SeekSafeTemperature"/>
         <li Class="ThinkNode_ConditionalCloseToDutyTarget">
           <maxDistToDutyTarget>12</maxDistToDutyTarget>
