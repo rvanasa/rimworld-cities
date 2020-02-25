@@ -43,10 +43,16 @@ namespace Cities {
         }
 
         void SpawnChair(Stencil s, ThingDef thing, ThingDef stuff) {
-            s.Spawn(thing, stuff);
-            if (s.Chance(chairPawnChance)) {
+            if (s.Check(IsValidChairTile)) {
+                s.Spawn(thing, stuff);
+            }
+            if (s.Chance(chairPawnChance) && s.IsInMap()) {
                 GenCity.SpawnInhabitant(s.pos, s.map);
             }
+        }
+
+        bool IsValidChairTile(Map map, IntVec3 pos) {
+            return pos.GetFirstThing<Building>(map) == null;
         }
     }
 }

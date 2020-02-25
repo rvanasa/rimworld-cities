@@ -6,8 +6,25 @@
     <label>start in a city (RimCities)</label>
     <category>WorldThing</category>
     <scenPartClass>Cities.ScenPart_StartCity</scenPartClass>
-		<summaryPriority>490</summaryPriority>
+    <summaryPriority>490</summaryPriority>
     <maxUses>1</maxUses>
+  </ScenPartDef>
+
+  <ScenPartDef>
+    <defName>StartCitadel</defName>
+    <label>start near a citadel (RimCities)</label>
+    <category>WorldThing</category>
+    <scenPartClass>Cities.ScenPart_StartCitadel</scenPartClass>
+    <summaryPriority>490</summaryPriority>
+    <maxUses>1</maxUses>
+  </ScenPartDef>
+
+  <ScenPartDef>
+    <defName>StartEquipment</defName>
+    <label>give each pawn</label>
+    <category>StartingItem</category>
+    <scenPartClass>Cities.ScenPart_Equipment</scenPartClass>
+    <summaryPriority>489</summaryPriority>
   </ScenPartDef>
 
 </Defs>

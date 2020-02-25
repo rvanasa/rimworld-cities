@@ -14,7 +14,7 @@ namespace Cities {
             Scribe_Values.Look(ref inhabitantKind, "inhabitantKind");
             base.ExposeData();
         }
-
+        
         public override void DoEditInterface(Listing_ScenEdit listing) {
             var scenPartRect = listing.GetScenPartRect(this, RowHeight * 3 + 31);
             if (Widgets.ButtonText(scenPartRect.TopPartPixels(RowHeight), inhabitantKind.ToString())) {
@@ -30,7 +30,7 @@ namespace Cities {
             city.SetFaction(Find.GameInitData.playerFaction);
             city.inhabitantFaction = GenCity.RandomCityFaction(IsValidFaction);
             city.Tile = Find.GameInitData.startingTile;
-            city.Name = SettlementNameGenerator.GenerateSettlementName(city, city.inhabitantFaction?.def.factionNameMaker);
+            city.Name = city.ChooseName();
             Find.WorldObjects.Add(city);
         }
 

@@ -54,12 +54,12 @@ namespace Cities {
         public override void OnMapGenerated(Map map) {
             if (map.Parent == city) {
                 map.GetComponent<MapComponent_City>().cityOwnedThings.Clear();
-                var playerFaction = Faction.OfPlayer;
-                foreach (var thing in map.listerThings.AllThings) {
-                    if (!(thing is Pawn) && thing.def.CanHaveFaction) {
-                        thing.SetFactionDirect(playerFaction);
-                    }
-                }
+                // var playerFaction = Faction.OfPlayer;
+                // foreach (var thing in map.listerThings.AllThings) {
+                //     if (!(thing is Pawn) && thing.def.CanHaveFaction) {
+                //         thing.SetFactionDirect(playerFaction);
+                //     }
+                // }
             }
         }
 
@@ -84,8 +84,10 @@ namespace Cities {
                             var parms = storyComp.GenerateParms(IncidentCategoryDefOf.ThreatBig, map);
                             parms.faction = enemyFaction;
                             parms.raidStrategy = DefDatabase<RaidStrategyDef>.GetRandom();
-                            parms.raidArrivalMode = DefDatabase<PawnsArrivalModeDef>.GetRandom();
-                            parms.points += Mathf.RoundToInt((5 + stage) * 1000);
+                            parms.raidArrivalMode = Rand.Chance(.4F)
+                                ? PawnsArrivalModeDefOf.EdgeDrop
+                                : PawnsArrivalModeDefOf.EdgeWalkIn;
+                            parms.points += Mathf.RoundToInt((2 + stage) * 1000);
                             IncidentDefOf.RaidEnemy.Worker.TryExecute(parms);
 
                             Messages.Message("QuestDefendWave".Translate().Formatted(stage, MaxStageCount),
@@ -135,68 +137,4 @@ namespace Cities {
         }
     }
 
-    public class Quest_PrisonBreak : Quest {
-        //const int MaxPrisoners = 5;
-
-        City city;
-
-        public override int MinCapableColonists => 1;
-
-        public override LookTargets Targets => city;
-
-        public override NamedArgument[] FormatArgs =>
-            new NamedArgument[] {city.Faction.Name, city.Name};
-
-        public override void ExposeData() {
-            base.ExposeData();
-            Scribe_References.Look(ref city, "city");
-        }
-
-        public override void ChooseParts() {
-            base.ChooseParts();
-            city = Find.WorldObjects.Settlements
-                .Where(s => s is City city && city.Visitable && !city.Abandoned
-                            && QuestUtility.Reachable(HomeMap?.Parent, s, 50)
-                            && !s.HasMap)
-                .RandomElementWithFallback() as City;
-        }
-
-        public override bool AllPartsValid() {
-            return base.AllPartsValid() && city != null;
-        }
-
-        public override void OnMapGenerated(Map map) {
-            if (map.Parent == city) {
-                var playerFaction = Faction.OfPlayer;
-                var count = 0;
-                foreach (var pawn in map.mapPawns.AllPawnsSpawned) {
-                    if (pawn.IsPrisoner) {
-                        count++;
-                        pawn.mindState.WillJoinColonyIfRescued = true;
-                        //pawn.guest = null;
-                        //if(count < MaxPrisoners) {
-                        //	pawn.SetFactionDirect(playerFaction);
-                        //}
-                    }
-                }
-
-                if (count > 0) {
-                    Complete();
-                }
-                else {
-                    Cancel();
-                }
-            }
-        }
-
-        public override void OnMapRemoved(Map map) {
-            if (map.Parent == city) {
-                Cancel();
-            }
-        }
-
-        public override void OnComplete() {
-            city.Faction.TryAffectGoodwillWith(Faction.OfPlayer, -200);
-        }
-    }
 }

@@ -2,7 +2,9 @@
 <Defs>
 
   <ScenarioDef Name="Crashlanded_City" Abstract="True">
-    <description>The three of you awake in your cryptosleep sarcophagi to the sound of sirens and ripping metal. You barely get to the escape pods before the ship is torn apart. Some time later, you land on this unknown rimworld.</description>
+    <description>The three of you awake in your cryptosleep sarcophagi to the sound of sirens and ripping metal. You
+      barely get to the escape pods before the ship is torn apart. Some time later, you land on this unknown rimworld.
+    </description>
     <scenario>
       <summary>The classic RimWorld experience with an urban twist.</summary>
       <playerFaction>
@@ -21,8 +23,8 @@
         <!-- Player starting stuff spawn method-->
         <li Class="ScenPart_PlayerPawnsArriveMethod">
           <def>PlayerPawnsArriveMethod</def>
-					<visible>false</visible>
-					<method>DropPods</method>
+          <visible>false</visible>
+          <method>DropPods</method>
         </li>
 
         <!-- Player pawns modifiers -->
@@ -38,7 +40,7 @@
             <max>1</max>
           </severityRange>
         </li>
-        
+
         <!-- Player starting things -->
         <li Class="ScenPart_StartingThing_Defined">
           <def>StartingThing_Defined</def>
@@ -73,18 +75,18 @@
           <thingDef>MeleeWeapon_Knife</thingDef>
           <stuff>Plasteel</stuff>
         </li>
-				<li Class="ScenPart_StartingThing_Defined">
+        <li Class="ScenPart_StartingThing_Defined">
           <def>StartingThing_Defined</def>
           <thingDef>Apparel_FlakPants</thingDef>
         </li>
-				<li Class="ScenPart_StartingThing_Defined">
+        <li Class="ScenPart_StartingThing_Defined">
           <def>StartingThing_Defined</def>
           <thingDef>Apparel_FlakVest</thingDef>
         </li>
-				<li Class="ScenPart_StartingThing_Defined">
+        <li Class="ScenPart_StartingThing_Defined">
           <def>StartingThing_Defined</def>
           <thingDef>Apparel_AdvancedHelmet</thingDef>
-					<stuff>Plasteel</stuff>
+          <stuff>Plasteel</stuff>
         </li>
         <li Class="ScenPart_StartingAnimal">
           <def>StartingAnimal</def>
@@ -120,58 +122,105 @@
           <thingDef>MealSurvivalPack</thingDef>
           <count>7</count>
         </li>
-        
+
         <!-- Game start dialog -->
         <li Class="ScenPart_GameStartDialog">
           <def>GameStartDialog</def>
           <textKey>GameStartDialog</textKey>
           <closeSound>GameStartSting</closeSound>
         </li>
+
+      </parts>
+    </scenario>
+  </ScenarioDef>
+
+  <ScenarioDef ParentName="Crashlanded_City">
+    <defName>Crashlanded_City_Abandoned</defName>
+    <label>Crashlanded (Abandoned City)</label>
+    <description>Instead of spawning in the wilderness, you will start inside an abandoned city. You will find plenty of
+      resources, but keep a close eye out for scavengers and raiding parties.
+    </description>
+    <scenario>
+      <parts>
+        <li Class="Cities.ScenPart_StartCity">
+          <def>StartCity</def>
+          <inhabitantKind>Abandoned</inhabitantKind>
+        </li>
+      </parts>
+    </scenario>
+  </ScenarioDef>
+
+  <ScenarioDef ParentName="Crashlanded_City">
+    <defName>Crashlanded_City_Friendly</defName>
+    <description>Instead of spawning in the wilderness, you will start inside a friendly city.</description>
+    <label>Crashlanded (Friendly City)</label>
+    <scenario>
+      <parts>
+        <li Class="Cities.ScenPart_StartCity">
+          <def>StartCity</def>
+          <inhabitantKind>Friendly</inhabitantKind>
+        </li>
+      </parts>
+    </scenario>
+  </ScenarioDef>
+
+  <ScenarioDef ParentName="Crashlanded_City">
+    <defName>Crashlanded_City_Ghost</defName>
+    <description>Instead of spawning in the wilderness, you will start inside an eerily silent city.</description>
+    <label>Crashlanded (Ghost City)</label>
+    <scenario>
+      <parts>
+        <li Class="Cities.ScenPart_StartCity">
+          <def>StartCity</def>
+          <inhabitantKind>Ghost</inhabitantKind>
+        </li>
+      </parts>
+    </scenario>
+  </ScenarioDef>
+
+  <ScenarioDef>
+    <defName>Siege_City_Citadel</defName>
+    <!--    <description>Take command of an elite task force to capture a hostile citadel.</description>-->
+    <label>Citadel Siege</label>
+    <scenario>
+      <summary>Take command of an elite task force to capture a hostile citadel.</summary>
+      <playerFaction>
+        <def>PlayerFaction</def>
+        <factionDef>PlayerColony</factionDef>
+      </playerFaction>
+      <parts>
+
+        <li Class="Cities.ScenPart_StartCitadel">
+          <def>StartCitadel</def>
+        </li>
+
+        <li Class="ScenPart_ConfigPage_ConfigureStartingPawns">
+          <def>ConfigPage_ConfigureStartingPawns</def>
+          <pawnCount>20</pawnCount>
+          <pawnChoiceCount>20</pawnChoiceCount>
+        </li>
+
+        <li Class="ScenPart_PlayerPawnsArriveMethod">
+          <def>PlayerPawnsArriveMethod</def>
+          <visible>false</visible>
+          <method>DropPods</method>
+        </li>
+
+        <li Class="Cities.ScenPart_Equipment">
+          <def>StartEquipment</def>
+          <thingDef>Apparel_ArmorHelmetRecon</thingDef>
+        </li>
+        <li Class="Cities.ScenPart_Equipment">
+          <def>StartEquipment</def>
+          <thingDef>Apparel_ArmorRecon</thingDef>
+        </li>
+        <li Class="Cities.ScenPart_Equipment">
+          <def>StartEquipment</def>
+          <thingDef>Gun_ChargeRifle</thingDef>
+        </li>
         
       </parts>
     </scenario>
   </ScenarioDef>
-	
-	<ScenarioDef ParentName="Crashlanded_City">
-		<defName>Crashlanded_City_Abandoned</defName>
-		<label>Crashlanded (Abandoned City)</label>
-		<description>Instead of spawning in the wilderness, you will start inside an abandoned city. You will find plenty of resources, but keep a close eye out for scavengers and raiding parties.</description>
-		<scenario>
-			<parts>
-				<li Class="Cities.ScenPart_StartCity">
-					<def>StartCity</def>
-					<inhabitantKind>Abandoned</inhabitantKind>
-				</li>
-			</parts>
-		</scenario>
-	</ScenarioDef>
-	
-	<ScenarioDef ParentName="Crashlanded_City">
-		<defName>Crashlanded_City_Friendly</defName>
-		<description>Instead of spawning in the wilderness, you will start inside a friendly city.</description>
-		<label>Crashlanded (Friendly City)</label>
-		<scenario>
-			<parts>
-				<li Class="Cities.ScenPart_StartCity">
-					<def>StartCity</def>
-					<inhabitantKind>Friendly</inhabitantKind>
-				</li>
-			</parts>
-		</scenario>
-	</ScenarioDef>
-	
-	<ScenarioDef ParentName="Crashlanded_City">
-		<defName>Crashlanded_City_Ghost</defName>
-		<description>Instead of spawning in the wilderness, you will start inside an eerily silent city.</description>
-		<label>Crashlanded (Ghost City)</label>
-		<scenario>
-			<parts>
-				<li Class="Cities.ScenPart_StartCity">
-					<def>StartCity</def>
-					<inhabitantKind>Ghost</inhabitantKind>
-				</li>
-			</parts>
-		</scenario>
-	</ScenarioDef>
 
 </Defs>

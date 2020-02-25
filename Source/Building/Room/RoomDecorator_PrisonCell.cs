@@ -20,6 +20,7 @@ namespace Cities {
             bed.ForPrisoners = true;
             if (s.Chance(prisonerChance)) {
                 var pawn = GenCity.SpawnInhabitant(s.pos, s.map, kind: PawnKindDefOf.Slave);
+                pawn.equipment.DestroyAllEquipment();
                 pawn.guest.SetGuestStatus(s.map.ParentFaction, true);
                 bed.CompAssignableToPawn.TryAssignPawn(pawn);
             }

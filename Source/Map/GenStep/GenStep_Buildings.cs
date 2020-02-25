@@ -33,6 +33,7 @@ namespace Cities {
                             sDir.Spawn(sDir.MaxX, z, ThingDefOf.Wall, doorStuff);
                         }
                         else {
+                            sDir.Move(sDir.MaxX + 1, z).ClearBuildingsAtPos();
                             sDir.Spawn(sDir.MaxX, z, ThingDefOf.Door, wallStuff);
                         }
                     }
@@ -46,6 +47,7 @@ namespace Cities {
                 buildingDecorators.RandomElement().Decorate(s);
             }
 
+            // s.FillFog();
             s.Expand(1).BorderTerrain(GenCity.RandomFloor(s.map), IsValidTile);
         }
 

@@ -19,7 +19,7 @@ namespace Cities {
                 }
             }
 
-            options.Where(opt => !opt.selfDestructive || s.map.ParentFaction.def.permanentEnemy)
+            options.Where(opt => !opt.selfDestructive || s.map.ParentFaction.def.permanentEnemy || s.map.Parent is Citadel)
                 .RandomElementByWeight(opt => opt.weight).Generate(s);
         }
 

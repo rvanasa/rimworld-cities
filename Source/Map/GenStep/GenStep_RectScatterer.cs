@@ -14,11 +14,18 @@ namespace Cities {
         public IntRange areaConstraints = new IntRange(100, 1000);
         public float maxRatio = 3;
 
+        public bool placeAnywhere = false;
+        public int minZ = 0;
+
         [Unsaved] IntVec3? cachedPos;
 
         [Unsaved] Stencil? cachedStencil;
 
         public int MaxAttempts => 100;
+
+        protected override bool CanScatterAt(IntVec3 pos, Map map) {
+            return /*base.CanScatterAt(pos, map) && */pos.z >= minZ;
+        }
 
         protected override void ScatterAt(IntVec3 pos, Map map, GenStepParams parms, int count) {
             var s = GetStencil(map, pos);
@@ -28,6 +35,18 @@ namespace Cities {
         }
 
         protected override bool TryFindScatterCell(Map map, out IntVec3 result) {
+            // Separate from previously established logic
+            if (map.Parent is Citadel) {
+                var atts = MaxAttempts;
+                do {
+                    result = CellRect.WholeMap(map).RandomCell;
+                    if (CanScatterAt(result, map) && GetStencil(map, result).HasValue) {
+                        return true;
+                    }
+                } while (--atts > 0);
+                return false;
+            }
+
             var attempts = MaxAttempts;
             do {
                 if (base.TryFindScatterCell(map, out result)) {
@@ -61,10 +80,10 @@ namespace Cities {
         public abstract void GenerateRect(Stencil s);
 
         protected virtual bool IsValidTile(Map map, IntVec3 pos) {
-            return IsValidTerrain(pos.GetTerrain(map));
+            return IsValidTerrain(map, pos.GetTerrain(map));
         }
 
-        protected virtual bool IsValidTerrain(TerrainDef terrain) {
+        protected virtual bool IsValidTerrain(Map map, TerrainDef terrain) {
             return TerrainUtility.IsNaturalExcludingRock(terrain);
         }
     }

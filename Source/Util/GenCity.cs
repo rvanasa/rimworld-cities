@@ -51,6 +51,8 @@ namespace Cities {
                 map.ParentFaction,
                 PawnGenerationContext.NonPlayer,
                 map.Tile,
+                mustBeCapableOfViolence: true,
+                forceGenerateNewPawn: true,/////
                 inhabitant: true));
 
             lord?.AddPawn(pawn);

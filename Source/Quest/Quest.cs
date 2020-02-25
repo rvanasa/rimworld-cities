@@ -173,6 +173,28 @@ namespace Cities {
             }
         }
 
+        public virtual void Emit(string key) {
+            IList<Result> results;
+            switch (key) {
+                // TODO: convert to multimap data structure
+                case "Complete":
+                    results = completeResults;
+                    break;
+                case "Cancel":
+                    results = cancelResults;
+                    break;
+                case "Expire":
+                    results = expireResults;
+                    break;
+                default:
+                    Log.Error("Unknown quest event: " + key);
+                    return;
+            }
+            foreach (var result in results) {
+                result.OnResult(this);
+            }
+        }
+
         public void Start() {
             if (Started) {
                 Log.Error("Quest already started: " + Name);
@@ -206,9 +228,11 @@ namespace Cities {
                 part.OnComplete(this);
             }
 
+            Emit("Complete");
+
             OnComplete();
 
-            handle.End(QuestEndOutcome.Success);
+            handle.End(QuestEndOutcome.Success, false);
         }
 
         public void Cancel() {
@@ -220,9 +244,11 @@ namespace Cities {
                 part.OnCancel(this);
             }
 
+            Emit("Cancel");
+
             OnCancel();
 
-            handle.End(QuestEndOutcome.Fail);
+            handle.End(QuestEndOutcome.Fail, false);
         }
 
         public void Expire() {
@@ -234,9 +260,11 @@ namespace Cities {
                 part.OnExpire(this);
             }
 
+            Emit("Expire");
+
             OnExpire();
 
-            handle.End(QuestEndOutcome.Fail);
+            handle.End(QuestEndOutcome.Fail, false);
         }
 
         bool TryEnd(QuestState state, string formatter, MessageTypeDef messageType) {

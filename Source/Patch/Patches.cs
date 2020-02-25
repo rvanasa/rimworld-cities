@@ -109,35 +109,33 @@ namespace Cities {
     [HarmonyPatch("FloodUnfogAdjacent")]
     internal static class FogGrid_FloodUnfogAdjacent {
         static bool Prefix(ref FogGrid __instance, ref Map ___map, IntVec3 c) {
-            if (!(___map.Parent is City)) {
-                return true;
-            }
-
-            __instance.Unfog(c);
-            for (var i = 0; i < 4; i++) {
-                var intVec = c + GenAdj.CardinalDirections[i];
-                if (intVec.InBounds(___map) && intVec.Fogged(___map)) {
-                    var edifice = intVec.GetEdifice(___map);
-                    if (edifice == null || !edifice.def.MakeFog) {
-                        FloodFillerFog.FloodUnfog(intVec, ___map);
-                    }
-                    else {
-                        __instance.Unfog(intVec);
-                    }
-                }
-            }
-
-            for (var j = 0; j < 8; j++) {
-                var c2 = c + GenAdj.AdjacentCells[j];
-                if (c2.InBounds(___map)) {
-                    var edifice2 = c2.GetEdifice(___map);
-                    if (edifice2 != null && edifice2.def.MakeFog) {
-                        __instance.Unfog(c2);
+            if (___map.Parent is City) {
+                var map = ___map;
+                __instance.Unfog(c);
+                for (var index = 0; index < 4; ++index) {
+                    var intVec3 = c + GenAdj.CardinalDirections[index];
+                    if (intVec3.InBounds(map) && intVec3.Fogged(map)) {
+                        var edifice = intVec3.GetEdifice(map);
+                        if (edifice == null || !edifice.def.MakeFog) {
+                            FloodFillerFog.FloodUnfog(intVec3, map);
+                        }
+                        else {
+                            __instance.Unfog(intVec3);
+                        }
                     }
                 }
+                for (var index = 0; index < 8; ++index) {
+                    var c1 = c + GenAdj.AdjacentCells[index];
+                    if (c1.InBounds(map)) {
+                        var edifice = c1.GetEdifice(map);
+                        if (edifice != null && edifice.def.MakeFog) {
+                            __instance.Unfog(c1);
+                        }
+                    }
+                }
+                return false;
             }
-
-            return false;
+            return true;
         }
     }
 
@@ -168,7 +166,7 @@ namespace Cities {
     [HarmonyPatch(typeof(Room))]
     [HarmonyPatch(nameof(Room.Notify_ContainedThingSpawnedOrDespawned))]
     internal static class Room_Notify_ContainedThingSpawnedOrDespawned {
-        static bool Prefix(Room __instance, ref Thing th) {
+        static bool Prefix(Room __instance, ref Thing th, ref bool ___statsAndRoleDirty) {
             try {
                 if (th.def.category == ThingCategory.Mote || th.def.category == ThingCategory.Projectile || (th.def.category == ThingCategory.Ethereal || th.def.category == ThingCategory.Pawn))
                     return false;
@@ -179,14 +177,24 @@ namespace Cities {
                             otherRegion.Room.Notify_ContainedThingSpawnedOrDespawned(th);
                     }
                 }
-                typeof(Room).GetField("statsAndRoleDirty", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.GetField)
-                    .SetValue(__instance, true);
+                ___statsAndRoleDirty = true;
             }
             catch (System.Exception e) {
                 Debug.LogWarning(e);
             }
 
             return false;
+        }
+    }
+
+    [HarmonyPatch(typeof(PawnGenerator))]
+    [HarmonyPatch(nameof(PawnGenerator.GeneratePawn), new[] {typeof(PawnGenerationRequest)})]
+    internal static class PawnGenerator_GeneratePawn {
+        static void Postfix(ref Pawn __result) {
+            if (__result.RaceProps.IsMechanoid && Rand.Chance(.005F)) {
+                var names = ((GenStep_NarrowKeep) DefDatabase<GenStepDef>.GetNamed("Narrow_Keep").genStep).mechanoidNames;
+                __result.Name = new NameSingle(names[Rand.Range(0, names.Count)]);
+            }
         }
     }
 }

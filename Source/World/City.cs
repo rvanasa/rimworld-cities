@@ -95,25 +95,28 @@ namespace Cities {
 
         public override IEnumerable<Gizmo> GetCaravanGizmos(Caravan caravan) {
             if (Visitable) {
-                var action = new Command_Action {
-                    icon = SettleUtility.SettleCommandTex,
-                    defaultLabel = "EnterCity".Translate(),
-                    defaultDesc = "EnterCityDesc".Translate(),
-                    action = () => {
-                        LongEventHandler.QueueLongEvent(() => {
-                            var orGenerateMap = GetOrGenerateMapUtility.GetOrGenerateMap(Tile, null);
-                            CaravanEnterMapUtility.Enter(caravan, orGenerateMap, CaravanEnterMode.Edge,
-                                CaravanDropInventoryMode.DoNotDrop, draftColonists: true);
-                        }, "GeneratingMapForNewEncounter", false, null);
-                    },
-                };
-                if (this.EnterCooldownBlocksEntering()) {
-                    action.disabled = true;
-                    action.disabledReason =
-                        "MessageEnterCooldownBlocksEntering".Translate(this.EnterCooldownDaysLeft().ToString("0.#"));
-                }
+                // TODO refactor
+                if (!(this is Citadel)) {
+                    var action = new Command_Action {
+                        icon = SettleUtility.SettleCommandTex,
+                        defaultLabel = "EnterCity".Translate(),
+                        defaultDesc = "EnterCityDesc".Translate(),
+                        action = () => {
+                            LongEventHandler.QueueLongEvent(() => {
+                                var orGenerateMap = GetOrGenerateMapUtility.GetOrGenerateMap(Tile, null);
+                                CaravanEnterMapUtility.Enter(caravan, orGenerateMap, CaravanEnterMode.Edge,
+                                    CaravanDropInventoryMode.DoNotDrop, draftColonists: true);
+                            }, "GeneratingMapForNewEncounter", false, null);
+                        },
+                    };
+                    if (this.EnterCooldownBlocksEntering()) {
+                        action.disabled = true;
+                        action.disabledReason =
+                            "MessageEnterCooldownBlocksEntering".Translate(this.EnterCooldownDaysLeft().ToString("0.#"));
+                    }
 
-                yield return action;
+                    yield return action;
+                }
 
                 if (!Abandoned) {
                     yield return CaravanVisitUtility.TradeCommand(caravan);

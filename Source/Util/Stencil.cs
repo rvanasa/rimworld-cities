@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using RimWorld.Planet;
 using Verse;
 
 namespace Cities {
@@ -227,6 +228,14 @@ namespace Cities {
             return Bound(x1, z1, x2, z2).FillRoof(roof, mask);
         }
 
+        // public Stencil FillFog() {
+        //     var grid = map.fogGrid.fogGrid;
+        //     foreach (var pos in bounds.Cells) {
+        //         grid[map.cellIndices.CellToIndex(pos)] = true;
+        //     }
+        //     return this;
+        // }
+
         public bool Any(Mask mask) {
             foreach (var pos in bounds.Cells) {
                 if (mask(map, pos)) {
@@ -245,6 +254,10 @@ namespace Cities {
             }
 
             return true;
+        }
+
+        public bool Check(Mask mask) {
+            return Check(pos, mask);
         }
 
         public bool Check(IntVec3 pos, Mask mask = null) {
@@ -275,6 +288,17 @@ namespace Cities {
             return this;
         }
 
+        public Stencil ClearBuildingsAtPos() {
+            if (pos.InBounds(map)) {
+                DoClearBuildings(pos);
+            }
+            return this;
+        }
+
+        public Stencil ClearThingsAtPos(int x, int y) {
+            return Move(x, y).ClearThingsAtPos();
+        }
+
         public Thing Spawn(int x, int z, ThingDef thing, ThingDef stuff = null) {
             return Move(x, z).ClampInsideMap().Spawn(thing, stuff);
         }
@@ -292,6 +316,17 @@ namespace Cities {
             for (var num = things.Count - 1; num >= 0; num--) {
                 var thing = things[num];
                 if (thing.def.destroyable) {
+                    thing.Destroy();
+                }
+            }
+        }
+
+        // TODO dry
+        void DoClearBuildings(IntVec3 pos) {
+            var things = pos.GetThingList(map);
+            for (var num = things.Count - 1; num >= 0; num--) {
+                var thing = things[num];
+                if (thing.def.destroyable && thing is Building) {
                     thing.Destroy();
                 }
             }

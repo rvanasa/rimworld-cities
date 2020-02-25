@@ -1,17 +1,19 @@
 ﻿using RimWorld;
+using RimWorld.BaseGen;
 using Verse;
 
 namespace Cities {
-    public class GenStep_Ghost_Post : GenStep {
+    public class GenStep_Post : GenStep {
         public override int SeedPart => GetType().Name.GetHashCode();
 
         public override void Generate(Map map, GenStepParams parms) {
             foreach (var thing in map.spawnedThings) {
-                if ((thing is Pawn || thing is Building_Turret) && thing.Faction != null && !thing.Faction.IsPlayer) {
-                    thing.Destroy();
+                if (!thing.def.canBeUsedUnderRoof) {
+                    new Stencil(map)
+                        .BoundTo(GenAdj.OccupiedRect(thing.Position, thing.Rotation, thing.def.size))
+                        .ClearRoof();
                 }
             }
-            map.weatherManager.curWeather = DefDatabase<WeatherDef>.GetNamed("Fog");
         }
     }
 }

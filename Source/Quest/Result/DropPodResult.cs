@@ -2,29 +2,32 @@ using System.Collections.Generic;
 using RimWorld;
 using Verse;
 
-namespace Cities
-{
-	public class DropPodResult : Result {
-		public List<Thing> things;
+namespace Cities {
+    public class DropPodResult : Result {
+        public List<Thing> things;
 
-		public override string Label => GenThing.ThingsToCommaList(things) + " (" + "QuestAppendWorth".Translate().Formatted(GenThing.GetMarketValue(things).ToStringMoney()) + ")";
+        public override string Label => GenThing.ThingsToCommaList(things) + " (" + "QuestAppendWorth".Translate().Formatted(GenThing.GetMarketValue(things).ToStringMoney()) + ")";
 
-		public DropPodResult() {
-		}
+        public DropPodResult() {
+        }
 
-		public DropPodResult(List<Thing> things) {
-			this.things = things;
-		}
+        public DropPodResult(List<Thing> things) {
+            this.things = things;
+        }
 
-		public override void ExposeData() {
-			Scribe_Collections.Look(ref things, "things", LookMode.Deep);
-		}
+        public override void ExposeData() {
+            Scribe_Collections.Look(ref things, "things", LookMode.Deep);
+        }
 
-		public override void OnResult(Quest quest) {
-			var map = quest.HomeMap;
-			var pos = QuestUtility.FindDropSpot(map);
-			DropPodUtility.DropThingsNear(pos, map, things, canRoofPunch: false);
-			Messages.Message("QuestReceived".Translate().Formatted(Label), new LookTargets(pos, map), MessageTypeDefOf.PositiveEvent);
-		}
-	}
+        public override void OnResult(Quest quest) {
+            var map = quest.HomeMap;
+            var pos = QuestUtility.FindDropSpot(map);
+            DropPodUtility.DropThingsNear(pos, map, things, canRoofPunch: false);
+            Find.LetterStack.ReceiveLetter(
+                "QuestReceivedLabel".Translate(),
+                "QuestReceived".Translate().Formatted(Label),
+                LetterDefOf.NeutralEvent,
+                new LookTargets(pos, map));
+        }
+    }
 }

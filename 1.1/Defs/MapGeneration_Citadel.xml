@@ -1,14 +1,62 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Defs>
 
-  <MapGeneratorDef ParentName="Cities_Base">
+  <!-- TODO convert to patch -->
+  <MapGeneratorDef Name="Narrow_MapCommonBase" Abstract="True">
+    <genSteps>
+      <li>ElevationFertility</li>
+      <!--      <li>Caves</li>-->
+      <li>Terrain</li>
+      <!--      <li>CavesTerrain</li>-->
+      <!--      <li>Roads</li>-->
+      <li>RockChunks</li>
+      <li>ScatterRuinsSimple</li>
+      <!--<li>SteamGeysers</li>-->
+      <li>FindPlayerStartSpot</li>
+      <li>ScenParts</li>
+      <li>Plants</li>
+      <li>Snow</li>
+      <!--      <li>Animals</li>-->
+      <li>Fog</li>
+    </genSteps>
+  </MapGeneratorDef>
+
+  <!-- TODO convert to patch -->
+  <MapGeneratorDef Name="Narrow_Base" ParentName="Narrow_MapCommonBase" Abstract="True">
+    <genSteps>
+      <!--      <li>RocksFromGrid</li>-->
+      <!--      <li>City_Walls</li>-->
+      <li>City_Streets</li>
+      <li>City_Docks</li>
+      <li>City_Bazaars</li>
+      <li>City_Prison</li>
+      <li>City_Hospital</li>
+      <li>City_Freezer</li>
+      <li>City_ProductionBuildings</li>
+      <li>City_MainBuildings</li>
+      <li>City_Houses</li>
+      <li>City_ThingGroups</li>
+      <li>City_Emplacements</li>
+      <li>City_Fields</li>
+      <li>City_Orchards</li>
+      <li>City_Sidewalks</li>
+      <!--      <li>City_ClearAnimals</li>-->
+      <li>City_Post</li>
+      <li>SettlementPower</li>
+    </genSteps>
+  </MapGeneratorDef>
+
+  <MapGeneratorDef ParentName="Narrow_Base">
     <defName>City_Citadel</defName>
     <genSteps>
-      <li>City_AdvancedBuildings</li>
-      <li>Narrow_Keep</li>
+      <!--      <li>City_AdvancedBuildings</li>-->
       <li>Narrow_Checkpoints</li>
       <li>Narrow_Trenches</li>
       <li>Narrow_Minefields</li>
+      <!--      <li>Narrow_Garages</li>-->
+      <li>Narrow_Keep</li>
+
+      <li>City_LargeBuildings</li>
 
       <!-- Additional passes -->
       <li>City_ProductionBuildings</li>
@@ -16,16 +64,110 @@
       <li>City_MainBuildings</li>
       <li>City_Houses</li>
       <li>City_Houses</li>
+      <li>City_Hospital</li>
       <li>City_Emplacements</li>
       <li>City_Emplacements</li>
     </genSteps>
   </MapGeneratorDef>
 
   <GenStepDef>
-    <defName>Narrow_Keep</defName>
-    <order>255</order>
-    <genStep Class="Cities.GenStep_NarrowKeep">
-      <buildingGenStepDef>City_AdvancedBuildings</buildingGenStepDef>
+    <defName>City_LargeBuildings</defName>
+    <order>252</order>
+    <genStep Class="Cities.GenStep_Buildings">
+      <minZ>600</minZ><!---->
+      <countPer10kCellsRange>10</countPer10kCellsRange>
+      <areaConstraints>100~2000</areaConstraints>
+      <maxRatio>5</maxRatio>
+      <wallChance>0.7</wallChance>
+      <roomDecorators>
+        <li Class="Cities.RoomDecorator_Centerpiece">
+          <weight>0.2</weight>
+          <roofed>false</roofed>
+          <maxArea>200</maxArea>
+          <options>
+            <li>Telescope</li>
+            <li>GroundPenetratingScanner</li>
+            <li>DeepDrill</li>
+            <li>SolarGenerator</li>
+          </options>
+        </li>
+        <li Class="Cities.RoomDecorator_Batteries">
+          <weight>0.2</weight>
+          <maxArea>200</maxArea>
+        </li>
+        <li Class="Cities.RoomDecorator_Centerpiece">
+          <weight>3</weight>
+          <maxArea>150</maxArea>
+          <options>
+            <li>TableSculpting</li>
+            <li>TableButcher</li>
+            <li>ElectricTailoringBench</li>
+            <li>ElectricSmithy</li>
+            <li>TableMachining</li>
+            <li>ElectricStove</li>
+            <li>TableStonecutter</li>
+            <li>Brewery</li>
+            <li>DrugLab</li>
+            <li>ElectricSmelter</li>
+            <li>BiofuelRefinery</li>
+            <li>FabricationBench</li>
+            <li>FermentingBarrel</li>
+          </options>
+          <chairOptions>
+            <li>Stool</li>
+            <li>DiningChair</li>
+          </chairOptions>
+        </li>
+        <li Class="Cities.RoomDecorator_Centerpiece">
+          <weight>0.7</weight>
+          <maxArea>150</maxArea>
+          <options>
+            <li>HoopstoneRing</li>
+            <li>BilliardsTable</li>
+            <li>ShipChunk</li>
+            <li>StandingLamp</li>
+            <li>WoodFiredGenerator</li>
+            <li>CryptosleepCasket</li>
+            <li>CommsConsole</li>
+            <li>OrbitalTradeBeacon</li>
+            <li>ElectricCrematorium</li>
+            <li>FabricationBench</li>
+            <li>HiTechResearchBench</li>
+            <li>BiofuelRefinery</li>
+            <li>InfiniteChemreactor</li>
+            <li>Urn</li>
+            <li>MarriageSpot</li>
+            <li>PartySpot</li>
+          </options>
+          <chairOptions>
+            <li>Stool</li>
+            <li>DiningChair</li>
+          </chairOptions>
+        </li>
+        <li Class="Cities.RoomDecorator_Centerpiece">
+          <weight>0.4</weight>
+          <maxArea>200</maxArea>
+          <options>
+            <li>ChessTable</li>
+            <li>GameOfUrBoard</li>
+            <li>PokerTable</li>
+            <li>Table1x2c</li>
+            <li>Table2x2c</li>
+            <li>Table2x4c</li>
+            <li>Table3x3c</li>
+          </options>
+          <chairOptions>
+            <li>Stool</li>
+            <li>DiningChair</li>
+          </chairOptions>
+          <chairDensity>0.8</chairDensity>
+        </li>
+      </roomDecorators>
+      <buildingDecorators>
+        <li Class="Cities.BuildingDecorator_None"/>
+        <li Class="Cities.BuildingDecorator_Patio"/>
+        <li Class="Cities.BuildingDecorator_Sandbags"/>
+      </buildingDecorators>
     </genStep>
   </GenStepDef>
 
@@ -33,10 +175,7 @@
     <defName>Narrow_Checkpoints</defName>
     <order>245</order>
     <genStep Class="Cities.GenStep_NarrowCheckpoints">
-      <countPer10kCellsRange>
-        <min>6</min>
-        <max>6</max>
-      </countPer10kCellsRange>
+      <countPer10kCellsRange>6</countPer10kCellsRange>
     </genStep>
   </GenStepDef>
 
@@ -44,10 +183,7 @@
     <defName>Narrow_Trenches</defName>
     <order>246</order>
     <genStep Class="Cities.GenStep_NarrowTrenches">
-      <countPer10kCellsRange>
-        <min>10</min>
-        <max>10</max>
-      </countPer10kCellsRange>
+      <countPer10kCellsRange>10</countPer10kCellsRange>
     </genStep>
   </GenStepDef>
 
@@ -55,10 +191,92 @@
     <defName>Narrow_Minefields</defName>
     <order>247</order>
     <genStep Class="Cities.GenStep_NarrowMinefields">
-      <countPer10kCellsRange>
-        <min>8</min>
-        <max>8</max>
-      </countPer10kCellsRange>
+      <countPer10kCellsRange>8</countPer10kCellsRange>
+    </genStep>
+  </GenStepDef>
+
+  <GenStepDef>
+    <defName>Narrow_Garages</defName>
+    <order>244</order>
+    <genStep Class="Cities.GenStep_NarrowGarages">
+      <countPer10kCellsRange>5</countPer10kCellsRange>
+    </genStep>
+  </GenStepDef>
+
+  <GenStepDef>
+    <defName>Narrow_Keep</defName>
+<!--    <order>256</order>-->
+    <order>271</order>
+    <!--    <order>1501</order>-->
+    <genStep Class="Cities.GenStep_NarrowKeep">
+      <buildingGenStepDef>City_AdvancedBuildings</buildingGenStepDef>
+      <mechanoidNames>
+        <li>Happy</li>
+        <li>Lucky</li>
+        <li>Skippy</li>
+        <li>Sunshine</li>
+        <li>Flowers</li>
+        <li>Rainbow</li>
+        <li>Popsicle</li>
+        <li>Bubbly</li>
+        <li>Squeaky</li>
+        <li>Bouncy</li>
+        <li>Grumpy</li>
+        <li>Stinky</li>
+        <li>Squishy</li>
+        <li>Smiley</li>
+        <li>Tickles</li>
+        <li>Nibbles</li>
+        <li>Nuzzly</li>
+        <li>Fuzzy</li>
+        <li>Wuzzy</li>
+        <li>Cutesy</li>
+        <li>Tootsy</li>
+        <li>Heehee</li>
+        <li>Knuckly</li>
+        <li>Snuggly</li>
+        <li>Ditsy</li>
+        <li>Sparkles</li>
+        <li>Sprinkles</li>
+        <li>Glitter</li>
+        <li>Shiny</li>
+        <li>Pokey</li>
+        <li>Silly</li>
+        <li>Cuddly</li>
+        <li>Plushie</li>
+        <li>Cupid</li>
+        <li>Sneezy</li>
+        <li>Tummy-Rub</li>
+        <li>Princess</li>
+        <li>Frumpy</li>
+        <li>Frowny</li>
+        <li>Peachy</li>
+        <li>Toothy</li>
+        <li>Wiggly</li>
+        <li>Squiggly</li>
+        <li>Frowny</li>
+        <li>Butterfies</li>
+        <li>Jumpy</li>
+        <li>Bumpy</li>
+        <li>Mistake</li>
+        <li>Accident</li>
+        <li>Giggly</li>
+        <li>Wheezy</li>
+        <li>Janky</li>
+        <li>Cranky</li>
+        <li>Creaky</li>
+        <li>Loosy-Goose</li>
+        <li>Clanky</li>
+        <li>Clinky</li>
+        <li>Scratchy</li>
+        <li>Floppy</li>
+        <li>Stabby</li>
+        <li>Waterlily</li>
+        <li>Tingly</li>
+        <li>Jingles</li>
+        <li>Pixie</li>
+        <li>Ror'Ramash the Eliminator</li>
+      </mechanoidNames>
     </genStep>
   </GenStepDef>
 
@@ -66,22 +284,44 @@
     <defName>City_AdvancedBuildings</defName>
     <order>311</order>
     <genStep Class="Cities.GenStep_Buildings">
-      <countPer10kCellsRange>
-        <min>4</min>
-        <max>4</max>
-      </countPer10kCellsRange>
-      <areaConstraints>
-        <min>200</min>
-        <max>1000</max>
-      </areaConstraints>
+      <countPer10kCellsRange>4</countPer10kCellsRange>
+      <areaConstraints>200~1000</areaConstraints>
       <expensive>true</expensive>
       <roomDecorators>
         <li Class="Cities.RoomDecorator_Storage">
           <weight>0.75</weight>
-          <maxArea>150</maxArea>
+          <maxArea>100</maxArea>
+          <density>0.15</density>
+          <stockGenerators>
+            <li Class="StockGenerator_Art">
+            </li>
+            <li Class="StockGenerator_Category">
+              <categoryDef>Artifacts</categoryDef>
+              <countRange>1</countRange>
+            </li>
+            <li Class="StockGenerator_Category">
+              <categoryDef>Neurotrainers</categoryDef>
+              <countRange>1</countRange>
+            </li>
+            <li Class="StockGenerator_Category">
+              <categoryDef>NeurotrainersPsycast</categoryDef>
+              <countRange>1</countRange>
+            </li>
+            <li Class="StockGenerator_Category">
+              <categoryDef>BodyPartsUltra</categoryDef>
+              <countRange>1</countRange>
+            </li>
+            <li Class="StockGenerator_Category">
+              <categoryDef>BodyPartsArchotech</categoryDef>
+              <countRange>1</countRange>
+            </li>
+            <!--            <li Class="StockGenerator_Category">-->
+            <!--              <categoryDef>ApparelNoble</categoryDef>-->
+            <!--              <countRange>1</countRange>-->
+            <!--            </li>-->
+          </stockGenerators>
         </li>
         <li Class="Cities.RoomDecorator_Centerpiece">
-          <weight>1.2</weight>
           <maxArea>120</maxArea>
           <options>
             <li>HoopstoneRing</li>

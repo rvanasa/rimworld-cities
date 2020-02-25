@@ -39,6 +39,7 @@
       <li>City_Orchards</li>
       <li>City_Sidewalks</li>
       <li>City_ClearAnimals</li>
+      <li>City_Post</li>
       <li>SettlementPower</li>
     </genSteps>
   </MapGeneratorDef>
@@ -526,7 +527,7 @@
           <ammoDef>Shell_AntigrainWarhead</ammoDef>
           <ammoCount>
             <min>1</min>
-            <max>3</max>
+            <max>2</max>
           </ammoCount>
           <manned>true</manned>
           <selfDestructive>true</selfDestructive>
@@ -606,8 +607,14 @@
   </GenStepDef>
 
   <GenStepDef>
-    <defName>City_Abandoned_Post</defName>
+    <defName>City_Post</defName>
     <order>690</order>
+    <genStep Class="Cities.GenStep_Post"/>
+  </GenStepDef>
+
+  <GenStepDef>
+    <defName>City_Abandoned_Post</defName>
+    <order>691</order>
     <genStep Class="Cities.GenStep_Abandoned_Post">
       <decay>
         <min>0.1</min>
@@ -618,7 +625,7 @@
 
   <GenStepDef>
     <defName>City_Ghost_Post</defName>
-    <order>690</order>
+    <order>691</order>
     <genStep Class="Cities.GenStep_Ghost_Post">
     </genStep>
   </GenStepDef>
@@ -626,12 +633,7 @@
   <GenStepDef>
     <defName>City_ClearAnimals</defName>
     <order>1100</order>
-    <genStep Class="Cities.GenStep_ClearAnimals">
-      <decay>
-        <min>0.1</min>
-        <max>0.5</max>
-      </decay>
-    </genStep>
+    <genStep Class="Cities.GenStep_ClearAnimals"/>
   </GenStepDef>
 
 </Defs>

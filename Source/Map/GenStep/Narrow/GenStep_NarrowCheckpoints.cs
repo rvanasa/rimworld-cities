@@ -9,26 +9,27 @@ namespace Cities {
         public override int SeedPart => GetType().Name.GetHashCode();
 
         public IntRange tierRange = new IntRange(1, 3);
-        public IntRange sentryRange = new IntRange(5, 10);
+        public IntRange sentryRange = new IntRange(6, 12);
         public IntRange ammoRange = new IntRange(4, 10);
 
         protected override void ScatterAt(IntVec3 pos, Map map, GenStepParams parms, int count) {
             var tier = tierRange.RandomInRange;
 
-            var stuff = GenCity.RandomWallStuff(map);
+            var wallStuff = GenCity.RandomWallStuff(map);
 
             var s = new Stencil(map).MoveTo(pos);
-            s.Bound(0, 0, 0, tier - 1).Fill(ThingDefOf.Door, stuff, IsValidTile);
+            // if (IsValidWallTile(map, s.pos)) {
+            //     s.Spawn(ThingDefOf.Door, wallStuff);
+            // }
             s = s.Bound(s.MinX, 0, s.MaxX, 0);
 
-            s.Expand(0, 0, 0, tier - 1)
-                .Fill(ThingDefOf.Wall, stuff, IsValidWallTile);
+            // s.Fill(ThingDefOf.Wall, wallStuff, IsValidWallTile);
 
             s.Expand(0, -1, 0, -3)
                 .ClearThingsInBounds();
 
             s.MoveWithBounds(0, -3)
-                .Fill(ThingDefOf.Barricade, GenCity.RandomStuff(ThingDefOf.Barricade, map), mask: IsValidTile);
+                .Fill(ThingDefOf.Barricade, GenCity.RandomStuff(ThingDefOf.Barricade, map), IsValidTile);
 
             var sentries = sentryRange.RandomInRange;
             for (var i = 0; i < sentries; i++) {
@@ -40,7 +41,7 @@ namespace Cities {
             for (var i = 0; i < mortars; i++) {
                 var attempts = 10;
                 do {
-                    var point = s.MoveRand().pos + IntVec3.North * (tier + 2);
+                    var point = s.Expand(-2, 0, -2, 0).MoveRand().pos + IntVec3.North * (tier + 2);
                     var sMortar = s.MoveTo(point).ExpandRegion(IsValidEmplacementTile, 25).Center();
                     if (s.Area >= 9) {
                         var mortar = sMortar.ClearThingsInBounds()
@@ -67,15 +68,18 @@ namespace Cities {
         }
 
         bool IsValidTile(Map map, IntVec3 pos) {
-            return TerrainUtility.IsNatural(pos.GetTerrain(map));
+            return pos.GetFirstThing<Building>(map) == null;
+            // return TerrainUtility.IsNatural(pos.GetTerrain(map));
         }
 
         bool IsValidWallTile(Map map, IntVec3 pos) {
-            return pos.GetThingList(map).Count == 0;
+            return pos.GetFirstThing<Building>(map) == null;
+            // return TerrainUtility.IsNaturalExcludingRock(pos.GetTerrain(map));
         }
 
         bool IsValidEmplacementTile(Map map, IntVec3 pos) {
-            return TerrainUtility.IsNaturalExcludingRock(pos.GetTerrain(map));
+            return pos.GetFirstThing<Building>(map) == null;
+            // return TerrainUtility.IsNaturalExcludingRock(pos.GetTerrain(map));
         }
     }
 }
