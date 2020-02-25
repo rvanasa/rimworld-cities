@@ -166,6 +166,28 @@ namespace Cities {
                 Log.Error("Unknown quest event: " + key);
             }
         }
+        
+        public virtual void Emit(string key) {
+            IList<Result> results;
+            switch (key) {
+                // TODO: convert to multimap data structure
+                case "Complete":
+                    results = completeResults;
+                    break;
+                case "Cancel":
+                    results = cancelResults;
+                    break;
+                case "Expire":
+                    results = expireResults;
+                    break;
+                default:
+                    Log.Error("Unknown quest event: " + key);
+                    return;
+            }
+            foreach (var result in results) {
+                result.OnResult(this);
+            }
+        }
 
         public void Start() {
             if (Started) {
@@ -191,6 +213,8 @@ namespace Cities {
             foreach (var part in def.questParts) {
                 part.OnComplete(this);
             }
+            
+            Emit("Complete");
 
             OnComplete();
         }
@@ -203,6 +227,8 @@ namespace Cities {
             foreach (var part in def.questParts) {
                 part.OnCancel(this);
             }
+            
+            Emit("Cancel");
 
             OnCancel();
         }
@@ -215,6 +241,8 @@ namespace Cities {
             foreach (var part in def.questParts) {
                 part.OnExpire(this);
             }
+            
+            Emit("Expire");
 
             OnExpire();
         }

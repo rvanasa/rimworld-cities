@@ -77,7 +77,7 @@ namespace Cities {
                             parms.faction = enemyFaction;
                             parms.raidStrategy = DefDatabase<RaidStrategyDef>.GetRandom();
                             parms.raidArrivalMode = DefDatabase<PawnsArrivalModeDef>.GetRandom();
-                            parms.points += Mathf.RoundToInt((5 + stage) * 1000);
+                            parms.points += Mathf.RoundToInt((2 + stage) * 1000);
                             IncidentDefOf.RaidEnemy.Worker.TryExecute(parms);
 
                             Messages.Message("QuestDefendWave".Translate().Formatted(stage, MaxStageCount),
