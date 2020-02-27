@@ -180,8 +180,8 @@
 
   <ScenarioDef>
     <defName>Siege_City_Citadel</defName>
-    <!--    <description>Take command of an elite task force to capture a hostile citadel.</description>-->
-    <label>Citadel Siege</label>
+    <description>Take command of an elite task force to capture a hostile citadel.</description>
+    <label>Task Force (Hostile Citadel)</label>
     <scenario>
       <summary>Take command of an elite task force to capture a hostile citadel.</summary>
       <playerFaction>
@@ -206,6 +206,29 @@
           <method>DropPods</method>
         </li>
 
+        <li Class="ScenPart_ForcedTrait">
+          <def>ForcedTrait</def>
+          <trait>Nerves</trait>
+          <degree>2</degree>
+          <context>PlayerStarter</context>
+          <chance>1</chance>
+        </li>
+        <li Class="ScenPart_ForcedTrait">
+          <def>ForcedTrait</def>
+          <trait>NaturalMood</trait>
+          <degree>1</degree>
+          <context>PlayerStarter</context>
+          <chance>1</chance>
+        </li>
+
+        <li Class="Cities.ScenPart_Allies">
+          <def>StartAllies</def>
+        </li>
+
+        <li Class="Cities.ScenPart_Elite">
+          <def>StartElite</def>
+        </li>
+
         <li Class="Cities.ScenPart_Equipment">
           <def>StartEquipment</def>
           <thingDef>Apparel_ArmorHelmetRecon</thingDef>
@@ -218,7 +241,7 @@
           <def>StartEquipment</def>
           <thingDef>Gun_ChargeRifle</thingDef>
         </li>
-        
+
       </parts>
     </scenario>
   </ScenarioDef>

@@ -27,4 +27,20 @@
     <summaryPriority>489</summaryPriority>
   </ScenPartDef>
 
+  <ScenPartDef>
+    <defName>StartElite</defName>
+    <label>elite colonists</label>
+    <category>PlayerPawnModifier</category>
+    <scenPartClass>Cities.ScenPart_Elite</scenPartClass>
+    <summaryPriority>488</summaryPriority>
+  </ScenPartDef>
+
+  <ScenPartDef>
+    <defName>StartAllies</defName>
+    <label>start with allies</label>
+    <category>Misc</category>
+    <scenPartClass>Cities.ScenPart_Allies</scenPartClass>
+    <summaryPriority>487</summaryPriority>
+  </ScenPartDef>
+
 </Defs>

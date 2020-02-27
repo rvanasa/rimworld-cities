@@ -41,7 +41,7 @@
           <targetKeepRadius>100</targetKeepRadius>
         </li>
         <li Class="ThinkNode_ConditionalRandom">
-          <chance>0.05</chance>
+          <chance>0.02</chance>
           <subNodes>
             <li Class="JobGiver_AIGotoNearestHostile"/>
           </subNodes>

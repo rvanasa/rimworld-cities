@@ -37,7 +37,7 @@ namespace Cities {
                 GenCity.SpawnInhabitant(point, map, new LordJob_DefendBase(map.ParentFaction, point));
             }
 
-            var mortars = tierRange.RandomInRange * 2;
+            var mortars = tierRange.RandomInRange * 1;/**/
             for (var i = 0; i < mortars; i++) {
                 var attempts = 10;
                 do {

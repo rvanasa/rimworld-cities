@@ -8,6 +8,7 @@ using RimWorld;
 using RimWorld.Planet;
 using RimWorld.QuestGen;
 using Verse;
+using Verse.AI;
 
 namespace Cities {
 
@@ -155,8 +156,8 @@ namespace Cities {
     [HarmonyPatch(nameof(Pawn.DropAndForbidEverything))]
     internal static class Pawn_DropAndForbidEverything {
         static bool Prefix(ref Pawn __instance) {
-            if (__instance.Map.Parent is City && __instance.TraderKind != null) {
-                __instance.inventory.DestroyAll();
+            if (__instance.Map?.Parent is City && __instance.TraderKind != null) {
+                __instance.inventory?.DestroyAll();
             }
             return true;
         }
@@ -184,6 +185,24 @@ namespace Cities {
             }
 
             return false;
+        }
+    }
+
+    // pathing error message hotfix
+    [HarmonyPatch(typeof(Pawn_PathFollower))]
+    [HarmonyPatch(nameof(Pawn_PathFollower.StartPath))]
+    internal static class Pawn_PathFollower_StartPath {
+        static bool Prefix(ref Pawn_PathFollower __instance, LocalTargetInfo dest, PathEndMode peMode, Pawn ___pawn) {
+            if (___pawn.Map?.Parent is City) {
+                dest = (LocalTargetInfo) GenPath.ResolvePathMode(___pawn, dest.ToTargetInfo(___pawn.Map), ref peMode);
+                if (dest.HasThing && dest.ThingDestroyed) {
+                    Log.Warning(___pawn + " pathing to destroyed thing " + dest.Thing);
+                    // ReSharper disable once PossibleNullReferenceException
+                    typeof(Pawn_PathFollower).GetMethod("PatherFailed", BindingFlags.NonPublic).Invoke(__instance, new object[] { });
+                    return false;
+                }
+            }
+            return true;
         }
     }
 

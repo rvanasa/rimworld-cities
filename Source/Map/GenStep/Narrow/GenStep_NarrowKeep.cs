@@ -25,7 +25,7 @@ namespace Cities {
                 .Center();
 
             // Clear area
-            s.Expand(0, 8, 0, 0).ClearThingsInBounds();
+            s.Expand(0, 3, 0, 0).ClearThingsInBounds();
 
             // Courtyard floor
             s.FillTerrain(BaseGenUtility.RandomHightechFloorDef());
@@ -34,7 +34,7 @@ namespace Cities {
             s.Bound(0, s.MinZ - 1, 0, s.MinZ - 8).SetTerrain(GenCity.RandomFloor(map));
 
             // Outer barricade
-            s.Fill(s.MinX, s.MinZ - 7, s.MaxX, s.MinZ - 7, ThingDefOf.Barricade, GenCity.RandomStuff(ThingDefOf.Barricade, map));
+            s.Fill(s.MinX, s.MinZ - 7, s.MaxX, s.MinZ - 7, ThingDefOf.Barricade, GenCity.RandomStuff(ThingDefOf.Barricade, map), IsValidBarricadeTile);
 
             // Outer wall
             var wallStuff = BaseGenUtility.RandomHightechWallStuff();
@@ -66,9 +66,9 @@ namespace Cities {
             //TODO throne room   
         }
 
-        // bool IsValidTile(Map map, IntVec3 pos) {
-        //     return TerrainUtility.IsNatural(pos.GetTerrain(map));
-        // }
+        bool IsValidBarricadeTile(Map map, IntVec3 pos) {
+            return pos.GetFirstThing<Building>(map) == null;
+        }
 
     }
 

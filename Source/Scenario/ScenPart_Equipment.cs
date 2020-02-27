@@ -10,13 +10,13 @@ namespace Cities {
     public class ScenPart_Equipment : ScenPart_ThingCount {
 
         public override void Notify_PawnGenerated(Pawn pawn, PawnGenerationContext context, bool redressed) {
-            if (pawn.Faction.IsPlayer) {
+            if (pawn.Faction?.IsPlayer ?? false) {
                 var thing = ThingMaker.MakeThing(thingDef, stuff);
                 if (thing is Apparel apparel) {
                     pawn.apparel.Wear(apparel, false);
                 }
                 else if (thing.def.equipmentType != EquipmentType.None && thing is ThingWithComps comps) {
-                    pawn.equipment.AddEquipment(comps); ///
+                    pawn.equipment.AddEquipment(comps);
                 }
                 else if (pawn.inventory.innerContainer.TryAdd(thing, count) != count) {
                     Debug.LogWarning("Could not give equipment: " + thing);
@@ -26,8 +26,8 @@ namespace Cities {
 
         public override bool AllowPlayerStartingPawn(Pawn pawn, bool tryingToRedress, PawnGenerationRequest req) {
             if (thingDef.equipmentType != EquipmentType.None) {
-                return !pawn.skills.GetSkill(SkillDefOf.Shooting).TotallyDisabled
-                       && !pawn.skills.GetSkill(SkillDefOf.Melee).TotallyDisabled;
+                return pawn.skills.GetSkill(SkillDefOf.Shooting).Level > 0
+                       && pawn.skills.GetSkill(SkillDefOf.Melee).Level > 0;
             }
             return true;
         }

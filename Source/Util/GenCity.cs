@@ -52,8 +52,9 @@ namespace Cities {
                 PawnGenerationContext.NonPlayer,
                 map.Tile,
                 mustBeCapableOfViolence: true,
-                forceGenerateNewPawn: true,/////
-                inhabitant: true));
+                forceGenerateNewPawn: true, /////
+                inhabitant: true
+            ));
 
             lord?.AddPawn(pawn);
             GenSpawn.Spawn(pawn, pos, map);

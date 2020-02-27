@@ -40,7 +40,7 @@
       <li>City_Fields</li>
       <li>City_Orchards</li>
       <li>City_Sidewalks</li>
-      <!--      <li>City_ClearAnimals</li>-->
+      <li>City_ClearAnimals</li>
       <li>City_Post</li>
       <li>SettlementPower</li>
     </genSteps>
@@ -205,7 +205,7 @@
 
   <GenStepDef>
     <defName>Narrow_Keep</defName>
-<!--    <order>256</order>-->
+    <!--    <order>256</order>-->
     <order>271</order>
     <!--    <order>1501</order>-->
     <genStep Class="Cities.GenStep_NarrowKeep">
@@ -315,10 +315,10 @@
               <categoryDef>BodyPartsArchotech</categoryDef>
               <countRange>1</countRange>
             </li>
-            <!--            <li Class="StockGenerator_Category">-->
-            <!--              <categoryDef>ApparelNoble</categoryDef>-->
-            <!--              <countRange>1</countRange>-->
-            <!--            </li>-->
+            <!--                        <li Class="StockGenerator_Category">-->
+            <!--                          <categoryDef>ApparelNoble</categoryDef>-->
+            <!--                          <countRange>1</countRange>-->
+            <!--                        </li>-->
           </stockGenerators>
         </li>
         <li Class="Cities.RoomDecorator_Centerpiece">
