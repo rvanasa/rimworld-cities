@@ -35,10 +35,9 @@ namespace Cities {
     [HarmonyPatch(nameof(SettlementDefeatUtility.CheckDefeated))]
     internal static class SettlementDefeatUtility_CheckDefeated {
         static bool Prefix(Settlement factionBase) {
-            if (factionBase is City city && !factionBase.Faction.HostileTo(Faction.OfPlayer)) {
+            if (factionBase is City && !factionBase.Faction.HostileTo(Faction.OfPlayer)) {
                 return false;
             }
-
             return true;
         }
     }
@@ -163,6 +162,30 @@ namespace Cities {
         }
     }
 
+    [HarmonyPatch(typeof(Pawn_TraderTracker))]
+    [HarmonyPatch(nameof(Pawn_TraderTracker.ColonyThingsWillingToBuy))]
+    internal static class Pawn_TraderTracker_ColonyThingsWillingToBuy {
+        static void Postfix(Pawn playerNegotiator, ref IEnumerable<Thing> __result) {
+            if (playerNegotiator.Map?.Parent is City) {
+                __result = __result.Concat(playerNegotiator.Map.mapPawns.SpawnedPawnsInFaction(playerNegotiator.Faction)
+                    .SelectMany(p => p.inventory.innerContainer.InnerListForReading));
+            }
+        }
+    }
+
+    [HarmonyPatch(typeof(TradeDeal))]
+    [HarmonyPatch("InSellablePosition")]
+    internal static class TradeDeal_InSellablePosition {
+        static bool Prefix(Thing t, ref bool __result) {
+            if (Find.CurrentMap?.Parent is City && !t.Spawned) {
+                __result = true;
+                return false;
+            }
+            return true;
+        }
+    }
+
+
     // bug hotfix for 1.1
     [HarmonyPatch(typeof(Room))]
     [HarmonyPatch(nameof(Room.Notify_ContainedThingSpawnedOrDespawned))]
@@ -181,7 +204,7 @@ namespace Cities {
                 ___statsAndRoleDirty = true;
             }
             catch (System.Exception e) {
-                Debug.LogWarning(e);
+                Log.Warning(e.ToString());
             }
 
             return false;
