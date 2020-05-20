@@ -63,7 +63,7 @@ namespace Cities {
                     text += "\n\n" + expire;
                 }
 
-                text += "\n\n" + "QuestExpireTime".Translate().Formatted(TicksLeft.ToStringTicksToPeriod());
+                // text += "\n\n" + "QuestExpireTime".Translate().Formatted(TicksLeft.ToStringTicksToPeriod());
                 return text;
             }
         }

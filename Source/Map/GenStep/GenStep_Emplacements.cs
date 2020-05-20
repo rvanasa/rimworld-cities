@@ -42,6 +42,7 @@ namespace Cities {
                 if (ammoDef != null) {
                     var ammo = s.RotateRand().Spawn(s.RandInclusive(-1, 1), s.RandInclusive(2, 3), ammoDef);
                     ammo.stackCount = ammoCount.RandomInRange;
+                    ammo.SetOwnedByCity(true, s.map);
                 }
 
                 if (roofed) {

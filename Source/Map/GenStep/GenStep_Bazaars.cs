@@ -33,7 +33,7 @@ namespace Cities {
                         item.Destroy();
                     }
                 }
-                
+
                 PawnInventoryGenerator.GiveRandomFood(pawn);
             }
 
@@ -45,14 +45,14 @@ namespace Cities {
                     sStand.Spawn(sStand.MinX - 1, 0, ThingDefOf.Wall, wallStuff);
                     sStand.Spawn(sStand.MaxX + 1, 0, ThingDefOf.Wall, wallStuff);
                     sStand.Expand(1).FillRoof(RoofDefOf.RoofConstructed);
-                    if (pawn != null) {
-                        var itemPos = sStand.Coords(sStand.RandX, sStand.RandZ);
-                        var item = pawn.inventory.innerContainer.FirstOrDefault();
-                        if (item != null) {
-                            pawn.inventory.innerContainer.TryDrop(item, itemPos, s.map, ThingPlaceMode.Direct, out var result);
-                            item.SetOwnedByCity(true);
-                        }
-                    }
+                    // if (pawn != null) {
+                    //     var itemPos = sStand.Coords(sStand.RandX, sStand.RandZ);
+                    //     var item = pawn.inventory.innerContainer.FirstOrDefault();
+                    //     if (item != null) {
+                    //         pawn.inventory.innerContainer.TryDrop(item, itemPos, s.map, ThingPlaceMode.Direct, out var result);
+                    //         item.SetOwnedByCity(true, s.map);
+                    //     }
+                    // }
                 }
             }
         }

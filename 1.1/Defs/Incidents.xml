@@ -109,8 +109,8 @@
 					<li>Complete</li>
 				</events>
 				<value>
-					<min>5000</min>
-					<max>7000</max>
+					<min>20000</min>
+					<max>30000</max>
 				</value>
 			</li>
 			<li Class="Cities.QuestListener_Message">
@@ -132,6 +132,7 @@
 			</li>
 		</questParts>
 		<baseChance>0.12</baseChance>
+		<EnterCityLabel>Defend City</EnterCityLabel>
 	</IncidentDef>
 	
   <IncidentDef Class="Cities.QuestDef">
@@ -156,6 +157,7 @@
 			</li>
 		</questParts>
 		<baseChance>0.2</baseChance>
+		<EnterCityLabel>Prison Break</EnterCityLabel>
 	</IncidentDef>
 
 </Defs>

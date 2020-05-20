@@ -42,13 +42,14 @@ namespace Cities {
             });
         }
 
-        public override void OnMapGenerated(Map map) {
-            if (map.Parent == target) {
+        public override void OnTick() {
+            var map = Find.CurrentMap;
+            if (map?.Parent == target) {
                 Complete();
                 var storyComp = Find.Storyteller.storytellerComps.First(x => x is StorytellerComp_OnOffCycle || x is StorytellerComp_RandomMain);
                 var parms = storyComp.GenerateParms(IncidentCategoryDefOf.ThreatBig, map);
                 parms.faction = alliedFaction;
-                parms.raidStrategy = DefDatabase<RaidStrategyDef>.GetRandom();
+                parms.raidStrategy = RaidStrategyDefOf.ImmediateAttackFriendly;
                 parms.raidArrivalMode = PawnsArrivalModeDefOf.EdgeWalkIn;
                 parms.raidArrivalModeForQuickMilitaryAid = true;
                 parms.points = 5000;

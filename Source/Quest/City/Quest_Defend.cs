@@ -6,7 +6,7 @@ using Verse;
 
 namespace Cities {
     public class Quest_Defend : Quest {
-        const int MaxStageCount = 8;
+        const int MaxStageCount = 5;
         const int CheckInterval = 1000;
         static readonly IntRange StageInterval = new IntRange(5_000, 10_000);
 
@@ -16,7 +16,7 @@ namespace Cities {
         int ticksTillNextStage = Rand.RangeInclusive(3_000, 5_000);
 
         public override int MinCapableColonists => 5;
-        public override int ChallengeRating => 4;
+        public override int ChallengeRating => 5;
 
         public override LookTargets Targets => city;
 
@@ -33,10 +33,10 @@ namespace Cities {
 
         public override void ChooseParts() {
             base.ChooseParts();
-            enemyFaction = Find.FactionManager.RandomEnemyFaction();
+            enemyFaction = Find.FactionManager.RandomEnemyFaction(minTechLevel: TechLevel.Industrial);
             city = Find.WorldObjects.Settlements
                 .OfType<City>()
-                .Where(s => s.Visitable && !s.Abandoned && !s.HasMap)
+                .Where(s => s.Visitable && !s.Abandoned && !s.HasMap && !(s is Citadel))
                 .RandomByDistance(HomeMap?.Parent, 50);
         }
 

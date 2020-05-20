@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -69,16 +70,30 @@ namespace Cities {
     [HarmonyPatch(new[] {typeof(Thing), typeof(bool)})]
     internal static class ThingOwner_TryAdd {
         static void Prefix(ref ThingOwner<Thing> __instance, Thing item) {
-            var pawn =
-                (__instance.Owner as Pawn_InventoryTracker)?.pawn ??
-                (__instance.Owner as Pawn_ApparelTracker)?.pawn ??
-                (__instance.Owner as Pawn_EquipmentTracker)?.pawn;
+            if (!Config_Cities.Instance.enableLooting) {
+                var pawn =
+                    (__instance.Owner as Pawn_InventoryTracker)?.pawn ??
+                    (__instance.Owner as Pawn_ApparelTracker)?.pawn ??
+                    (__instance.Owner as Pawn_EquipmentTracker)?.pawn;
 
-            if (pawn != null && pawn.IsColonist && item.IsOwnedByCity(pawn.Map)) {
-                if (pawn.Map.Parent is City city && !city.Abandoned && city.Faction != pawn.Faction) {
-                    city.Faction.TryAffectGoodwillWith(pawn.Faction,
-                        -Mathf.RoundToInt(Mathf.Sqrt(item.MarketValue)) - 2);
+                if (pawn != null && pawn.IsColonist && item.IsOwnedByCity(pawn.Map)) {
+                    if (pawn.Map.Parent is City city && !city.Abandoned && city.Faction != pawn.Faction) {
+                        city.Faction.TryAffectGoodwillWith(pawn.Faction,
+                            -Mathf.RoundToInt(Mathf.Sqrt(item.stackCount * item.MarketValue) * Rand.Range(1.5F, 2)) - 2);
+                    }
                 }
+            }
+        }
+    }
+
+    [HarmonyPatch(typeof(TransporterUtility))]
+    [HarmonyPatch(nameof(TransporterUtility.AllSendableItems))]
+    internal static class TransporterUtility_AllSendableItems {
+        static void Postfix(ref IEnumerable<Thing> __result, Map map) {
+            if (!Config_Cities.Instance.enableLooting && map.Parent is City) {
+                __result = __result.Where(t => !(t as ThingWithComps)?.GetComp<CompForbiddable>()?.Forbidden ?? !t.IsOwnedByCity(map));
+
+                // __result = __result.ToList();
             }
         }
     }
@@ -102,6 +117,23 @@ namespace Cities {
             if (__instance.IsOwnedByCity()) {
                 __result?.SetOwnedByCity(true, __instance.Map);
             }
+        }
+    }
+
+    [HarmonyPatch(typeof(SettlementUtility))]
+    [HarmonyPatch(nameof(SettlementUtility.Attack))]
+    internal static class SettlementUtility_Attack {
+        static bool Prefix(Caravan caravan, Settlement settlement) {
+            if (settlement is Citadel && !settlement.HasMap) {
+                var method = typeof(SettlementUtility).GetMethod("AttackNow", BindingFlags.NonPublic | BindingFlags.Static);
+                if (method != null) {
+                    LongEventHandler.QueueLongEvent(() => method.Invoke(null, new object[] {caravan, settlement}),
+                        "GeneratingCitadel", false, null);
+                    return false;
+                }
+                Log.Error("SettlementUtility.AttackNow(..) no longer exists");
+            }
+            return true;
         }
     }
 

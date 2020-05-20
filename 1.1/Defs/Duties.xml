@@ -41,7 +41,7 @@
           <targetKeepRadius>100</targetKeepRadius>
         </li>
         <li Class="ThinkNode_ConditionalRandom">
-          <chance>0.02</chance>
+          <chance>0.005</chance>
           <subNodes>
             <li Class="JobGiver_AIGotoNearestHostile"/>
           </subNodes>
@@ -50,7 +50,7 @@
           <treeDef>SatisfyBasicNeeds</treeDef>
         </li>
         <li Class="JobGiver_ManTurretsNearSelf">
-          <maxDistFromPoint>30</maxDistFromPoint>
+          <maxDistFromPoint>20</maxDistFromPoint>
         </li>
         <li Class="JobGiver_SeekSafeTemperature"/>
         <li Class="ThinkNode_ConditionalCloseToDutyTarget">

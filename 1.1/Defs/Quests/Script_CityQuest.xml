@@ -18,9 +18,9 @@
     </questDescriptionRules>
     <root Class="QuestNode_Sequence">
       <nodes>
-        
+        <!-- TODO convert to 1.1 quest system -->
       </nodes>
     </root>
   </QuestScriptDef>
-  
+
 </Defs>

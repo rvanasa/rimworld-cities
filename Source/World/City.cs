@@ -97,15 +97,19 @@ namespace Cities {
             if (Visitable) {
                 // TODO refactor
                 if (!(this is Citadel)) {
+                    var enterLabel = Find.World.GetComponent<WorldComponent_QuestTracker>().quests
+                        .Select(q => q.def.EnterCityLabel)
+                        .FirstOrDefault() ?? "EnterCity".Translate();
+
                     var action = new Command_Action {
                         icon = SettleUtility.SettleCommandTex,
-                        defaultLabel = "EnterCity".Translate(),
+                        defaultLabel = enterLabel,
                         defaultDesc = "EnterCityDesc".Translate(),
                         action = () => {
                             LongEventHandler.QueueLongEvent(() => {
                                 var orGenerateMap = GetOrGenerateMapUtility.GetOrGenerateMap(Tile, null);
                                 CaravanEnterMapUtility.Enter(caravan, orGenerateMap, CaravanEnterMode.Edge,
-                                    CaravanDropInventoryMode.DoNotDrop, draftColonists: true);
+                                    CaravanDropInventoryMode.DoNotDrop, true);
                             }, "GeneratingMapForNewEncounter", false, null);
                         },
                     };

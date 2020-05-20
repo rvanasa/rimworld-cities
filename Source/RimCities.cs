@@ -23,6 +23,8 @@ namespace Cities {
         public bool limitCitySize = true;
         public bool enableQuestSystem = true;
         public bool enableEvents = true;
+        public bool enableLooting;
+        public float lootScale = 1;
         public float abandonedChance = 0.3F;
         public IntRange citiesPer100kTiles = new IntRange(10, 15);
         public IntRange abandonedPer100kTiles = new IntRange(5, 10);
@@ -32,6 +34,8 @@ namespace Cities {
             Scribe_Values.Look(ref limitCitySize, "limitCitySize", Defaults.limitCitySize);
             Scribe_Values.Look(ref enableQuestSystem, "enableQuestSystem", Defaults.enableQuestSystem);
             Scribe_Values.Look(ref enableEvents, "enableEvents", Defaults.enableEvents);
+            Scribe_Values.Look(ref enableLooting, "enableLooting", Defaults.enableLooting);
+            Scribe_Values.Look(ref lootScale, "lootScale", Defaults.lootScale);
             Scribe_Values.Look(ref citiesPer100kTiles, "citiesPer100kTiles", Defaults.citiesPer100kTiles);
             Scribe_Values.Look(ref abandonedPer100kTiles, "abandonedPer100kTiles", Defaults.abandonedPer100kTiles);
             Scribe_Values.Look(ref minCitadelsPerWorld, "minCitadelsPerWorld", Defaults.minCitadelsPerWorld);
@@ -57,6 +61,10 @@ namespace Cities {
             listing.Gap();
             listing.CheckboxLabeled("EnableCityEvents".Translate(), ref Config.enableEvents);
             listing.Gap();
+            listing.CheckboxLabeled("EnableCityLooting".Translate(), ref Config.enableLooting);
+            listing.Gap();
+            listing.Label("CityLootScale".Translate().Formatted(GenMath.RoundTo(Config.lootScale, 0.05F)));
+            Config.lootScale = listing.Slider(Config.lootScale, 0, 3);
             listing.Label("AbandonedCityChance".Translate().Formatted(GenMath.RoundTo(Config.abandonedChance, 0.01F)));
             Config.abandonedChance = listing.Slider(Config.abandonedChance, 0, 1);
             listing.Gap();
@@ -65,6 +73,10 @@ namespace Cities {
             listing.Gap();
             listing.Label("MinCitadelsPerWorld".Translate().Formatted(Config.minCitadelsPerWorld));
             listing.IntAdjuster(ref Config.minCitadelsPerWorld, 1, 1);
+            listing.Gap();
+            if (listing.ButtonText("CitiesConfigReset".Translate())) {
+                settings.config = new Config_Cities();
+            }
             listing.End();
             base.DoSettingsWindowContents(inRect);
         }

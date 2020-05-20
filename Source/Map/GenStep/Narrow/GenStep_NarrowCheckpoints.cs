@@ -37,7 +37,7 @@ namespace Cities {
                 GenCity.SpawnInhabitant(point, map, new LordJob_DefendBase(map.ParentFaction, point));
             }
 
-            var mortars = tierRange.RandomInRange * 1;/**/
+            var mortars = tierRange.RandomInRange * 1; /**/
             for (var i = 0; i < mortars; i++) {
                 var attempts = 10;
                 do {
@@ -53,6 +53,7 @@ namespace Cities {
                         var ammoPoint = point + IntVec3.North * 2;
                         var ammo = s.MoveTo(ammoPoint).Spawn(0, 0, ThingDefOf.Shell_HighExplosive);
                         ammo.stackCount = ammoRange.RandomInRange;
+                        ammo.SetOwnedByCity(true, s.map);
                         GenCity.SpawnInhabitant(ammoPoint, map, new LordJob_ManTurrets());
 
                         break;

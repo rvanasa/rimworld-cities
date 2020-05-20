@@ -3,10 +3,13 @@
 
   <EnterCity>Enter City</EnterCity>
   <EnterCityDesc>Enter the selected city.</EnterCityDesc>
-  
+
+  <CitiesConfigReset>Reset to defaults</CitiesConfigReset>
   <LimitCitySize>Limit city map size (reduces lag)</LimitCitySize>
   <EnableCityQuests>Enable city quest system</EnableCityQuests>
   <EnableCityEvents>Enable city events (food drops, reinforcements)</EnableCityEvents>
+  <EnableCityLooting>Enable looting cities without penalty</EnableCityLooting>
+  <CityLootScale>City loot multiplier: [{0}]</CityLootScale>
   <AbandonedCityChance>Abandoned city chance: [{0}]</AbandonedCityChance>
   <CitiesPer100kTiles>City spawn frequency:</CitiesPer100kTiles>
   <MinCitadelsPerWorld>Minimum citadels per world: [{0}]</MinCitadelsPerWorld>
@@ -18,5 +21,6 @@
   <GhostCityKind>Ghost</GhostCityKind>
   
   <CitadelName>{0} Citadel</CitadelName>
+  <GeneratingCitadel>Generating citadel (this might take a while)</GeneratingCitadel>
   
 </LanguageData>

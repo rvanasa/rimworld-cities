@@ -18,13 +18,14 @@ namespace Cities {
 
             // var friendly = !s.map.ParentFaction.HostileTo(Faction.OfPlayer);
             foreach (var pos in s.bounds.Cells) {
-                if (s.Chance(density)) {
+                if (s.Chance(density * Config_Cities.Instance.lootScale)) {
                     var thing = generators.RandomElement().GenerateThings(s.map.Tile).FirstOrDefault();
                     if (thing != null) {
                         if (thing.stackCount > thing.def.stackLimit) {
                             thing.stackCount = s.RandInclusive(1, thing.def.stackLimit);
                         }
-                        GenSpawn.Spawn(thing.TryMakeMinified(), pos, s.map);
+                        thing = thing.TryMakeMinified();
+                        GenSpawn.Spawn(thing, pos, s.map);
                         if (thing is Pawn pawn) {
                             if (pawn.guest == null) {
                                 pawn.guest = new Pawn_GuestTracker(pawn);
@@ -32,7 +33,7 @@ namespace Cities {
                             pawn.guest.SetGuestStatus(s.map.ParentFaction, true);
                         }
                         else {
-                            thing.SetOwnedByCity(true);
+                            thing.SetOwnedByCity(true, s.map);
                         }
                     }
                 }

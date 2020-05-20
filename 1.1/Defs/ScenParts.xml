@@ -43,4 +43,12 @@
     <summaryPriority>487</summaryPriority>
   </ScenPartDef>
 
+  <ScenPartDef>
+    <defName>RescuePrisoners</defName>
+    <label>rescue prisoners</label>
+    <category>Misc</category>
+    <scenPartClass>Cities.ScenPart_RescuePrisoners</scenPartClass>
+    <summaryPriority>486</summaryPriority>
+  </ScenPartDef>
+
 </Defs>

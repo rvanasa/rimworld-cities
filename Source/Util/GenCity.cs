@@ -74,13 +74,13 @@ namespace Cities {
             return (map ?? thing.Map)?.GetComponent<MapComponent_City>()?.cityOwnedThings.Contains(thing) ?? false;
         }
 
-        public static void SetOwnedByCity(this Thing thing, bool owned, Map map = null) {
+        public static void SetOwnedByCity(this Thing thing, bool owned, Map map/* = null*/) {
             try {
                 if (owned) {
                     thing.SetForbidden(true, false);
                 }
 
-                map = map ?? thing.Map;
+                // map = map ?? thing.Map;
                 if (map?.Parent is City city && !city.Abandoned && !city.Faction.HostileTo(Faction.OfPlayer)) {
                     var cityOwnedThings = map.GetComponent<MapComponent_City>().cityOwnedThings;
                     if (owned) {

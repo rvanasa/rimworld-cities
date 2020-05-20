@@ -14,7 +14,7 @@ namespace Cities {
 
         public override NamedArgument[] FormatArgs =>
             new NamedArgument[] {city.Faction.Name, city.Name};
-
+        
         public override void ExposeData() {
             base.ExposeData();
             Scribe_References.Look(ref city, "city");
@@ -35,7 +35,6 @@ namespace Cities {
 
         public override void OnMapGenerated(Map map) {
             if (map.Parent == city) {
-                var playerFaction = Faction.OfPlayer;
                 var count = 0;
                 foreach (var pawn in map.mapPawns.AllPawnsSpawned) {
                     if (pawn.IsPrisoner) {
@@ -43,7 +42,7 @@ namespace Cities {
                         pawn.mindState.WillJoinColonyIfRescued = true;
                         //pawn.guest = null;
                         //if(count < MaxPrisoners) {
-                        //	pawn.SetFactionDirect(playerFaction);
+                        //	pawn.SetFactionDirect(Faction.OfPlayer);
                         //}
                     }
                 }
