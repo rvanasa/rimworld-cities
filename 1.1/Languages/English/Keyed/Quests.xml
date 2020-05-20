@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+
+  <QuestResultComplete>On completion: {0}</QuestResultComplete>
+  <QuestResultCancel>On failure: {0}</QuestResultCancel>
+  <QuestResultExpire>On expiration: {0}</QuestResultExpire>
+  <QuestExpireTime>Time remaining: {0}</QuestExpireTime>
+  
+  <QuestAppendWorth>worth {0}</QuestAppendWorth>
+
+  <QuestComplete>Quest complete ({0})</QuestComplete>
+  <QuestCancelled>Quest cancelled ({0})</QuestCancelled>
+  <QuestExpired>Quest expired ({0})</QuestExpired>
+
+  <QuestReceivedLabel>Reward</QuestReceivedLabel>
+  <QuestReceived>You have received {0}</QuestReceived>
+  
+  <QuestDefendWave>Attack wave ({0} / {1})</QuestDefendWave>
+  
+</LanguageData>

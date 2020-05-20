@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <EnterCity>大都市に入る</EnterCity>
+  <EnterCityDesc>選択された大都市に入ります。</EnterCityDesc>
+
+  <LimitCitySize>大都市マップの大きさを制限（遅延を削減）</LimitCitySize>
+  <EnableCityQuests>大都市クエストシステムを有効</EnableCityQuests>
+  <EnableCityEvents>大都市イベントを有効（食料の投下や増援）</EnableCityEvents>
+  <AbandonedCityChance>放棄された大都市の確率：[{0}]</AbandonedCityChance>
+  <CitiesPer100kTiles>大都市の出現頻度：</CitiesPer100kTiles>
+
+  <FriendlyCityKind>友好都市</FriendlyCityKind>
+  <HostileCityKind>敵対都市</HostileCityKind>
+  <AbandonedCityKind>放棄都市</AbandonedCityKind>
+  <GhostCityKind>幽霊都市</GhostCityKind>
+
+</LanguageData>

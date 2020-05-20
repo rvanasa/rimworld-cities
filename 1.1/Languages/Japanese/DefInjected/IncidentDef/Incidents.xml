@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <Quest_City_Sabotage.label>大都市クエスト：サボタージュ</Quest_City_Sabotage.label>
+  <Quest_City_Sabotage.letterText>ゲリラ部隊は{0}の都市である{1}を攻撃する準備をしています。 あなたは{1}の全てのタレット防衛施設を破壊することで支援することができます。\n\n攻撃者の身元は、攻撃が開始されるまで明かされません。\n\nこの任務を完了すると、あなたのコロニーに対する両方の派閥の友好度が劇的に変化することになります。</Quest_City_Sabotage.letterText>
+  <Quest_City_Sabotage.letterLabel>サボタージュ攻撃</Quest_City_Sabotage.letterLabel>
+
+  <Quest_City_Assault.label>大都市クエスト：連携攻撃</Quest_City_Assault.label>
+  <Quest_City_Assault.letterText>{0}は{1}の拠点である{2}を攻撃する準備をしています。\n\nあなたがこの攻撃に参加することを選択した場合、{0}はあなたが征服された大都市を領有することを許可します。</Quest_City_Assault.letterText>
+  <Quest_City_Assault.letterLabel>連携攻撃</Quest_City_Assault.letterLabel>
+
+  <Quest_City_Assassinate.label>大都市クエスト：暗殺</Quest_City_Assassinate.label>
+  <Quest_City_Assassinate.letterText>詳細不明な怪しい人物があなたの植民地に、{0}の暗殺を依頼する連絡してきました。{1}は非常に影響力のある{2}の市民であり、現在{3}の大都市に住んでいます。\n\nこの間接的な暗殺が成功すれば外交関係に影響を出さないでしょう。</Quest_City_Assassinate.letterText>
+  <Quest_City_Assassinate.letterLabel>暗殺の依頼</Quest_City_Assassinate.letterLabel>
+  <Quest_City_Assassinate.questParts.1.letter>目標を暗殺した</Quest_City_Assassinate.questParts.1.letter>
+  <Quest_City_Assassinate.questParts.2.letter>目標を逃した</Quest_City_Assassinate.questParts.2.letter>
+  <Quest_City_Assassinate.questParts.1.message>{0}の暗殺に成功しました。</Quest_City_Assassinate.questParts.1.message>
+  <Quest_City_Assassinate.questParts.2.message>{0}がこのエリアから逃れました。</Quest_City_Assassinate.questParts.2.message>
+
+  <Quest_City_Defend.label>大都市クエスト：重包囲防衛</Quest_City_Defend.label>
+  <Quest_City_Defend.letterText>現在{2}は、{0}による激しい包囲攻撃を受けており、必死に防衛していますが、増援部隊が必要です。\n\nもし、あなたが{2}を首尾よく防御できれば、この大都市は彼らの感謝の印としてあなたに見返りを提供するでしょう。。</Quest_City_Defend.letterText>
+  <Quest_City_Defend.letterLabel>大都市を防衛せよ</Quest_City_Defend.letterLabel>
+  <Quest_City_Defend.questParts.1.letter>襲撃者が撤退した</Quest_City_Defend.questParts.1.letter>
+  <Quest_City_Defend.questParts.2.letter>大都市が占領された</Quest_City_Defend.questParts.2.letter>
+  <Quest_City_Defend.questParts.1.message>{0}は荷物をまとめて退却を開始しました。{2}の防衛に成功しました。</Quest_City_Defend.questParts.1.message>
+  <Quest_City_Defend.questParts.2.message>{2}は{0}によって占領されました。</Quest_City_Defend.questParts.2.message>
+
+  <Quest_City_PrisonBreak.label>大都市クエスト：プリズンブレイク</Quest_City_PrisonBreak.label>
+  <Quest_City_PrisonBreak.letterText>{1}の囚人は脱出計画を練っています。もし、あなたがそれを支援することにした場合、彼らは解放されると同時にあなたの派閥に参加するでしょう。\n\nしかし、残念なことに、彼らを収監している側に情報が洩れて、あなたたちが到着する前に迎撃準備しています。囚人たちが逃亡する前に{1}に侵入した場合、{0}との友好関係は敵対的になるでしょう。</Quest_City_PrisonBreak.letterText>
+  <Quest_City_PrisonBreak.letterLabel>脱走計画</Quest_City_PrisonBreak.letterLabel>
+  <Quest_City_PrisonBreak.questParts.0.letter>囚人たちは逃亡した</Quest_City_PrisonBreak.questParts.0.letter>
+  <Quest_City_PrisonBreak.questParts.0.message>もう囚人たちは逃亡したようです。</Quest_City_PrisonBreak.questParts.0.message>
+
+</LanguageData>

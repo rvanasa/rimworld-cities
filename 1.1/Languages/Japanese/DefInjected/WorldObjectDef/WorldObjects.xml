@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <City_Faction.label>大都市</City_Faction.label>
+  <City_Faction.description>大規模で、大変発展したコロニーです。</City_Faction.description>
+
+  <City_Abandoned.label>放棄された都市</City_Abandoned.label>
+  <City_Abandoned.description>かつての偉大な文明の遺跡です。</City_Abandoned.description>
+
+  <City_Ghost.label>幽霊都市</City_Ghost.label>
+  <City_Ghost.description>不思議なことに誰も居ないコロニー。</City_Ghost.description>
+
+</LanguageData>

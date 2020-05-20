@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <Keanu_Pawn.label>伝説の男</Keanu_Pawn.label>
+  <Keanu_Pawn.labelPlural>伝説の男たち</Keanu_Pawn.labelPlural>
+
+  <Keanu_Dog.label>ビーグル犬</Keanu_Dog.label>
+  <Keanu_Dog.labelPlural>ビーグル犬たち</Keanu_Dog.labelPlural>
+  <Keanu_Dog.lifeStages.beagle_puppy.label>ビーグル犬の子犬</Keanu_Dog.lifeStages.beagle_puppy.label>
+  <Keanu_Dog.lifeStages.beagle_puppy.labelPlural>ビーグル犬の子犬たち</Keanu_Dog.lifeStages.beagle_puppy.labelPlural>
+  <Keanu_Dog.lifeStages.beagle_puppy.labelMale>ビーグル犬の子犬(オス)</Keanu_Dog.lifeStages.beagle_puppy.labelMale>
+  <Keanu_Dog.lifeStages.beagle_puppy.labelMalePlural>ビーグル犬の子犬(オス)たち</Keanu_Dog.lifeStages.beagle_puppy.labelMalePlural>
+  <Keanu_Dog.lifeStages.beagle_puppy.labelFemale>ビーグル犬の子犬(メス)</Keanu_Dog.lifeStages.beagle_puppy.labelFemale>
+  <Keanu_Dog.lifeStages.beagle_puppy.labelFemalePlural>ビーグル犬の子犬(メス)たち</Keanu_Dog.lifeStages.beagle_puppy.labelFemalePlural>
+  <Keanu_Dog.lifeStages.1.label>ビーグル犬</Keanu_Dog.lifeStages.1.label>
+  <Keanu_Dog.lifeStages.1.labelPlural>ビーグル犬たち</Keanu_Dog.lifeStages.1.labelPlural>
+  <Keanu_Dog.lifeStages.1.labelMale>ビーグル犬(オス)</Keanu_Dog.lifeStages.1.labelMale>
+  <Keanu_Dog.lifeStages.1.labelMalePlural>ビーグル犬(オス)たち</Keanu_Dog.lifeStages.1.labelMalePlural>
+  <Keanu_Dog.lifeStages.1.labelFemale>ビーグル犬(メス)</Keanu_Dog.lifeStages.1.labelFemale>
+  <Keanu_Dog.lifeStages.1.labelFemalePlural>ビーグル犬(メス)たち</Keanu_Dog.lifeStages.1.labelFemalePlural>
+  <Keanu_Dog.lifeStages.2.label>ビーグル犬</Keanu_Dog.lifeStages.2.label>
+  <Keanu_Dog.lifeStages.2.labelPlural>ビーグル犬たち</Keanu_Dog.lifeStages.2.labelPlural>
+  <Keanu_Dog.lifeStages.2.labelMale>ビーグル犬(オス)</Keanu_Dog.lifeStages.2.labelMale>
+  <Keanu_Dog.lifeStages.2.labelMalePlural>ビーグル犬(オス)たち</Keanu_Dog.lifeStages.2.labelMalePlural>
+  <Keanu_Dog.lifeStages.2.labelFemale>ビーグル犬(メス)</Keanu_Dog.lifeStages.2.labelFemale>
+  <Keanu_Dog.lifeStages.2.labelFemalePlural>ビーグル犬(メス)たち</Keanu_Dog.lifeStages.2.labelFemalePlural>
+  <Keanu_Dog.labelMale>ビーグル犬(オス)</Keanu_Dog.labelMale>
+  <Keanu_Dog.labelMalePlural>ビーグル犬(オス)たち</Keanu_Dog.labelMalePlural>
+  <Keanu_Dog.labelFemale>ビーグル犬(メス)</Keanu_Dog.labelFemale>
+  <Keanu_Dog.labelFemalePlural>ビーグル犬(メス)たち</Keanu_Dog.labelFemalePlural>
+
+</LanguageData>

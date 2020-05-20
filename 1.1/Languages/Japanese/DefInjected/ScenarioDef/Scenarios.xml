@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <Crashlanded_City_Abandoned.label>不時着（放棄された大都市)</Crashlanded_City_Abandoned.label>
+  <Crashlanded_City_Abandoned.description>冬眠カプセルに居たあなた方３名は、鳴り響く警報音と船体が引き裂かれる音の中で目覚めました。宇宙船がバラバラに崩壊する前に、幸運にも脱出ポッドに乗ることが出来ました。何もない荒野に出現する代わりに、あなた方はこの未知の惑星Rimworldで廃墟になった大都市の中でスタートします。豊富な資源を回収することが可能ですが、盗掘者や襲撃に注意してください。</Crashlanded_City_Abandoned.description>
+  <Crashlanded_City_Abandoned.scenario.name>不時着（放棄された大都市)</Crashlanded_City_Abandoned.scenario.name>
+  <Crashlanded_City_Abandoned.scenario.summary>降り立った先が大都会という意外な展開を加えた標準的なRimWorldを体験します。</Crashlanded_City_Abandoned.scenario.summary>
+  <Crashlanded_City_Abandoned.scenario.description>冬眠カプセルに居たあなた方３名は、鳴り響く警報音と船体が引き裂かれる音の中で目覚めました。宇宙船がバラバラに崩壊する前に、幸運にも脱出ポッドに乗ることが出来ました。何もない荒野に出現する代わりに、あなた方はこの未知の惑星Rimworldで廃墟になった大都市の中でスタートします。豊富な資源を回収することが可能ですが、盗掘者や襲撃に注意してください。</Crashlanded_City_Abandoned.scenario.description>
+
+  <Crashlanded_City_Friendly.label>不時着（友好的な大都市)</Crashlanded_City_Friendly.label>
+  <Crashlanded_City_Friendly.description>冬眠カプセルに居たあなた方３名は、鳴り響く警報音と船体が引き裂かれる音の中で目覚めました。宇宙船がバラバラに崩壊する前に、幸運にも脱出ポッドに乗ることが出来ました。大気圏に突入して、あなた方はこの未知の惑星Rimworldにある友好的な大都市に着陸しました。</Crashlanded_City_Friendly.description>
+  <Crashlanded_City_Friendly.scenario.name>不時着（友好的な大都市)</Crashlanded_City_Friendly.scenario.name>
+  <Crashlanded_City_Friendly.scenario.summary>降り立った先が大都会という意外な展開を加えた標準的なRimWorldを体験します。</Crashlanded_City_Friendly.scenario.summary>
+  <Crashlanded_City_Friendly.scenario.description>冬眠カプセルに居たあなた方３名は、鳴り響く警報音と船体が引き裂かれる音の中で目覚めました。宇宙船がバラバラに崩壊する前に、幸運にも脱出ポッドに乗ることが出来ました。大気圏に突入して、あなた方はこの未知の惑星Rimworldにある友好的な大都市に着陸しました。</Crashlanded_City_Friendly.scenario.description>
+
+  <Crashlanded_City_Ghost.label>不時着（幽霊都市）</Crashlanded_City_Ghost.label>
+  <Crashlanded_City_Ghost.description>何もない荒野に出現する代わりに、あなた方は不気味に静まり返った大都市の中からスタートします。</Crashlanded_City_Ghost.description>
+  <Crashlanded_City_Ghost.scenario.name>不時着（幽霊都市）</Crashlanded_City_Ghost.scenario.name>
+  <Crashlanded_City_Ghost.scenario.summary>降り立った先が大都会という意外な展開を加えた標準的なRimWorldを体験します。</Crashlanded_City_Ghost.scenario.summary>
+  <Crashlanded_City_Ghost.scenario.description>何もない荒野に出現する代わりに、あなた方は不気味に静まり返った大都市の中からスタートします。</Crashlanded_City_Ghost.scenario.description>
+
+</LanguageData>
