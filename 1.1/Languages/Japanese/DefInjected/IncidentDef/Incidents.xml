@@ -24,11 +24,13 @@
   <Quest_City_Defend.questParts.2.letter>大都市が占領された</Quest_City_Defend.questParts.2.letter>
   <Quest_City_Defend.questParts.1.message>{0}は荷物をまとめて退却を開始しました。{2}の防衛に成功しました。</Quest_City_Defend.questParts.1.message>
   <Quest_City_Defend.questParts.2.message>{2}は{0}によって占領されました。</Quest_City_Defend.questParts.2.message>
+  <Quest_City_Defend.EnterCityLabel>大都市を防衛する</Quest_City_Defend.EnterCityLabel>
 
   <Quest_City_PrisonBreak.label>大都市クエスト：プリズンブレイク</Quest_City_PrisonBreak.label>
   <Quest_City_PrisonBreak.letterText>{1}の囚人は脱出計画を練っています。もし、あなたがそれを支援することにした場合、彼らは解放されると同時にあなたの派閥に参加するでしょう。\n\nしかし、残念なことに、彼らを収監している側に情報が洩れて、あなたたちが到着する前に迎撃準備しています。囚人たちが逃亡する前に{1}に侵入した場合、{0}との友好関係は敵対的になるでしょう。</Quest_City_PrisonBreak.letterText>
   <Quest_City_PrisonBreak.letterLabel>脱走計画</Quest_City_PrisonBreak.letterLabel>
   <Quest_City_PrisonBreak.questParts.0.letter>囚人たちは逃亡した</Quest_City_PrisonBreak.questParts.0.letter>
   <Quest_City_PrisonBreak.questParts.0.message>もう囚人たちは逃亡したようです。</Quest_City_PrisonBreak.questParts.0.message>
+  <Quest_City_PrisonBreak.EnterCityLabel>囚人を脱獄させる</Quest_City_PrisonBreak.EnterCityLabel>
 
 </LanguageData>
