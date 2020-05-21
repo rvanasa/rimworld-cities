@@ -12,6 +12,7 @@
   <QuestCancelled>クエスト中止（{0}）</QuestCancelled>
   <QuestExpired>クエスト期限切れ（{0}）</QuestExpired>
 
+  <QuestReceivedLabel>報酬</QuestReceivedLabel>
   <QuestReceived>これらの報酬を受け取りました：{0}</QuestReceived>
 
   <QuestDefendWave>攻撃の波（{0}回目／最大{1}回）</QuestDefendWave>
