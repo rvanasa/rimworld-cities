@@ -53,13 +53,7 @@ namespace Cities {
 
         public override void OnMapGenerated(Map map) {
             if (map.Parent == city) {
-                // map.GetComponent<MapComponent_City>().cityOwnedThings.Clear();
-                // var playerFaction = Faction.OfPlayer;
-                // foreach (var thing in map.listerThings.AllThings) {
-                //     if (!(thing is Pawn) && thing.def.CanHaveFaction) {
-                //         thing.SetFactionDirect(playerFaction);
-                //     }
-                // }
+                city.Faction.TryAffectGoodwillWith(enemyFaction, -200, false, false);
             }
         }
 
