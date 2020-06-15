@@ -75,6 +75,7 @@ namespace Cities {
 
         public virtual void ExposeData() {
             Scribe_Defs.Look(ref def, "def");
+            Scribe_References.Look(ref handle, "handle");
             Scribe_Values.Look(ref expireTime, "expireTime");
             Scribe_Values.Look(ref state, "state");
             Scribe_References.Look(ref home, "home");

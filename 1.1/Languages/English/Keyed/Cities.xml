@@ -5,7 +5,7 @@
   <EnterCityDesc>Enter the selected city.</EnterCityDesc>
 
   <CitiesConfigReset>Reset to defaults</CitiesConfigReset>
-  <LimitCitySize>Limit city map size (reduces lag)</LimitCitySize>
+  <LimitCitySize>Limit city map size (reduces lag): [{0} x {1}]</LimitCitySize>
   <EnableCityQuests>Enable city quest system</EnableCityQuests>
   <EnableCityEvents>Enable city events (food drops, reinforcements)</EnableCityEvents>
   <EnableCityLooting>Enable looting cities without penalty</EnableCityLooting>

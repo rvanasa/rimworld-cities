@@ -29,6 +29,11 @@ namespace Cities {
                     prevInitAction?.Invoke(map);
                 };
             }
+
+            if (Config_Cities.Instance.customMapSizes) {
+                mapSize.x = Config_Cities.Instance.customMapX;
+                mapSize.z = Config_Cities.Instance.customMapZ;
+            }
         }
     }
 

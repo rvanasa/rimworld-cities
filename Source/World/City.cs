@@ -178,8 +178,8 @@ namespace Cities {
 
         public virtual IntVec3 ChooseMapSize(IntVec3 mapSize) {
             if (Config_Cities.Instance.limitCitySize) {
-                mapSize.x = Mathf.Min(mapSize.x, 200);
-                mapSize.z = Mathf.Min(mapSize.z, 200);
+                mapSize.x = Mathf.Min(mapSize.x, Config_Cities.Instance.limitCitySizeScale);
+                mapSize.z = Mathf.Min(mapSize.z, Config_Cities.Instance.limitCitySizeScale);
             }
             return mapSize;
         }

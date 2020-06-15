@@ -35,13 +35,4 @@ namespace Cities {
             }
         }
     }
-
-    /*public class WorldObjectCompProperties_Quests : WorldObjectCompProperties {
-        public WorldObjectCompProperties_Quests() {
-            compClass = typeof(WorldObjectComp_Quests);
-        }
-    }
-
-    public class WorldObjectComp_Quests : WorldObjectComp {
-    }*/
 }

@@ -4,7 +4,7 @@
   <EnterCity>Войти в город</EnterCity>
   <EnterCityDesc>Войти в выбранный город</EnterCityDesc>
 
-  <LimitCitySize>Ограничить размер городской карты (меньше лагов)</LimitCitySize>
+  <LimitCitySize>Ограничить размер городской карты (меньше лагов): [{0} {1}]</LimitCitySize>
   <EnableCityQuests>Включить систему квестов в городе</EnableCityQuests>
   <EnableCityEvents>Включить события в городе (появление еды, подкрепление)</EnableCityEvents>
   <AbandonedCityChance>Шанс города стать покинутым：[{0}]</AbandonedCityChance>

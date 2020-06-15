@@ -21,6 +21,7 @@ namespace Cities {
         static readonly Config_Cities Defaults = new Config_Cities();
 
         public bool limitCitySize = true;
+        public int limitCitySizeScale = 200;
         public bool enableQuestSystem = true;
         public bool enableEvents = true;
         public bool enableLooting;
@@ -30,8 +31,13 @@ namespace Cities {
         public IntRange abandonedPer100kTiles = new IntRange(5, 10);
         public int minCitadelsPerWorld = 1;
 
+        public bool customMapSizes;
+        public int customMapX = 200;
+        public int customMapZ = 200;
+
         public void ExposeData() {
             Scribe_Values.Look(ref limitCitySize, "limitCitySize", Defaults.limitCitySize);
+            Scribe_Values.Look(ref limitCitySizeScale, "limitCitySizeScale", Defaults.limitCitySizeScale);
             Scribe_Values.Look(ref enableQuestSystem, "enableQuestSystem", Defaults.enableQuestSystem);
             Scribe_Values.Look(ref enableEvents, "enableEvents", Defaults.enableEvents);
             Scribe_Values.Look(ref enableLooting, "enableLooting", Defaults.enableLooting);
@@ -39,6 +45,10 @@ namespace Cities {
             Scribe_Values.Look(ref citiesPer100kTiles, "citiesPer100kTiles", Defaults.citiesPer100kTiles);
             Scribe_Values.Look(ref abandonedPer100kTiles, "abandonedPer100kTiles", Defaults.abandonedPer100kTiles);
             Scribe_Values.Look(ref minCitadelsPerWorld, "minCitadelsPerWorld", Defaults.minCitadelsPerWorld);
+
+            // Scribe_Values.Look(ref customMapSizes, "customMapSizes", Defaults.customMapSizes);
+            Scribe_Values.Look(ref customMapX, "customMapX", Defaults.customMapX);
+            Scribe_Values.Look(ref customMapZ, "customMapZ", Defaults.customMapZ);
         }
     }
 
@@ -55,7 +65,8 @@ namespace Cities {
             var listing = new Listing_Standard();
             listing.Begin(inRect);
             listing.Gap();
-            listing.CheckboxLabeled("LimitCitySize".Translate(), ref Config.limitCitySize);
+            listing.CheckboxLabeled("LimitCitySize".Translate().Formatted(Config.limitCitySizeScale, Config.limitCitySizeScale), ref Config.limitCitySize);
+            listing.IntAdjuster(ref Config.limitCitySizeScale, 10, 50);
             listing.Gap();
             listing.CheckboxLabeled("EnableCityQuests".Translate(), ref Config.enableQuestSystem);
             listing.Gap();
@@ -74,6 +85,20 @@ namespace Cities {
             listing.Label("MinCitadelsPerWorld".Translate().Formatted(Config.minCitadelsPerWorld));
             listing.IntAdjuster(ref Config.minCitadelsPerWorld, 1, 1);
             listing.Gap();
+            {
+                ///////////////
+                // listing.Gap();
+                // listing.CheckboxLabeled("Override all map sizes (disables upon exiting the game): [{0} x {1}]".Formatted(Config.customMapX, Config.customMapZ), ref Config.customMapSizes);
+                // listing.Gap();
+                // listing.Label("Custom map size X: [{0}]".Formatted(Config.customMapX));
+                // listing.IntAdjuster(ref Config.customMapX, 5, 10);
+                // listing.IntAdjuster(ref Config.customMapX, 100, 10);
+                // listing.Label("Custom map size Z: [{0}]".Formatted(Config.customMapZ));
+                // listing.IntAdjuster(ref Config.customMapZ, 5, 10);
+                // listing.IntAdjuster(ref Config.customMapZ, 100, 10);
+                // listing.Gap();
+                // listing.Gap();
+            }
             if (listing.ButtonText("CitiesConfigReset".Translate())) {
                 settings.config = new Config_Cities();
             }

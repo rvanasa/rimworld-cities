@@ -50,30 +50,4 @@ namespace Cities {
             return true;
         }
     }
-
-    // [HarmonyPatch(typeof(RegionAndRoomUpdater))]
-    // [HarmonyPatch(nameof(RegionAndRoomUpdater.TryRebuildDirtyRegionsAndRooms))]
-    // internal static class RegionAndRoomUpdater_TryRebuildDirtyRegionsAndRooms {
-    //     static bool Prefix(RegionAndRoomUpdater __instance, Map ___map) {
-    //         if (___map.Parent is Citadel) {
-    //             return false;
-    //         }
-    //         return true;
-    //     }
-    // }
-
-    // [HarmonyPatch(typeof(RegionGrid))]
-    // [HarmonyPatch(nameof(RegionGrid.GetValidRegionAt))]
-    // internal static class RegionGrid_GetValidRegionAt {
-    //     static bool Prefix(RegionGrid __instance, IntVec3 c, ref Region __result, Map ___map) {
-    //         if (___map.Parent is Citadel) {
-    //             __result = __instance.GetValidRegionAt_NoRebuild(c);
-    //             // if (__result == null) {
-    //             //     var region = Region.MakeNewUnfilled();
-    //             // }
-    //             return false;
-    //         }
-    //         return true;
-    //     }
-    // }
 }

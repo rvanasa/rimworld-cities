@@ -44,7 +44,7 @@ namespace Cities {
 
         public override void OnTick() {
             var map = Find.CurrentMap;
-            if (map?.Parent == target) {
+            if (map != null && map.Parent == target && (Find.TickManager.TicksGame - map.generationTick + 1) % 200 == 0) {
                 Complete();
                 var storyComp = Find.Storyteller.storytellerComps.First(x => x is StorytellerComp_OnOffCycle || x is StorytellerComp_RandomMain);
                 var parms = storyComp.GenerateParms(IncidentCategoryDefOf.ThreatBig, map);
