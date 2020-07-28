@@ -6,7 +6,7 @@
   <Quest_City_Sabotage.letterLabel>サボタージュ攻撃</Quest_City_Sabotage.letterLabel>
 
   <Quest_City_Assault.label>大都市クエスト：連携攻撃</Quest_City_Assault.label>
-  <Quest_City_Assault.letterText>{0}は{1}の拠点である{2}を攻撃する準備をしています。\n\nあなたがこの攻撃に参加することを選択した場合、{0}はあなたが征服された大都市を領有することを許可します。</Quest_City_Assault.letterText>
+  <Quest_City_Assault.letterText>{0}は{1}の拠点である{2}を攻撃する準備をしています。\n\nあなたがこの攻撃に参加することを選択した場合、{0}が征服された大都市を領有します。</Quest_City_Assault.letterText>
   <Quest_City_Assault.letterLabel>連携攻撃</Quest_City_Assault.letterLabel>
 
   <Quest_City_Assassinate.label>大都市クエスト：暗殺</Quest_City_Assassinate.label>
