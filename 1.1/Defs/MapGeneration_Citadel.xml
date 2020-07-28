@@ -42,6 +42,7 @@
       <li>City_Sidewalks</li>
       <li>City_ClearAnimals</li>
       <li>City_Post</li>
+      <li>Narrow_Post</li>
       <li>SettlementPower</li>
     </genSteps>
   </MapGeneratorDef>
@@ -369,6 +370,13 @@
         <li>CarpetCream</li>
         <li>CarpetDark</li>
       </floorOptions>
+    </genStep>
+  </GenStepDef>
+
+  <GenStepDef>
+    <defName>Narrow_Post</defName>
+    <order>691</order>
+    <genStep Class="Cities.GenStep_Narrow_Post">
     </genStep>
   </GenStepDef>
 

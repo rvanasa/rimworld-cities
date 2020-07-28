@@ -12,10 +12,12 @@ namespace Cities {
         public IntRange sentryRange = new IntRange(6, 12);
         public IntRange ammoRange = new IntRange(4, 10);
 
+        public float mapDensity = .4F;
+
         protected override void ScatterAt(IntVec3 pos, Map map, GenStepParams parms, int count) {
             var tier = tierRange.RandomInRange;
 
-            var wallStuff = GenCity.RandomWallStuff(map);
+            pos.z = (int) (map.Size.z * (1 - Rand.Value * mapDensity)); /////////
 
             var s = new Stencil(map).MoveTo(pos);
             // if (IsValidWallTile(map, s.pos)) {
