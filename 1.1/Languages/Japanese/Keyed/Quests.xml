@@ -17,4 +17,7 @@
 
   <QuestDefendWave>攻撃の波（{0}回目／最大{1}回）</QuestDefendWave>
 
+  <QuestTargetLocated>目標を発見</QuestTargetLocated>
+  <QuestTargetLocatedMessage>作戦目標の所在位置が判明しました。</QuestTargetLocatedMessage>
+
 </LanguageData>

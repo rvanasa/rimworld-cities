@@ -13,4 +13,7 @@
   <City_Citadel.label>要塞</City_Citadel.label>
   <City_Citadel.description>この惑星上の光輝く首都です。</City_Citadel.description>
 
+  <City_Compromised.label>危険な都市</City_Compromised.label>
+  <City_Compromised.description>危険な無法地帯で、ギャングが支配する都市です。</City_Compromised.description>
+
 </LanguageData>
