@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Patch>
+    
+  <Operation Class="PatchOperationFindMod">
+    <mods>
+      <li>Combat Extended</li>
+    </mods>
+    <match Class="PatchOperationSequence">
+      <!--<success>Always</success>-->
+      <operations>
+        <li Class="PatchOperationReplace">
+          <xpath>/Defs/GenStepDef[defName="City_Emplacements"]/genStep/options/li[weaponDef="Turret_MiniTurret"]</xpath>
+          <value>
+      			<li>
+      				<roofed>true</roofed>
+      				<weaponDef>Turret_Blaster</weaponDef>
+      				<manned>true</manned>
+            </li>
+          </value>
+        </li>
+        <li Class="PatchOperationReplace">
+          <xpath>/Defs/GenStepDef[defName="City_Emplacements"]/genStep/options/li[weaponDef="Turret_Autocannon"]</xpath>
+          <value>
+      			<li>
+      				<roofed>true</roofed>
+      				<weaponDef>Turret_Heavy</weaponDef>
+      				<manned>true</manned>
+            </li>
+          </value>
+        </li>
+        <li Class="PatchOperationReplace">
+          <xpath>/Defs/GenStepDef[defName="City_Emplacements"]/genStep/options/li[weaponDef="Turret_Sniper"]</xpath>
+          <value>
+    				<li>
+      				<roofed>true</roofed>
+      				<weaponDef>Turret_M240B</weaponDef>
+      				<manned>true</manned>
+            </li>
+          </value>
+        </li>
+      </operations>
+    </match>
+  </Operation>
+
+</Patch>
