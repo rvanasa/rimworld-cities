@@ -37,7 +37,7 @@ namespace Cities {
             city = Find.WorldObjects.Settlements
                 .OfType<City>()
                 .Where(s => s.Visitable && !s.Abandoned && !s.HasMap && !(s is Citadel))
-                .RandomByDistance(HomeMap?.Parent, 50);
+                .RandomByDistance(HomeMap?.Parent, 80);
         }
 
         public override bool AllPartsValid() {

@@ -14,7 +14,7 @@ namespace Cities {
 
         public override NamedArgument[] FormatArgs =>
             new NamedArgument[] {city.Faction.Name, city.Name};
-        
+
         public override void ExposeData() {
             base.ExposeData();
             Scribe_References.Look(ref city, "city");
@@ -23,8 +23,8 @@ namespace Cities {
         public override void ChooseParts() {
             base.ChooseParts();
             city = Find.WorldObjects.Settlements
-                .Where(s => s is City city && city.Visitable && !city.Abandoned
-                            && QuestUtility.Reachable(HomeMap?.Parent, s, 50)
+                .Where(s => s is City city && city.Visitable && !city.Abandoned && !(s is Citadel)
+                            && QuestUtility.Reachable(HomeMap?.Parent, s, 80)
                             && !s.HasMap)
                 .RandomElementWithFallback() as City;
         }

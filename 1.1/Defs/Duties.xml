@@ -66,4 +66,28 @@
     </thinkNode>
   </DutyDef>
 
+  <DutyDef>
+    <defName>CityHostage</defName>
+    <alwaysShowWeapon>false</alwaysShowWeapon>
+    <thinkNode Class="ThinkNode_Priority">
+      <subNodes>
+        <li Class="Cities.JobGiver_DoNothing"/>
+      </subNodes>
+    </thinkNode>
+  </DutyDef>
+
+  <DutyDef>
+    <defName>CityCaptor</defName>
+    <alwaysShowWeapon>true</alwaysShowWeapon>
+    <thinkNode Class="ThinkNode_Priority">
+      <subNodes>
+        <li Class="Cities.JobGiver_CaptorFightEnemies">
+          <targetAcquireRadius>20</targetAcquireRadius>
+          <targetKeepRadius>30</targetKeepRadius>
+        </li>
+        <li Class="Cities.JobGiver_DoNothing"/>
+      </subNodes>
+    </thinkNode>
+  </DutyDef>
+
 </Defs>

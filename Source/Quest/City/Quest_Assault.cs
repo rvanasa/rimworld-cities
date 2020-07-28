@@ -27,8 +27,8 @@ namespace Cities {
             alliedFaction = Find.FactionManager.RandomAlliedFaction(minTechLevel: TechLevel.Industrial);
             target = Find.WorldObjects.Settlements
                 .OfType<City>()
-                .Where(s => s.Faction.HostileTo(Faction.OfPlayer) && !s.HasMap)
-                .RandomByDistance(HomeMap?.Parent, 50);
+                .Where(s => s.Faction.HostileTo(Faction.OfPlayer) && !s.HasMap && !(s is Citadel))
+                .RandomByDistance(HomeMap?.Parent, 80);
         }
 
         public override bool AllPartsValid() {
@@ -44,7 +44,7 @@ namespace Cities {
 
         public override void OnTick() {
             var map = Find.CurrentMap;
-            if (map != null && map.Parent == target && (Find.TickManager.TicksGame - map.generationTick + 1) % 200 == 0) {
+            if (map != null && map.Parent == target && (Find.TickManager.TicksGame - map.generationTick + 1) % 1000 == 0) {
                 Complete();
                 var storyComp = Find.Storyteller.storytellerComps.First(x => x is StorytellerComp_OnOffCycle || x is StorytellerComp_RandomMain);
                 var parms = storyComp.GenerateParms(IncidentCategoryDefOf.ThreatBig, map);
@@ -54,6 +54,8 @@ namespace Cities {
                 parms.raidArrivalModeForQuickMilitaryAid = true;
                 parms.points = 5000;
                 IncidentDefOf.RaidFriendly.Worker.TryExecute(parms);
+
+                target.SetFaction(alliedFaction);
             }
         }
 

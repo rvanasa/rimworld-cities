@@ -47,5 +47,13 @@
     <mapGenerator>City_Citadel</mapGenerator>
     <expandingIconTexture>World/WorldObjects/City_Citadel</expandingIconTexture>
   </WorldObjectDef>
+
+  <WorldObjectDef ParentName="CityCommon">
+    <defName>City_Compromised</defName>
+    <label>compromised city</label>
+    <description>A dangerous, lawless, gang-controlled city.</description>
+    <mapGenerator>City_Compromised</mapGenerator>
+    <expandingIconTexture>World/WorldObjects/City_Abandoned</expandingIconTexture>
+  </WorldObjectDef>
   
 </Defs>

@@ -40,6 +40,8 @@ namespace Cities {
                     return "City_Abandoned";
                 case InhabitantKind.Ghost:
                     return "City_Ghost";
+                case InhabitantKind.Compromised:
+                    return "City_Compromised";
                 default:
                     return "City_Faction";
             }
@@ -54,6 +56,8 @@ namespace Cities {
                     return faction.HostileTo(playerFaction) && faction.def.CanEverBeNonHostile;
                 case InhabitantKind.Pirate:
                     return !faction.def.CanEverBeNonHostile;
+                case InhabitantKind.Compromised:
+                    return !faction.def.CanEverBeNonHostile;
                 default:
                     return false;
             }
@@ -65,6 +69,7 @@ namespace Cities {
             Friendly,
             Hostile,
             Pirate,
+            Compromised,
         }
     }
 }

@@ -15,7 +15,7 @@ namespace Cities {
 
         public override void GenerateRect(Stencil s) {
             var plant = DefDatabase<ThingDef>.AllDefs
-                .Where(t => t.category == ThingCategory.Plant && t.altitudeLayer == altitudeLayer && !t.plant.cavePlant)
+                .Where(t => t.category == ThingCategory.Plant && t.altitudeLayer == altitudeLayer && !t.plant.cavePlant && t != ThingDefOf.Plant_TreeAnima)
                 .RandomElement();
             foreach (var pos in s.bounds.Cells) {
                 if (s.Chance(density) && pos.GetFirstThing<Thing>(s.map) == null) {

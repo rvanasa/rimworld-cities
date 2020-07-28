@@ -35,7 +35,7 @@
 		  <li>World</li>
 		</targetTags>
 		<letterLabel>Combined assault</letterLabel>
-		<letterText>{0} is preparing to attack {2}, a settlement of {1}. \n\nIf you choose to join, {0} will allow you to claim the conquered city.</letterText>
+		<letterText>{0} is preparing to attack {2}, a settlement of {1}. \n\nIf you choose to join, {0} will claim the conquered city.</letterText>
 		<letterDef>NeutralEvent</letterDef>
 		<questParts>
 			<li Class="Cities.QuestListener_GiveThings">
@@ -131,17 +131,17 @@
 				<messageType>NegativeEvent</messageType>
 			</li>
 		</questParts>
-		<baseChance>0.07</baseChance>
+		<baseChance>0.08</baseChance>
 		<EnterCityLabel>Defend City</EnterCityLabel>
 	</IncidentDef>
-	
-  <IncidentDef Class="Cities.QuestDef">
+
+	<IncidentDef Class="Cities.QuestDef">
 		<defName>Quest_City_PrisonBreak</defName>
 		<label>prison break quest</label>
 		<questClass>Cities.Quest_PrisonBreak</questClass>
 		<category>GiveQuest</category>
 		<targetTags>
-		  <li>World</li>
+			<li>World</li>
 		</targetTags>
 		<letterLabel>Prison plot</letterLabel>
 		<letterText>Prisoners at {1} are devising an escape plan. If you choose to help, they will join your faction upon being released. \n\nUnfortunately, their captors have been tipped off and are preparing for your arrival. If you enter {1} before the prisoners escape, expect a hostile reaction from {0}.</letterText>
@@ -159,5 +159,38 @@
 		<baseChance>0.15</baseChance>
 		<EnterCityLabel>Prison Break</EnterCityLabel>
 	</IncidentDef>
+
+<!--	<IncidentDef Class="Cities.QuestDef">-->
+<!--		<defName>Quest_City_Hostages</defName>-->
+<!--		<label>hostage rescue</label>-->
+<!--		<questClass>Cities.Quest_Hostages</questClass>-->
+<!--		<category>GiveQuest</category>-->
+<!--		<targetTags>-->
+<!--			<li>World</li>-->
+<!--		</targetTags>-->
+<!--		<letterLabel>Hostage rescue</letterLabel>-->
+<!--		<letterText>Criminals in {0} have taken over a building and are holding {1} citizens hostage. The local authorities have been unable to negotiate terms. If you rescue them, they will happily join your faction. \n\nBe warned: the captors will likely execute their hostages if directly provoked.</letterText>-->
+<!--		<letterDef>PositiveEvent</letterDef>-->
+<!--		<questParts>-->
+<!--			<li Class="Cities.QuestListener_Message">-->
+<!--				<events>-->
+<!--					<li>Complete</li>-->
+<!--				</events>-->
+<!--				<letter>Hostages rescued</letter>-->
+<!--				<message>You have successfully liberated the hostages.</message>-->
+<!--				<messageType>PositiveEvent</messageType>-->
+<!--			</li>-->
+<!--			<li Class="Cities.QuestListener_Message">-->
+<!--				<events>-->
+<!--					<li>Cancel</li>-->
+<!--				</events>-->
+<!--				<letter>Hostages lost</letter>-->
+<!--				<message>You were unable to save the hostages.</message>-->
+<!--				<messageType>NegativeEvent</messageType>-->
+<!--			</li>-->
+<!--		</questParts>-->
+<!--		<baseChance>0.1</baseChance>-->
+<!--		<EnterCityLabel>Hostages</EnterCityLabel>-->
+<!--	</IncidentDef>-->
 
 </Defs>

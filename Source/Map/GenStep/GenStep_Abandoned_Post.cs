@@ -8,9 +8,9 @@ namespace Cities {
         public override int SeedPart => GetType().Name.GetHashCode();
 
         public FloatRange decay = new FloatRange(0, 1);
-        public FloatRange corpseChance = new FloatRange(0, 0.3F);
+        public FloatRange corpseChance = new FloatRange(0.1F, 0.3F);
         public float remnantDensity = 0.15F;
-        public float scavengerDensity = 0.5F;
+        public float scavengerDensity = 1;
         public FloatRange maxItemValue = new FloatRange(300, 400);
 
         public override void Generate(Map map, GenStepParams parms) {
@@ -61,13 +61,14 @@ namespace Cities {
             }
         }
 
-        bool ShouldDestroy(Thing thing, float decay) {
+        public virtual bool ShouldDestroy(Thing thing, float decay) {
             var remnantDensity = this.remnantDensity * (1 - decay);
             var isScavenger = thing is Pawn pawn && !pawn.NonHumanlikeOrWildMan();
             return thing.def.destroyable
                    && !Rand.Chance(isScavenger ? remnantDensity * scavengerDensity : remnantDensity)
                    && thing.def != ThingDefOf.Door
                    && (isScavenger
+                       || (thing.def == ThingDefOf.Silver)
                        || (thing is Building_Turret)
                        || (thing is Plant plant && plant.IsCrop)
                        || (!thing.def.thingCategories.NullOrEmpty() && !thing.def.IsWithinCategory(ThingCategoryDefOf.Buildings) && !thing.def.IsWithinCategory(ThingCategoryDefOf.Chunks))

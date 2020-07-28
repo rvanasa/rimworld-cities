@@ -13,15 +13,15 @@ namespace Cities {
             var config = Config_Cities.Instance;
 
             if (!Find.WorldObjects.AllWorldObjects.Any(obj => obj is City)) {
-                GenerateCities(config.citiesPer100kTiles.RandomInRange, false);
-                GenerateCities(config.abandonedPer100kTiles.RandomInRange, true);
+                GenerateCities(config.citiesPer100kTiles.RandomInRange, "City_Faction", false);
+                GenerateCities(config.abandonedPer100kTiles.RandomInRange, "City_Abandoned", true);
+                GenerateCities(config.compromisedPer100kTiles.RandomInRange, "City_Compromised", false, f => !f.def.CanEverBeNonHostile);
             }
 
             var missingCitadels = Config_Cities.Instance.minCitadelsPerWorld
                                   - Find.WorldObjects.AllWorldObjects.Count(obj => obj is Citadel);
             while (missingCitadels-- > 0) {
-                GenerateCity(DefDatabase<WorldObjectDef>.GetNamed("City_Citadel"), false,
-                    f => f.def.CanEverBeNonHostile);
+                GenerateCity(DefDatabase<WorldObjectDef>.GetNamed("City_Citadel"), false, f => f.def.CanEverBeNonHostile);
             }
         }
 
@@ -29,11 +29,11 @@ namespace Cities {
             GenerateFresh(seed);
         }
 
-        void GenerateCities(int per100kTiles, bool abandoned) {
+        void GenerateCities(int per100kTiles, string defName, bool abandoned, System.Predicate<Faction> factionFilter = null) {
             var cityCount = Mathf.Max(1, GenMath.RoundRandom(Find.WorldGrid.TilesCount / 100_000F * per100kTiles));
             for (var i = 0; i < cityCount; i++) {
-                var def = DefDatabase<WorldObjectDef>.GetNamed(abandoned ? "City_Abandoned" : "City_Faction");
-                GenerateCity(def, abandoned);
+                var def = DefDatabase<WorldObjectDef>.GetNamed(defName);
+                GenerateCity(def, abandoned, factionFilter);
             }
         }
 

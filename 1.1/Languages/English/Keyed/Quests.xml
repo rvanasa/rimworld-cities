@@ -16,5 +16,8 @@
   <QuestReceived>You have received {0}</QuestReceived>
   
   <QuestDefendWave>Attack wave ({0} / {1})</QuestDefendWave>
+
+  <QuestTargetLocated>Target located</QuestTargetLocated>
+  <QuestTargetLocatedMessage>You have been informed about the location of your mission target.</QuestTargetLocatedMessage>
   
 </LanguageData>

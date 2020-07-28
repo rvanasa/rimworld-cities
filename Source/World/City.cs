@@ -30,16 +30,6 @@ namespace Cities {
 
         int abandonCt;
 
-        // Quest Tab mod metadata
-        // bool QuestTab_IsQuest => QuestsHere.Any();
-        // string QuestTab_Label => Name;
-        // int QuestTab_Hostility => Faction.IsPlayer ? -1000 : -Faction.PlayerGoodwill;
-        // int QuestTab_TicksLeft => QuestsHere
-        //     .Where(q => q.TicksLeft > 0)
-        //     .TryMinBy(q => q.TicksLeft, out var min)
-        //     ? min.TicksLeft
-        //     : -1;
-
         public City() {
             trader = new Settlement_TraderTracker(this);
         }
@@ -51,13 +41,6 @@ namespace Cities {
             }
         }
 
-        // public override void PostMake() {
-        //     base.PostMake();
-        //     if (Abandoned) {
-        //         trader = null;
-        //     }
-        // }
-
         public override void Tick() {
             base.Tick();
 
@@ -68,23 +51,6 @@ namespace Cities {
                 }
             }
         }
-
-        // public override void PostMake() {
-        //     base.PostMake();
-        //     if (Faction == null) {
-        //         base.SetFaction(Find.FactionManager?.AllFactions
-        //             .Where(f => f.def.humanlikeFaction && !f.def.techLevel.IsNeolithicOrWorse())
-        //             .RandomElementWithFallback());
-        //     }
-        //     isInhabitantFactionDefined = false;
-        // }
-        //
-        // public override void PostAdd() {
-        //     base.PostAdd();
-        //     if (!isInhabitantFactionDefined || inhabitantFaction == null) {
-        //         inhabitantFaction = Faction;
-        //     }
-        // }
 
         public override void PostMapGenerate() {
             base.PostMapGenerate();
@@ -177,9 +143,9 @@ namespace Cities {
         }
 
         public virtual IntVec3 ChooseMapSize(IntVec3 mapSize) {
-            if (Config_Cities.Instance.limitCitySize) {
-                mapSize.x = Mathf.Min(mapSize.x, Config_Cities.Instance.limitCitySizeScale);
-                mapSize.z = Mathf.Min(mapSize.z, Config_Cities.Instance.limitCitySizeScale);
+            if (Config_Cities.Instance.customCitySize) {
+                mapSize.x = Config_Cities.Instance.citySizeScale;
+                mapSize.z = Config_Cities.Instance.citySizeScale;
             }
             return mapSize;
         }

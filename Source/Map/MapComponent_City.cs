@@ -37,16 +37,6 @@ namespace Cities {
                             parms.points += city.RaidPointIncrease;
                             IncidentDefOf.RaidEnemy.Worker.TryExecute(parms);
                         }
-                        // else {
-                        // var pos = QuestUtility.FindDropSpot(map);
-                        // var things = new List<Thing>();
-                        // var foodCount = (int) (.Count * EventTimeCycle / 60000F / );
-                        // for (var i = 0; i < foodCount; i++) {
-                        //     map.GetComponent<MapComponent_City>().cityOwnedThings.Add(thing);
-                        //     things.Add(thing);
-                        // }
-                        // DropPodUtility.DropThingsNear(pos, map, things, canRoofPunch: false);
-                        // }
 
                         foreach (var pawn in map.mapPawns.SpawnedPawnsInFaction(map.ParentFaction)) {
                             if (!pawn.inventory.innerContainer.Any(thing => pawn.WillEat(thing))) {

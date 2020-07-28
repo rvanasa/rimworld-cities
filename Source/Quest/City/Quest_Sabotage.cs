@@ -23,8 +23,8 @@ namespace Cities {
             base.ChooseParts();
             target = Find.WorldObjects.Settlements
                 .OfType<City>()
-                .Where(s => s.Visitable && !s.Abandoned && !s.HasMap)
-                .RandomByDistance(HomeMap?.Parent, 50);
+                .Where(s => s.Visitable && !s.Abandoned && !s.HasMap && !(s is Citadel))
+                .RandomByDistance(HomeMap?.Parent, 80);
         }
 
         public override bool AllPartsValid() {
