@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <City_Faction.label>город</City_Faction.label>
+  <City_Faction.description>Большое, высокоразвитое поселение.</City_Faction.description>
+
+  <City_Abandoned.label>покинутый город</City_Abandoned.label>
+  <City_Abandoned.description>Остатки былого величия некой цивилизации.</City_Abandoned.description>
+
+  <City_Ghost.label>город-призрак</City_Ghost.label>
+  <City_Ghost.description>Подозрительно пустующее поселение.</City_Ghost.description>
+
+</LanguageData>

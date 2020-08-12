@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <ScenarioDef Name="Crashlanded_City" Abstract="True">
+    <description>The three of you awake in your cryptosleep sarcophagi to the sound of sirens and ripping metal. You
+      barely get to the escape pods before the ship is torn apart. Some time later, you land on this unknown rimworld.
+    </description>
+    <scenario>
+      <summary>The classic RimWorld experience with an urban twist.</summary>
+      <playerFaction>
+        <def>PlayerFaction</def>
+        <factionDef>PlayerColony</factionDef>
+      </playerFaction>
+      <parts>
+
+        <!-- Config pages -->
+        <li Class="ScenPart_ConfigPage_ConfigureStartingPawns">
+          <def>ConfigPage_ConfigureStartingPawns</def>
+          <pawnCount>3</pawnCount>
+          <pawnChoiceCount>8</pawnChoiceCount>
+        </li>
+
+        <!-- Player starting stuff spawn method-->
+        <li Class="ScenPart_PlayerPawnsArriveMethod">
+          <def>PlayerPawnsArriveMethod</def>
+          <visible>false</visible>
+          <method>DropPods</method>
+        </li>
+
+        <!-- Player pawns modifiers -->
+        <li Class="ScenPart_ForcedHediff">
+          <def>ForcedHediff</def>
+          <visible>false</visible>
+          <context>PlayerStarter</context>
+          <chance>0.5</chance>
+          <hediff>CryptosleepSickness</hediff>
+          <hideOffMap>true</hideOffMap>
+          <severityRange>
+            <min>1</min>
+            <max>1</max>
+          </severityRange>
+        </li>
+
+        <!-- Player starting things -->
+        <li Class="ScenPart_StartingThing_Defined">
+          <def>StartingThing_Defined</def>
+          <thingDef>Silver</thingDef>
+          <count>800</count>
+        </li>
+        <li Class="ScenPart_StartingThing_Defined">
+          <def>StartingThing_Defined</def>
+          <thingDef>MealSurvivalPack</thingDef>
+          <count>50</count>
+        </li>
+        <li Class="ScenPart_StartingThing_Defined">
+          <def>StartingThing_Defined</def>
+          <thingDef>MedicineIndustrial</thingDef>
+          <count>30</count>
+        </li>
+        <li Class="ScenPart_StartingThing_Defined">
+          <def>StartingThing_Defined</def>
+          <thingDef>ComponentIndustrial</thingDef>
+          <count>30</count>
+        </li>
+        <li Class="ScenPart_StartingThing_Defined">
+          <def>StartingThing_Defined</def>
+          <thingDef>Gun_BoltActionRifle</thingDef>
+        </li>
+        <li Class="ScenPart_StartingThing_Defined">
+          <def>StartingThing_Defined</def>
+          <thingDef>Gun_Revolver</thingDef>
+        </li>
+        <li Class="ScenPart_StartingThing_Defined">
+          <def>StartingThing_Defined</def>
+          <thingDef>MeleeWeapon_Knife</thingDef>
+          <stuff>Plasteel</stuff>
+        </li>
+        <li Class="ScenPart_StartingThing_Defined">
+          <def>StartingThing_Defined</def>
+          <thingDef>Apparel_FlakPants</thingDef>
+        </li>
+        <li Class="ScenPart_StartingThing_Defined">
+          <def>StartingThing_Defined</def>
+          <thingDef>Apparel_FlakVest</thingDef>
+        </li>
+        <li Class="ScenPart_StartingThing_Defined">
+          <def>StartingThing_Defined</def>
+          <thingDef>Apparel_AdvancedHelmet</thingDef>
+          <stuff>Plasteel</stuff>
+        </li>
+        <li Class="ScenPart_StartingAnimal">
+          <def>StartingAnimal</def>
+          <count>1</count>
+          <bondToRandomPlayerPawnChance>1.0</bondToRandomPlayerPawnChance>
+        </li>
+
+        <!-- Scatter some things near player start -->
+        <li Class="ScenPart_ScatterThingsNearPlayerStart">
+          <def>ScatterThingsNearPlayerStart</def>
+          <thingDef>Steel</thingDef>
+          <count>450</count>
+        </li>
+        <li Class="ScenPart_ScatterThingsNearPlayerStart">
+          <def>ScatterThingsNearPlayerStart</def>
+          <thingDef>WoodLog</thingDef>
+          <count>300</count>
+        </li>
+
+        <!-- Scatter some things anywhere -->
+        <li Class="ScenPart_ScatterThingsAnywhere">
+          <def>ScatterThingsAnywhere</def>
+          <thingDef>ShipChunk</thingDef>
+          <count>3</count>
+        </li>
+        <li Class="ScenPart_ScatterThingsAnywhere">
+          <def>ScatterThingsAnywhere</def>
+          <thingDef>Steel</thingDef>
+          <count>720</count>
+        </li>
+        <li Class="ScenPart_ScatterThingsAnywhere">
+          <def>ScatterThingsAnywhere</def>
+          <thingDef>MealSurvivalPack</thingDef>
+          <count>7</count>
+        </li>
+
+        <!-- Game start dialog -->
+        <li Class="ScenPart_GameStartDialog">
+          <def>GameStartDialog</def>
+          <textKey>GameStartDialog</textKey>
+          <closeSound>GameStartSting</closeSound>
+        </li>
+
+      </parts>
+    </scenario>
+  </ScenarioDef>
+
+  <ScenarioDef ParentName="Crashlanded_City">
+    <defName>Crashlanded_City_Abandoned</defName>
+    <label>Crashlanded (Abandoned City)</label>
+    <description>Instead of spawning in the wilderness, you will start inside an abandoned city. You will find plenty of
+      resources, but keep a close eye out for scavengers and raiding parties.
+    </description>
+    <scenario>
+      <parts>
+        <li Class="Cities.ScenPart_StartCity">
+          <def>StartCity</def>
+          <inhabitantKind>Abandoned</inhabitantKind>
+        </li>
+      </parts>
+    </scenario>
+  </ScenarioDef>
+
+  <ScenarioDef ParentName="Crashlanded_City">
+    <defName>Crashlanded_City_Friendly</defName>
+    <description>Instead of spawning in the wilderness, you will start inside a friendly city.</description>
+    <label>Crashlanded (Friendly City)</label>
+    <scenario>
+      <parts>
+        <li Class="Cities.ScenPart_StartCity">
+          <def>StartCity</def>
+          <inhabitantKind>Friendly</inhabitantKind>
+        </li>
+      </parts>
+    </scenario>
+  </ScenarioDef>
+
+  <ScenarioDef ParentName="Crashlanded_City">
+    <defName>Crashlanded_City_Ghost</defName>
+    <description>Instead of spawning in the wilderness, you will start inside an eerily silent city.</description>
+    <label>Crashlanded (Ghost City)</label>
+    <scenario>
+      <parts>
+        <li Class="Cities.ScenPart_StartCity">
+          <def>StartCity</def>
+          <inhabitantKind>Ghost</inhabitantKind>
+        </li>
+      </parts>
+    </scenario>
+  </ScenarioDef>
+
+  <ScenarioDef>
+    <defName>Siege_City_Citadel</defName>
+    <description>Take command of an elite task force to capture a hostile citadel.</description>
+    <label>Task Force (Hostile Citadel)</label>
+    <scenario>
+      <summary>Take command of an elite task force to capture a hostile citadel.</summary>
+      <playerFaction>
+        <def>PlayerFaction</def>
+        <factionDef>PlayerColony</factionDef>
+      </playerFaction>
+      <parts>
+
+        <li Class="Cities.ScenPart_StartCitadel">
+          <def>StartCitadel</def>
+        </li>
+
+        <li Class="ScenPart_ConfigPage_ConfigureStartingPawns">
+          <def>ConfigPage_ConfigureStartingPawns</def>
+          <pawnCount>20</pawnCount>
+          <pawnChoiceCount>20</pawnChoiceCount>
+        </li>
+
+        <li Class="ScenPart_PlayerPawnsArriveMethod">
+          <def>PlayerPawnsArriveMethod</def>
+          <visible>false</visible>
+          <method>DropPods</method>
+        </li>
+
+        <li Class="ScenPart_ForcedTrait">
+          <def>ForcedTrait</def>
+          <trait>Nerves</trait>
+          <degree>2</degree>
+          <context>PlayerStarter</context>
+          <chance>1</chance>
+        </li>
+        <li Class="ScenPart_ForcedTrait">
+          <def>ForcedTrait</def>
+          <trait>NaturalMood</trait>
+          <degree>1</degree>
+          <context>PlayerStarter</context>
+          <chance>1</chance>
+        </li>
+
+        <li Class="Cities.ScenPart_Allies">
+          <def>StartAllies</def>
+        </li>
+
+        <li Class="Cities.ScenPart_Elite">
+          <def>StartElite</def>
+        </li>
+
+        <li Class="Cities.ScenPart_Equipment">
+          <def>StartEquipment</def>
+          <thingDef>Apparel_ArmorHelmetRecon</thingDef>
+        </li>
+        <li Class="Cities.ScenPart_Equipment">
+          <def>StartEquipment</def>
+          <thingDef>Apparel_ArmorRecon</thingDef>
+        </li>
+        <li Class="Cities.ScenPart_Equipment">
+          <def>StartEquipment</def>
+          <thingDef>Gun_ChargeRifle</thingDef>
+        </li>
+
+      </parts>
+    </scenario>
+  </ScenarioDef>
+
+</Defs>

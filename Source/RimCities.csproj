@@ -16,7 +16,7 @@
     <DebugSymbols>false</DebugSymbols>
     <DebugType>none</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\1.1\Assemblies\</OutputPath>
+    <OutputPath>..\1.2\Assemblies\</OutputPath>
     <DefineConstants>
     </DefineConstants>
     <ErrorReport>prompt</ErrorReport>
@@ -25,7 +25,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>none</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>..\..\RimCities\1.1\Assemblies\</OutputPath>
+    <OutputPath>..\..\RimCities\1.2\Assemblies\</OutputPath>
     <DefineConstants>
     </DefineConstants>
     <ErrorReport>prompt</ErrorReport>
@@ -91,6 +91,7 @@
       IF /I "$(ConfigurationName)" == "Release"; xcopy "$(ProjectDir)..\packages" "$(TargetDir)..\..\packages" /S /C /Y /K /I /Q /D
       IF /I "$(ConfigurationName)" == "Release"; xcopy "$(ProjectDir)..\1.0" "$(TargetDir)..\..\1.0" /S /C /Y /K /I /Q /D
       IF /I "$(ConfigurationName)" == "Release"; xcopy "$(ProjectDir)..\1.1" "$(TargetDir)..\..\1.1" /S /C /Y /K /I /Q /D
+      IF /I "$(ConfigurationName)" == "Release"; xcopy "$(ProjectDir)..\1.2" "$(TargetDir)..\..\1.2" /S /C /Y /K /I /Q /D
       IF /I "$(ConfigurationName)" == "Release"; IF EXIST "$(ProjectDir)..\LICENSE"; copy "$(ProjectDir)..\LICENSE" "$(TargetDir)..\..\LICENSE" /Y
     </PostBuildEvent>
   </PropertyGroup>

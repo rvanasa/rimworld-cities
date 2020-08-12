@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  
+    <WorldGenStepDef>
+      <defName>Cities</defName>
+      <order>550</order>
+      <worldGenStep Class="Cities.WorldGenStep_Cities" />
+    </WorldGenStepDef>
+  
+</Defs>
