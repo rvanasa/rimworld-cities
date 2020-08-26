@@ -78,6 +78,10 @@
 <!--    <StartArguments>-quicktest</StartArguments>-->
 <!--  </PropertyGroup>-->
   <PropertyGroup>
+    <PreBuildEvent>
+      del /S /Q "$(ProjectDir)..\..\RimCities"
+      rmdir /S /Q "$(ProjectDir)..\..\RimCities"
+    </PreBuildEvent>
     <PostBuildEvent>
       echo F|xcopy "$(ProjectDir)..\About\About-$(ConfigurationName).xml" "$(TargetDir)..\..\About\About.xml" /C /Y /K /Q /D
       IF /I "$(ConfigurationName)" == "Release"; echo F|xcopy "$(ProjectDir)..\About\Preview.png" "$(TargetDir)..\..\About\Preview.png" /S /C /Y /K /Q /D

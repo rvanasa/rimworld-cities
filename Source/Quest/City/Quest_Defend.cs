@@ -52,9 +52,9 @@ namespace Cities {
         }
 
         public override void OnMapGenerated(Map map) {
-            if (map.Parent == city) {
-                city.Faction.TryAffectGoodwillWith(enemyFaction, -200, false, false);
-            }
+            // if (map.Parent == city) {
+            //     city.Faction.TryAffectGoodwillWith(enemyFaction, -200, false, false);
+            // }
         }
 
         public override void OnMapRemoved(Map map) {
@@ -72,12 +72,13 @@ namespace Cities {
                         if (stage < MaxStageCount) {
                             stage++;
                             ticksTillNextStage += StageInterval.RandomInRange;
+                            city.Faction.TryAffectGoodwillWith(enemyFaction, -200, false, false);
                             city.Faction.TryAffectGoodwillWith(Faction.OfPlayer, 100);
                             var storyComp = Find.Storyteller.storytellerComps.First(x =>
                                 x is StorytellerComp_OnOffCycle || x is StorytellerComp_RandomMain);
                             var parms = storyComp.GenerateParms(IncidentCategoryDefOf.ThreatBig, map);
                             parms.faction = enemyFaction;
-                            parms.raidStrategy = DefDatabase<RaidStrategyDef>.GetRandom();
+                            parms.raidStrategy = RaidStrategyDefOf.ImmediateAttack;
                             parms.raidArrivalMode = Rand.Chance(.4F)
                                 ? PawnsArrivalModeDefOf.EdgeDrop
                                 : PawnsArrivalModeDefOf.EdgeWalkIn;

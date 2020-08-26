@@ -39,6 +39,7 @@
 			<li>City_Fields</li>
 			<li>City_Orchards</li>
 			<li>City_Sidewalks</li>
+			<li>City_Post</li>
 			<li>City_ClearAnimals</li>
 			<li>SettlementPower</li>
     </genSteps>
@@ -47,7 +48,6 @@
   <MapGeneratorDef ParentName="Cities_Base">
     <defName>City_Faction</defName>
     <genSteps>
-      <li>City_ClearAnimals</li>
     </genSteps>
   </MapGeneratorDef>
 	
@@ -67,7 +67,6 @@
 			<li>ScatterShrines</li>
       <li>CaveHives</li>
       <li>City_Ghost_Post</li>
-      <li>City_ClearAnimals</li>
     </genSteps>
   </MapGeneratorDef>
 	
@@ -575,21 +574,28 @@
 			</sidewalkTerrains>
     </genStep>
   </GenStepDef>
-	
-  <GenStepDef>
-    <defName>City_Abandoned_Post</defName>
-    <order>690</order>
-    <genStep Class="Cities.GenStep_Abandoned_Post">
+
+	<GenStepDef>
+		<defName>City_Post</defName>
+		<order>690</order>
+		<genStep Class="Cities.GenStep_Post">
+		</genStep>
+	</GenStepDef>
+
+	<GenStepDef>
+		<defName>City_Abandoned_Post</defName>
+		<order>691</order>
+		<genStep Class="Cities.GenStep_Abandoned_Post">
 			<decay>
 				<min>0.1</min>
 				<max>0.5</max>
 			</decay>
-    </genStep>
-  </GenStepDef>
+		</genStep>
+	</GenStepDef>
 	
   <GenStepDef>
     <defName>City_Ghost_Post</defName>
-    <order>690</order>
+    <order>691</order>
     <genStep Class="Cities.GenStep_Ghost_Post">
     </genStep>
   </GenStepDef>
