@@ -11,7 +11,7 @@ namespace Cities {
         public FloatRange corpseChance = new FloatRange(0.1F, 0.3F);
         public float remnantDensity = 0.15F;
         public float scavengerDensity = 1;
-        public FloatRange maxItemValue = new FloatRange(300, 400);
+        public FloatRange maxItemValue = new FloatRange(1000, 2000);
 
         public override void Generate(Map map, GenStepParams parms) {
             var decay = this.decay.RandomInRange;

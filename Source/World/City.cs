@@ -57,6 +57,8 @@ namespace Cities {
             if (Abandoned) {
                 SetFaction(Faction.OfPlayer);
             }
+            
+            GetComponent<TimedDetectionRaids>().ResetCountdown();
         }
 
         public override IEnumerable<Gizmo> GetCaravanGizmos(Caravan caravan) {
