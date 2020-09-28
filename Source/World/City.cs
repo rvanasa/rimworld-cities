@@ -28,7 +28,7 @@ namespace Cities {
 
         public virtual TraderKindDef WorldTraderKind => DefDatabase<TraderKindDef>.GetNamed("Base_City");
 
-        int abandonCt;
+        int cityCt;
 
         public City() {
             trader = new Settlement_TraderTracker(this);
@@ -44,12 +44,9 @@ namespace Cities {
         public override void Tick() {
             base.Tick();
 
-            if (abandonCt > 100) {
-                abandonCt = 0;
-                if (Abandoned) {
-                    trader = null;
-                }
-            }
+            // if (++cityCt > 100) {
+            //     cityCt = 0;
+            // }
         }
 
         public override void PostMapGenerate() {
@@ -57,7 +54,7 @@ namespace Cities {
             if (Abandoned) {
                 SetFaction(Faction.OfPlayer);
             }
-            
+
             GetComponent<TimedDetectionRaids>().ResetCountdown();
         }
 
@@ -66,6 +63,7 @@ namespace Cities {
                 // TODO refactor
                 if (!(this is Citadel)) {
                     var enterLabel = Find.World.GetComponent<WorldComponent_QuestTracker>().quests
+                        .Where(q => q.Targets != null && q.Targets.targets.Contains(this))
                         .Select(q => q.def.EnterCityLabel)
                         .FirstOrDefault() ?? "EnterCity".Translate();
 

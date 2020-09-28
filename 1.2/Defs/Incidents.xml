@@ -23,7 +23,7 @@
 				</value>
 			</li>
 		</questParts>
-		<baseChance>0.15</baseChance>
+		<baseChance>0.05</baseChance>
 	</IncidentDef>
 	
   <IncidentDef Class="Cities.QuestDef">
@@ -48,7 +48,7 @@
 				</value>
 			</li>
 		</questParts>
-		<baseChance>0.15</baseChance>
+		<baseChance>0.05</baseChance>
 	</IncidentDef>
 	
   <IncidentDef Class="Cities.QuestDef">
@@ -89,7 +89,7 @@
 				<messageType>NegativeEvent</messageType>
 			</li>
 		</questParts>
-		<baseChance>0.15</baseChance>
+		<baseChance>0.1</baseChance>
 	</IncidentDef>
 	
   <IncidentDef Class="Cities.QuestDef">
@@ -131,7 +131,7 @@
 				<messageType>NegativeEvent</messageType>
 			</li>
 		</questParts>
-		<baseChance>0.08</baseChance>
+		<baseChance>0.02</baseChance>
 		<EnterCityLabel>Defend City</EnterCityLabel>
 	</IncidentDef>
 
@@ -156,7 +156,7 @@
 				<messageType>NegativeEvent</messageType>
 			</li>
 		</questParts>
-		<baseChance>0.15</baseChance>
+		<baseChance>0.1</baseChance>
 		<EnterCityLabel>Prison Break</EnterCityLabel>
 	</IncidentDef>
 
