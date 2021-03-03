@@ -10,7 +10,7 @@ namespace Cities {
     public abstract class Quest : IExposable {
         static readonly IntRange ExpirationDaysRange = new IntRange(10, 30);
 
-        RimWorld.Quest handle;
+        protected RimWorld.Quest handle;
 
         public QuestDef def;
         public int expireTime;
