@@ -10,6 +10,7 @@ namespace Cities {
                 foreach (var skill in pawn.skills.skills) {
                     skill.Level = Rand.RangeInclusive(15, 20);
                 }
+                pawn.playerSettings.hostilityResponse = HostilityResponseMode.Attack;
             }
         }
     }

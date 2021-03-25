@@ -12,6 +12,7 @@ namespace Cities {
             if (map != null && Find.TickManager.TicksGame == 20) {
                 foreach (var pawn in map.mapPawns.AllPawnsSpawned) {
                     if (pawn.IsPrisoner) {
+                        pawn.SetFactionDirect(Find.FactionManager.RandomNonHostileFaction());
                         pawn.mindState.WillJoinColonyIfRescued = true;
                     }
                 }

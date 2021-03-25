@@ -242,6 +242,10 @@
           <thingDef>Gun_ChargeRifle</thingDef>
         </li>
 
+        <li Class="Cities.ScenPart_RescuePrisoners">
+          <def>RescuePrisoners</def>
+        </li>
+
       </parts>
     </scenario>
   </ScenarioDef>

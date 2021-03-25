@@ -28,8 +28,6 @@ namespace Cities {
 
         public virtual TraderKindDef WorldTraderKind => DefDatabase<TraderKindDef>.GetNamed("Base_City");
 
-        int cityCt;
-
         public City() {
             trader = new Settlement_TraderTracker(this);
         }

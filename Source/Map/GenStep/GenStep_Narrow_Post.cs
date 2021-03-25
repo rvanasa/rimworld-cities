@@ -14,6 +14,13 @@ namespace Cities {
                     bed.Medical = true;
                 }
             }
+
+            var safeZone = 50;
+            foreach (var pawn in map.mapPawns.AllPawns) {
+                if (pawn.Position.z <= safeZone && pawn.Faction.HostileTo(Faction.OfPlayer)) {
+                    pawn.Position = new IntVec3(pawn.Position.x, 0, pawn.Position.z + safeZone);
+                }
+            }
         }
     }
 }
