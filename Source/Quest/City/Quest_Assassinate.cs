@@ -18,6 +18,21 @@ namespace Cities {
             base.ExposeData();
             Scribe_References.Look(ref city, "city");
             Scribe_References.Look(ref pawn, "pawn");
+
+            if (pawn == null && city?.Faction != null && handle != null)
+            {
+                GeneratePawn();
+
+                // regenerate quest description
+                handle.description = DetailText;
+
+                // remove any QuestParts
+                foreach (var part in handle.PartsListForReading.ToArray())
+                    handle.RemovePart(part);
+
+                // add new QuestParts
+                OnSetupHandle(handle);
+            }
         }
 
         public override void ChooseParts() {
@@ -26,10 +41,14 @@ namespace Cities {
                 .OfType<City>()
                 .Where(s => s.Visitable && !s.Abandoned && !s.HasMap && !(s is Citadel))
                 .RandomByDistance(HomeMap?.Parent, 80);
-            if (city == null) {
+            if (city == null)
                 return;
-            }
 
+            GeneratePawn();
+        }
+
+        private void GeneratePawn()
+        {
             var faction = city.Faction;
             pawn = PawnGenerator.GeneratePawn(new PawnGenerationRequest(faction.RandomPawnKind(), faction,
                 PawnGenerationContext.NonPlayer, city.Tile));

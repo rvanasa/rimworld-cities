@@ -10,6 +10,7 @@ namespace Cities {
         City city;
         List<Pawn> hostages;
         List<Pawn> captors;
+        int hostageCount, captorCount;
 
         bool _enteredCity;
 
@@ -21,8 +22,27 @@ namespace Cities {
         public override void ExposeData() {
             base.ExposeData();
             Scribe_References.Look(ref city, "city");
+            Scribe_Values.Look(ref hostageCount, "hostageCount");
+            Scribe_Values.Look(ref captorCount, "captorCount");
             Scribe_Collections.Look(ref hostages, "hostages", LookMode.Reference);
             Scribe_Collections.Look(ref captors, "captors", LookMode.Reference);
+
+            if ((hostages == null || hostages.Count != hostageCount ||
+                captors == null || captors.Count != captorCount) 
+                && city?.Faction != null && handle != null)
+            {
+                GeneratePawns();
+
+                // regenerate quest description
+                handle.description = DetailText;
+
+                // remove any QuestParts
+                foreach (var part in handle.PartsListForReading.ToArray())
+                    handle.RemovePart(part);
+
+                // add new QuestParts
+                OnSetupHandle(handle);
+            }
         }
 
         public override void ChooseParts() {
@@ -35,10 +55,17 @@ namespace Cities {
                 return;
             }
 
+            hostageCount = Rand.RangeInclusive(2, 4);
+            captorCount = hostageCount + 3;
+
+            GeneratePawns();
+        }
+
+        private void GeneratePawns()
+        {
             var faction = city.Faction;
-            var hostageCt = Rand.RangeInclusive(2, 4);
             hostages = new List<Pawn>();
-            for (var i = 0; i < hostageCt; i++) {
+            for (var i = 0; i < hostageCount; i++) {
                 var pawn = PawnGenerator.GeneratePawn(new PawnGenerationRequest(PawnKindDefOf.Slave, faction, PawnGenerationContext.NonPlayer, city.Tile));
                 pawn.equipment?.DestroyAllEquipment();
                 hostages.Add(pawn);
@@ -46,9 +73,8 @@ namespace Cities {
 
             var captorFaction = GenCity.RandomCityFaction(f => !faction.def.CanEverBeNonHostile)
                                 ?? GenCity.RandomCityFaction(f => f.HostileTo(Faction.OfPlayer));
-            var captorCt = hostageCt + 3;
             captors = new List<Pawn>();
-            for (var i = 0; i < captorCt; i++) {
+            for (var i = 0; i < captorCount; i++) {
                 var pawn = PawnGenerator.GeneratePawn(new PawnGenerationRequest(faction.RandomPawnKind(), captorFaction, PawnGenerationContext.NonPlayer, city.Tile));
                 captors.Add(pawn);
             }
