@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <Quest_City_Sabotage.label>квест на саботаж в городе</Quest_City_Sabotage.label>
+  <Quest_City_Sabotage.letterText>Партизанский отряд собирается атаковать {1}, город {0}. Вы можете помочь, демонтировав все защитные сооружения в {1}. \n\nЛичность атакующих будет в тайне до самого начала штурма.\n\nУчтите, это задание очень сильно повлияет на мнение обеих фракций насчет вашей колонии.</Quest_City_Sabotage.letterText>
+  <Quest_City_Sabotage.letterLabel>Возможность саботажа</Quest_City_Sabotage.letterLabel>
+
+  <Quest_City_Assault.label>квест на атаку города</Quest_City_Assault.label>
+  <Quest_City_Assault.letterText>{0} готовятся атаковать {2}, поселение {1}. \n\nЕсли вы присоединитесь, {0} разрешат вам оставить себе завоеванный город.</Quest_City_Assault.letterText>
+  <Quest_City_Assault.letterLabel>Совместная атака</Quest_City_Assault.letterLabel>
+
+  <Quest_City_Assassinate.label>квест на заказное убийство</Quest_City_Assassinate.label>
+  <Quest_City_Assassinate.letterText>Таинственный незнакомец обратился к вашей колонии с запросом на убийство {0}. {1} очень влиятельный {2} гражданин, живет в поселении {3}. \n\nЕсли организовать необычное убийство без прямого воздействия, то никаких политических последствий не будет.</Quest_City_Assassinate.letterText>
+  <Quest_City_Assassinate.letterLabel>Заказ на убийство</Quest_City_Assassinate.letterLabel>
+  <Quest_City_Assassinate.questParts.1.letter>Цель убита</Quest_City_Assassinate.questParts.1.letter>
+  <Quest_City_Assassinate.questParts.2.letter>Цель сбежала</Quest_City_Assassinate.questParts.2.letter>
+  <Quest_City_Assassinate.questParts.1.message>Вы успешно убили {0}</Quest_City_Assassinate.questParts.1.message>
+  <Quest_City_Assassinate.questParts.2.message>Цель {0} сбежала из города.</Quest_City_Assassinate.questParts.2.message>
+
+  <Quest_City_Defend.label>квест на защиту города</Quest_City_Defend.label>
+  <Quest_City_Defend.letterText>Город {2} атакуют войска {0} и он нуждается в подкреплении. \n\nЕсли вы успешно защитите {2}, город будет отдан под ваше правление в качестве благодарности.</Quest_City_Defend.letterText>
+  <Quest_City_Defend.letterLabel>Город атакуют!</Quest_City_Defend.letterLabel>
+  <Quest_City_Defend.questParts.1.letter>Атакующие сбегают</Quest_City_Defend.questParts.1.letter>
+  <Quest_City_Defend.questParts.2.letter>Город захвачен</Quest_City_Defend.questParts.2.letter>
+  <Quest_City_Defend.questParts.1.message>Войска {0} запаниковали и ретировались. {2} успешно защищен.</Quest_City_Defend.questParts.1.message>
+  <Quest_City_Defend.questParts.2.message>{2} захвачен войсками {0}.</Quest_City_Defend.questParts.2.message>
+
+  <Quest_City_PrisonBreak.label>квест: побег из тюрьмы</Quest_City_PrisonBreak.label>
+  <Quest_City_PrisonBreak.letterText>Узники в {1} разрабатывают план побега. Если вы согласитесь помочь, они присоединятся к вам после освобождения. \n\nК сожалению, те, кто их пленил, уже знают о вашем прибытии. Если вы войдете в {1} до того, как узники сбегут, ожидайте враждебной реакции от {0}.</Quest_City_PrisonBreak.letterText>
+  <Quest_City_PrisonBreak.letterLabel>План побега</Quest_City_PrisonBreak.letterLabel>
+  <Quest_City_PrisonBreak.questParts.0.letter>Узники успешно сбежали</Quest_City_PrisonBreak.questParts.0.letter>
+  <Quest_City_PrisonBreak.questParts.0.message>Кажется, узникам удалось сбежать.</Quest_City_PrisonBreak.questParts.0.message>
+
+</LanguageData>

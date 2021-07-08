@@ -77,7 +77,9 @@ namespace Cities {
 
         public override void OnComplete() {
             var faction = Find.FactionManager.RandomNonHostileFaction(minTechLevel: TechLevel.Industrial)
-                          ?? FactionGenerator.NewGeneratedFaction(FactionDefOf.Empire);
+                          ?? FactionGenerator.NewGeneratedFaction(new FactionGeneratorParms() {
+                              factionDef = FactionDefOf.Empire,
+                          });
 
             faction.TryAffectGoodwillWith(Faction.OfPlayer, 50);
             target.Faction.TryAffectGoodwillWith(Faction.OfPlayer, -50);

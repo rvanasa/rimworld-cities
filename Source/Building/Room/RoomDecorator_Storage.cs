@@ -30,7 +30,7 @@ namespace Cities {
                             if (pawn.guest == null) {
                                 pawn.guest = new Pawn_GuestTracker(pawn);
                             }
-                            pawn.guest.SetGuestStatus(s.map.ParentFaction, true);
+                            pawn.guest.SetGuestStatus(s.map.ParentFaction, GuestStatus.Slave);
                         }
                         else {
                             thing.SetOwnedByCity(true, s.map);

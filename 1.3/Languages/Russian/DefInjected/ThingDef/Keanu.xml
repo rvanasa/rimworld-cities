@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <Keanu_Dog.label>гончая собака</Keanu_Dog.label>
+  <Keanu_Dog.description>Счастливая маленькая гончая.</Keanu_Dog.description>
+  <Keanu_Dog.tools.left_claw.label>Левый коготь</Keanu_Dog.tools.left_claw.label>
+  <Keanu_Dog.tools.right_claw.label>Правый коготь</Keanu_Dog.tools.right_claw.label>
+  <Keanu_Dog.tools.cute_little_teeth.label>Милые зубки</Keanu_Dog.tools.cute_little_teeth.label>
+  <Keanu_Dog.tools.head.label>Голова</Keanu_Dog.tools.head.label>
+  <!-- <Leather_Keanu_Dog.label>шкура гончей</Leather_Keanu_Dog.label>
+  <Leather_Keanu_Dog.description>шкура гончей</Leather_Keanu_Dog.description>
+  <Leather_Keanu_Dog.stuffProps.stuffAdjective>из шкуры гончей</Leather_Keanu_Dog.stuffProps.stuffAdjective>
+  <Meat_Keanu_Dog.label>мясо гончей/Meat_Keanu_Dog.label>
+  <Meat_Keanu_Dog.description>Мясо гончей</Meat_Keanu_Dog.description> -->
+  <Corpse_Keanu_Dog.label>Тушка гончей</Corpse_Keanu_Dog.label>
+  <Corpse_Keanu_Dog.description>Тушка гончей</Corpse_Keanu_Dog.description>
+
+</LanguageData>

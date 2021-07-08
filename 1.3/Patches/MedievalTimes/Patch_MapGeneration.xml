@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Patch>
+    
+  <Operation Class="PatchOperationFindMod">
+    <mods>
+      <li>Medieval Times</li>
+    </mods>
+    <match Class="PatchOperationSequence">
+      <!--<success>Always</success>-->
+      <operations>
+        <li Class="PatchOperationRemove">
+          <xpath>/Defs/MapGeneratorDef[@Name="Cities_Base"]/genSteps/li[text()="City_Hospital"]</xpath>
+        </li>
+        <li Class="PatchOperationRemove">
+          <xpath>/Defs/MapGeneratorDef[@Name="Cities_Base"]/genSteps/li[text()="City_Freezer"]</xpath>
+        </li>
+        <li Class="PatchOperationRemove">
+          <xpath>/Defs/MapGeneratorDef[@Name="Cities_Base"]/genSteps/li[text()="City_Emplacements"]</xpath>
+        </li>
+        <li Class="PatchOperationRemove">
+          <xpath>/Defs/MapGeneratorDef[@Name="Cities_Base"]/genSteps/li[text()="SettlementPower"]</xpath>
+        </li>
+        <li Class="PatchOperationRemove">
+          <xpath>/Defs/GenStepDef[defName="City_ProductionBuildings"]/genStep/roomDecorators/li[@Class="Cities.RoomDecorator_Batteries"]</xpath>
+        </li>
+        <li Class="PatchOperationReplace">
+          <xpath>/Defs/GenStepDef[defName="City_ThingGroups"]/genStep/options</xpath>
+          <value>
+      			<options>
+              <li>
+      					<naturalFloor>true</naturalFloor>
+      					<thingDef>Grave</thingDef>
+      					<spacingX>2</spacingX>
+      					<spacingZ>3</spacingZ>
+      				</li>
+      				<li>
+      					<weight>0.25</weight>
+      					<roofed>true</roofed>
+      					<thingDef>Sarcophagus</thingDef>
+      					<spacingX>3</spacingX>
+      					<spacingZ>4</spacingZ>
+      				</li>
+            </options>
+          </value>
+        </li>
+        <li Class="PatchOperationReplace">
+          <xpath>/Defs/GenStepDef[defName="City_MainBuildings"]/genStep/roomDecorators/li/options[not(chairDensity)]</xpath>
+          <value>
+            <options>
+  						<li>HoopstoneRing</li>
+  						<li>BilliardsTable</li>
+  						<li>ShipChunk</li>
+  						<li>AncientCryptosleepCasket</li>
+  						<!--<li>AnimalSleepingBox</li>-->
+              <li>MedTimes_StoneHearth</li>
+              <li>MedTimes_CombatStandPlaced</li>
+              <li>MedTimes_StoneQuarry</li>
+            </options>
+          </value>
+        </li>
+        <li Class="PatchOperationReplace">
+          <xpath>/Defs/GenStepDef[defName="City_ProductionBuildings"]/genStep/roomDecorators/li/options[not(chairDensity)]</xpath>
+          <value>
+            <options>
+              <li>TableSculpting</li>
+  						<li>TableButcher</li>
+  						<li>TableStonecutter</li>
+              <li>MedTimes_ButcherBlock</li>
+              <li>MedTimes_StoneHearth</li>
+              <li>MedTimes_Smokehouse</li>
+              <li>MedTimes_StoragePotPlaced</li>
+              <li>MedTimes_CraftingStation</li>
+              <li>MedTimes_ArtisanStation</li>
+              <li>MedTimes_FoodPrepStation</li>
+              <li>MedTimes_TailoringStation</li>
+              <li>MedTimes_BlacksmithForge</li>
+              <li>MedTimes_BlacksmithForgeTierTwo</li>
+              <li>MedTimes_FueledSmelter</li>
+              <li>MedTimes_StoneQuarry</li>
+            </options>
+          </value>
+        </li>
+        <li Class="PatchOperationAdd">
+          <xpath>/Defs/GenStepDef/genStep/roomDecorators/li</xpath>
+          <value>
+            <lightChance>0</lightChance>
+          </value>
+          <order>Prepend</order>
+        </li>
+    </operations>
+    </match>
+  </Operation>
+
+</Patch>
