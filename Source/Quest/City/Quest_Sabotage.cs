@@ -65,7 +65,7 @@ namespace Cities {
                 foreach (var thing in map.listerThings.AllThings) {
                     if (IsDefense(thing)) {
                         hasDefenses = true;
-                        Log.Warning("Building remaining: " + thing + " :: " + thing.Position, false);
+                        Log.Warning("Building remaining: " + thing + " :: " + thing.Position);
                         break;
                     }
                 }

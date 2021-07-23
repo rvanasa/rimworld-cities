@@ -80,8 +80,8 @@ namespace Cities {
                     (__instance.Owner as Pawn_InventoryTracker)?.pawn ??
                     (__instance.Owner as Pawn_ApparelTracker)?.pawn ??
                     (__instance.Owner as Pawn_EquipmentTracker)?.pawn;
-
-                if (pawn != null && pawn.IsColonist && item.IsOwnedByCity(pawn.Map)) {
+    
+                if (pawn != null && pawn.IsColonistPlayerControlled && item.IsOwnedByCity(pawn.Map)) {
                     if (pawn.Map.Parent is City city && !city.Abandoned && city.Faction != pawn.Faction) {
                         city.Faction.TryAffectGoodwillWith(pawn.Faction,
                             -Mathf.RoundToInt(Mathf.Sqrt(item.stackCount * item.MarketValue) * Rand.Range(1.5F, 2)) - 2);
@@ -276,6 +276,6 @@ namespace Cities {
             }
         }
     }
-    
-    
+
+
 }
