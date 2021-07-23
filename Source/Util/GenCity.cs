@@ -58,6 +58,12 @@ namespace Cities {
 
             lord?.AddPawn(pawn);
             GenSpawn.Spawn(pawn, pos, map);
+            
+            if (pawn.guilt == null) {
+                pawn.guilt = new Pawn_GuiltTracker(pawn);
+            }
+            pawn.guilt.Notify_Guilty(0);
+            
             return pawn;
         }
 
@@ -74,7 +80,7 @@ namespace Cities {
             return (map ?? thing.Map)?.GetComponent<MapComponent_City>()?.cityOwnedThings.Contains(thing) ?? false;
         }
 
-        public static void SetOwnedByCity(this Thing thing, bool owned, Map map/* = null*/) {
+        public static void SetOwnedByCity(this Thing thing, bool owned, Map map /* = null*/) {
             try {
                 if (owned) {
                     thing.SetForbidden(true, false);
