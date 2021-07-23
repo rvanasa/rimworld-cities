@@ -26,14 +26,16 @@ namespace Cities {
                         }
                         thing = thing.TryMakeMinified();
                         GenSpawn.Spawn(thing, pos, s.map);
-                        if (thing is Pawn pawn && pawn.IsColonist) {
+                        if (thing is Pawn pawn && pawn.Faction != null) {
                             if (pawn.guest == null) {
                                 pawn.guest = new Pawn_GuestTracker(pawn);
                             }
                             if (pawn.skills == null) {
                                 pawn.skills = new Pawn_SkillTracker(pawn);
                             }
-                            pawn.guest.SetGuestStatus(s.map.ParentFaction, GuestStatus.Slave);
+                            if (pawn.Faction.HostileTo(s.map.ParentFaction)) {
+                                pawn.guest.SetGuestStatus(s.map.ParentFaction, GuestStatus.Prisoner);
+                            }
                         }
                         else {
                             thing.SetOwnedByCity(true, s.map);

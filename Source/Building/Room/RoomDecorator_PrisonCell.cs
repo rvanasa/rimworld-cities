@@ -26,9 +26,10 @@ namespace Cities {
                 if (pawn.skills == null) {
                     pawn.skills = new Pawn_SkillTracker(pawn);
                 }
-                pawn.equipment.DestroyAllEquipment();
-                pawn.guest.SetGuestStatus(s.map.ParentFaction, GuestStatus.Slave);
-                bed.CompAssignableToPawn.TryAssignPawn(pawn);
+                if (pawn.Faction.HostileTo(s.map.ParentFaction)) {
+                    pawn.equipment.DestroyAllEquipment();
+                    pawn.guest.SetGuestStatus(s.map.ParentFaction, GuestStatus.Prisoner);
+                }
             }
         }
     }
