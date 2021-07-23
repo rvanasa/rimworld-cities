@@ -14,8 +14,8 @@ namespace Cities {
         }
 
         public override void ExposeData() {
-            Scribe_Collections.Look(ref cityOwnedThings, "cityOwnedThings", LookMode.Reference);
             base.ExposeData();
+            Scribe_Collections.Look(ref cityOwnedThings, "cityOwnedThings", LookMode.Reference);
         }
 
         public override void MapComponentTick() {

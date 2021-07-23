@@ -11,8 +11,8 @@ namespace Cities {
         InhabitantKind inhabitantKind = InhabitantKind.Abandoned;
 
         public override void ExposeData() {
-            Scribe_Values.Look(ref inhabitantKind, "inhabitantKind");
             base.ExposeData();
+            Scribe_Values.Look(ref inhabitantKind, "inhabitantKind");
         }
         
         public override void DoEditInterface(Listing_ScenEdit listing) {
