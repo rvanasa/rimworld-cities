@@ -110,8 +110,8 @@ namespace Cities {
         }
 
         public override void ExposeData() {
-            Scribe_References.Look(ref inhabitantFaction, "inhabitantFaction");
             base.ExposeData();
+            Scribe_References.Look(ref inhabitantFaction, "inhabitantFaction");
         }
 
         public virtual void PreMapGenerate(Map map) {
