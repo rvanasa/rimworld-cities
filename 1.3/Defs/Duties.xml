@@ -10,6 +10,12 @@
           <targetAcquireRadius>45</targetAcquireRadius>
           <targetKeepRadius>50</targetKeepRadius>
         </li>
+        <li Class="ThinkNode_ConditionalRandom">
+          <chance>0.01</chance>
+          <subNodes>
+            <li Class="JobGiver_AIGotoNearestHostile"/>
+          </subNodes>
+        </li>
         <!--<li Class="JobGiver_AIGotoNearestHostile" />-->
         <li Class="ThinkNode_Subtree">
           <treeDef>SatisfyBasicNeeds</treeDef>
