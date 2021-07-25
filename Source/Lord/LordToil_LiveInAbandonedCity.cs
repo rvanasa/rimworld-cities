@@ -10,17 +10,16 @@ using Verse.AI;
 
 namespace Cities {
     // TODO dry
-    public class LordToil_LiveInCitadel : LordToil {
+    public class LordToil_LiveInAbandonedCity : LordToil {
         public IntVec3 workSpot;
 
-        public LordToil_LiveInCitadel(IntVec3 workSpot) {
+        public LordToil_LiveInAbandonedCity(IntVec3 workSpot) {
             this.workSpot = workSpot;
         }
 
         public override void UpdateAllDuties() {
-            Debug.LogError("123");
             foreach (var pawn in lord.ownedPawns) {
-                pawn.mindState.duty = new PawnDuty(DefDatabase<DutyDef>.GetNamed("LiveInCitadel"), workSpot);
+                pawn.mindState.duty = new PawnDuty(DefDatabase<DutyDef>.GetNamed("LiveInAbandonedCity"), workSpot);
             }
         }
     }

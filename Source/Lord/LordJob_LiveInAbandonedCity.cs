@@ -4,21 +4,21 @@ using Verse.AI.Group;
 namespace Cities
 {
 	// TODO dry
-	public class LordJob_LiveInCity : LordJob {
+	public class LordJob_LiveInAbandonedCity : LordJob {
 		public IntVec3 workSpot;
 
-		public override bool AddFleeToil => false;
+		public override bool AddFleeToil => true;
 
-		public LordJob_LiveInCity() {
+		public LordJob_LiveInAbandonedCity() {
 		}
 
-		public LordJob_LiveInCity(IntVec3 workSpot) {
+		public LordJob_LiveInAbandonedCity(IntVec3 workSpot) {
 			this.workSpot = workSpot;
 		}
 
 		public override StateGraph CreateGraph() {
 			var graph = new StateGraph();
-			graph.AddToil(new LordToil_LiveInCity(workSpot));
+			graph.AddToil(new LordToil_LiveInAbandonedCity(workSpot));
 			return graph;
 		}
 

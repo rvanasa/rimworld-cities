@@ -9,6 +9,7 @@ using Verse.AI.Group;
 using Verse.AI;
 
 namespace Cities {
+    // TODO dry
     public class LordToil_LiveInCity : LordToil {
         public IntVec3 workSpot;
 
