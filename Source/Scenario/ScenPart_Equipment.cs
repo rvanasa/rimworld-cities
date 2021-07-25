@@ -10,7 +10,7 @@ namespace Cities {
     public class ScenPart_Equipment : ScenPart_ThingCount {
 
         public override void Notify_PawnGenerated(Pawn pawn, PawnGenerationContext context, bool redressed) {
-            if (pawn.Faction?.IsPlayer ?? false) {
+            if (context == PawnGenerationContext.PlayerStarter) {
                 var thing = ThingMaker.MakeThing(thingDef, stuff);
                 if (thing is Apparel apparel) {
                     pawn.apparel.Wear(apparel, false);
