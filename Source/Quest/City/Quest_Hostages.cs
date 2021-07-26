@@ -49,7 +49,7 @@ namespace Cities {
             base.ChooseParts();
             city = Find.WorldObjects.Settlements
                 .OfType<City>()
-                .Where(s => s.Visitable && !s.Abandoned && !s.HasMap && !(s is Citadel))
+                .Where(s => s.Visitable && !s.Abandoned && !s.HasMap && !(s is Citadel) && s.FindQuests().Count == 0)
                 .RandomByDistance(HomeMap?.Parent, Rand.RangeInclusive(20, 100));
             if (city == null) {
                 return;

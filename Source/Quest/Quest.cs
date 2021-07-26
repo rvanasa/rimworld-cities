@@ -85,8 +85,7 @@ namespace Cities {
         }
 
         protected virtual bool IsValidHome(Map map) {
-            return map?.Parent?.Faction != null && !map.ParentFaction.HostileTo(Faction.OfPlayer) &&
-                   HasSufficientColonists(map);
+            return map?.Parent?.Faction != null && !map.ParentFaction.HostileTo(Faction.OfPlayer) && HasSufficientColonists(map);
         }
 
         protected virtual bool HasSufficientColonists(Map map) {

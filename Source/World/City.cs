@@ -147,5 +147,11 @@ namespace Cities {
             }
             return mapSize;
         }
+
+        public List<Quest> FindQuests() {
+            return Find.World.GetComponent<WorldComponent_QuestTracker>().quests
+                .Where(quest => !quest.Ended && quest.Targets.targets.Any(target => target.WorldObject == this))
+                .ToList();
+        }
     }
 }

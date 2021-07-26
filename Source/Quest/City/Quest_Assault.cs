@@ -27,7 +27,7 @@ namespace Cities {
             alliedFaction = Find.FactionManager.RandomAlliedFaction(minTechLevel: TechLevel.Industrial);
             target = Find.WorldObjects.Settlements
                 .OfType<City>()
-                .Where(s => s.Faction.HostileTo(Faction.OfPlayer) && !s.HasMap && !(s is Citadel))
+                .Where(s => s.Faction.HostileTo(Faction.OfPlayer) && !s.HasMap && !(s is Citadel) && s.FindQuests().Count == 0)
                 .RandomByDistance(HomeMap?.Parent, 80);
         }
 

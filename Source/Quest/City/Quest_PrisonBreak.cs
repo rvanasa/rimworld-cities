@@ -9,6 +9,7 @@ namespace Cities {
         City city;
 
         public override int MinCapableColonists => 1;
+        public override int ChallengeRating => 3;
 
         public override LookTargets Targets => city;
 
@@ -23,7 +24,8 @@ namespace Cities {
         public override void ChooseParts() {
             base.ChooseParts();
             city = Find.WorldObjects.Settlements
-                .Where(s => s is City city && city.Visitable && city.inhabitantFaction != null && city.inhabitantFaction.PlayerGoodwill < 50 && !(s is Citadel)
+                .OfType<City>()
+                .Where(s => s.Visitable && s.inhabitantFaction != null && s.inhabitantFaction.PlayerGoodwill < 50 && !(s is Citadel) && s.FindQuests().Count == 0
                             && QuestUtility.Reachable(HomeMap?.Parent, s, 80)
                             && !s.HasMap)
                 .RandomElementWithFallback() as City;

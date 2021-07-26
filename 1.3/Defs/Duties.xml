@@ -7,8 +7,8 @@
     <thinkNode Class="ThinkNode_Priority">
       <subNodes>
         <li Class="JobGiver_AIFightEnemies">
-          <targetAcquireRadius>80</targetAcquireRadius>
-          <targetKeepRadius>100</targetKeepRadius>
+          <targetAcquireRadius>60</targetAcquireRadius>
+          <targetKeepRadius>80</targetKeepRadius>
         </li>
         <li Class="JobGiver_AIGotoNearestHostile" />
         <li Class="ThinkNode_Subtree">
