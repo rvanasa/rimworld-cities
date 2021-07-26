@@ -23,7 +23,7 @@ namespace Cities {
             base.ChooseParts();
             target = Find.WorldObjects.Settlements
                 .OfType<City>()
-                .Where(s => s.Visitable && !s.Abandoned && !s.HasMap && !(s is Citadel))
+                .Where(s => s.Visitable && s.inhabitantFaction != null && s.inhabitantFaction.PlayerGoodwill < 50 && !s.HasMap && !(s is Citadel))
                 .RandomByDistance(HomeMap?.Parent, 80);
         }
 

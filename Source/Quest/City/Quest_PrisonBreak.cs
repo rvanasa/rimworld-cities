@@ -23,7 +23,7 @@ namespace Cities {
         public override void ChooseParts() {
             base.ChooseParts();
             city = Find.WorldObjects.Settlements
-                .Where(s => s is City city && city.Visitable && !city.Abandoned && !(s is Citadel)
+                .Where(s => s is City city && city.Visitable && city.inhabitantFaction != null && city.inhabitantFaction.PlayerGoodwill < 50 && !(s is Citadel)
                             && QuestUtility.Reachable(HomeMap?.Parent, s, 80)
                             && !s.HasMap)
                 .RandomElementWithFallback() as City;
