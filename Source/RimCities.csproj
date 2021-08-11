@@ -92,7 +92,6 @@
       IF /I "$(ConfigurationName)" == "Release"; xcopy "$(ProjectDir)..\Languages" "$(TargetDir)..\..\Languages" /S /C /Y /K /I /Q /D
       IF /I "$(ConfigurationName)" == "Release"; xcopy "$(ProjectDir)..\Sounds" "$(TargetDir)..\..\Sounds" /S /C /Y /K /I /Q /D
       IF /I "$(ConfigurationName)" == "Release"; xcopy "$(ProjectDir)..\Textures" "$(TargetDir)..\..\Textures" /S /C /Y /K /I /Q /D
-      IF /I "$(ConfigurationName)" == "Release"; xcopy "$(ProjectDir)..\packages" "$(TargetDir)..\..\packages" /S /C /Y /K /I /Q /D
       IF /I "$(ConfigurationName)" == "Release"; xcopy "$(ProjectDir)..\1.0" "$(TargetDir)..\..\1.0" /S /C /Y /K /I /Q /D
       IF /I "$(ConfigurationName)" == "Release"; xcopy "$(ProjectDir)..\1.1" "$(TargetDir)..\..\1.1" /S /C /Y /K /I /Q /D
       IF /I "$(ConfigurationName)" == "Release"; xcopy "$(ProjectDir)..\1.2" "$(TargetDir)..\..\1.2" /S /C /Y /K /I /Q /D

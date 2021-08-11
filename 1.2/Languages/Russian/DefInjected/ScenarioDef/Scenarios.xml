@@ -1,16 +1,29 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <LanguageData>
 
-  <Crashlanded_City_Abandoned.label>аварийная посадка в заброшенном городе</Crashlanded_City_Abandoned.label>
-  <Crashlanded_City_Abandoned.description>Вы втроем проснулись в своих саркофагах криптосна под звук сирен и скрежет металла. Едва вы успели добраться до спасательных капсул, как корабль развалился на части. Вместо обычного начала в пустыне, вы начинаете игру в большом заброшенном городе.</Crashlanded_City_Abandoned.description>
+  <Crashlanded_City_Abandoned.label>Аварийная посадка в заброшенном городе</Crashlanded_City_Abandoned.label>
+  <Crashlanded_City_Abandoned.description>Вместо появления на дикой местности, вы начнете игру внутри заброшенного города. Вы найдете множество ресурсов, но внимательно следите за мусорщиками и рейдерами.</Crashlanded_City_Abandoned.description>
   <Crashlanded_City_Abandoned.scenario.name>Аварийная посадка в заброшенном городе</Crashlanded_City_Abandoned.scenario.name>
-  <Crashlanded_City_Abandoned.scenario.summary>Классический сценарий Rimworld, который разворачивается в новом месте.</Crashlanded_City_Abandoned.scenario.summary>
-  <Crashlanded_City_Abandoned.scenario.description>Вы втроем проснулись в своих саркофагах криптосна под звук сирен и скрежет металла. Едва вы успели добраться до спасательных капсул, как корабль развалился на части. Вместо обычного начала в пустыне, вы начинаете игру в большом заброшенном городе.</Crashlanded_City_Abandoned.scenario.description>
+  <Crashlanded_City_Abandoned.scenario.summary>Классический RimWorld в урбанистическом стиле.</Crashlanded_City_Abandoned.scenario.summary>
+  <Crashlanded_City_Abandoned.scenario.description>Вместо появления на дикой местности, вы начнете игру внутри заброшенного города. Вы найдете множество ресурсов, но внимательно следите за мусорщиками и рейдерами.</Crashlanded_City_Abandoned.scenario.description>
 
-  <Crashlanded_City_Friendly.label>аварийная посадка в дружественном городе</Crashlanded_City_Friendly.label>
-  <Crashlanded_City_Friendly.description>Вы втроем проснулись в своих саркофагах криптосна под звук сирен и скрежет металла. Едва вы успели добраться до спасательных капсул, как корабль развалился на части. Вместо обычного начала в пустыне, вы начинаете игру в большом городе.</Crashlanded_City_Friendly.description>
+  <Crashlanded_City_Friendly.label>Аварийная посадка в дружественном городе</Crashlanded_City_Friendly.label>
+  <Crashlanded_City_Friendly.description>Вместо появления на дикой местности, вы начнете игру внутри дружественного города.</Crashlanded_City_Friendly.description>
   <Crashlanded_City_Friendly.scenario.name>Аварийная посадка в дружественном городе</Crashlanded_City_Friendly.scenario.name>
-  <Crashlanded_City_Friendly.scenario.summary>Классический сценарий Rimworld, который разворачивается в новом месте.</Crashlanded_City_Friendly.scenario.summary>
-  <Crashlanded_City_Friendly.scenario.description>Вы втроем проснулись в своих саркофагах криптосна под звук сирен и скрежет металла. Едва вы успели добраться до спасательных капсул, как корабль развалился на части. Вместо обычного начала в пустыне, вы начинаете игру в большом городе.</Crashlanded_City_Friendly.scenario.description>
+  <Crashlanded_City_Friendly.scenario.summary>Классический RimWorld в урбанистическом стиле.</Crashlanded_City_Friendly.scenario.summary>
+  <Crashlanded_City_Friendly.scenario.description>Вместо появления на дикой местности, вы начнете игру внутри дружественного города.</Crashlanded_City_Friendly.scenario.description>
+
+  <Crashlanded_City_Ghost.label>Аварийная посадка в городе-призраке</Crashlanded_City_Ghost.label>
+  <Crashlanded_City_Ghost.description>Вместо появления на дикой местности, вы начнете игру внутри пугающе тихого города.</Crashlanded_City_Ghost.description>
+  <Crashlanded_City_Ghost.scenario.name>Аварийная посадка в городе-призраке</Crashlanded_City_Ghost.scenario.name>
+  <Crashlanded_City_Ghost.scenario.summary>Классический RimWorld в урбанистическом стиле.</Crashlanded_City_Ghost.scenario.summary>
+  <Crashlanded_City_Ghost.scenario.description>Вместо появления на дикой местности, вы начнете игру внутри пугающе тихого города.</Crashlanded_City_Ghost.scenario.description>
+
+  <Siege_City_Citadel.label>Штурм вражеской цитадели</Siege_City_Citadel.label>
+  <Siege_City_Citadel.description>Возьмите на себя командование группой элитных оперативников для захвата вражеской цитадели.</Siege_City_Citadel.description>
+  <Siege_City_Citadel.scenario.name>Штурм вражеской цитадели</Siege_City_Citadel.scenario.name>
+  <Siege_City_Citadel.scenario.summary>Элитные оперативники штурмуют город-цитадель.</Siege_City_Citadel.scenario.summary>
+  <Siege_City_Citadel.scenario.description>Возьмите на себя командование группой элитных оперативников для захвата вражеской цитадели.</Siege_City_Citadel.scenario.description>
+
 
 </LanguageData>

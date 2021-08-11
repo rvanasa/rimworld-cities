@@ -1,6 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <LanguageData>
 
-  <StartCity.label>Начало в городе（RimCities)</StartCity.label>
+  <StartCity.label>начать в городе (RimCities)</StartCity.label>
+  <StartCitadel.label>начать рядом с цитаделью (RimCities)</StartCitadel.label>
+  <StartEquipment.label>дать каждому колонисту</StartEquipment.label>
+  <StartElite.label>элитные колонисты</StartElite.label>
+  <StartAllies.label>начать с союзниками</StartAllies.label>
+  <RescuePrisoners.label>спасение заключенных</RescuePrisoners.label>
+
 
 </LanguageData>

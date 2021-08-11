@@ -7,10 +7,16 @@
     <thinkNode Class="ThinkNode_Priority">
       <subNodes>
         <li Class="JobGiver_AIFightEnemies">
-          <targetAcquireRadius>60</targetAcquireRadius>
-          <targetKeepRadius>80</targetKeepRadius>
+          <targetAcquireRadius>50</targetAcquireRadius>
+          <targetKeepRadius>60</targetKeepRadius>
         </li>
-        <li Class="JobGiver_AIGotoNearestHostile" />
+        <li Class="ThinkNode_ConditionalRandom">
+          <chance>0.02</chance>
+          <subNodes>
+            <li Class="JobGiver_AIGotoNearestHostile"/>
+          </subNodes>
+        </li>
+<!--        <li Class="JobGiver_AIGotoNearestHostile" />-->
         <li Class="ThinkNode_Subtree">
           <treeDef>SatisfyBasicNeeds</treeDef>
         </li>
