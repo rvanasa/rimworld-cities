@@ -39,28 +39,30 @@ namespace Cities {
                 GenCity.SpawnInhabitant(point, map, new LordJob_DefendBase(map.ParentFaction, point));
             }
 
-            var mortars = tierRange.RandomInRange * 1; /**/
-            for (var i = 0; i < mortars; i++) {
-                var attempts = 10;
-                do {
-                    var point = s.Expand(-2, 0, -2, 0).MoveRand().pos + IntVec3.North * (tier + 2);
-                    var sMortar = s.MoveTo(point).ExpandRegion(IsValidEmplacementTile, 25).Center();
-                    if (s.Area >= 9) {
-                        var mortar = sMortar.ClearThingsInBounds()
-                            .FillTerrain(TerrainDefOf.Concrete)
-                            .Back()
-                            .Spawn(ThingDefOf.Turret_Mortar, GenCity.RandomStuff(ThingDefOf.Turret_Mortar, map));
-                        mortar.SetFactionDirect(map.ParentFaction);
+            if (Config_Cities.Instance.enableMortars) {
+                var mortars = tierRange.RandomInRange * 1; /**/
+                for (var i = 0; i < mortars; i++) {
+                    var attempts = 10;
+                    do {
+                        var point = s.Expand(-2, 0, -2, 0).MoveRand().pos + IntVec3.North * (tier + 2);
+                        var sMortar = s.MoveTo(point).ExpandRegion(IsValidEmplacementTile, 25).Center();
+                        if (s.Area >= 9) {
+                            var mortar = sMortar.ClearThingsInBounds()
+                                .FillTerrain(TerrainDefOf.Concrete)
+                                .Back()
+                                .Spawn(ThingDefOf.Turret_Mortar, GenCity.RandomStuff(ThingDefOf.Turret_Mortar, map));
+                            mortar.SetFactionDirect(map.ParentFaction);
 
-                        var ammoPoint = point + IntVec3.North * 2;
-                        var ammo = s.MoveTo(ammoPoint).Spawn(0, 0, ThingDefOf.Shell_HighExplosive);
-                        ammo.stackCount = ammoRange.RandomInRange;
-                        ammo.SetOwnedByCity(true, s.map);
-                        GenCity.SpawnInhabitant(ammoPoint, map, new LordJob_ManTurrets());
+                            var ammoPoint = point + IntVec3.North * 2;
+                            var ammo = s.MoveTo(ammoPoint).Spawn(0, 0, ThingDefOf.Shell_HighExplosive);
+                            ammo.stackCount = ammoRange.RandomInRange;
+                            ammo.SetOwnedByCity(true, s.map);
+                            GenCity.SpawnInhabitant(ammoPoint, map, new LordJob_ManTurrets());
 
-                        break;
-                    }
-                } while (attempts-- > 0);
+                            break;
+                        }
+                    } while (attempts-- > 0);
+                }
             }
 
             s.Bound(s.MinX, 0, s.MaxX, 0)

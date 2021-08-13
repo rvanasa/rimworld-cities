@@ -24,6 +24,8 @@ namespace Cities {
         public int citySizeScale = 200;
         public bool enableQuestSystem = true;
         public bool enableEvents = true;
+        public bool enableTurrets = true;
+        public bool enableMortars = true;
         public bool enableLooting;
         public float lootScale = 1;
         public float abandonedChance = 0.3F;
@@ -41,6 +43,8 @@ namespace Cities {
             Scribe_Values.Look(ref citySizeScale, "limitCitySizeScale", Defaults.citySizeScale);
             Scribe_Values.Look(ref enableQuestSystem, "enableQuestSystem", Defaults.enableQuestSystem);
             Scribe_Values.Look(ref enableEvents, "enableEvents", Defaults.enableEvents);
+            Scribe_Values.Look(ref enableTurrets, "enableTurrets", Defaults.enableTurrets);
+            Scribe_Values.Look(ref enableMortars, "enableMortars", Defaults.enableMortars);
             Scribe_Values.Look(ref enableLooting, "enableLooting", Defaults.enableLooting);
             Scribe_Values.Look(ref lootScale, "lootScale", Defaults.lootScale);
             Scribe_Values.Look(ref citiesPer100kTiles, "citiesPer100kTiles", Defaults.citiesPer100kTiles);
@@ -73,6 +77,10 @@ namespace Cities {
             listing.CheckboxLabeled("EnableCityQuests".Translate(), ref Config.enableQuestSystem);
             listing.Gap();
             listing.CheckboxLabeled("EnableCityEvents".Translate(), ref Config.enableEvents);
+            listing.Gap();
+            listing.CheckboxLabeled("EnableCityTurrets".Translate(), ref Config.enableTurrets);
+            listing.Gap();
+            listing.CheckboxLabeled("EnableCityMortars".Translate(), ref Config.enableMortars);
             listing.Gap();
             listing.CheckboxLabeled("EnableCityLooting".Translate(), ref Config.enableLooting);
             listing.Gap();

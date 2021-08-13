@@ -28,7 +28,7 @@ namespace Cities {
         }
 
         public override bool AllPartsValid() {
-            return base.AllPartsValid() && target != null;
+            return base.AllPartsValid() && target != null && Config_Cities.Instance.enableTurrets;
         }
 
         protected override void OnSetupHandle(RimWorld.Quest handle) {

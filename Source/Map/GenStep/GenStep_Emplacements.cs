@@ -9,6 +9,9 @@ namespace Cities {
         public List<EmplacementOption> options = new List<EmplacementOption>();
 
         public override void GenerateRect(Stencil s) {
+            if (!Config_Cities.Instance.enableTurrets) {
+                return;
+            }
             var stuff = GenCity.RandomStuff(ThingDefOf.Sandbags, s.map);
             for (var dir = 0; dir < 4; dir++) {
                 var sDir = s.Rotate(dir);
@@ -19,8 +22,15 @@ namespace Cities {
                 }
             }
 
-            options.Where(opt => !opt.selfDestructive || s.map.ParentFaction.def.permanentEnemy || s.map.Parent is Citadel)
-                .RandomElementByWeight(opt => opt.weight).Generate(s);
+            var emplacementOption = options
+                .Where(opt => {
+                    if (opt.selfDestructive) {
+                        return Config_Cities.Instance.enableMortars && (s.map.ParentFaction.def.permanentEnemy || s.map.Parent is Citadel);
+                    }
+                    return Config_Cities.Instance.enableTurrets;
+                })
+                .RandomElementByWeight(opt => opt.weight);
+            emplacementOption?.Generate(s);
         }
 
         protected override bool IsValidTile(Map map, IntVec3 pos) {

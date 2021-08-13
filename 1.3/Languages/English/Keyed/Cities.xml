@@ -8,6 +8,8 @@
   <LimitCitySize>Custom city map size: [{0} x {1}]</LimitCitySize>
   <EnableCityQuests>Enable city quest system</EnableCityQuests>
   <EnableCityEvents>Enable city events (food drops, reinforcements)</EnableCityEvents>
+  <EnableCityTurrets>Enable city turret defenses</EnableCityTurrets>
+  <EnableCityMortars>Enable city mortar defenses</EnableCityMortars>
   <EnableCityLooting>Enable looting cities without penalty</EnableCityLooting>
   <CityLootScale>City loot multiplier: [{0}]</CityLootScale>
   <AbandonedCityChance>Abandoned city chance: [{0}]</AbandonedCityChance>

@@ -180,7 +180,7 @@
 
   <ScenarioDef>
     <defName>Siege_City_Citadel</defName>
-    <description>Take command of an elite task force to capture a hostile citadel.</description>
+    <description>Take command of an elite task force to capture a hostile citadel. Expect multiple days of combat-intensive gameplay on a long, narrow city map.</description>
     <label>Task Force (Hostile Capitol)</label>
     <scenario>
       <summary>Take command of an elite task force to capture a hostile citadel.</summary>
