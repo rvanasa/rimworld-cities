@@ -8,6 +8,8 @@
   <LimitCitySize>大都市マップの大きさを編集（遅延を削減）：[{0} {1}]</LimitCitySize>
   <EnableCityQuests>大都市クエストシステムを有効</EnableCityQuests>
   <EnableCityEvents>大都市イベントを有効（食料の投下や増援）</EnableCityEvents>
+  <EnableCityTurrets>大都市のタレット防衛を有効</EnableCityTurrets>
+  <EnableCityMortars>大都市の迫撃砲防衛を有効</EnableCityMortars>
   <EnableCityLooting>ペナルティなしで都市を略奪可能にする</EnableCityLooting>
   <CityLootScale>大都市の戦利品倍率：[{0}]</CityLootScale>
   <AbandonedCityChance>放棄された大都市の確率：[{0}]</AbandonedCityChance>
