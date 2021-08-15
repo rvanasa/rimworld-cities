@@ -577,6 +577,13 @@
         <max>1000</max>
       </areaConstraints>
       <maxRatio>5</maxRatio>
+      <excludePlants>
+        <li>Plant_Ambrosia</li>
+        <li>Plant_TreeAnima</li>
+        <li>Plant_GrassAnima</li>
+        <li>Plant_PodGauranlen</li>
+        <li>Plant_TreeGauranlen</li>
+      </excludePlants>
     </genStep>
   </GenStepDef>
 

@@ -12,10 +12,11 @@ namespace Cities {
     public class GenStep_Fields : GenStep_RectScatterer {
         public float density = 0.9F;
         public AltitudeLayer altitudeLayer = AltitudeLayer.LowPlant;
+        public List<string> excludePlants = new List<string>();
 
         public override void GenerateRect(Stencil s) {
             var plant = DefDatabase<ThingDef>.AllDefs
-                .Where(t => t.category == ThingCategory.Plant && t.altitudeLayer == altitudeLayer && !t.plant.cavePlant && t != ThingDefOf.Plant_TreeAnima)
+                .Where(t => t.category == ThingCategory.Plant && t.altitudeLayer == altitudeLayer && !t.plant.cavePlant && !excludePlants.Contains(t.defName))
                 .RandomElement();
             foreach (var pos in s.bounds.Cells) {
                 if (s.Chance(density) && pos.GetFirstThing<Thing>(s.map) == null) {
