@@ -68,10 +68,11 @@ namespace Cities {
                     GenSpawn.Spawn(pawn, CellRect.WholeMap(map).ExpandedBy(-20).RandomCell, map);
                 }
                 if (pawn.GetLord() == null) {
-                    var lord = LordMaker.MakeNewLord(pawn.Faction, new LordJob_LiveInCity(), map);
+                    var lord = LordMaker.MakeNewLord(pawn.Faction, new LordJob_LiveInCity(pawn.Position), map);
                     lord.AddPawn(pawn);
                 }
-                var bed = map.listerThings.AllThings.OfType<Building_Bed>().Where(b => !b.ForPrisoners && !b.Medical)
+                var bed = map.listerThings.AllThings.OfType<Building_Bed>()
+                    .Where(b => !b.ForPrisoners && !b.Medical)
                     .RandomElementWithFallback();
                 if (bed != null) {
                     bed.SetFactionDirect(pawn.Faction);

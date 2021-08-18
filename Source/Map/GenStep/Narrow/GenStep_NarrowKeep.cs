@@ -5,6 +5,7 @@ using RimWorld;
 using RimWorld.BaseGen;
 using UnityEngine;
 using Verse;
+using Verse.AI.Group;
 
 namespace Cities {
 
@@ -55,12 +56,15 @@ namespace Cities {
                 groupKind = PawnGroupKindDefOf.Combat,
                 tile = map.Tile,
                 faction = Faction.OfMechanoids,
-                points = 10000,
-            });
+                points = 5000,
+            }).ToList();
             foreach (var mech in mechs) {
-                GenSpawn.Spawn(mech, GenCity.FindPawnSpot(s.Bound(-5, -5, 5, 5).MoveRand().pos, map), map);
+                var pos = s.Expand(-10).MoveRand().pos;
+                GenSpawn.Spawn(mech, GenCity.FindPawnSpot(pos, map), map);
                 mech.SetFactionDirect(map.ParentFaction);
                 mech.Name = new NameSingle(mechanoidNames[Rand.Range(0, mechanoidNames.Count)] + " #" + Rand.RangeInclusive(10, 40));
+                var lord = LordMaker.MakeNewLord(map.ParentFaction, new LordJob_LiveInCitadel(pos), map);
+                lord.AddPawn(mech);
             }
 
             //TODO throne room   
