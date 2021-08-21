@@ -9,7 +9,7 @@ namespace Cities {
         City target;
 
         public override int MinCapableColonists => 5;
-        public override int ChallengeRating => 3;
+        public override int ChallengeRating => 1;
 
         public override LookTargets Targets => target;
 
@@ -66,10 +66,10 @@ namespace Cities {
         }
 
         public override void OnComplete() {
+            target.SetFaction(alliedFaction);
         }
 
         public override void OnExpire() {
-            target.SetFaction(alliedFaction);
         }
     }
 }
