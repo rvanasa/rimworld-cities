@@ -5,7 +5,7 @@
 
 ---
 
-![](About/Preview.png)
+[![RimCities](About/Preview.png)](https://steamcommunity.com/sharedfiles/filedetails/?id=1775170117)
 
 ---
 
@@ -26,19 +26,19 @@ Work in progress! Let me know if you have any ideas or suggestions for the mod.
 ## Features:
 
 ### Visit cities on the world map.
-![](Docs/World1.png)
+[![](Docs/World1.png)](https://steamcommunity.com/sharedfiles/filedetails/?id=1775170117)
 
 ### Explore large, intricate settlement layouts.
-![](Docs/Map1.png)
+[![](Docs/Map1.png)](https://steamcommunity.com/sharedfiles/filedetails/?id=1775170117)
 
 ### Scavenge for supplies and avoid defenses.
-![](Docs/Map2.png)
+[![](Docs/Map2.png)](https://steamcommunity.com/sharedfiles/filedetails/?id=1775170117)
 
 ### Reveal rooms as you progress through the map.
-![](Docs/Map3.png)
+[![](Docs/Map3.png)](https://steamcommunity.com/sharedfiles/filedetails/?id=1775170117)
 
 ### Claim conquered and abandoned cities for your faction.
-![](Docs/Map4.png)
+[![](Docs/Map4.png)](https://steamcommunity.com/sharedfiles/filedetails/?id=1775170117)
 
 ---
 
