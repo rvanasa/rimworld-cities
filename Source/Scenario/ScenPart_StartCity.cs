@@ -17,7 +17,7 @@ namespace Cities {
         
         public override void DoEditInterface(Listing_ScenEdit listing) {
             var scenPartRect = listing.GetScenPartRect(this, RowHeight * 3 + 31);
-            if (Widgets.ButtonText(scenPartRect.TopPartPixels(RowHeight), inhabitantKind.ToString())) {
+            if (Widgets.ButtonTextSubtle(scenPartRect.TopPartPixels(RowHeight), inhabitantKind.ToString())) {
                 FloatMenuUtility.MakeMenu(System.Enum.GetNames(typeof(InhabitantKind)), s => (s + "CityKind").Translate(), s => { return () => inhabitantKind = (InhabitantKind) System.Enum.Parse(typeof(InhabitantKind), s); });
             }
         }

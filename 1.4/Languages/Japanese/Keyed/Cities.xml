@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <EnterCity>大都市に入る</EnterCity>
+  <EnterCityDesc>選択された大都市に入ります。</EnterCityDesc>
+
+  <CitiesConfigReset>設定をリセットして初期化する</CitiesConfigReset>
+  <LimitCitySize>大都市マップの大きさを編集（遅延を削減）：[{0} {1}]</LimitCitySize>
+  <EnableCityQuests>大都市クエストシステムを有効</EnableCityQuests>
+  <EnableCityEvents>大都市イベントを有効（食料の投下や増援）</EnableCityEvents>
+  <EnableCityTurrets>大都市のタレット防衛を有効</EnableCityTurrets>
+  <EnableCityMortars>大都市の迫撃砲防衛を有効</EnableCityMortars>
+  <EnableCityLooting>ペナルティなしで都市を略奪可能にする</EnableCityLooting>
+  <CityLootScale>大都市の戦利品倍率：[{0}]</CityLootScale>
+  <AbandonedCityChance>放棄された大都市の確率：[{0}]</AbandonedCityChance>
+  <CitiesPer100kTiles>大都市の出現頻度：</CitiesPer100kTiles>
+  <AbandonedPer100kTiles>放棄された都市の発生頻度:</AbandonedPer100kTiles>
+  <CompromisedPer100kTiles>危険な都市の発生頻度:</CompromisedPer100kTiles>
+  <MinCitadelsPerWorld>ワールドマップ上の最小要塞数：[{0}]</MinCitadelsPerWorld>
+
+  <FriendlyCityKind>友好都市</FriendlyCityKind>
+  <HostileCityKind>敵対都市</HostileCityKind>
+  <PirateCityKind>宙賊都市</PirateCityKind>
+  <AbandonedCityKind>放棄都市</AbandonedCityKind>
+  <GhostCityKind>幽霊都市</GhostCityKind>
+  <CompromisedCityKind>危険都市</CompromisedCityKind>
+
+  <CitadelName>{0}要塞</CitadelName>
+  <GeneratingCitadel>要塞を生成（これにはしばらく時間がかかる場合があります）</GeneratingCitadel>
+
+</LanguageData>

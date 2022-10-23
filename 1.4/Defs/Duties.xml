@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <DutyDef>
+    <defName>LiveInCity</defName>
+    <alwaysShowWeapon>false</alwaysShowWeapon>
+    <thinkNode Class="ThinkNode_Priority">
+      <subNodes>
+        <li Class="JobGiver_AIFightEnemies">
+          <targetAcquireRadius>50</targetAcquireRadius>
+          <targetKeepRadius>60</targetKeepRadius>
+        </li>
+        <li Class="Cities.JobGiver_CityAIGotoNearbyHostile">
+          <maxDistance>40</maxDistance>
+        </li>
+        <li Class="ThinkNode_Subtree">
+          <treeDef>SatisfyBasicNeeds</treeDef>
+        </li>
+        <li Class="JobGiver_SeekSafeTemperature"/>
+        <li Class="ThinkNode_ConditionalCloseToDutyTarget">
+          <maxDistToDutyTarget>12</maxDistToDutyTarget>
+          <subNodes>
+            <li Class="JobGiver_WanderAnywhere">
+              <wanderRadius>12</wanderRadius>
+            </li>
+          </subNodes>
+        </li>
+        <li Class="JobGiver_WanderNearDutyLocation"/>
+      </subNodes>
+    </thinkNode>
+  </DutyDef>
+
+  <DutyDef>
+    <defName>LiveInAbandonedCity</defName>
+    <alwaysShowWeapon>false</alwaysShowWeapon>
+    <thinkNode Class="ThinkNode_Priority">
+      <subNodes>
+        <li Class="JobGiver_AIFightEnemies">
+          <targetAcquireRadius>50</targetAcquireRadius>
+          <targetKeepRadius>60</targetKeepRadius>
+        </li>
+        <li Class="Cities.JobGiver_CityAIGotoNearbyHostile">
+          <maxDistance>40</maxDistance>
+        </li>
+<!--        <li Class="ThinkNode_ConditionalRandom">-->
+<!--          <chance>0.01</chance>-->
+<!--          <subNodes>-->
+<!--            <li Class="JobGiver_AIGotoNearestHostile"/>-->
+<!--          </subNodes>-->
+<!--        </li>-->
+        <li Class="ThinkNode_Subtree">
+          <treeDef>SatisfyBasicNeeds</treeDef>
+        </li>
+        <li Class="JobGiver_SeekSafeTemperature"/>
+        <li Class="ThinkNode_ConditionalCloseToDutyTarget">
+          <maxDistToDutyTarget>12</maxDistToDutyTarget>
+          <subNodes>
+            <li Class="JobGiver_WanderAnywhere">
+              <wanderRadius>12</wanderRadius>
+            </li>
+          </subNodes>
+        </li>
+        <li Class="JobGiver_WanderNearDutyLocation"/>
+      </subNodes>
+    </thinkNode>
+  </DutyDef>
+
+  <DutyDef>
+    <defName>LiveInCitadel</defName>
+    <alwaysShowWeapon>false</alwaysShowWeapon>
+    <thinkNode Class="ThinkNode_Priority">
+      <subNodes>
+        <li Class="JobGiver_TakeCombatEnhancingDrug">
+          <onlyIfInDanger>true</onlyIfInDanger>
+        </li>
+        <li Class="JobGiver_AIFightEnemies">
+          <targetAcquireRadius>80</targetAcquireRadius>
+          <targetKeepRadius>100</targetKeepRadius>
+        </li>
+        <li Class="Cities.JobGiver_CityAIGotoNearbyHostile">
+          <maxDistance>50</maxDistance>
+        </li>
+<!--        <li Class="ThinkNode_ConditionalRandom">-->
+<!--          <chance>0.005</chance>-->
+<!--          <subNodes>-->
+<!--            <li Class="JobGiver_AIGotoNearestHostile"/>-->
+<!--          </subNodes>-->
+<!--        </li>-->
+        <li Class="ThinkNode_Subtree">
+          <treeDef>SatisfyBasicNeeds</treeDef>
+        </li>
+        <li Class="JobGiver_ManTurretsNearSelf">
+          <maxDistFromPoint>20</maxDistFromPoint>
+        </li>
+        <li Class="JobGiver_SeekSafeTemperature"/>
+        <li Class="ThinkNode_ConditionalCloseToDutyTarget">
+          <maxDistToDutyTarget>12</maxDistToDutyTarget>
+          <subNodes>
+            <li Class="JobGiver_WanderAnywhere">
+              <wanderRadius>12</wanderRadius>
+            </li>
+          </subNodes>
+        </li>
+        <li Class="JobGiver_WanderNearDutyLocation"/>
+      </subNodes>
+    </thinkNode>
+  </DutyDef>
+
+  <DutyDef>
+    <defName>CityHostage</defName>
+    <alwaysShowWeapon>false</alwaysShowWeapon>
+    <thinkNode Class="ThinkNode_Priority">
+      <subNodes>
+        <li Class="Cities.JobGiver_DoNothing"/>
+      </subNodes>
+    </thinkNode>
+  </DutyDef>
+
+  <DutyDef>
+    <defName>CityCaptor</defName>
+    <alwaysShowWeapon>true</alwaysShowWeapon>
+    <thinkNode Class="ThinkNode_Priority">
+      <subNodes>
+        <li Class="Cities.JobGiver_CaptorFightEnemies">
+          <targetAcquireRadius>20</targetAcquireRadius>
+          <targetKeepRadius>30</targetKeepRadius>
+        </li>
+        <li Class="Cities.JobGiver_DoNothing"/>
+      </subNodes>
+    </thinkNode>
+  </DutyDef>
+
+</Defs>
