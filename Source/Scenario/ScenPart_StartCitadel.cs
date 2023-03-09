@@ -19,7 +19,9 @@ namespace Cities {
 
             var citadel = (Citadel) WorldObjectMaker.MakeWorldObject(DefDatabase<WorldObjectDef>.GetNamed("City_Citadel"));
             citadel.SetFaction(Find.GameInitData.playerFaction);
-            citadel.inhabitantFaction = GenCity.RandomCityFaction(f => !f.def.CanEverBeNonHostile);
+            // citadel.inhabitantFaction = GenCity.RandomCityFaction(f => !f.def.CanEverBeNonHostile);
+            citadel.inhabitantFaction = FactionGenerator.NewGeneratedFaction(new FactionGeneratorParms(DefDatabase<FactionDef>.GetNamed("OutlanderCivil")));
+            citadel.inhabitantFaction.SetRelation(new FactionRelation(Faction.OfPlayer, FactionRelationKind.Hostile));
             citadel.Tile = Find.GameInitData.startingTile;
             citadel.Name = citadel.ChooseName();
             Find.WorldObjects.Add(citadel);

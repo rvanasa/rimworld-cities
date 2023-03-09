@@ -12,6 +12,9 @@ namespace Cities {
             if (map != null && Find.TickManager.TicksGame == 20) {
                 var faction = GenCity.RandomCityFaction(f => f.GoodwillWith(Faction.OfPlayer) >= 0 && !f.def.HasRoyalTitles);
                 faction.TryAffectGoodwillWith(Faction.OfPlayer, 100, false, false);
+                if (map.ParentFaction != null && map.ParentFaction.HostileTo(Faction.OfPlayer)) {
+                    faction.TryAffectGoodwillWith(map.ParentFaction, -100, false, false);
+                }
 
                 var storyComp = Find.Storyteller.storytellerComps.First(x => x is StorytellerComp_OnOffCycle || x is StorytellerComp_RandomMain);
                 var parms = storyComp.GenerateParms(IncidentCategoryDefOf.ThreatBig, map);

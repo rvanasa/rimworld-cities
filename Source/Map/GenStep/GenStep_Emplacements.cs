@@ -25,7 +25,7 @@ namespace Cities {
             var emplacementOption = options
                 .Where(opt => {
                     if (opt.selfDestructive) {
-                        return Config_Cities.Instance.enableMortars && (s.map.ParentFaction.def.permanentEnemy || s.map.Parent is Citadel);
+                        return Config_Cities.Instance.enableMortars && (s.map.ParentFaction.def.permanentEnemy);
                     }
                     return Config_Cities.Instance.enableTurrets;
                 })
