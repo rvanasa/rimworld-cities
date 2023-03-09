@@ -41,6 +41,9 @@ namespace Cities {
         }
 
         public override bool AllPartsValid() {
+            if (Config_Cities.Instance.enableQuestSystem) {
+                
+            }
             return base.AllPartsValid() && enemyFaction != null && city != null;
         }
 

@@ -23,6 +23,7 @@ namespace Cities {
         public bool customCitySize = true;
         public int citySizeScale = 200;
         public bool enableQuestSystem = true;
+        public bool enableDefendQuest = false;
         public bool enableEvents = true;
         public bool enableTurrets = true;
         public bool enableMortars = true;
@@ -42,6 +43,7 @@ namespace Cities {
             Scribe_Values.Look(ref customCitySize, "limitCitySize", Defaults.customCitySize);
             Scribe_Values.Look(ref citySizeScale, "limitCitySizeScale", Defaults.citySizeScale);
             Scribe_Values.Look(ref enableQuestSystem, "enableQuestSystem", Defaults.enableQuestSystem);
+            Scribe_Values.Look(ref enableDefendQuest, "enableDefendQuest", Defaults.enableDefendQuest);
             Scribe_Values.Look(ref enableEvents, "enableEvents", Defaults.enableEvents);
             Scribe_Values.Look(ref enableTurrets, "enableTurrets", Defaults.enableTurrets);
             Scribe_Values.Look(ref enableMortars, "enableMortars", Defaults.enableMortars);
@@ -70,34 +72,28 @@ namespace Cities {
         public override void DoSettingsWindowContents(Rect inRect) {
             var listing = new Listing_Standard();
             listing.Begin(inRect);
-            listing.Gap();
             listing.CheckboxLabeled("LimitCitySize".Translate().Formatted(Config.citySizeScale, Config.citySizeScale), ref Config.customCitySize);
             listing.IntAdjuster(ref Config.citySizeScale, 10, 50);
-            listing.Gap();
             listing.CheckboxLabeled("EnableCityQuests".Translate(), ref Config.enableQuestSystem);
+            if (Config.enableQuestSystem) {
+                listing.CheckboxLabeled("EnableDefendQuest".Translate(), ref Config.enableDefendQuest);
+            }
             listing.Gap();
             listing.CheckboxLabeled("EnableCityEvents".Translate(), ref Config.enableEvents);
-            listing.Gap();
             listing.CheckboxLabeled("EnableCityTurrets".Translate(), ref Config.enableTurrets);
-            listing.Gap();
             listing.CheckboxLabeled("EnableCityMortars".Translate(), ref Config.enableMortars);
-            listing.Gap();
             listing.CheckboxLabeled("EnableCityLooting".Translate(), ref Config.enableLooting);
             listing.Gap();
             listing.Label("CityLootScale".Translate().Formatted(GenMath.RoundTo(Config.lootScale, 0.05F)));
             Config.lootScale = listing.Slider(Config.lootScale, 0, 3);
             // listing.Label("AbandonedCityChance".Translate().Formatted(GenMath.RoundTo(Config.abandonedChance, 0.01F)));
             // Config.abandonedChance = listing.Slider(Config.abandonedChance, 0, 1);
-            listing.Gap();
             listing.Label("CitiesPer100kTiles".Translate());
             listing.IntRange(ref Config.citiesPer100kTiles, 0, 100);
-            listing.Gap();
             listing.Label("AbandonedPer100kTiles".Translate());
             listing.IntRange(ref Config.abandonedPer100kTiles, 0, 100);
-            listing.Gap();
             listing.Label("CompromisedPer100kTiles".Translate());
             listing.IntRange(ref Config.compromisedPer100kTiles, 0, 100);
-            listing.Gap();
             listing.Label("MinCitadelsPerWorld".Translate().Formatted(Config.minCitadelsPerWorld));
             listing.IntAdjuster(ref Config.minCitadelsPerWorld, 1, 1);
             listing.Gap();
