@@ -239,7 +239,7 @@
         </li>
         <li Class="Cities.ScenPart_Equipment">
           <def>StartEquipment</def>
-          <thingDef>Gun_ChargeRifle</thingDef>
+          <thingDef>Gun_AssaultRifle</thingDef>
         </li>
 
         <li Class="Cities.ScenPart_RescuePrisoners">

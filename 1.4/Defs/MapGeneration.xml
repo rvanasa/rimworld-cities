@@ -532,12 +532,12 @@
           <selfDestructive>true</selfDestructive>
         </li>
         <li>
-          <weight>0.5</weight>
+          <weight>0.2</weight>
           <weaponDef>Turret_Mortar</weaponDef>
           <ammoDef>Shell_AntigrainWarhead</ammoDef>
           <ammoCount>
             <min>1</min>
-            <max>2</max>
+            <max>1</max>
           </ammoCount>
           <manned>true</manned>
           <selfDestructive>true</selfDestructive>
