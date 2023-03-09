@@ -7,8 +7,8 @@ using Verse;
 
 namespace Cities {
     public class Citadel : City {
-        const int MapGenArea = 100_000;
-        const int MapGenWidth = 80;
+        const int MapGenArea = 80_000;
+        const int MapGenWidth = 100;
 
         public override int RaidPointIncrease => 1000;
 
