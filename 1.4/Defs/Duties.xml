@@ -10,6 +10,10 @@
           <targetAcquireRadius>50</targetAcquireRadius>
           <targetKeepRadius>60</targetKeepRadius>
         </li>
+        <li Class="JobGiver_AIDefendPoint">
+          <targetAcquireRadius>50</targetAcquireRadius>
+          <targetKeepRadius>60</targetKeepRadius>
+        </li>
         <li Class="Cities.JobGiver_CityAIGotoNearbyHostile">
           <maxDistance>40</maxDistance>
         </li>
@@ -36,6 +40,10 @@
     <thinkNode Class="ThinkNode_Priority">
       <subNodes>
         <li Class="JobGiver_AIFightEnemies">
+          <targetAcquireRadius>50</targetAcquireRadius>
+          <targetKeepRadius>60</targetKeepRadius>
+        </li>
+        <li Class="JobGiver_AIDefendPoint">
           <targetAcquireRadius>50</targetAcquireRadius>
           <targetKeepRadius>60</targetKeepRadius>
         </li>
@@ -74,6 +82,10 @@
           <onlyIfInDanger>true</onlyIfInDanger>
         </li>
         <li Class="JobGiver_AIFightEnemies">
+          <targetAcquireRadius>80</targetAcquireRadius>
+          <targetKeepRadius>100</targetKeepRadius>
+        </li>
+        <li Class="JobGiver_AIDefendPoint">
           <targetAcquireRadius>80</targetAcquireRadius>
           <targetKeepRadius>100</targetKeepRadius>
         </li>
