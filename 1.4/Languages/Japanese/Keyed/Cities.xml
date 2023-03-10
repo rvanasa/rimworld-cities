@@ -7,6 +7,7 @@
   <CitiesConfigReset>設定をリセットして初期化する</CitiesConfigReset>
   <LimitCitySize>大都市マップの大きさを編集（遅延を削減）：[{0} {1}]</LimitCitySize>
   <EnableCityQuests>大都市クエストシステムを有効</EnableCityQuests>
+  <EnableDefendQuest>大都市の重包囲防衛クエストを有効</EnableDefendQuest>
   <EnableCityEvents>大都市イベントを有効（食料の投下や増援）</EnableCityEvents>
   <EnableCityTurrets>大都市のタレット防衛を有効</EnableCityTurrets>
   <EnableCityMortars>大都市の迫撃砲防衛を有効</EnableCityMortars>
