@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <QuestResultComplete>При завершении: {0}</QuestResultComplete>
+  <QuestResultCancel>При провале: {0}</QuestResultCancel>
+  <QuestResultExpire>По завершению срока: {0}</QuestResultExpire>
+  <QuestExpireTime>Осталось времени: {0}</QuestExpireTime>
+
+  <QuestAppendWorth>стоимостью {0}</QuestAppendWorth>
+
+  <QuestComplete>Квест завершен ({0})</QuestComplete>
+  <QuestCancelled>Квест отменен ({0})</QuestCancelled>
+  <QuestExpired>Квест более не актуален ({0})</QuestExpired>
+
+  <QuestReceivedLabel>Награда</QuestReceivedLabel>
+  <QuestReceived>Вы получите {0}</QuestReceived>
+
+  <QuestDefendWave>Волна атакующих ({0} / {1})</QuestDefendWave>
+
+  <QuestTargetLocated>Цель обнаружена</QuestTargetLocated>
+  <QuestTargetLocatedMessage>Вы были проинформированы о местоположении цели вашей миссии.</QuestTargetLocatedMessage>
+
+</LanguageData>

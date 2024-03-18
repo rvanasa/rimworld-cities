@@ -78,7 +78,7 @@ namespace Cities {
                         },
                     };
                     if (this.EnterCooldownBlocksEntering()) {
-                        action.disabled = true;
+                        action.Disable();
                         action.disabledReason =
                             "MessageEnterCooldownBlocksEntering".Translate(this.EnterCooldownDaysLeft().ToString("0.#"));
                     }
