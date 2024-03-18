@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <EnterCity>Войти в город</EnterCity>
+  <EnterCityDesc>Войти в выбранный город.</EnterCityDesc>
+
+  <CitiesConfigReset>Установить по умолчанию</CitiesConfigReset>
+  <LimitCitySize>Произвольный размер карты города: [{0} x {1}]</LimitCitySize>
+  <EnableCityQuests>Включить квесты свяазанные с городами</EnableCityQuests>
+  <EnableCityEvents>Включить городские события (припасы с едой, подкрепления)</EnableCityEvents>
+  <EnableCityLooting>Отключить штрафы от разраграбления городов</EnableCityLooting>
+  <CityLootScale>Мультипликатор добычи от города: [{0}]</CityLootScale>
+  <AbandonedCityChance>Шанс что город будет заброшен: [{0}]</AbandonedCityChance>
+  <CitiesPer100kTiles>Частота появления городов:</CitiesPer100kTiles>
+  <AbandonedPer100kTiles>Частота появления заброшенных городов:</AbandonedPer100kTiles>
+  <CompromisedPer100kTiles>Частота появления бандитских городов:</CompromisedPer100kTiles>
+  <MinCitadelsPerWorld>Минимальное количество цитаделей в мире: [{0}]</MinCitadelsPerWorld>
+
+  <FriendlyCityKind>Дружественный</FriendlyCityKind>
+  <HostileCityKind>Враждебный</HostileCityKind>
+  <PirateCityKind>Пиратский</PirateCityKind>
+  <AbandonedCityKind>Заброшенный</AbandonedCityKind>
+  <GhostCityKind>Призрак</GhostCityKind>
+  <CompromisedCityKind>Бандитский</CompromisedCityKind>
+
+  <CitadelName>{0} Цитадель</CitadelName>
+  <GeneratingCitadel>Сгенерировать цитадель (это может занять время)</GeneratingCitadel>
+
+</LanguageData>

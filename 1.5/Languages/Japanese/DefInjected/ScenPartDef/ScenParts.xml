@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <StartCity.label>大都市で開始（RimCities)</StartCity.label>
+  <StartCitadel.label>要塞の近くで開始 (RimCities)</StartCitadel.label>
+  <StartEquipment.label>各ポーンに与える</StartEquipment.label>
+  <StartElite.label>精鋭の入植者たち</StartElite.label>
+  <StartAllies.label>同盟軍と開始</StartAllies.label>
+  <RescuePrisoners.label>囚人を救助</RescuePrisoners.label>
+
+</LanguageData>

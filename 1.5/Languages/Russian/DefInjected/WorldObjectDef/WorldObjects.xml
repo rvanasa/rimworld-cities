@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <City_Faction.label>город</City_Faction.label>
+  <City_Faction.description>Крупное и высокоразвитое поселение.</City_Faction.description>
+
+  <City_Abandoned.label>покинутый город</City_Abandoned.label>
+  <City_Abandoned.description>Руины некогда великой цивилизации.</City_Abandoned.description>
+
+  <City_Ghost.label>город-призрак</City_Ghost.label>
+  <City_Ghost.description>Таинственное и покинутое поселение.</City_Ghost.description>
+
+  <City_Citadel.label>цитадель</City_Citadel.label>
+  <City_Citadel.description>Сияющая столица этого мира.</City_Citadel.description>
+
+  <City_Compromised.label>бандитский город</City_Compromised.label>
+  <City_Compromised.description>Опасный город, где правит беззаконие и бандиты.</City_Compromised.description>
+
+
+</LanguageData>
