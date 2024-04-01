@@ -42,7 +42,7 @@
       <Private>True</Private>
     </Reference> -->
     <!-- <PackageReference Include="Lib.Harmony" Version="2.3.2.0" /> -->
-    <Reference Include="0Harmony, Version=2.3.2.0, targetFramework=net472">
+    <Reference Include="0Harmony, Version=2.3.3.0, targetFramework=net472">
       <HintPath>..\1.5\Assemblies\0Harmony.dll</HintPath>
       <Private>True</Private>
     </Reference>

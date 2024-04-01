@@ -72,7 +72,7 @@ namespace Cities {
 
     [HarmonyPatch(typeof(ThingOwner<Thing>))]
     [HarmonyPatch(nameof(ThingOwner<Thing>.TryAdd))]
-    [HarmonyPatch(new[] {typeof(Thing), typeof(bool)})]
+    [HarmonyPatch(new[] { typeof(Thing), typeof(bool) })]
     internal static class ThingOwner_TryAdd {
         static void Prefix(ref ThingOwner<Thing> __instance, Thing item) {
             if (!Config_Cities.Instance.enableLooting) {
@@ -80,7 +80,7 @@ namespace Cities {
                     (__instance.Owner as Pawn_InventoryTracker)?.pawn ??
                     (__instance.Owner as Pawn_ApparelTracker)?.pawn ??
                     (__instance.Owner as Pawn_EquipmentTracker)?.pawn;
-    
+
                 if (pawn != null && pawn.IsColonistPlayerControlled && item.IsOwnedByCity(pawn.Map)) {
                     if (pawn.Map.Parent is City city && !city.Abandoned && city.Faction != pawn.Faction) {
                         city.Faction.TryAffectGoodwillWith(pawn.Faction,
@@ -132,7 +132,7 @@ namespace Cities {
             if (settlement is Citadel && !settlement.HasMap) {
                 var method = typeof(SettlementUtility).GetMethod("AttackNow", BindingFlags.NonPublic | BindingFlags.Static);
                 if (method != null) {
-                    LongEventHandler.QueueLongEvent(() => method.Invoke(null, new object[] {caravan, settlement}),
+                    LongEventHandler.QueueLongEvent(() => method.Invoke(null, new object[] { caravan, settlement }),
                         "GeneratingCitadel", false, null);
                     return false;
                 }
@@ -142,39 +142,13 @@ namespace Cities {
         }
     }
 
-    // [HarmonyPatch(typeof(FogGrid))]
-    // [HarmonyPatch("FloodUnfogAdjacent")]
-    // internal static class FogGrid_FloodUnfogAdjacent {
-    //     static bool Prefix(ref FogGrid __instance, ref Map ___map, IntVec3 c) {
-    //         if (___map.Parent is City) {
-    //             var map = ___map;
-    //             __instance.Unfog(c);
-    //             for (var index = 0; index < 4; ++index) {
-    //                 var intVec3 = c + GenAdj.CardinalDirections[index];
-    //                 if (intVec3.InBounds(map) && intVec3.Fogged(map)) {
-    //                     var edifice = intVec3.GetEdifice(map);
-    //                     if (edifice == null || !edifice.def.MakeFog) {
-    //                         FloodFillerFog.FloodUnfog(intVec3, map);
-    //                     }
-    //                     else {
-    //                         __instance.Unfog(intVec3);
-    //                     }
-    //                 }
-    //             }
-    //             for (var index = 0; index < 8; ++index) {
-    //                 var c1 = c + GenAdj.AdjacentCells[index];
-    //                 if (c1.InBounds(map)) {
-    //                     var edifice = c1.GetEdifice(map);
-    //                     if (edifice != null && edifice.def.MakeFog) {
-    //                         __instance.Unfog(c1);
-    //                     }
-    //                 }
-    //             }
-    //             return false;
-    //         }
-    //         return true;
-    //     }
-    // }
+    [HarmonyPatch(typeof(FogGrid))]
+    [HarmonyPatch("NotifyAreaRevealed")]
+    internal static class FogGrid_NotifyAreaRevealed {
+        static bool Prefix(ref Map ___map) {
+            return !(___map.Parent is City);
+        }
+    }
 
     [HarmonyPatch(typeof(Settlement_TraderTracker))]
     [HarmonyPatch(nameof(Settlement_TraderTracker.TraderKind), MethodType.Getter)]
@@ -239,8 +213,7 @@ namespace Cities {
                     }
                 }
                 ___statsAndRoleDirty = true;
-            }
-            catch (System.Exception e) {
+            } catch (System.Exception e) {
                 Log.Warning(e.ToString());
             }
 
@@ -254,7 +227,7 @@ namespace Cities {
     internal static class Pawn_PathFollower_StartPath {
         static bool Prefix(ref Pawn_PathFollower __instance, LocalTargetInfo dest, PathEndMode peMode, Pawn ___pawn) {
             if (___pawn.Map?.Parent is City) {
-                dest = (LocalTargetInfo) GenPath.ResolvePathMode(___pawn, dest.ToTargetInfo(___pawn.Map), ref peMode);
+                dest = (LocalTargetInfo)GenPath.ResolvePathMode(___pawn, dest.ToTargetInfo(___pawn.Map), ref peMode);
                 if (dest.HasThing && dest.ThingDestroyed) {
                     Log.Warning(___pawn + " pathing to destroyed thing " + dest.Thing);
                     // ReSharper disable once PossibleNullReferenceException
@@ -267,11 +240,11 @@ namespace Cities {
     }
 
     [HarmonyPatch(typeof(PawnGenerator))]
-    [HarmonyPatch(nameof(PawnGenerator.GeneratePawn), new[] {typeof(PawnGenerationRequest)})]
+    [HarmonyPatch(nameof(PawnGenerator.GeneratePawn), new[] { typeof(PawnGenerationRequest) })]
     internal static class PawnGenerator_GeneratePawn {
         static void Postfix(ref Pawn __result) {
             if (__result.RaceProps.IsMechanoid && Rand.Chance(.005F)) {
-                var names = ((GenStep_NarrowKeep) DefDatabase<GenStepDef>.GetNamed("Narrow_Keep").genStep).mechanoidNames;
+                var names = ((GenStep_NarrowKeep)DefDatabase<GenStepDef>.GetNamed("Narrow_Keep").genStep).mechanoidNames;
                 __result.Name = new NameSingle(names[Rand.Range(0, names.Count)]);
             }
         }

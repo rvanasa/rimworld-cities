@@ -825,7 +825,7 @@
             <param name="assembly">The assembly</param>
         </member>
         <member name="M:HarmonyLib.Harmony.PatchCategory(System.String)">
-            <summary>Searches an assembly for Harmony annotations with a specific category and uses them to create patches</summary>
+            <summary>Searches the current assembly for Harmony annotations with a specific category and uses them to create patches</summary>
             <param name="category">Name of patch category</param>
         </member>
         <member name="M:HarmonyLib.Harmony.PatchCategory(System.Reflection.Assembly,System.String)">
@@ -864,6 +864,15 @@
             <summary>Unpatches a method by patching it with zero patches. Fully unpatching is not supported. Be careful, unpatching is global</summary>
             <param name="original">The original method/constructor</param>
             <param name="patch">The patch method as method to remove</param>
+        </member>
+        <member name="M:HarmonyLib.Harmony.UnpatchCategory(System.String)">
+            <summary>Searches the current assembly for types with a specific category annotation and uses them to unpatch existing patches. Fully unpatching is not supported. Be careful, unpatching is global</summary>
+            <param name="category">Name of patch category</param>
+        </member>
+        <member name="M:HarmonyLib.Harmony.UnpatchCategory(System.Reflection.Assembly,System.String)">
+            <summary>Searches an assembly for types with a specific category annotation and uses them to unpatch existing patches. Fully unpatching is not supported. Be careful, unpatching is global</summary>
+            <param name="assembly">The assembly</param>
+            <param name="category">Name of patch category</param>
         </member>
         <member name="M:HarmonyLib.Harmony.HasAnyPatches(System.String)">
             <summary>Test for patches from a specific Harmony ID</summary>
@@ -1285,6 +1294,9 @@
         <member name="M:HarmonyLib.PatchClassProcessor.Patch">
             <summary>Applies the patches</summary>
             <returns>A list of all created replacement methods or null if patch class is not annotated</returns>
+        </member>
+        <member name="M:HarmonyLib.PatchClassProcessor.Unpatch">
+            <summary>REmoves the patches</summary>
         </member>
         <member name="T:HarmonyLib.Patches">
             <summary>A group of patches</summary>
