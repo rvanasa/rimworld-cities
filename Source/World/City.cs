@@ -65,7 +65,8 @@ namespace Cities {
                         .Select(q => q.def.EnterCityLabel)
                         .FirstOrDefault() ?? "EnterCity".Translate();
 
-                    var action = new Command_Action {
+                    var action = new Command_Action
+                    {
                         icon = SettleUtility.SettleCommandTex,
                         defaultLabel = enterLabel,
                         defaultDesc = "EnterCityDesc".Translate(),
@@ -78,9 +79,7 @@ namespace Cities {
                         },
                     };
                     if (this.EnterCooldownBlocksEntering()) {
-                        action.disabled = true;
-                        action.disabledReason =
-                            "MessageEnterCooldownBlocksEntering".Translate(this.EnterCooldownDaysLeft().ToString("0.#"));
+                        action.Disable("MessageEnterCooldownBlocksEntering".Translate(this.EnterCooldownDaysLeft().ToString("0.#")));
                     }
 
                     yield return action;
