@@ -33,15 +33,9 @@
   </PropertyGroup>
   <PropertyGroup>
     <RestoreProjectStyle>Packages.config</RestoreProjectStyle>
-    <!-- <RestoreProjectStyle>PackageReference</RestoreProjectStyle> -->
   </PropertyGroup>
   <ItemGroup>
     <None Include="packages.config" />
-    <!-- <Reference Include="0Harmony, Version=2.3.2.0, Culture=neutral, PublicKeyToken=null">
-      <HintPath>..\packages\Lib.Harmony.2.3.2.0\lib\net472\0Harmony.dll</HintPath>
-      <Private>True</Private>
-    </Reference> -->
-    <!-- <PackageReference Include="Lib.Harmony" Version="2.3.2.0" /> -->
     <Reference Include="0Harmony, Version=2.3.3.0, targetFramework=net472">
       <HintPath>..\1.5\Assemblies\0Harmony.dll</HintPath>
       <Private>True</Private>
@@ -86,13 +80,10 @@
  </PropertyGroup>
   <PropertyGroup>
     <PreBuildEvent>
-      <!-- del /S /Q "$(ProjectDir)obj" -->
       del /S /Q "$(ProjectDir)..\..\RimCities"
       rmdir /S /Q "$(ProjectDir)..\..\RimCities"
     </PreBuildEvent>
     <PostBuildEvent>
-      xcopy $(TargetDir)RimCities.dll $(ProjectDir)..\1.5\Assemblies\RimCities.dll
-      <!-- echo F|xcopy "$(ProjectDir)..\About\About-$(ConfigurationName).xml" "$(TargetDir)..\..\About\About.xml" /C /Y /K /Q /D -->
       IF /I "$(ConfigurationName)" == "Release"; echo F|xcopy "$(ProjectDir)..\About\Preview.png" "$(TargetDir)..\..\About\Preview.png" /S /C /Y /K /Q /D
       IF /I "$(ConfigurationName)" == "Release"; echo F|xcopy "$(ProjectDir)..\About\PublishedFileId.txt" "$(TargetDir)..\..\About\PublishedFileId.txt" /S /C /Y /K /Q /D
       IF /I "$(ConfigurationName)" == "Release"; xcopy "$(ProjectDir)..\About" "$(TargetDir)..\..\About" /S /C /Y /K /I /Q /D
