@@ -142,39 +142,39 @@ namespace Cities {
         }
     }
 
-    [HarmonyPatch(typeof(FogGrid))]
-    [HarmonyPatch("FloodUnfogAdjacent")]
-    internal static class FogGrid_FloodUnfogAdjacent {
-        static bool Prefix(ref FogGrid __instance, ref Map ___map, IntVec3 c) {
-            if (___map.Parent is City) {
-                var map = ___map;
-                __instance.Unfog(c);
-                for (var index = 0; index < 4; ++index) {
-                    var intVec3 = c + GenAdj.CardinalDirections[index];
-                    if (intVec3.InBounds(map) && intVec3.Fogged(map)) {
-                        var edifice = intVec3.GetEdifice(map);
-                        if (edifice == null || !edifice.def.MakeFog) {
-                            FloodFillerFog.FloodUnfog(intVec3, map);
-                        }
-                        else {
-                            __instance.Unfog(intVec3);
-                        }
-                    }
-                }
-                for (var index = 0; index < 8; ++index) {
-                    var c1 = c + GenAdj.AdjacentCells[index];
-                    if (c1.InBounds(map)) {
-                        var edifice = c1.GetEdifice(map);
-                        if (edifice != null && edifice.def.MakeFog) {
-                            __instance.Unfog(c1);
-                        }
-                    }
-                }
-                return false;
-            }
-            return true;
-        }
-    }
+    // [HarmonyPatch(typeof(FogGrid))]
+    // [HarmonyPatch("FloodUnfogAdjacent")]
+    // internal static class FogGrid_FloodUnfogAdjacent {
+    //     static bool Prefix(ref FogGrid __instance, ref Map ___map, IntVec3 c) {
+    //         if (___map.Parent is City) {
+    //             var map = ___map;
+    //             __instance.Unfog(c);
+    //             for (var index = 0; index < 4; ++index) {
+    //                 var intVec3 = c + GenAdj.CardinalDirections[index];
+    //                 if (intVec3.InBounds(map) && intVec3.Fogged(map)) {
+    //                     var edifice = intVec3.GetEdifice(map);
+    //                     if (edifice == null || !edifice.def.MakeFog) {
+    //                         FloodFillerFog.FloodUnfog(intVec3, map);
+    //                     }
+    //                     else {
+    //                         __instance.Unfog(intVec3);
+    //                     }
+    //                 }
+    //             }
+    //             for (var index = 0; index < 8; ++index) {
+    //                 var c1 = c + GenAdj.AdjacentCells[index];
+    //                 if (c1.InBounds(map)) {
+    //                     var edifice = c1.GetEdifice(map);
+    //                     if (edifice != null && edifice.def.MakeFog) {
+    //                         __instance.Unfog(c1);
+    //                     }
+    //                 }
+    //             }
+    //             return false;
+    //         }
+    //         return true;
+    //     }
+    // }
 
     [HarmonyPatch(typeof(Settlement_TraderTracker))]
     [HarmonyPatch(nameof(Settlement_TraderTracker.TraderKind), MethodType.Getter)]
