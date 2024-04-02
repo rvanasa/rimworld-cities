@@ -31,11 +31,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup>
-    <RestoreProjectStyle>Packages.config</RestoreProjectStyle>
-  </PropertyGroup>
   <ItemGroup>
-    <None Include="packages.config" />
     <Reference Include="0Harmony, Version=2.3.3.0, targetFramework=net472">
       <HintPath>..\1.5\Assemblies\0Harmony.dll</HintPath>
       <Private>True</Private>
