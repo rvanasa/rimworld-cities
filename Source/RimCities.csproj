@@ -32,7 +32,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="0Harmony, Version=2.3.3.0, targetFramework=net472">
+    <Reference Include="0Harmony, Version=2.3.3.0">
       <HintPath>..\1.5\Assemblies\0Harmony.dll</HintPath>
       <Private>True</Private>
     </Reference>
