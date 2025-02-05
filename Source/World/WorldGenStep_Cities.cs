@@ -56,7 +56,7 @@ namespace Cities {
 
                 Find.WorldObjects.Add(city);
             } catch (Exception e) {
-                Log.Error($"Error while generating city: {e.ToString()}");
+                Log.Error($"Error while generating city: {e}");
             }
         }
     }
