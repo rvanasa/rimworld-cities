@@ -32,30 +32,30 @@ namespace Cities {
         void GenerateCities(int per100kTiles, string defName, bool abandoned, System.Predicate<Faction> factionFilter = null) {
             var cityCount = Mathf.Max(1, GenMath.RoundRandom(Find.WorldGrid.TilesCount / 100_000F * per100kTiles));
             for (var i = 0; i < cityCount; i++) {
-                try {
-                    var def = DefDatabase<WorldObjectDef>.GetNamed(defName);
-                    GenerateCity(def, abandoned, factionFilter);
-                } catch (Exception e) {
-                    Log.Error("Error while generating city: " + e.ToString());
-                }
+                var def = DefDatabase<WorldObjectDef>.GetNamed(defName);
+                GenerateCity(def, abandoned, factionFilter);
             }
         }
 
         void GenerateCity(WorldObjectDef def, bool abandoned, System.Predicate<Faction> factionFilter = null) {
-            var city = (City)WorldObjectMaker.MakeWorldObject(def);
-            city.SetFaction(GenCity.RandomCityFaction(factionFilter));
-            if (!abandoned) {
-                city.inhabitantFaction = city.Faction;
-            }
+            try {
+                var city = (City)WorldObjectMaker.MakeWorldObject(def);
+                city.SetFaction(GenCity.RandomCityFaction(factionFilter));
+                if (!abandoned) {
+                    city.inhabitantFaction = city.Faction;
+                }
 
-            city.Tile = TileFinder.RandomSettlementTileFor(city.Faction);
-            city.Name = city.ChooseName();
-            if (!TileFinder.IsValidTileForNewSettlement(city.Tile)) {
-                // (Faction Control) ensure valid tile for existing saves
-                city.Tile = TileFinder.RandomStartingTile();
-            }
+                city.Tile = TileFinder.RandomSettlementTileFor(city.Faction);
+                city.Name = city.ChooseName();
+                if (!TileFinder.IsValidTileForNewSettlement(city.Tile)) {
+                    // (Faction Control) ensure valid tile for existing saves
+                    city.Tile = TileFinder.RandomStartingTile();
+                }
 
-            Find.WorldObjects.Add(city);
+                Find.WorldObjects.Add(city);
+            } catch (Exception e) {
+                Log.Error("Error while generating city: " + e.ToString());
+            }
         }
     }
 }
