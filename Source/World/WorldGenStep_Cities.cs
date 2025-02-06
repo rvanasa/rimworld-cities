@@ -41,8 +41,14 @@ namespace Cities {
 
         void GenerateCity(WorldObjectDef def, bool abandoned, System.Predicate<Faction> factionFilter = null) {
             try {
+                var faction = GenCity.RandomCityFaction(factionFilter);
+                if (faction == null) {
+                    Log.Warning("No suitable faction was found for city generation!");
+                    return;
+                }
+
                 var city = (City)WorldObjectMaker.MakeWorldObject(def);
-                city.SetFaction(GenCity.RandomCityFaction(factionFilter));
+                city.SetFaction(faction);
                 if (!abandoned) {
                     city.inhabitantFaction = city.Faction;
                 }
