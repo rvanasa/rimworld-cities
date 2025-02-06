@@ -21,7 +21,6 @@ namespace Cities {
             var missingCitadels = Config_Cities.Instance.minCitadelsPerWorld
                                   - Find.WorldObjects.AllWorldObjects.Count(obj => obj is Citadel);
             while (missingCitadels-- > 0) {
-                Log.Message("Generating citadel");
                 GenerateCity(DefDatabase<WorldObjectDef>.GetNamed("City_Citadel"), false, f => f.def.CanEverBeNonHostile);
             }
         }
@@ -34,7 +33,6 @@ namespace Cities {
             var cityCount = Mathf.Max(1, GenMath.RoundRandom(Find.WorldGrid.TilesCount / 100_000F * per100kTiles));
             for (var i = 0; i < cityCount; i++) {
                 var def = DefDatabase<WorldObjectDef>.GetNamed(defName);
-                Log.Message($"Generating {defName}: {i + 1} / {cityCount}");
                 GenerateCity(def, abandoned, factionFilter);
             }
         }
