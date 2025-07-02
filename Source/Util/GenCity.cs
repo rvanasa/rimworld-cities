@@ -37,7 +37,7 @@ namespace Cities {
         }
 
         public static Pawn SpawnInhabitant(IntVec3 pos, Map map, LordJob job = null, bool friendlyJob = false, bool randomWorkSpot = false, PawnKindDef kind = null) {
-            var faction = GetCityFaction(map);
+            var faction = map.GetCityFaction();
             if (job == null || (!friendlyJob && !faction.HostileTo(Faction.OfPlayer))) {
                 var workPos = randomWorkSpot ? CellRect.WholeMap(map).RandomCell : pos;
                 workPos = FindPawnSpot(workPos, map);
@@ -53,7 +53,7 @@ namespace Cities {
         public static Pawn SpawnInhabitant(IntVec3 pos, Map map, Lord lord, PawnKindDef kind = null) {
             pos = FindPawnSpot(pos, map);
 
-            var faction = GetCityFaction(map);
+            var faction = map.GetCityFaction();
             var pawn = PawnGenerator.GeneratePawn(new PawnGenerationRequest(
                 kind ?? faction.RandomPawnKind(),
                 faction,
