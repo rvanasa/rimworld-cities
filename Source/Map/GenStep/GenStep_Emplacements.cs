@@ -25,7 +25,7 @@ namespace Cities {
             var emplacementOption = options
                 .Where(opt => {
                     if (opt.selfDestructive) {
-                        return Config_Cities.Instance.enableMortars && (s.map.ParentFaction.def.permanentEnemy);
+                        return Config_Cities.Instance.enableMortars && s.map.ParentFaction.def.permanentEnemy;
                     }
                     return Config_Cities.Instance.enableTurrets;
                 })
@@ -48,7 +48,7 @@ namespace Cities {
 
             public virtual void Generate(Stencil s) {
                 var weapon = s.Spawn(weaponDef, weaponDef.MadeFromStuff ? ThingDefOf.Steel : null);
-                weapon.SetFactionDirect(s.map.ParentFaction);
+                weapon.SetFactionDirect(s.map.GetCityFaction());
                 if (ammoDef != null) {
                     var ammo = s.RotateRand().Spawn(s.RandInclusive(-1, 1), s.RandInclusive(2, 3), ammoDef);
                     ammo.stackCount = ammoCount.RandomInRange;

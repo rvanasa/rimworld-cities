@@ -16,7 +16,7 @@ namespace Cities {
                 : (traderKinds.RandomElementWithFallback()
                    ?? DefDatabase<TraderKindDef>.AllDefs.Where(t => t.stockGenerators.Count > 0).RandomElement()).stockGenerators;
 
-            // var friendly = !s.map.ParentFaction.HostileTo(Faction.OfPlayer);
+            // var friendly = !cityFaction.HostileTo(Faction.OfPlayer);
             foreach (var pos in s.bounds.Cells) {
                 if (s.Chance(density * Config_Cities.Instance.lootScale)) {
                     var thing = generators.RandomElement().GenerateThings(s.map.Tile).FirstOrDefault();
@@ -33,8 +33,9 @@ namespace Cities {
                             if (pawn.skills == null) {
                                 pawn.skills = new Pawn_SkillTracker(pawn);
                             }
-                            if (pawn.Faction.HostileTo(s.map.ParentFaction)) {
-                                pawn.guest.SetGuestStatus(s.map.ParentFaction, GuestStatus.Prisoner);
+                            var cityFaction = s.map.GetCityFaction();
+                            if (pawn.Faction.HostileTo(cityFaction)) {
+                                pawn.guest.SetGuestStatus(cityFaction, GuestStatus.Prisoner);
                             }
                         }
                         else {

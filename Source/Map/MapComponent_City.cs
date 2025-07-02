@@ -38,11 +38,13 @@ namespace Cities {
                             IncidentDefOf.RaidEnemy.Worker.TryExecute(parms);
                         }
 
-                        foreach (var pawn in map.mapPawns.SpawnedPawnsInFaction(map.ParentFaction)) {
-                            if (!pawn.inventory.innerContainer.Any(thing => pawn.WillEat(thing))) {
-                                for (var i = 0; i < 2; i++) {
-                                    var meal = ThingMaker.MakeThing(ThingDefOf.MealSurvivalPack);
-                                    pawn.inventory.innerContainer.TryAdd(meal);
+                        if (city.inhabitantFaction != null && city.inhabitantFaction != Faction.OfPlayer) {
+                            foreach (var pawn in map.mapPawns.SpawnedPawnsInFaction(city.inhabitantFaction)) {
+                                if (!pawn.inventory.innerContainer.Any(thing => pawn.WillEat(thing))) {
+                                    for (var i = 0; i < 2; i++) {
+                                        var meal = ThingMaker.MakeThing(ThingDefOf.MealSurvivalPack);
+                                        pawn.inventory.innerContainer.TryAdd(meal);
+                                    }
                                 }
                             }
                         }

@@ -8,10 +8,14 @@ using Verse.AI.Group;
 namespace Cities {
     public static class GenCity {
 
+        public static Faction GetCityFaction(this Map map) {
+            return (map.Parent as City).inhabitantFaction ?? map.ParentFaction;
+        }
+
         public static Faction RandomCityFaction(System.Predicate<Faction> filter = null) {
             return (from x in Find.World.factionManager.AllFactionsListForReading
-                where !x.def.isPlayer && !x.def.hidden && !TechLevelUtility.IsNeolithicOrWorse(x.def.techLevel) && (filter == null || filter(x))
-                select x).RandomElementByWeightWithFallback(f => f.def.settlementGenerationWeight);
+                    where !x.def.isPlayer && !x.def.hidden && !TechLevelUtility.IsNeolithicOrWorse(x.def.techLevel) && (filter == null || filter(x))
+                    select x).RandomElementByWeightWithFallback(f => f.def.settlementGenerationWeight);
         }
 
         public static TerrainDef RandomFloor(Map map, bool carpets = false) {
@@ -25,34 +29,34 @@ namespace Cities {
         public static ThingDef RandomStuff(ThingDef thing, Map map, bool expensive = false) {
             if (!thing.MadeFromStuff) {
                 return null;
-            }
-            else if (expensive) {
+            } else if (expensive) {
                 return GenStuff.RandomStuffByCommonalityFor(thing, map.ParentFaction.def.techLevel);
-            }
-            else {
+            } else {
                 return GenStuff.RandomStuffInexpensiveFor(thing, map.ParentFaction);
             }
         }
 
         public static Pawn SpawnInhabitant(IntVec3 pos, Map map, LordJob job = null, bool friendlyJob = false, bool randomWorkSpot = false, PawnKindDef kind = null) {
-            if (job == null || (!friendlyJob && !map.ParentFaction.HostileTo(Faction.OfPlayer))) {
+            var faction = GetCityFaction(map);
+            if (job == null || (!friendlyJob && !faction.HostileTo(Faction.OfPlayer))) {
                 var workPos = randomWorkSpot ? CellRect.WholeMap(map).RandomCell : pos;
                 workPos = FindPawnSpot(workPos, map);
                 job = map.Parent is Citadel
-                    ? new LordJob_LiveInCitadel()
+                    ? new LordJob_LiveInCitadel(workPos)
                     : map.Parent is City city && city.Abandoned
-                        ? (LordJob) new LordJob_LiveInAbandonedCity(workPos)
+                        ? (LordJob)new LordJob_LiveInAbandonedCity(workPos)
                         : new LordJob_LiveInCity(workPos);
             }
-            return SpawnInhabitant(pos, map, LordMaker.MakeNewLord(map.ParentFaction, job, map));
+            return SpawnInhabitant(pos, map, LordMaker.MakeNewLord(faction, job, map), kind);
         }
 
         public static Pawn SpawnInhabitant(IntVec3 pos, Map map, Lord lord, PawnKindDef kind = null) {
             pos = FindPawnSpot(pos, map);
 
+            var faction = GetCityFaction(map);
             var pawn = PawnGenerator.GeneratePawn(new PawnGenerationRequest(
-                kind ?? map.ParentFaction.RandomPawnKind(),
-                map.ParentFaction,
+                kind ?? faction.RandomPawnKind(),
+                faction,
                 PawnGenerationContext.NonPlayer,
                 map.Tile,
                 mustBeCapableOfViolence: true,
@@ -95,13 +99,11 @@ namespace Cities {
                     var cityOwnedThings = map.GetComponent<MapComponent_City>().cityOwnedThings;
                     if (owned) {
                         cityOwnedThings.Add(thing);
-                    }
-                    else {
+                    } else {
                         cityOwnedThings.Remove(thing);
                     }
                 }
-            }
-            catch (System.Exception e) {
+            } catch (System.Exception e) {
                 Log.Message("Failed to set city ownership [" + owned + "] on thing: " + thing + " (" + e + ")");
             }
         }

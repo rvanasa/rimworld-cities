@@ -18,9 +18,6 @@ namespace Cities {
         }
 
         public override void UpdateAllDuties() {
-            
-            // TODO: verify that this works properly
-            
             foreach (var pawn in lord.ownedPawns) {
                 pawn.mindState.duty = new PawnDuty(DefDatabase<DutyDef>.GetNamed("LiveInCitadel"), workSpot);
             }

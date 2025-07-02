@@ -13,13 +13,78 @@ using Verse.AI;
 
 namespace Cities {
 
+
+    // [HarmonyPatch(typeof(Game), nameof(Game.InitNewGame))]
+    // internal static class Game_InitNewGame {
+    //     static bool Prefix(Game __instance) {
+    //         if (__instance.Scenario.AllParts.Any(part => part is ScenPart_StartCity || part is ScenPart_StartCitadel)) {
+    //             string text = LoadedModManager.RunningMods.Select((ModContentPack mod) => mod.PackageIdPlayerFacing + ((!mod.ModMetaData.VersionCompatible) ? " (incompatible version)" : "")).ToLineList("  - ");
+    //             Log.Message("Initializing new game with mods:\n" + text);
+    //             if (__instance.Maps.Any()) {
+    //                 Log.Error("Called InitNewGame() but there already is a map. There should be 0 maps...");
+    //                 return false;
+    //             }
+    //             if (__instance.InitData == null) {
+    //                 Log.Error("Called InitNewGame() but init data is null. Create it first.");
+    //                 return false;
+    //             }
+    //             Game.ClearCaches();
+    //             Verse.Profile.MemoryUtility.UnloadUnusedUnityAssets();
+    //             try {
+    //                 Current.ProgramState = ProgramState.MapInitializing;
+    //                 IntVec3 intVec = new IntVec3(__instance.InitData.mapSize, 1, __instance.InitData.mapSize);
+    //                 Settlement settlement = null;
+    //                 List<Settlement> settlements = Find.WorldObjects.Settlements;
+    //                 for (int i = 0; i < settlements.Count; i++) {
+    //                     if (settlements[i].Tile == __instance.InitData.startingTile) {
+    //                         settlement = settlements[i];
+    //                         break;
+    //                     }
+    //                 }
+    //                 if (settlement == null) {
+    //                     Log.Error("Could not generate starting map because there is no settlement on the starting tile.");
+    //                 }
+    //                 __instance.tickManager.gameStartAbsTick = GenTicks.ConfiguredTicksAbsAtGameStart;
+    //                 __instance.Info.startingTile = __instance.InitData.startingTile;
+    //                 __instance.Info.startingAndOptionalPawns = __instance.InitData.startingAndOptionalPawns;
+    //                 Map currentMap = MapGenerator.GenerateMap(intVec, settlement, __instance.InitData.mapGeneratorDef ?? settlement.MapGeneratorDef, settlement.ExtraGenStepDefs);
+    //                 __instance.World.info.initialMapSize = intVec;
+    //                 if (__instance.InitData.permadeath) {
+    //                     __instance.Info.permadeathMode = true;
+    //                     __instance.Info.permadeathModeUniqueName = PermadeathModeUtility.GeneratePermadeathSaveName();
+    //                 }
+    //                 PawnUtility.GiveAllStartingPlayerPawnsThought(ThoughtDefOf.NewColonyOptimism);
+    //                 __instance.FinalizeInit();
+    //                 Current.Game.CurrentMap = currentMap;
+    //                 Find.CameraDriver.JumpToCurrentMapLoc(MapGenerator.PlayerStartSpot);
+    //                 Find.CameraDriver.ResetSize();
+    //                 if (Prefs.PauseOnLoad && __instance.InitData.startedFromEntry) {
+    //                     LongEventHandler.ExecuteWhenFinished(delegate {
+    //                         __instance.tickManager.DoSingleTick();
+    //                         __instance.tickManager.CurTimeSpeed = TimeSpeed.Paused;
+    //                     });
+    //                 }
+    //                 Find.Scenario.PostGameStart();
+    //                 __instance.history.FinalizeInit();
+    //                 ResearchUtility.ApplyPlayerStartingResearch();
+    //                 GameComponentUtility.StartedNewGame();
+    //                 __instance.InitData = null;
+
+    //             } finally { }
+    //             return false;
+    //         }
+    //         return true;
+    //     }
+    // }
+
+
     [HarmonyPatch(typeof(HistoryAutoRecorder))]
     [HarmonyPatch(nameof(HistoryAutoRecorder.Tick))]
     internal static class HistoryAutoRecorder_Tick {
         static bool Prefix(ref HistoryAutoRecorder __instance) {
             try {
                 if (Find.TickManager.TicksGame % __instance.def.recordTicksFrequency == 0 || !__instance.records.Any()) {
-                    if (Find.AnyPlayerHomeMap == null && !__instance.records.Empty()) {
+                    if (Find.AnyPlayerHomeMap == null && __instance.records.Any()) {
                         __instance.records.Add(__instance.records.Last());
                         return false;
                     }

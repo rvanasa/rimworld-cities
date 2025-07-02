@@ -34,9 +34,10 @@ namespace Cities {
                 .Fill(ThingDefOf.Barricade, GenCity.RandomStuff(ThingDefOf.Barricade, map), IsValidTile);
 
             var sentries = sentryRange.RandomInRange;
+            var lord = LordMaker.MakeNewLord(map.GetCityFaction(), new LordJob_LiveInCitadel(s.MoveRand().pos + IntVec3.South), map);
             for (var i = 0; i < sentries; i++) {
                 var point = s.MoveRand().pos + IntVec3.South;
-                GenCity.SpawnInhabitant(point, map, new LordJob_DefendBase(map.ParentFaction, point, 0));
+                GenCity.SpawnInhabitant(point, map, lord);
             }
 
             if (Config_Cities.Instance.enableMortars) {

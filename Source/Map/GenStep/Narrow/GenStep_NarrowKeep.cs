@@ -48,22 +48,24 @@ namespace Cities {
             // Inner keep
             s = s.Expand(-marginRange.RandomInRange, -marginRange.RandomInRange, -marginRange.RandomInRange, -marginRange.RandomInRange);
 
-            var genStep = (GenStep_Buildings) buildingGenStepDef.genStep;
+            var genStep = (GenStep_Buildings)buildingGenStepDef.genStep;
             genStep.GenerateRect(s);
 
             // Mechanoids
-            var mechs = PawnGroupMakerUtility.GeneratePawns(new PawnGroupMakerParms {
+            var mechs = PawnGroupMakerUtility.GeneratePawns(new PawnGroupMakerParms
+            {
                 groupKind = PawnGroupKindDefOf.Combat,
                 tile = map.Tile,
                 faction = Faction.OfMechanoids,
                 points = 5000,
             }).ToList();
+            var cityFaction = map.GetCityFaction();
             foreach (var mech in mechs) {
                 var pos = s.Expand(-10).MoveRand().pos;
                 GenSpawn.Spawn(mech, GenCity.FindPawnSpot(pos, map), map);
-                mech.SetFactionDirect(map.ParentFaction);
+                mech.SetFactionDirect(cityFaction);
                 mech.Name = new NameSingle(mechanoidNames[Rand.Range(0, mechanoidNames.Count)] + " #" + Rand.RangeInclusive(10, 40));
-                var lord = LordMaker.MakeNewLord(map.ParentFaction, new LordJob_LiveInCitadel(pos), map);
+                var lord = LordMaker.MakeNewLord(cityFaction, new LordJob_LiveInCitadel(pos), map);
                 lord.AddPawn(mech);
             }
 

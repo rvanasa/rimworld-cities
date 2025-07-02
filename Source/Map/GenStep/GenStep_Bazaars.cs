@@ -15,18 +15,20 @@ namespace Cities {
 
         public override void GenerateRect(Stencil s) {
             s.FillTerrain(GenCity.RandomFloor(s.map));
-            var pawn = (Pawn) null;
-            if (!s.map.ParentFaction.HostileTo(Faction.OfPlayer)) {
+            var cityFaction = s.map.GetCityFaction();
+            var pawn = (Pawn)null;
+            if (!cityFaction.HostileTo(Faction.OfPlayer)) {
                 pawn = GenCity.SpawnInhabitant(s.Coords(s.RandX / 2, s.RandZ / 2), s.map);
                 var traderKind = DefDatabase<TraderKindDef>.AllDefs.RandomElement();
                 pawn.mindState.wantsToTradeWithColony = true;
                 PawnComponentsUtility.AddAndRemoveDynamicComponents(pawn, true);
                 pawn.trader.traderKind = traderKind;
                 pawn.inventory.DestroyAll();
-                var parms = new ThingSetMakerParams {
+                var parms = new ThingSetMakerParams
+                {
                     traderDef = traderKind,
                     tile = s.map.Tile,
-                    makingFaction = s.map.ParentFaction,
+                    makingFaction = cityFaction,
                 };
                 foreach (var item in ThingSetMakerDefOf.TraderStock.root.Generate(parms)) {
                     if (!(item is Pawn) && !pawn.inventory.innerContainer.TryAdd(item)) {

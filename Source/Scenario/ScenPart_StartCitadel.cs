@@ -4,6 +4,7 @@ using UnityEngine;
 using RimWorld;
 using RimWorld.Planet;
 using Verse;
+using System;
 
 namespace Cities {
 
@@ -17,11 +18,19 @@ namespace Cities {
             var defaultSettlement = Find.WorldObjects.MapParentAt(Find.GameInitData.startingTile);
             Find.WorldObjects.Remove(defaultSettlement);
 
-            var citadel = (Citadel) WorldObjectMaker.MakeWorldObject(DefDatabase<WorldObjectDef>.GetNamed("City_Citadel"));
+            var citadel = (Citadel)WorldObjectMaker.MakeWorldObject(DefDatabase<WorldObjectDef>.GetNamed("City_Citadel"));
             citadel.SetFaction(Find.GameInitData.playerFaction);
-            // citadel.inhabitantFaction = GenCity.RandomCityFaction(f => !f.def.CanEverBeNonHostile);
-            citadel.inhabitantFaction = FactionGenerator.NewGeneratedFaction(new FactionGeneratorParms(DefDatabase<FactionDef>.GetNamed("OutlanderCivil")));
-            citadel.inhabitantFaction.SetRelation(new FactionRelation(Faction.OfPlayer, FactionRelationKind.Hostile));
+            var factionDef = DefDatabase<FactionDef>.GetNamed("OutlanderCivil", errorOnFail: false);
+            Faction faction;
+            if (factionDef != null) {
+                faction = FactionGenerator.NewGeneratedFaction(new FactionGeneratorParms(factionDef));
+            } else {
+                Log.Warning("RimCities: unable to find suitable citadel inhabitant faction. Choosing random!");
+                faction = GenCity.RandomCityFaction(f => !f.def.CanEverBeNonHostile);
+            }
+            faction.SetRelation(new FactionRelation(Faction.OfPlayer, FactionRelationKind.Hostile));
+            // citadel.SetFaction(faction);
+            citadel.inhabitantFaction = faction;
             citadel.Tile = Find.GameInitData.startingTile;
             citadel.Name = citadel.ChooseName();
             Find.WorldObjects.Add(citadel);

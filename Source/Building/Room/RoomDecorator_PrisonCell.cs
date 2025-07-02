@@ -15,8 +15,9 @@ namespace Cities {
             var sBed = s.Expand(-1);
             var thing = bedOptions.RandomElement();
             var stuff = GenCity.RandomStuff(thing, s.map);
-            var bed = (Building_Bed) sBed.Spawn(sBed.RandX, sBed.RandZ, thing, stuff);
-            bed.SetFactionDirect(s.map.ParentFaction);
+            var bed = (Building_Bed)sBed.Spawn(sBed.RandX, sBed.RandZ, thing, stuff);
+            var cityFaction = s.map.GetCityFaction();
+            bed.SetFactionDirect(cityFaction);
             bed.ForPrisoners = true;
             if (s.Chance(prisonerChance)) {
                 var pawn = GenCity.SpawnInhabitant(s.pos, s.map, kind: PawnKindDefOf.Slave);
@@ -26,9 +27,9 @@ namespace Cities {
                 if (pawn.skills == null) {
                     pawn.skills = new Pawn_SkillTracker(pawn);
                 }
-                if (pawn.Faction.HostileTo(s.map.ParentFaction)) {
+                if (pawn.Faction.HostileTo(cityFaction)) {
                     pawn.equipment.DestroyAllEquipment();
-                    pawn.guest.SetGuestStatus(s.map.ParentFaction, GuestStatus.Prisoner);
+                    pawn.guest.SetGuestStatus(cityFaction, GuestStatus.Prisoner);
                 }
             }
         }

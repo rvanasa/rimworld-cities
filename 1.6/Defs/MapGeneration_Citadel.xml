@@ -196,7 +196,7 @@
     <defName>Narrow_Minefields</defName>
     <order>247</order>
     <genStep Class="Cities.GenStep_NarrowMinefields">
-      <countPer10kCellsRange>8</countPer10kCellsRange>
+      <countPer10kCellsRange>4</countPer10kCellsRange>
     </genStep>
   </GenStepDef>
 

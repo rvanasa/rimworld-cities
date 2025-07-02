@@ -10,15 +10,16 @@ namespace Cities {
         public override void Tick() {
             var map = Find.CurrentMap;
             if (map != null && Find.TickManager.TicksGame == 20) {
-                var faction = GenCity.RandomCityFaction(f => f.GoodwillWith(Faction.OfPlayer) >= 0 && !f.def.HasRoyalTitles);
-                faction.TryAffectGoodwillWith(Faction.OfPlayer, 100, false, false);
-                if (map.ParentFaction != null && map.ParentFaction.HostileTo(Faction.OfPlayer)) {
-                    faction.TryAffectGoodwillWith(map.ParentFaction, -100, false, false);
+                var allyFaction = GenCity.RandomCityFaction(f => f.GoodwillWith(Faction.OfPlayer) >= 0 && !f.def.HasRoyalTitles);
+                var enemyFaction = map.GetCityFaction();
+                allyFaction.TryAffectGoodwillWith(Faction.OfPlayer, 100, false, false);
+                if (enemyFaction != null && enemyFaction.HostileTo(Faction.OfPlayer)) {
+                    allyFaction.TryAffectGoodwillWith(enemyFaction, -100, false, false);
                 }
 
                 var storyComp = Find.Storyteller.storytellerComps.First(x => x is StorytellerComp_OnOffCycle || x is StorytellerComp_RandomMain);
                 var parms = storyComp.GenerateParms(IncidentCategoryDefOf.ThreatBig, map);
-                parms.faction = faction;
+                parms.faction = allyFaction;
                 parms.raidStrategy = RaidStrategyDefOf.ImmediateAttackFriendly;
                 parms.raidArrivalMode = PawnsArrivalModeDefOf.EdgeWalkIn;
                 parms.raidArrivalModeForQuickMilitaryAid = true;

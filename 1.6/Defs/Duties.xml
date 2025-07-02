@@ -6,6 +6,9 @@
     <alwaysShowWeapon>false</alwaysShowWeapon>
     <thinkNode Class="ThinkNode_Priority">
       <subNodes>
+        <li Class="ThinkNode_Subtree">
+          <treeDef>Abilities_Aggressive</treeDef>
+        </li>
         <li Class="JobGiver_AIFightEnemies">
           <targetAcquireRadius>50</targetAcquireRadius>
           <targetKeepRadius>60</targetKeepRadius>
@@ -39,6 +42,9 @@
     <alwaysShowWeapon>false</alwaysShowWeapon>
     <thinkNode Class="ThinkNode_Priority">
       <subNodes>
+        <li Class="ThinkNode_Subtree">
+          <treeDef>Abilities_Aggressive</treeDef>
+        </li>
         <li Class="JobGiver_AIFightEnemies">
           <targetAcquireRadius>50</targetAcquireRadius>
           <targetKeepRadius>60</targetKeepRadius>
@@ -75,11 +81,14 @@
 
   <DutyDef>
     <defName>LiveInCitadel</defName>
-    <alwaysShowWeapon>false</alwaysShowWeapon>
+    <alwaysShowWeapon>true</alwaysShowWeapon>
     <thinkNode Class="ThinkNode_Priority">
       <subNodes>
-        <li Class="JobGiver_TakeCombatEnhancingDrug">
+        <!-- <li Class="JobGiver_TakeCombatEnhancingDrug">
           <onlyIfInDanger>true</onlyIfInDanger>
+        </li> -->
+        <li Class="ThinkNode_Subtree">
+          <treeDef>Abilities_Aggressive</treeDef>
         </li>
         <li Class="JobGiver_AIFightEnemies">
           <targetAcquireRadius>80</targetAcquireRadius>
@@ -113,7 +122,9 @@
             </li>
           </subNodes>
         </li>
-        <li Class="JobGiver_WanderNearDutyLocation"/>
+        <li Class="JobGiver_WanderNearDutyLocation">
+          <locomotionUrgencyOutsideRadius>Sprint</locomotionUrgencyOutsideRadius>
+        </li>
       </subNodes>
     </thinkNode>
   </DutyDef>

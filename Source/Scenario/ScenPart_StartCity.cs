@@ -14,11 +14,11 @@ namespace Cities {
             base.ExposeData();
             Scribe_Values.Look(ref inhabitantKind, "inhabitantKind");
         }
-        
+
         public override void DoEditInterface(Listing_ScenEdit listing) {
             var scenPartRect = listing.GetScenPartRect(this, RowHeight * 3 + 31);
             if (Widgets.ButtonTextSubtle(scenPartRect.TopPartPixels(RowHeight), inhabitantKind.ToString())) {
-                FloatMenuUtility.MakeMenu(System.Enum.GetNames(typeof(InhabitantKind)), s => (s + "CityKind").Translate(), s => { return () => inhabitantKind = (InhabitantKind) System.Enum.Parse(typeof(InhabitantKind), s); });
+                FloatMenuUtility.MakeMenu(System.Enum.GetNames(typeof(InhabitantKind)), s => (s + "CityKind").Translate(), s => { return () => inhabitantKind = (InhabitantKind)System.Enum.Parse(typeof(InhabitantKind), s); });
             }
         }
 
@@ -26,7 +26,7 @@ namespace Cities {
             var defaultSettlement = Find.WorldObjects.MapParentAt(Find.GameInitData.startingTile);
             Find.WorldObjects.Remove(defaultSettlement);
 
-            var city = (City) WorldObjectMaker.MakeWorldObject(DefDatabase<WorldObjectDef>.GetNamed(GetObjectDefName()));
+            var city = (City)WorldObjectMaker.MakeWorldObject(DefDatabase<WorldObjectDef>.GetNamed(GetObjectDefName()));
             city.SetFaction(Find.GameInitData.playerFaction);
             city.inhabitantFaction = GenCity.RandomCityFaction(IsValidFaction);
             city.Tile = Find.GameInitData.startingTile;
