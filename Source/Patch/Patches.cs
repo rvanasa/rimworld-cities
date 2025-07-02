@@ -13,6 +13,27 @@ using Verse.AI;
 
 namespace Cities {
 
+    [HarmonyPatch(typeof(HistoryAutoRecorder))]
+    [HarmonyPatch(nameof(HistoryAutoRecorder.Tick))]
+    internal static class HistoryAutoRecorder_Tick {
+        static bool Prefix(ref HistoryAutoRecorder __instance) {
+            try {
+                if (Find.TickManager.TicksGame % __instance.def.recordTicksFrequency == 0 || !__instance.records.Any()) {
+                    if (Find.AnyPlayerHomeMap == null && !__instance.records.Empty()) {
+                        __instance.records.Add(__instance.records.Last());
+                        return false;
+                    }
+                    float item = __instance.def.Worker.PullRecord();
+                    __instance.records.Add(item);
+                }
+            } catch (Exception e) {
+                // Warning instead of error
+                Log.Warning(e.ToString());
+            }
+            return false;
+        }
+    }
+
     [HarmonyPatch(typeof(MapGenerator))]
     [HarmonyPatch(nameof(MapGenerator.GenerateMap))]
     internal static class MapGenerator_GenerateMap {
@@ -63,7 +84,7 @@ namespace Cities {
     [HarmonyPatch(typeof(QuestNode_GetNearbySettlement))]
     [HarmonyPatch("RandomNearbyTradeableSettlement")]
     internal static class QuestNode_GetNearbySettlement_RandomNearbyTradeableSettlement {
-        static void Postfix(ref MapParent __result, int originTile, Slate slate) {
+        static void Postfix(ref MapParent __result, PlanetTile originTile, Slate slate) {
             if (__result is City city && (city.Abandoned || city.Faction.HostileTo(Faction.OfPlayer))) {
                 __result = null;
             }

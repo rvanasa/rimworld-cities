@@ -29,7 +29,7 @@ namespace Cities {
             var sentries = sentryRange.RandomInRange;
             for (var i = 0; i < sentries; i++) {
                 var point = s.MoveRand().pos + IntVec3.North * 3;
-                GenCity.SpawnInhabitant(point, map, new LordJob_DefendBase(map.ParentFaction, point));
+                GenCity.SpawnInhabitant(point, map, new LordJob_DefendBase(map.ParentFaction, point, 0));
             }
         }
 

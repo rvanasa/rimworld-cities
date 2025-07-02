@@ -1,4 +1,5 @@
-﻿using RimWorld;
+﻿using System.Linq;
+using RimWorld;
 using RimWorld.BaseGen;
 using Verse;
 
@@ -7,7 +8,7 @@ namespace Cities {
         public override int SeedPart => GetType().Name.GetHashCode();
 
         public override void Generate(Map map, GenStepParams parms) {
-            foreach (var thing in map.spawnedThings) {
+            foreach (var thing in map.spawnedThings.ToArray() /* ?? */) {
                 if (thing.def == ThingDefOf.Silver) {
                     thing.Destroy();
                 }

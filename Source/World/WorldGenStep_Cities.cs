@@ -9,36 +9,36 @@ namespace Cities {
     public class WorldGenStep_Cities : WorldGenStep {
         public override int SeedPart => GetType().Name.GetHashCode();
 
-        public override void GenerateFresh(string seed) {
+        public override void GenerateFresh(string seed, PlanetLayer layer) {
             var config = Config_Cities.Instance;
 
             if (!Find.WorldObjects.AllWorldObjects.Any(obj => obj is City)) {
-                GenerateCities(config.citiesPer100kTiles.RandomInRange, "City_Faction", false);
-                GenerateCities(config.abandonedPer100kTiles.RandomInRange, "City_Abandoned", true);
-                GenerateCities(config.compromisedPer100kTiles.RandomInRange, "City_Compromised", false, f => !f.def.CanEverBeNonHostile);
+                GenerateCities(layer, config.citiesPer100kTiles.RandomInRange, "City_Faction", false);
+                GenerateCities(layer, config.abandonedPer100kTiles.RandomInRange, "City_Abandoned", true);
+                GenerateCities(layer, config.compromisedPer100kTiles.RandomInRange, "City_Compromised", false, f => !f.def.CanEverBeNonHostile);
             }
 
             var missingCitadels = Config_Cities.Instance.minCitadelsPerWorld
                                   - Find.WorldObjects.AllWorldObjects.Count(obj => obj is Citadel);
             while (missingCitadels-- > 0) {
-                GenerateCity(DefDatabase<WorldObjectDef>.GetNamed("City_Citadel"), false, f => f.def.CanEverBeNonHostile);
+                GenerateCity(layer, "City_Citadel", false, f => f.def.CanEverBeNonHostile);
             }
         }
 
-        public override void GenerateFromScribe(string seed) {
-            GenerateFresh(seed);
+        public override void GenerateFromScribe(string seed, PlanetLayer layer) {
+            GenerateFresh(seed, layer);
         }
 
-        void GenerateCities(int per100kTiles, string defName, bool abandoned, System.Predicate<Faction> factionFilter = null) {
+        void GenerateCities(PlanetLayer layer, int per100kTiles, string defName, bool abandoned, Predicate<Faction> factionFilter = null) {
             var cityCount = Mathf.Max(1, GenMath.RoundRandom(Find.WorldGrid.TilesCount / 100_000F * per100kTiles));
             for (var i = 0; i < cityCount; i++) {
-                var def = DefDatabase<WorldObjectDef>.GetNamed(defName);
-                GenerateCity(def, abandoned, factionFilter);
+                GenerateCity(layer, defName, abandoned, factionFilter);
             }
         }
 
-        void GenerateCity(WorldObjectDef def, bool abandoned, System.Predicate<Faction> factionFilter = null) {
+        void GenerateCity(PlanetLayer layer, string defName, bool abandoned, Predicate<Faction> factionFilter = null) {
             try {
+                var def = DefDatabase<WorldObjectDef>.GetNamed(defName);
                 var faction = GenCity.RandomCityFaction(factionFilter);
                 if (faction == null) {
                     Log.Warning("No suitable faction was found for city generation!");
@@ -51,7 +51,7 @@ namespace Cities {
                     city.inhabitantFaction = city.Faction;
                 }
 
-                city.Tile = TileFinder.RandomSettlementTileFor(city.Faction);
+                city.Tile = TileFinder.RandomSettlementTileFor(layer, city.Faction);
                 city.Name = city.ChooseName();
                 if (!TileFinder.IsValidTileForNewSettlement(city.Tile)) {
                     // (Faction Control) ensure valid tile for existing saves

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <ScenPartDef>
+    <defName>StartCity</defName>
+    <label>start in a city (RimCities)</label>
+    <category>WorldThing</category>
+    <scenPartClass>Cities.ScenPart_StartCity</scenPartClass>
+    <summaryPriority>490</summaryPriority>
+    <maxUses>1</maxUses>
+  </ScenPartDef>
+
+  <ScenPartDef>
+    <defName>StartCitadel</defName>
+    <label>start near a citadel (RimCities)</label>
+    <category>WorldThing</category>
+    <scenPartClass>Cities.ScenPart_StartCitadel</scenPartClass>
+    <summaryPriority>490</summaryPriority>
+    <maxUses>1</maxUses>
+  </ScenPartDef>
+
+  <ScenPartDef>
+    <defName>StartEquipment</defName>
+    <label>give each pawn</label>
+    <category>StartingItem</category>
+    <scenPartClass>Cities.ScenPart_Equipment</scenPartClass>
+    <summaryPriority>489</summaryPriority>
+  </ScenPartDef>
+
+  <ScenPartDef>
+    <defName>StartElite</defName>
+    <label>elite colonists</label>
+    <category>PlayerPawnModifier</category>
+    <scenPartClass>Cities.ScenPart_Elite</scenPartClass>
+    <summaryPriority>488</summaryPriority>
+  </ScenPartDef>
+
+  <ScenPartDef>
+    <defName>StartAllies</defName>
+    <label>start with allies</label>
+    <category>Misc</category>
+    <scenPartClass>Cities.ScenPart_Allies</scenPartClass>
+    <summaryPriority>487</summaryPriority>
+  </ScenPartDef>
+
+  <ScenPartDef>
+    <defName>RescuePrisoners</defName>
+    <label>rescue prisoners</label>
+    <category>Misc</category>
+    <scenPartClass>Cities.ScenPart_RescuePrisoners</scenPartClass>
+    <summaryPriority>486</summaryPriority>
+  </ScenPartDef>
+
+</Defs>
