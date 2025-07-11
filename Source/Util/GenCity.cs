@@ -9,7 +9,7 @@ namespace Cities {
     public static class GenCity {
 
         public static Faction GetCityFaction(this Map map) {
-            return (map.Parent as City).inhabitantFaction ?? map.ParentFaction;
+            return (map.Parent as City)?.inhabitantFaction ?? map.ParentFaction;
         }
 
         public static Faction RandomCityFaction(System.Predicate<Faction> filter = null) {
