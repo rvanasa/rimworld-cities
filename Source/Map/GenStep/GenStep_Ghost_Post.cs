@@ -1,4 +1,5 @@
-﻿using RimWorld;
+﻿using System.Linq;
+using RimWorld;
 using Verse;
 
 namespace Cities {
@@ -6,7 +7,7 @@ namespace Cities {
         public override int SeedPart => GetType().Name.GetHashCode();
 
         public override void Generate(Map map, GenStepParams parms) {
-            foreach (var thing in map.spawnedThings) {
+            foreach (var thing in map.spawnedThings.ToList()) {
                 if ((thing is Pawn || thing is Building_Turret) && thing.Faction != null && !thing.Faction.IsPlayer) {
                     thing.Destroy();
                 }
