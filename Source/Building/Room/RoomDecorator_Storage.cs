@@ -21,6 +21,7 @@ namespace Cities {
                 if (s.Chance(density * Config_Cities.Instance.lootScale)) {
                     var thing = generators.RandomElement().GenerateThings(s.map.Tile).FirstOrDefault();
                     if (thing != null) {
+                        GenCity.AssignQuality(thing);
                         if (thing.stackCount > thing.def.stackLimit) {
                             thing.stackCount = s.RandInclusive(1, thing.def.stackLimit);
                         }

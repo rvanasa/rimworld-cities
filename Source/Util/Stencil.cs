@@ -1,5 +1,4 @@
-using System.Collections.Generic;
-using RimWorld.Planet;
+using RimWorld;
 using Verse;
 
 namespace Cities {
@@ -307,8 +306,12 @@ namespace Cities {
             return DoSpawn(pos, thing, stuff);
         }
 
-        Thing DoSpawn(IntVec3 pos, ThingDef thing, ThingDef stuff) {
-            return GenSpawn.Spawn(ThingMaker.MakeThing(thing, stuff), pos, map, thing.rotatable ? rot : default(Rot4));
+        Thing DoSpawn(IntVec3 pos, ThingDef thingDef, ThingDef stuff) {
+            Thing thing = ThingMaker.MakeThing(thingDef, stuff);
+
+            GenCity.AssignQuality(thing);
+
+            return GenSpawn.Spawn(thing, pos, map, thingDef.rotatable ? rot : default(Rot4));
         }
 
         void DoClear(IntVec3 pos) {
