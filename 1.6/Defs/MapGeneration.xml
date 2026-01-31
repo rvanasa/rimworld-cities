@@ -51,6 +51,7 @@
   <MapGeneratorDef ParentName="Cities_Base">
     <defName>City_Faction</defName>
     <genSteps>
+      <li>City_ClearChunks</li>
       <li>City_ClearAnimals</li>
     </genSteps>
   </MapGeneratorDef>
@@ -672,6 +673,12 @@
         <max>5000</max>
       </maxItemValue>
     </genStep>
+  </GenStepDef>
+
+  <GenStepDef>
+    <defName>City_ClearChunks</defName>
+    <order>1000</order>
+    <genStep Class="Cities.GenStep_ClearChunks"/>
   </GenStepDef>
 
   <GenStepDef>

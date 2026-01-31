@@ -72,6 +72,7 @@
       <li>City_Hospital</li>
       <li>City_Emplacements</li>
       <li>City_Emplacements</li>
+      <li>City_ClearChunks</li>
     </genSteps>
   </MapGeneratorDef>
 
