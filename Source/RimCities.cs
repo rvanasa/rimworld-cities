@@ -73,7 +73,7 @@ namespace Cities {
             var listing = new Listing_Standard();
             listing.Begin(inRect);
             listing.CheckboxLabeled("LimitCitySize".Translate().Formatted(Config.citySizeScale, Config.citySizeScale), ref Config.customCitySize);
-            listing.IntAdjuster(ref Config.citySizeScale, 10, 50);
+            Config.citySizeScale = (int)listing.Slider(Config.citySizeScale, 50, 500);
             listing.CheckboxLabeled("EnableCityQuests".Translate(), ref Config.enableQuestSystem);
             if (Config.enableQuestSystem) {
                 listing.CheckboxLabeled("EnableDefendQuest".Translate(), ref Config.enableDefendQuest);
