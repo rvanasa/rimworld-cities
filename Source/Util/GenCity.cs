@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using RimWorld;
 using RimWorld.BaseGen;
@@ -33,6 +34,44 @@ namespace Cities {
                 return GenStuff.RandomStuffByCommonalityFor(thing, map.ParentFaction.def.techLevel);
             } else {
                 return GenStuff.RandomStuffInexpensiveFor(thing, map.ParentFaction);
+            }
+        }
+
+        public static void AssignQuality(Thing thing)
+        {
+            // The multiplicative factor between adjacent quality tiers. Each lower-quality tier is `weightMultiplier`
+            // times more likely than the tier above it.
+            const int weightMultiplier = 3;
+            const int legendaryWeight = 1;
+            const int masterworkWeight = legendaryWeight * weightMultiplier;
+            const int excellentWeight = masterworkWeight * weightMultiplier;
+            const int goodWeight = excellentWeight * weightMultiplier;
+            const int normalWeight = goodWeight * weightMultiplier;
+            const int normalThreshold = normalWeight;
+            const int goodThreshold = normalThreshold + goodWeight;
+            const int excellentThreshold = goodThreshold + excellentWeight;
+            const int masterworkThreshold = excellentThreshold + masterworkWeight;
+            const int totalWeight = masterworkThreshold + legendaryWeight;
+
+            CompQuality compQuality = thing.TryGetComp<CompQuality>();
+
+            if (compQuality != null) {
+                QualityCategory qualityCategory;
+                int randomValue = Rand.Range(0, totalWeight);
+
+                if (randomValue < normalThreshold) {
+                    qualityCategory = QualityCategory.Normal;
+                } else if (randomValue < goodThreshold) {
+                    qualityCategory = QualityCategory.Good;
+                } else if (randomValue < excellentThreshold) {
+                    qualityCategory = QualityCategory.Excellent;
+                } else if (randomValue < masterworkThreshold) {
+                    qualityCategory = QualityCategory.Masterwork;
+                } else {
+                    qualityCategory = QualityCategory.Legendary;
+                }
+
+                compQuality.SetQuality(qualityCategory, ArtGenerationContext.Outsider);
             }
         }
 
