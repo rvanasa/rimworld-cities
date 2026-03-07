@@ -49,8 +49,8 @@ namespace Cities {
 
         protected override void OnSetupHandle(RimWorld.Quest handle) {
             handle.AddPart(new QuestPart_CityQuest {
-                factions = new[] {enemyFaction},
-                targets = new GlobalTargetInfo[] {city},
+                factions = { enemyFaction },
+                targets = { city },
             });
         }
 
