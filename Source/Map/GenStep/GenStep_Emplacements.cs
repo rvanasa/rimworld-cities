@@ -48,7 +48,7 @@ namespace Cities {
 
             public virtual void Generate(Stencil s) {
                 var weapon = s.Spawn(weaponDef, weaponDef.MadeFromStuff ? ThingDefOf.Steel : null);
-                weapon.SetFactionDirect(s.map.GetCityFaction());
+                weapon.SetFaction(s.map.GetCityFaction());
                 if (ammoDef != null) {
                     var ammo = s.RotateRand().Spawn(s.RandInclusive(-1, 1), s.RandInclusive(2, 3), ammoDef);
                     ammo.stackCount = ammoCount.RandomInRange;
