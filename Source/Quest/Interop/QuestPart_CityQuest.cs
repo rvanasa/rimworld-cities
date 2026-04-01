@@ -10,8 +10,18 @@ namespace Cities {
 
         public override void ExposeData() {
             base.ExposeData();
+
             Scribe_Collections.Look(ref factions, "factions", LookMode.Reference);
+
+            if (factions == null) {
+                factions = new List<Faction>();
+            }
+
             Scribe_Collections.Look(ref targets, "targets", LookMode.GlobalTargetInfo);
+
+            if (targets == null) {
+                targets = new List<GlobalTargetInfo>();
+            }
         }
 
         public override IEnumerable<Faction> InvolvedFactions => factions;
