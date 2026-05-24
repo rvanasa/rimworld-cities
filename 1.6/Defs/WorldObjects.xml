@@ -1,21 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Defs>
   
-  <WorldObjectDef Name="CityCommon" Abstract="True">
+  <WorldObjectDef Name="CityCommon" ParentName="Settlement" Abstract="True">
     <worldObjectClass>Cities.City</worldObjectClass>
     <expandingIconTexture>World/WorldObjects/City</expandingIconTexture>
-    <expandingIcon>true</expandingIcon>
-    <expandingIconPriority>10</expandingIconPriority>
-    <canBePlayerHome>true</canBePlayerHome>
-    <comps>
-      <!--<li Class="City.WorldObjectCompProperties_QuestTracker" />-->
-      <li Class="WorldObjectCompProperties_Abandon" />
-      <li Class="WorldObjectCompProperties_TradeRequest" />
-      <li Class="WorldObjectCompProperties_FormCaravan" />
-      <li Class="WorldObjectCompProperties_TimedDetectionRaids" />
-      <!--<li Class="WorldObjectCompProperties_TimedForcedExit" />-->
-      <li Class="WorldObjectCompProperties_EnterCooldown" />
-    </comps>
   </WorldObjectDef>
   
   <WorldObjectDef ParentName="CityCommon">
