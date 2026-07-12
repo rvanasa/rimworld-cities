@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+
+  <EnterCity>Entrez dans la ville</EnterCity>
+  <EnterCityDesc>Entrez dans la ville sélectionnée.</EnterCityDesc>
+
+  <CitiesConfigReset>Réinitialiser</CitiesConfigReset>
+  <LimitCitySize>Taille de la carte personnalisée: [{0} x {1}]</LimitCitySize>
+  <EnableCityQuests>Activer le système de quête urbaine</EnableCityQuests>
+  <EnableDefendQuest>Activer les quêtes de défense urbaine</EnableDefendQuest>
+  <EnableCityEvents>Activer les événements urbain (largages de provision, renforts)</EnableCityEvents>
+  <EnableCityTurrets>Activer les tourelles de défense urbaine</EnableCityTurrets>
+  <EnableCityMortars>Activer les mortiers de défense urbain</EnableCityMortars>
+  <EnableCityLooting>Activer le pillage des villes sans pénalité</EnableCityLooting>
+  <CityLootScale>Multiplicateur de butin urbain: [{0}]</CityLootScale>
+  <AbandonedCityChance>Chance de ville abandonnée: [{0}]</AbandonedCityChance>
+  <CitiesPer100kTiles>Fréquence d'apparition de ville:</CitiesPer100kTiles>
+  <AbandonedPer100kTiles>Fréquence d'apparition de ville abandonnée:</AbandonedPer100kTiles>
+  <CompromisedPer100kTiles>Fréquence d'apparition de ville compromise:</CompromisedPer100kTiles>
+  <MinCitadelsPerWorld>Citadelle minimale par monde: [{0}]</MinCitadelsPerWorld>
+  
+  <FriendlyCityKind>Amicale</FriendlyCityKind>
+  <HostileCityKind>Hostile</HostileCityKind>
+  <PirateCityKind>Pirate</PirateCityKind>
+  <AbandonedCityKind>Abandonnée</AbandonedCityKind>
+  <GhostCityKind>Fantôme</GhostCityKind>
+  <CompromisedCityKind>Compromise</CompromisedCityKind>
+  
+  <CitadelName>{0} Citadelle</CitadelName>
+  <GeneratingCitadel>Génération de la citadelle (cela peut prendre un certain temps)</GeneratingCitadel>
+  
+</LanguageData>

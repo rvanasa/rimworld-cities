@@ -1,0 +1,32 @@
+﻿﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <Keanu_Pawn.label>légende</Keanu_Pawn.label>
+  <Keanu_Pawn.labelPlural>légendes</Keanu_Pawn.labelPlural>
+
+  <Keanu_Dog.label>beagle</Keanu_Dog.label>
+  <Keanu_Dog.labelPlural>beagles</Keanu_Dog.labelPlural>
+  <Keanu_Dog.lifeStages.beagle_puppy.label>Chiot beagle</Keanu_Dog.lifeStages.beagle_puppy.label>
+  <Keanu_Dog.lifeStages.beagle_puppy.labelPlural>Chiots beagle</Keanu_Dog.lifeStages.beagle_puppy.labelPlural>
+  <Keanu_Dog.lifeStages.beagle_puppy.labelMale>Chiot Beagle mâle</Keanu_Dog.lifeStages.beagle_puppy.labelMale>
+  <Keanu_Dog.lifeStages.beagle_puppy.labelMalePlural>Chiots Beagle mâles</Keanu_Dog.lifeStages.beagle_puppy.labelMalePlural>
+  <Keanu_Dog.lifeStages.beagle_puppy.labelFemale>Chiot beagle femelle</Keanu_Dog.lifeStages.beagle_puppy.labelFemale>
+  <Keanu_Dog.lifeStages.beagle_puppy.labelFemalePlural>Chiots Beagle femelles</Keanu_Dog.lifeStages.beagle_puppy.labelFemalePlural>
+  <Keanu_Dog.lifeStages.1.label>Beagle</Keanu_Dog.lifeStages.1.label>
+  <Keanu_Dog.lifeStages.1.labelPlural>Beagles</Keanu_Dog.lifeStages.1.labelPlural>
+  <Keanu_Dog.lifeStages.1.labelMale>Beagle mâle</Keanu_Dog.lifeStages.1.labelMale>
+  <Keanu_Dog.lifeStages.1.labelMalePlural>Beagles mâles</Keanu_Dog.lifeStages.1.labelMalePlural>
+  <Keanu_Dog.lifeStages.1.labelFemale>Beagle femelle</Keanu_Dog.lifeStages.1.labelFemale>
+  <Keanu_Dog.lifeStages.1.labelFemalePlural>Beagles femelles</Keanu_Dog.lifeStages.1.labelFemalePlural>
+  <Keanu_Dog.lifeStages.2.label>Beagle</Keanu_Dog.lifeStages.2.label>
+  <Keanu_Dog.lifeStages.2.labelPlural>Beagles</Keanu_Dog.lifeStages.2.labelPlural>
+  <Keanu_Dog.lifeStages.2.labelMale>Beagle mâle</Keanu_Dog.lifeStages.2.labelMale>
+  <Keanu_Dog.lifeStages.2.labelMalePlural>Beagles mâles</Keanu_Dog.lifeStages.2.labelMalePlural>
+  <Keanu_Dog.lifeStages.2.labelFemale>Beagle femelle</Keanu_Dog.lifeStages.2.labelFemale>
+  <Keanu_Dog.lifeStages.2.labelFemalePlural>Beagles femelles</Keanu_Dog.lifeStages.2.labelFemalePlural>
+  <Keanu_Dog.labelMale>Beagle mâle</Keanu_Dog.labelMale>
+  <Keanu_Dog.labelMalePlural>Beagles mâles</Keanu_Dog.labelMalePlural>
+  <Keanu_Dog.labelFemale>Beagle femelle</Keanu_Dog.labelFemale>
+  <Keanu_Dog.labelFemalePlural>Beagles femelles</Keanu_Dog.labelFemalePlural>
+
+</LanguageData>
