@@ -1,0 +1,13 @@
+﻿﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <Keanu_Dog.label>Beagle</Keanu_Dog.label>
+  <Keanu_Dog.description>C'est un petit beagle heureux.</Keanu_Dog.description>
+  <Keanu_Dog.tools.left_claw.label>Griffe gauche</Keanu_Dog.tools.left_claw.label>
+  <Keanu_Dog.tools.right_claw.label>Griffe droite</Keanu_Dog.tools.right_claw.label>
+  <Keanu_Dog.tools.cute_little_teeth.label>Des crocs mignons</Keanu_Dog.tools.cute_little_teeth.label>
+  <Keanu_Dog.tools.head.label>tête</Keanu_Dog.tools.head.label>
+  <Corpse_Keanu_Dog.label>Carcasse de beagle</Corpse_Keanu_Dog.label>
+  <Corpse_Keanu_Dog.description>Carcasse de beagle</Corpse_Keanu_Dog.description>
+
+</LanguageData>

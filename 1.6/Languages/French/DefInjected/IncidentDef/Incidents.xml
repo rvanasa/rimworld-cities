@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <Quest_City_Sabotage.label>Quête : sabotage d'une ville</Quest_City_Sabotage.label>
+  <Quest_City_Sabotage.letterText>Des forces de guérilla se préparent à attaquer {1}, une ville appartenant à {0}. Vous pouvez apporter votre soutien en détruisant toutes les tourelles défensives de {1}.\n\nL'identité des assaillants ne sera révélée qu'au début de l'attaque.\n\nL'accomplissement de cette mission modifiera considérablement la réputation de votre colonie auprès des deux factions.</Quest_City_Sabotage.letterText>
+  <Quest_City_Sabotage.letterLabel>Opportunité de sabotage</Quest_City_Sabotage.letterLabel>
+
+  <Quest_City_Assault.label>Quête : assaut combiné</Quest_City_Assault.label>
+  <Quest_City_Assault.letterText>{0} prépare une attaque sur {2}, une colonie de {1}. \n\nSi vous choisissez de participer, {0} revendiquera la ville conquise.</Quest_City_Assault.letterText>
+  <Quest_City_Assault.letterLabel>assaut combiné</Quest_City_Assault.letterLabel>
+
+  <Quest_City_Assassinate.label>Quête : assassinat</Quest_City_Assassinate.label>
+  <Quest_City_Assassinate.letterText>Un individu mystérieux a contacté votre colonie, demandant l'assassinat de {0}. {1} est un citoyen très influent de {2}, résidant actuellement dans la ville de {3}. \n\nUn assassinat créatif et indirect permettra d'éviter des répercussions diplomatiques.</Quest_City_Assassinate.letterText>
+  <Quest_City_Assassinate.letterLabel>Requête d'assassinat</Quest_City_Assassinate.letterLabel>
+  <Quest_City_Assassinate.questParts.1.letter>Cible assassinée</Quest_City_Assassinate.questParts.1.letter>
+  <Quest_City_Assassinate.questParts.2.letter>Cible manquée</Quest_City_Assassinate.questParts.2.letter>
+  <Quest_City_Assassinate.questParts.1.message>Élimination de {0} réussie</Quest_City_Assassinate.questParts.1.message>
+  <Quest_City_Assassinate.questParts.2.message>{0} a quitté la zone</Quest_City_Assassinate.questParts.2.message>
+
+  <Quest_City_Defend.label>Quête : Défense d'une ville</Quest_City_Defend.label>
+  <Quest_City_Defend.letterText>{2} subit un siège important de {0} et a désespérément besoin de renforts. \n\nSi vous parvenez à défendre {2}, la ville vous récompensera généreusement.</Quest_City_Defend.letterText>
+  <Quest_City_Defend.letterLabel>Ville subissant une attaque</Quest_City_Defend.letterLabel>
+  <Quest_City_Defend.questParts.1.letter>Les assaillants partent</Quest_City_Defend.questParts.1.letter>
+  <Quest_City_Defend.questParts.2.letter>Ville capturée</Quest_City_Defend.questParts.2.letter>
+  <Quest_City_Defend.questParts.1.message>{0} plient bagage et s'en vont. {2} a été défendu avec succès.</Quest_City_Defend.questParts.1.message>
+  <Quest_City_Defend.questParts.2.message>{2} à été capturée par {0}</Quest_City_Defend.questParts.2.message>
+  <Quest_City_Defend.EnterCityLabel>Défense d'une ville</Quest_City_Defend.EnterCityLabel>
+
+  <Quest_City_PrisonBreak.label>Quête : évasion de prison</Quest_City_PrisonBreak.label>
+  <Quest_City_PrisonBreak.letterText>Les prisonniers de {1} élaborent un plan d'évasion. Si vous choisissez de les aider, ils rejoindront votre faction une fois libérés. \n\nMalheureusement, leurs geôliers ont été prévenus et se préparent à votre arrivée. Si vous entrez dans {1} avant que les prisonniers ne s'évadent, attendez-vous à une réaction hostile de {0}.</Quest_City_PrisonBreak.letterText>
+  <Quest_City_PrisonBreak.letterLabel>Évasion</Quest_City_PrisonBreak.letterLabel>
+  <Quest_City_PrisonBreak.questParts.0.letter>Prisonniers évadés</Quest_City_PrisonBreak.questParts.0.letter>
+  <Quest_City_PrisonBreak.questParts.0.message>Les prisonniers se sont déjà évadés</Quest_City_PrisonBreak.questParts.0.message>
+  <Quest_City_PrisonBreak.EnterCityLabel>Évasion de prison</Quest_City_PrisonBreak.EnterCityLabel>
+</LanguageData>

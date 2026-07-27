@@ -1,0 +1,18 @@
+﻿﻿<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+
+  <EnterCity>Entrez dans la ville</EnterCity>
+  <EnterCityDesc>Entrez dans la ville sélectionnée.</EnterCityDesc>
+
+  <LimitCitySize>Taille de la carte personnalisée: [{0} x {1}]</LimitCitySize>
+  <EnableCityQuests>Activer le système de quête urbaine</EnableCityQuests>
+  <EnableCityEvents>Activer les événements urbain (largages de provision, renforts)</EnableCityEvents>
+  <AbandonedCityChance>Chance de ville abandonnée: [{0}]</AbandonedCityChance>
+  <CitiesPer100kTiles>Fréquence d'apparition de ville:</CitiesPer100kTiles>
+  
+  <FriendlyCityKind>Amicale</FriendlyCityKind>
+  <HostileCityKind>Hostile</HostileCityKind>
+  <AbandonedCityKind>Abandonnée</AbandonedCityKind>
+  <GhostCityKind>Fantôme</GhostCityKind>
+  
+</LanguageData>

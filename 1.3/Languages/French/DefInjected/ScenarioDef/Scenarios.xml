@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <Crashlanded_City_Abandoned.label>Atterrissage forcé (Ville abandonnée)</Crashlanded_City_Abandoned.label>
+  <Crashlanded_City_Abandoned.description>Vous vous êtes réveillés, tous les trois, de vos caissons d'hibernation au son des alarmes hurlantes et du fracas du vaisseau qui se disloquait. Par chance, vous avez réussi à gagner une capsule de sauvetage avant que le vaisseau ne vole en éclats. Au lieu d'atterrir dans une étendue sauvage et désolée, vous vous retrouvez au milieu des ruines d'une immense ville, sur la planète inconnue de RimWorld. Si les ressources à récupérer ne manquent pas, prenez garde aux pillards et aux bandits.</Crashlanded_City_Abandoned.description>
+  <Crashlanded_City_Abandoned.scenario.name>Atterrissage forcé (Ville abandonnée)</Crashlanded_City_Abandoned.scenario.name>
+  <Crashlanded_City_Abandoned.scenario.summary>Découvrez RimWorld dans sa version classique, mais avec une surprise de taille : un atterrissage au cœur d'une immense ville.</Crashlanded_City_Abandoned.scenario.summary>
+  <Crashlanded_City_Abandoned.scenario.description>Vous vous êtes réveillés, tous les trois, de vos caissons d'hibernation au son des alarmes hurlantes et du fracas du vaisseau qui se disloquait. Par chance, vous avez réussi à gagner une capsule de sauvetage avant que le vaisseau ne vole en éclats. Au lieu d'atterrir dans une étendue sauvage et désolée, vous vous retrouvez au milieu des ruines d'une immense ville, sur la planète inconnue de RimWorld. Si les ressources à récupérer ne manquent pas, prenez garde aux pillards et aux bandits.</Crashlanded_City_Abandoned.scenario.description>
+
+  <Crashlanded_City_Friendly.label>Atterrissage forcé (Ville amicale)</Crashlanded_City_Friendly.label>
+  <Crashlanded_City_Friendly.description>AtterVous vous êtes réveillés, tous les trois, de vos caissons d'hibernation au milieu du hurlement des alarmes et du fracas du vaisseau qui se disloquait. Par chance, vous avez réussi à monter à bord d'une capsule de sauvetage avant que le vaisseau ne se désintègre. Après avoir traversé l'atmosphère, vous avez atterri dans une ville accueillante sur la planète inconnue de RimWorld.rissage forcé</Crashlanded_City_Friendly.description>
+  <Crashlanded_City_Friendly.scenario.name>Atterrissage forcé (Ville amicale)</Crashlanded_City_Friendly.scenario.name>
+  <Crashlanded_City_Friendly.scenario.summary>Découvrez RimWorld dans sa version classique, mais avec une surprise de taille : un atterrissage au cœur d'une immense ville.</Crashlanded_City_Friendly.scenario.summary>
+  <Crashlanded_City_Friendly.scenario.description>AtterVous vous êtes réveillés, tous les trois, de vos caissons d'hibernation au milieu du hurlement des alarmes et du fracas du vaisseau qui se disloquait. Par chance, vous avez réussi à monter à bord d'une capsule de sauvetage avant que le vaisseau ne se désintègre. Après avoir traversé l'atmosphère, vous avez atterri dans une ville accueillante sur la planète inconnue de RimWorld.rissage forcé</Crashlanded_City_Friendly.scenario.description>
+
+  <Crashlanded_City_Ghost.label>Atterrissage forcé (Ville fantôme)</Crashlanded_City_Ghost.label>
+  <Crashlanded_City_Ghost.description>Au lieu d'apparaître dans une étendue désolée, vous commencez au sein d'une ville plongée dans un silence inquiétant.</Crashlanded_City_Ghost.description>
+  <Crashlanded_City_Ghost.scenario.name>Atterrissage forcé (Ville fantôme)</Crashlanded_City_Ghost.scenario.name>
+  <Crashlanded_City_Ghost.scenario.summary>Découvrez RimWorld dans sa version classique, mais avec une surprise de taille : un atterrissage au cœur d'une immense ville.</Crashlanded_City_Ghost.scenario.summary>
+  <Crashlanded_City_Ghost.scenario.description>Au lieu d'apparaître dans une étendue désolée, vous commencez au sein d'une ville plongée dans un silence inquiétant.</Crashlanded_City_Ghost.scenario.description>
+
+  <Siege_City_Citadel.label>Unitée d'opérations spéciales (Capital ennemie)</Siege_City_Citadel.label>
+  <Siege_City_Citadel.description>Prenez le commandement d'une unité d'élite des forces spéciales et emparez-vous de la capitale ennemie. Préparez-vous à une expérience de jeu marquée par des combats ininterrompus s'étalant sur plusieurs jours.</Siege_City_Citadel.description>
+  <Siege_City_Citadel.scenario.name>Unitée d'opérations spéciales (Capital ennemie)</Siege_City_Citadel.scenario.name>
+  <Siege_City_Citadel.scenario.summary>Prenez le commandement d'une unité d'élite des forces spéciales et capturez la capitale ennemie.</Siege_City_Citadel.scenario.summary>
+  <Siege_City_Citadel.scenario.description>Prenez le commandement d'une unité d'élite des forces spéciales et emparez-vous de la capitale ennemie. Préparez-vous à une expérience de jeu marquée par des combats ininterrompus s'étalant sur plusieurs jours.</Siege_City_Citadel.scenario.description>
+
+</LanguageData>

@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <StartCity.label>commencer dans une ville (RimCities)</StartCity.label>
+  <StartCitadel.label>commencer près d'une citadelle (RimCities)</StartCitadel.label>
+  <StartEquipment.label>donner à chaque colon</StartEquipment.label>
+  <StartElite.label>colons d'élite</StartElite.label>
+  <StartAllies.label>commencer avec des alliés</StartAllies.label>
+  <RescuePrisoners.label>secourir des prisoniers</RescuePrisoners.label>
+</LanguageData>
