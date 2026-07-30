@@ -26,10 +26,12 @@ namespace Cities {
                         _currentThing = thing;
                         if ((thing.MarketValue > maxItemValue || ShouldDestroy(thing, decay)) && !thing.Destroyed) {
                             if (thing is Pawn pawn && !pawn.Faction.IsPlayer && Rand.Chance(corpseChance)) {
-                                pawn.equipment.DestroyAllEquipment();
-                                foreach (var apparel in pawn.apparel.WornApparel) {
-                                    if (apparel.MarketValue > maxItemValue * 2) {
-                                        pawn.apparel.Remove(apparel);
+                                pawn.equipment?.DestroyAllEquipment();
+                                if (pawn.apparel != null) {
+                                    foreach (var apparel in new System.Collections.Generic.List<Apparel>(pawn.apparel.WornApparel)) {
+                                        if (apparel.MarketValue > maxItemValue * 2) {
+                                            pawn.apparel.Remove(apparel);
+                                        }
                                     }
                                 }
                                 pawn.Kill(null);
