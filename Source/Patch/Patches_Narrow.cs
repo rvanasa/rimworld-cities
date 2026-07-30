@@ -52,9 +52,9 @@ namespace Cities {
     internal static class GenSpawn_Spawn {
         static void Postfix(Thing newThing, Map map) {
             if (newThing is Pawn pawn && map?.Parent is Citadel) {
-                if (!pawn.Faction?.IsPlayer ?? false) {
+                if ((!pawn.Faction?.IsPlayer ?? false) && pawn.equipment != null) {
                     foreach (var item in new System.Collections.Generic.List<ThingWithComps>(pawn.equipment.AllEquipmentListForReading)) {
-                        if (item.def.weaponTags.Contains("GunSingleUse")) {
+                        if (item.def.weaponTags != null && item.def.weaponTags.Contains("GunSingleUse")) {
                             pawn.equipment.DestroyEquipment(item);
                         }
                     }

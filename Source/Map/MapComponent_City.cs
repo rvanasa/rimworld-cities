@@ -40,7 +40,7 @@ namespace Cities {
 
                         if (city.inhabitantFaction != null && city.inhabitantFaction != Faction.OfPlayer) {
                             foreach (var pawn in map.mapPawns.SpawnedPawnsInFaction(city.inhabitantFaction)) {
-                                if (!pawn.inventory.innerContainer.Any(thing => pawn.WillEat(thing))) {
+                                if (pawn.inventory != null && !pawn.inventory.innerContainer.Any(thing => pawn.WillEat(thing))) {
                                     for (var i = 0; i < 2; i++) {
                                         var meal = ThingMaker.MakeThing(ThingDefOf.MealSurvivalPack);
                                         pawn.inventory.innerContainer.TryAdd(meal);
